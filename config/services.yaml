@@ -1,0 +1,46 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+    locale: 'en'
+    app_locales: 'en|ru|nl|bg'
+    images_directory: '%kernel.project_dir%/public/uploads/images'
+    app_version: '2.4.3'
+    app.stripe.publishable_api_key: '%env(resolve:STRIPE_PUBLISHABLE_API_KEY)%'
+    app.stripe.secret_api_key: '%env(resolve:STRIPE_SECRET_API_KEY)%'
+
+services:
+# default config
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            $locales: '%app_locales%'
+            $defaultLocale: '%locale%'
+            $stripe_secret_key: "%env(STRIPE_SECRET_KEY)%"
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Tests/'
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    App\Service\FileUploader:
+        arguments:
+            $targetDirectory: '%images_directory%'
+
+    App\EventListener\ExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }

@@ -1,0 +1,11 @@
+<form action="{{ url('admin_feature_delete', {id: feature.id}) }}" method="post"
+      id="delete-form-{{ feature.id }}">
+
+    <input type="hidden" name="token" value="{{ csrf_token('delete') }}"/>
+
+    <a href="{{ url('admin_feature_edit', {id: feature.id}) }}"
+       class="btn btn-sm btn-outline-primary">{{ 'action.edit' | trans }}</a> &nbsp;&nbsp;&nbsp;
+
+    {{ include('common/_delete_button.html.twig') }}
+
+</form>

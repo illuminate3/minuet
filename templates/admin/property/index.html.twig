@@ -1,0 +1,125 @@
+{% extends 'admin/layout/base.html.twig' %}
+
+{% block title %}{{ 'title.latest_properties' | trans }}{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+
+        <div class="col-12 col-lg-6 col-md-6 col-sm-auto">
+            <a href="{{ path('admin_property_new') }}"
+               class="btn btn-light"
+               style="background-color: #fff; border: 1px solid #ced4da;">
+                <i class="fas fa-plus-square text-danger"></i> {{ 'menu.add_new'|trans }}
+            </a>
+        </div>
+
+        <div class="col-12 col-lg-6 col-md-6 col-sm-auto">
+            <div class="form-group row justify-content-end">
+                <label for="sort_by" class="col-auto col-form-label">{{ 'label.sort_by'|trans }}:</label>
+                <div class="col-auto">
+                    <select class="form-control" id="sort_by" name="sort_by">
+                        <option value="id" {% if searchParams.sort_by == 'id' %} selected{% endif %}>
+                            {{ 'option.latest'|trans }}
+                        </option>
+                        <option
+                            value="priority_number" {% if searchParams.sort_by == 'priority_number' %} selected{% endif %}>
+                            {{ 'option.priority'|trans }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="col-auto pl-0">
+                    <select class="form-control" id="state" name="state" aria-label="{{ 'label.moderation_status'|trans }}">
+                        <option value="published" {% if searchParams.state == 'published' %} selected{% endif %}>
+                            {{ 'option.published'|trans }}
+                        </option>
+                        <option value="private" {% if searchParams.state == 'private' %} selected{% endif %}>
+                            {{ 'option.private'|trans }}
+                        </option>
+                        <option value="pending" {% if searchParams.state == 'pending' %} selected{% endif %}>
+                            {{ 'option.pending'|trans }}
+                        </option>
+                        <option value="rejected" {% if searchParams.state == 'rejected' %} selected{% endif %}>
+                            {{ 'option.rejected'|trans }}
+                        </option>
+                        <option
+                            value="all" {% if searchParams.state == 'all' %} selected{% endif %}>
+                            {{ 'option.all'|trans }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <br>
+    <div class="row">
+
+        {% for property in properties %}
+
+            <!-- Item -->
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card">
+                    <a href="{{ path('property_show', {
+                        'id':  property.id,
+                        'citySlug': property.city.slug,
+                        'slug': property.slug }) }}">
+
+                        {% for photo in property.photos | slice(0, 1) %}
+
+                            <img class="card-img-top" src="/uploads/images/small/{{ photo.photo }}"
+                                 alt="{{ property.address }}"
+                                 title="{{ property.address }}"/>
+
+                        {% else %}
+
+                            <img class="card-img-top border-bottom" src="{{ asset('/images/no-photo.png') }}"
+                                 alt="{{ property.address }}"
+                                 title="{{ property.address }}"/>
+
+                        {% endfor %}
+
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title"><a
+                                href="{{ path('property_show', {
+                                    'id':  property.id,
+                                    'citySlug': property.city.slug,
+                                    'slug': property.slug }) }}">
+                                {{ property.propertyDescription.title }}
+                            </a>
+                        </h5>
+                        <p class="small icon-green">
+                            <i class="fas fa-map-marker-alt"></i> {{ property.address }}
+                        </p>
+
+                        <span class="attribute">{{ property.dealType.name }}</span>
+                        <span class="attribute">{{ property.category.name }}</span>
+
+                        {% if property.bedroomsNumber %}
+                            <span
+                                class="attribute">{{ 'property.bedrooms'|trans }}: {{ property.bedroomsNumber }}</span>
+                        {% endif %}
+                        <br>
+                        <br>
+                        {{ include('admin/property/_action_form.html.twig', {property: property}, with_context = false) }}
+
+                    </div>
+                </div>
+                <br>
+            </div>
+            <!-- / Item -->
+
+        {% else %}
+            <div class="col-sm-12">
+                {{ 'no_items_found' | trans }}
+            </div>
+        {% endfor %}
+
+    </div>
+
+    {{ knp_pagination_render(properties) }}
+
+{% endblock %}

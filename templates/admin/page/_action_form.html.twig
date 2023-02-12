@@ -1,0 +1,14 @@
+<form action="{{ url('admin_page_delete', {id: page.id}) }}" method="post"
+      id="delete-form-{{ page.id }}">
+
+    <input type="hidden" name="token" value="{{ csrf_token('delete') }}"/>
+
+    <div class="btn-group btn-group-sm" role="group">
+
+        <a href="{{ url('admin_page_edit', {id: page.id}) }}"
+           class="btn btn-sm btn-light">{{ 'action.edit' | trans }}</a>
+
+        {{ include('common/_delete_button.html.twig') }}
+
+    </div>
+</form>

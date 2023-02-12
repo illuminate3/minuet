@@ -1,0 +1,84 @@
+security:
+    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    password_hashers:
+        # By default, password hashers are resource intensive and take time. This is
+        # important to generate secure password hashes. In tests however, secure hashes
+        # are not important, waste resources and increase test times. The following
+        # reduces the work factor to the lowest possible values.
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+            algorithm: auto
+            cost: 4 # Lowest possible value for bcrypt
+            time_cost: 3 # Lowest possible value for argon
+            memory_cost: 10 # Lowest possible value for argon
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+        # In this example, users are stored via Doctrine in the database
+        # To see the users at src/App/DataFixtures/ORM/LoadFixtures.php
+        # To load users from somewhere else: https://symfony.com/doc/current/security/custom_provider.html
+        database_users:
+            entity: { class: App\Entity\User, property: username }
+
+    # https://symfony.com/doc/current/security.html#initial-security-yml-setup-authentication
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            lazy: true
+            login_throttling:
+                max_attempts: 5
+
+            # This allows the user to login by submitting a username and password
+            # Reference: https://symfony.com/doc/current/security/form_login_setup.html
+            form_login:
+                # The route name that the login form submits to
+                check_path: security_login
+                # The name of the route where the login form lives
+                # When the user tries to access a protected page, they are redirected here
+                login_path: security_login
+                # Reference: https://symfony.com/doc/current/reference/configuration/security.html#username-parameter
+                username_parameter: login_form[username]
+                password_parameter: login_form[password]
+                csrf_parameter: login_form[_csrf_token]
+                # Secure the login form against CSRF
+                # Reference: https://symfony.com/doc/current/security/csrf.html
+                enable_csrf: true
+                # The page users are redirect to when there is no previous page stored in the
+                # session (for example when the users access directly to the login page).
+                default_target_path: security_login
+
+            logout:
+                # The route name the user can go to in order to logout
+                path: security_logout
+                # The name of the route to redirect to after logging out
+                target: property
+
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 2592000 # 30 days in seconds
+                path:     /
+
+            # needed because in tests we redefine the 'main' firewall to use
+            # HTTP Basic instead of the login form, so this firewall has
+            # multiple authenticators
+            # See https://symfony.com/doc/current/security/experimental_authenticators.html#configuring-the-authentication-entry-point
+            entry_point: 'form_login'
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+    # this is a catch-all for the admin area
+    # additional security lives in the controllers
+    - { path: '^/(%app_locales%)/admin', roles: ROLE_ADMIN }
+    - { path: '^/(%app_locales%)/user', roles: ROLE_USER }
+
+when@test:
+    # this configuration simplifies testing URLs protected by the security mechanism
+    # See https://symfony.com/doc/current/testing/http_authentication.html
+    security:
+        firewalls:
+            main:
+                http_basic: ~

@@ -1,0 +1,29 @@
+{% extends 'admin/layout/base.html.twig' %}
+
+{% block title %}{{ 'title.edit_category' | trans }}{% endblock %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header"><i class="fas fa-edit text-danger"></i> {{ 'title.edit_category' | trans }}</div>
+        <div class="card-body">
+
+            {% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+
+            <div class="form-group">
+
+                <button type="submit" class="btn btn-primary">
+                    {{ 'action.save'|trans }}
+                </button>
+
+            </div>
+
+            {{ form_end(form) }}
+
+        </div>
+    </div><br>
+
+{% endblock %}

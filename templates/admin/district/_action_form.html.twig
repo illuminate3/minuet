@@ -1,0 +1,11 @@
+<form action="{{ url('admin_district_delete', {id: district.id}) }}" method="post"
+      id="delete-district-{{ district.id }}">
+
+    <input type="hidden" name="token" value="{{ csrf_token('delete') }}"/>
+
+    <a href="{{ url('admin_district_edit', {id: district.id}) }}"
+       class="btn btn-sm btn-outline-primary">{{ 'action.edit' | trans }}</a> &nbsp;&nbsp;&nbsp;
+
+    {{ include('common/_delete_button.html.twig') }}
+
+</form>

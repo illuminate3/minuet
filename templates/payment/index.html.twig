@@ -1,0 +1,15 @@
+{% extends 'layout/extra.html.twig' %}
+
+{% block title %}Payment{% endblock %}
+
+{% block body %}
+
+    {{ parent() }}
+    <form action="/checkout" method="POST">
+        <button type="submit" class="btn btn-dark btn-lg">Checkout</button>
+    </form>
+
+    <div>
+
+    </div>
+{% endblock %}

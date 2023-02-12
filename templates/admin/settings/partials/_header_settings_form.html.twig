@@ -1,0 +1,45 @@
+<h5 class="card-title">{{ formTitle }}</h5>
+
+{% if formImage == '' %}
+
+    <form action="{{ formPath }}" method="POST"
+          enctype="multipart/form-data"
+          data-token="{{ csrf_token('csrf_token') }}"
+          class="dropzone js-photo-dropzone">
+        <div class="fallback">
+            <input name="file" type="file" accept="image/*"/>
+            <input name="csrf_token" type="hidden" value="{{ csrf_token('csrf_token') }}"/>
+        </div>
+    </form>
+
+{% else %}
+
+    <div class="photos-list">
+        <div class="gallery">
+            <ul>
+                <li>
+                    <img src="/uploads/images/small/{{ formImage }}"
+                         alt="{{ 'title.settings.header_settings' | trans }}"/>
+
+                    <form action="{{ formDeletePath }}"
+                          id="delete-form-{{ formType }}" method="post"
+                          data-confirmation="true">
+
+                        <input type="hidden" name="token" value="{{ csrf_token('delete') }}"/>
+
+                        <button type="submit"
+                                data-type="delete"
+                                class="btn btn-danger btn-sm remove-{{ formType }}"
+                                data-message="{{ 'confirmation.delete_photo' | trans }}"
+                                data-confirmation-text="{{ 'action.delete' | trans }}"
+                                data-cancellation-text="{{ 'action.cancel' | trans }}">
+                            {{ 'action.delete' | trans }}
+                        </button>
+                    </form>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+
+{% endif %}

@@ -1,0 +1,143 @@
+{% extends 'admin/layout/base.html.twig' %}
+
+{% block title %}{{ 'title.edit_property' | trans }}{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('css/select2') }}
+
+    <link href="{{ asset('libs/summernote/0.8.20/summernote-bs4.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-edit text-danger"></i> {{ 'title.edit_property' | trans }}
+        </div>
+
+        <div class="card-body">
+
+            {% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+            {{ form_start(form) }}
+
+            <div class="row">
+
+                <div class="col-md-6 col-lg-4 mb-3">
+                    {{ form_row(form.city) }}
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-3">
+                    {{ form_row(form.district) }}
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-3">
+                    {{ form_row(form.neighborhood) }}
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-3">
+                    {{ form_row(form.metro_station) }}
+                </div>
+
+            </div>
+            <hr>
+
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-3">
+                    {{ form_row(form.dealType) }}
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-3">
+                    {{ form_row(form.category) }}
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-md-6 col-lg-4 mb-3">
+                    {{ form_row(form.bathrooms_number) }}
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-3">
+                    {{ form_row(form.bedrooms_number) }}
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-3">
+                    {{ form_row(form.max_guests) }}
+                </div>
+            </div>
+
+            {{ form_row(form.property_description.title) }}
+            {{ form_row(form.property_description.meta_title) }}
+            {{ form_row(form.property_description.meta_description) }}
+
+            <div class="form-group row">
+                <div class="col-md-6 col-lg-8 mb-3">
+                    {{ form_row(form.address) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-3">
+                    {{ form_row(form.latitude) }}
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-3">
+                    {{ form_row(form.longitude) }}
+                </div>
+            </div>
+
+            {{ form_row(form.show_map) }}
+
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-3">
+                    {{ form_row(form.price) }}
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-3">
+                    {{ form_row(form.price_type) }}
+                </div>
+            </div>
+
+            {{ form_row(form.available_now) }}
+
+            <div class="form-group">
+                {{ form_row(form.features) }}
+
+                <p><small><a class="ml-2" href="{{ path('admin_feature') }}">
+                            {{ 'action.edit'|trans }} {{ 'features'|trans }}
+                        </a></small></p>
+            </div>
+
+            <div class="form-group">
+                {{ form_row(form.priority_number) }}
+
+                <p><small class="ml-2">{{ 'label.priority_number.help'|trans }}</small></p>
+            </div>
+
+            {{ form_row(form.author) }}
+            {{ form_row(form.property_description.content) }}
+            {{ form_row(form.state) }}
+
+            <div class="form-group">
+
+                <button type="submit" class="btn btn-primary">
+                    {{ 'action.save' | trans }}
+                </button>
+
+            </div>
+
+            {{ form_end(form) }}
+
+        </div>
+    </div><br>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ encore_entry_script_tags('js/city') }}
+    {{ encore_entry_script_tags('js/select2') }}
+
+    <script src="{{ asset('libs/summernote/0.8.20/summernote-bs4.min.js') }}"></script>
+
+{% endblock %}

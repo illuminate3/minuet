@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<script src="https://js.stripe.com/v3/" ></script>
+
+<title>Hello SubscriptionController!</title>
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    <pre><code>{{ subscription_pi_secret }}</code></pre>
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code><a href="{{ '/Users/admin/Code/residence/src/Controller/SubscriptionController.php'|file_link(0) }}">src/Controller/SubscriptionController.php</a></code></li>
+        <li>Your template at <code><a href="{{ '/Users/admin/Code/residence/templates/subscription/index.html.twig'|file_link(0) }}">templates/subscription/index.html.twig</a></code></li>
+    </ul>
+</div>
+{#{% endblock %}#}
+
+
+<form id="stripe-subscription-form">
+    <div id="stripe-element"></div>
+    <button type='submit'>Subscrive</button>
+    </form>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+    let stripe
+    let elements
+    window.onload = function() {
+                presentPaymentElement();
+                addFormSubmitEvent();
+            }
+        22
+        function presentPaymentElement() {
+                stripe = new Stripe('{{ stripe_pk }}');
+                elements = stripe.elements({
+                        appearance: {
+                            theme: 'stripe',
+                            },
+                    clientSecret: '{{ subscription_pi_secret }}'
+                });
+                const paymentElement = elements.create('payment', {
+                        layout: 'accordion'
+                });
+                paymentElement.mount('#stripe-element');
+            }
+
+        function addFormSubmitEvent() {
+                document
+                    .getElementById('stripe-subscription-form')
+                    .addEventListener('submit', async function(e) {
+                            e.preventDefault();
+                            if (!stripe || !elements) return;
+                            const { error, paymentIntent } = await stripe.confirmPayment({
+                                    elements,
+                                    redirect: 'if_required'
+                            });
+                            if (error) {
+                                    window.alert(JSON.stringify(error));
+                                } else {
+                                    console.log(paymentIntent);
+                                    window.alert('done');
+                                }
+                        });
+            }
+        </script>
+    {% endblock %}

@@ -1,0 +1,13 @@
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{{ form_start(form) }}
+
+    {{ form_widget(form) }}
+
+    <button type="submit" class="btn btn-lg btn-primary">
+        {{ 'action.submit'|trans }}
+    </button>
+
+{{ form_end(form) }}
+
+<div class="clearfix"></div>

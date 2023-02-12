@@ -1,0 +1,14 @@
+<form action="{{ url('user_photo_delete', {id: photo.id }) }}" method="post"
+      data-confirmation="true">
+
+    <input type="hidden" name="token" value="{{ csrf_token('delete') }}"/>
+
+    <button class="btn btn-danger btn-sm remove"
+            data-type="delete"
+            data-message="{{ 'confirmation.delete_item' | trans }}"
+            data-confirmation-text="{{ 'action.delete' | trans }}"
+            data-cancellation-text="{{ 'action.cancel' | trans }}">
+        {{ 'action.delete' | trans }}
+    </button>
+
+</form>

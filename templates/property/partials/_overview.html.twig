@@ -1,0 +1,87 @@
+<div class="overview">
+    <table>
+        <tbody>
+        <tr>
+            <th>{{ 'property.location' | trans }}:</th>
+            <td>
+                {% if property.neighborhood.name | default %}
+                    {{ property.neighborhood.name }},
+                {% elseif property.district.name | default %}
+                    {{ property.district.name }},
+                {% endif %}
+                <a href="{{ path('city', {slug: property.city.slug}) }}">{{ property.city.name }}</a>
+            </td>
+        </tr>
+
+        {% if property.metroStation %}
+
+            <tr>
+                <th>{{ 'metro_station' | trans }}:</th>
+                <td>{{ property.metroStation.name }}</td>
+            </tr>
+
+        {% endif %}
+
+        <tr>
+            <th>{{ 'property.deal_type' | trans }}:</th>
+            <td>{{ property.dealType.name }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'property.category' | trans }}:</th>
+            <td>{{ property.category.name }}</td>
+        </tr>
+
+        {% if property.bathroomsNumber != '' %}
+
+            <tr>
+                <th>{{ 'property.bathrooms' | trans }}:</th>
+                <td>{{ property.bathroomsNumber }}</td>
+            </tr>
+
+        {% endif %}
+
+        {% if property.bedroomsNumber != '' %}
+
+            <tr>
+                <th>{{ 'property.bedrooms' | trans }}:</th>
+                <td>{{ property.bedroomsNumber }}</td>
+            </tr>
+
+        {% endif %}
+
+        {% if property.maxGuests != '' %}
+
+            <tr>
+                <th>{{ 'property.max_guests' | trans }}:</th>
+                <td>{{ property.maxGuests }}</td>
+            </tr>
+
+        {% endif %}
+
+        {% if property.availableNow == '1' %}
+
+            <tr>
+                <th>{{ 'property.available_now' | trans }}:</th>
+                <td>{{ 'yes' | trans }}</td>
+            </tr>
+
+        {% endif %}
+
+        {% if property.price != '' %}
+
+            <tr>
+                <th>{{ 'property.price' | trans }}:</th>
+                <td>{{ site.currency.symbolLeft }}{{ property.price }}
+                    {{ site.currency.symbolRight }}
+
+                    {% if property.priceType != '' %}
+                        / {{ property.priceType }}
+                    {% endif %}
+                </td>
+            </tr>
+
+        {% endif %}
+
+        </tbody>
+    </table>
+</div>

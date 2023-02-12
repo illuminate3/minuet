@@ -1,0 +1,35 @@
+{% extends 'admin/layout/base.html.twig' %}
+
+{% block title %}{{ 'title.edit_user' | trans }}{% endblock %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header"><i class="fas fa-edit text-danger"></i> {{ 'title.edit_user' | trans }}</div>
+        <div class="card-body">
+
+            {% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+            {{ form_start(form) }}
+            {{ form_row(form.roles) }}
+            {{ form_row(form.profile.full_name) }}
+            {{ form_row(form.username) }}
+            {{ form_row(form.profile.phone) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.email_verified) }}
+            {{ form_row(form.password) }}
+
+            <div class="form-group">
+
+                <button type="submit" class="btn btn-primary">
+                    {{ 'action.save' | trans }}
+                </button>
+
+            </div>
+
+            {{ form_end(form) }}
+
+        </div>
+    </div><br>
+
+{% endblock %}

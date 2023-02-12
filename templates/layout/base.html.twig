@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>{% block title %}Welcome!{% endblock %}</title>
+
+    <meta name="description" content="{% block description %}Welcome!{% endblock %}"/>
+
+    {{ site.custom_code | raw }}
+
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- Web Application Manifest -->
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="{{ site.name }}">
+    <link rel="icon" sizes="192x192" href="{{ asset('/images/icons/chrome-touch-icon-192x192.png') }}">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="{{ site.name }}">
+    <link rel="apple-touch-icon" href="{{ asset('/images/icons/apple-touch-icon.png') }}">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="{{ asset('/images/icons/icon-144x144.png') }}">
+    <meta name="msapplication-TileColor" content="#0069d9">
+
+    <!-- Color the status bar on mobile devices -->
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Styles -->
+    {{ encore_entry_link_tags('css/app') }}
+    {% block stylesheets %}{% endblock %}
+</head>
+
+<body{% if site.fixed_top_navbar == '1' %} class="body"{% endif %}>
+
+{{ include('layout/partials/_navbar.html.twig') }}
+
+{% block header %}{% endblock %}
+
+<div class="container">
+
+    {{ include('common/_flash_messages.html.twig') }}
+
+    {% block body %}{% endblock %}
+
+</div>
+
+<div class="container text-muted">
+    <p>© {{ "now" | date("Y") }} <a class="text-muted" href="{{ path('property') }}">{{ site.name }}</a>.
+        {{ site.custom_footer_text | raw }}
+    </p>
+</div>
+
+<!-- Scripts -->
+{{ encore_entry_script_tags('js/app') }}
+{% if app.user %}
+    {{ encore_entry_script_tags('js/auth') }}
+{% endif %}
+
+{% block javascripts %}{% endblock %}
+
+</body>
+</html>

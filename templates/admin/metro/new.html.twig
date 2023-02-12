@@ -1,0 +1,58 @@
+{% extends 'admin/layout/base.html.twig' %}
+
+{% block title %}{{ 'title.add_metro_station' | trans }}{% endblock %}
+
+{% block body %}
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('admin_metro') }}">
+                <i class="fas fa-subway text-danger"></i> {{ 'metro_stations'|trans }}
+            </a>
+        </li>
+        <li class="nav-item active">
+            <span class="nav-link active">
+                <i class="fas fa-plus-square text-danger"></i> {{ 'label.create_metro_station'|trans }}
+            </span>
+        </li>
+    </ul>
+
+    <div class="card mb-3">
+
+        <div class="card-body">
+
+            {% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+            {{ form_start(form) }}
+            {{ form_row(form.city) }}
+
+            <div id="name">
+                {{ form_row(form.name) }}
+            </div>
+
+            <div id="slug">
+                {{ form_row(form.slug) }}
+            </div>
+
+            <div class="form-group">
+
+                <button type="submit" class="btn btn-primary">
+                    {{ 'label.create_metro_station'|trans }}
+                </button>
+
+                {{ form_widget(form.saveAndCreateNew, {label: 'label.save_and_create_new', attr: {class: 'btn btn-primary'}}) }}
+
+            </div>
+
+            {{ form_end(form) }}
+
+        </div>
+    </div><br>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ encore_entry_script_tags('js/slugger') }}
+
+{% endblock %}

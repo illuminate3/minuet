@@ -1,0 +1,21 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block title %}Failed Payment{% endblock %}
+
+{% block body %}
+
+    {{ parent() }}
+    <h1>Thanks for your attempted order!</h1>
+    <h5> We appreciate your business! </h5>
+    <p>
+        But Your Payment has Failed :(
+    </p>
+    <p>
+        If you have any questions, please email
+        <a href="mailto:orders@example.com">customerservice@gmail.com</a>.
+    </p>
+
+    <div>
+
+    </div>
+{% endblock %}
