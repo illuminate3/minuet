@@ -19,16 +19,20 @@ final class ProfileType extends AbstractType
     {
         $builder
             ->add('full_name', null, [
+                'label' => 'label.full_name',
                 'attr' => [
                     'autofocus' => true,
+                    'placeholder' => 'label.full_name',
                 ],
-                'label' => 'label.full_name',
                 'constraints' => [
                     new NotNull(),
                 ],
             ])
             ->add('phone', null, [
                 'label' => 'label.phone',
+                'attr' => [
+                    'placeholder' => 'label.phone',
+                ],
                 'constraints' => [
                     new NotNull(),
                 ],

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>{{ app_site_name }} - {% block title %}{{ title }}{% endblock %}</title>
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('css/app') }}
+        <!-- Google fonts - Roboto -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    {% endblock %}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('js/app') }}
+    {% endblock %}
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+
+<body id="{% block body_id %}{% endblock %}">
+
+{% block body %}
+{% endblock %}
+
+</body>
+</html>

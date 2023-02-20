@@ -9,17 +9,13 @@ use App\Service\Admin\DashboardService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 final class DashboardController extends BaseController
 {
     #[Route(path: '/admin', name: 'admin_dashboard')]
-    public function index(Request $request, DashboardService $service): Response
+    public function index(Request $request, DashboardService $service, AuthenticationUtils $helper): Response
     {
-        $properties = $service->countProperties();
-
-        $cities = $service->countCities();
-
-        $dealTypes = $service->countDealTypes();
 
         $categories = $service->countCategories();
 
@@ -29,9 +25,7 @@ final class DashboardController extends BaseController
 
         return $this->render('admin/dashboard/index.html.twig', [
             'site' => $this->site($request),
-            'number_of_properties' => $properties,
-            'number_of_cities' => $cities,
-            'number_of_deal_types' => $dealTypes,
+            'error' => $helper->getLastAuthenticationError(),
             'number_of_categories' => $categories,
             'number_of_pages' => $pages,
             'number_of_users' => $users,

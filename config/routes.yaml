@@ -1,6 +1,10 @@
 default_route:
     path: /
-    controller: App\Controller\PropertyController::search
+#    controller: App\Controller\PropertyController::search
+#    defaults:
+#      path: /en
+#      permanent: true
+    controller: App\Controller\DashController::index
     defaults:
       path: /en
       permanent: true

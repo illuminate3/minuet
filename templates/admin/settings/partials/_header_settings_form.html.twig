@@ -19,7 +19,7 @@
             <ul>
                 <li>
                     <img src="/uploads/images/small/{{ formImage }}"
-                         alt="{{ 'title.settings.header_settings' | trans }}"/>
+                         alt="{{ 'title.settings.header_settings'|trans }}"/>
 
                     <form action="{{ formDeletePath }}"
                           id="delete-form-{{ formType }}" method="post"
@@ -30,10 +30,10 @@
                         <button type="submit"
                                 data-type="delete"
                                 class="btn btn-danger btn-sm remove-{{ formType }}"
-                                data-message="{{ 'confirmation.delete_photo' | trans }}"
-                                data-confirmation-text="{{ 'action.delete' | trans }}"
-                                data-cancellation-text="{{ 'action.cancel' | trans }}">
-                            {{ 'action.delete' | trans }}
+                                data-message="{{ 'confirmation.delete_photo'|trans }}"
+                                data-confirmation-text="{{ 'action.delete'|trans }}"
+                                data-cancellation-text="{{ 'action.cancel'|trans }}">
+                            {{ 'action.delete'|trans }}
                         </button>
                     </form>
 

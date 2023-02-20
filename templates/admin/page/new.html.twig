@@ -1,6 +1,6 @@
 {% extends 'admin/layout/base.html.twig' %}
 
-{% block title %}{{ 'title.add_page' | trans }}{% endblock %}
+{% block title %}{{ 'title.add_page'|trans }}{% endblock %}
 
 {% block stylesheets %}
     <link href="{{ asset('libs/summernote/0.8.20/summernote-bs4.css') }}" rel="stylesheet"/>
@@ -9,7 +9,7 @@
 {% block body %}
 
     <div class="card mb-3">
-        <div class="card-header"><i class="fas fa-home text-danger"></i> {{ 'title.add_page' | trans }}</div>
+        <div class="card-header"><i class="fas fa-home text-danger"></i> {{ 'title.add_page'|trans }}</div>
         <div class="card-body">
 
             {{ form_start(form) }}
@@ -51,7 +51,7 @@
             <div class="form-group">
 
                 <button type="submit" class="btn btn-primary">
-                    {{ 'label.create_page' | trans }}
+                    {{ 'label.create_page'|trans }}
                 </button>
 
             </div>

@@ -1,6 +1,6 @@
 {% extends 'admin/layout/base.html.twig' %}
 
-{% block title %}{{ 'menu' | trans }}{% endblock %}
+{% block title %}{{ 'menu'|trans }}{% endblock %}
 
 {% block body %}
 
@@ -12,7 +12,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ path('admin_menu_new') }}">
-                <i class="fas fa-plus-square text-danger"></i> {{ 'action.add_menu_item' | trans }}
+                <i class="fas fa-plus-square text-danger"></i> {{ 'action.add_menu_item'|trans }}
             </a>
         </li>
     </ul>
@@ -24,10 +24,10 @@
                 <table class="table" style="background-color: #FFFFFF">
                     <thead class="thead">
                     <tr>
-                        <th>{{ 'table.link_text' | trans }}</th>
-                        <th class="hidden-sm">{{ 'table.url' | trans }}</th>
-                        <th>{{ 'table.move' | trans }}</th>
-                        <th>{{ 'table.action' | trans }}</th>
+                        <th>{{ 'table.link_text'|trans }}</th>
+                        <th class="hidden-sm">{{ 'table.url'|trans }}</th>
+                        <th>{{ 'table.move'|trans }}</th>
+                        <th>{{ 'table.action'|trans }}</th>
                     </tr>
                     </thead>
                     <tbody>

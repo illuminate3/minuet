@@ -26,8 +26,6 @@ Encore
     .addEntry('js/select2', './assets/js/select2.js')
     .addEntry('js/settings', './assets/js/admin/settings.js')
     .addEntry('js/slugger', './assets/js/slugger.js')
-    .addEntry('js/city', './assets/js/city.js')
-    .addEntry('js/photo', './assets/js/photo.js')
     .addEntry('js/page', './assets/js/page.js')
     .addEntry('js/user', './assets/js/user/user.js')
     .addEntry('js/password', './assets/js/user/password/password.js')
@@ -67,9 +65,7 @@ Encore
     .addStyleEntry('css/app', ['./assets/styles/app.scss'])
     .addStyleEntry('css/admin', ['./assets/styles/admin.scss'])
     .addStyleEntry('css/ekko-lightbox', ['./assets/styles/ekko-lightbox.scss'])
-    .addStyleEntry('css/city', ['./assets/styles/city.scss'])
     .addStyleEntry('css/detail', ['./assets/styles/detail.scss'])
-    .addStyleEntry('css/photo', ['./assets/styles/photo.scss'])
     .addStyleEntry('css/select2', ['./assets/styles/select2.scss'])
     //.enableIntegrityHashes()
     .configureBabel(null, {

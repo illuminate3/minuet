@@ -17,19 +17,25 @@ final class LoginController extends BaseController
     #[Route(path: '/login', name: 'security_login')]
     public function login(Request $request, Security $security, AuthenticationUtils $helper): Response
     {
+
+//        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+//        $this->getUser()->isVerified()
+
+
         // if user is already logged in, don't display the login page again
         if ($security->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute('admin_dashboard');
         } elseif ($security->isGranted('ROLE_USER')) {
-            return $this->redirectToRoute('user_property');
+            return $this->redirectToRoute('app_dash');
         }
 
         $form = $this->createForm(LoginFormType::class);
 
         return $this->render('auth/login.html.twig', [
-            'site' => $this->site($request),
+            'title' => 'Login',
+            'site'  => $this->site($request),
             'error' => $helper->getLastAuthenticationError(),
-            'form' => $form,
+            'form'  => $form,
         ]);
     }
 

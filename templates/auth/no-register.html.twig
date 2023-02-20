@@ -1,0 +1,40 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block title %}{{ 'title.no_register'|trans }}{% endblock %}
+
+{% block body %}
+
+    <br>
+
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">{{ 'title.no_register'|trans }}</div>
+                <div class="card-body">
+
+                    {{ 'message.registration_suspended'|trans }}
+
+                    <div class="form-group row mb-0">
+                        <div class="col-md-12">
+
+                            <a class="btn btn-link" href="{{ path('password_reset') }}">
+                                {{ 'action.forgot_password'|trans }}
+                            </a>
+                            <a class="btn btn-link" href="{{ path('security_login') }}">
+                                {{ 'action.sign_in'|trans }}
+                            </a>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

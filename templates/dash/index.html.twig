@@ -1,20 +1,35 @@
-<!DOCTYPE html>
+{% extends 'layout/base.html.twig' %}
 
-<title>Hello DashController!</title>
+{% block title %}{{ 'title.dash' | trans }}{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <br>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/admin/Code/residence/src/Controller/DashController.php'|file_link(0) }}">src/Controller/DashController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/admin/Code/residence/templates/dash/index.html.twig'|file_link(0) }}">templates/dash/index.html.twig</a></code></li>
-    </ul>
-</div>
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">{{ 'title.register' | trans }}</div>
+                <div class="card-body">
+
+
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{ path('user_profile') }}">Profile</a></li>
+                        <li class="breadcrumb-item"><a href="{{ path('security_login') }}">login</a></li>
+                        <li class="breadcrumb-item"><a href="{{ path('security_logout') }}">logout</a></li>
+                        <li class="breadcrumb-item"><a href="{{ path('register') }}">Register</a></li>
+                    </ul>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

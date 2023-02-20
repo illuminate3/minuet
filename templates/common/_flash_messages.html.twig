@@ -1,20 +1,18 @@
 {% for type, messages in app.flashes %}
     {% for message in messages %}
-        {# Bootstrap alert, see https://getbootstrap.com/docs/4.4/components/alerts/ #}
-        <div class="alert alert-dismissible alert-{{ type }} mt-2" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
 
-            {{ message|trans }}
+        <div class="alert alert-{{ type }} alert-dismissible fade show mt-lg-4" role="alert">
+            {{ message|trans }} 11111 -- {{ type }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
+
     {% endfor %}
 {% endfor %}
 
 {% if app.user %}
     {% if not app.user.isVerified %}
         <div class="alert alert-dismissible alert-warning mt-2" role="alert">
-            {{ 'message.confirm_email'|trans }}
+            {{ 'message.confirm_email'|trans }} 22222
             <a href="#" id="resend"
                data-token="{{ csrf_token('csrf_token') }}"
                data-path="{{ path('resend_confirmation') }}"
@@ -23,4 +21,11 @@
             </a>
         </div>
     {% endif %}
+{% endif %}
+
+{% if error %}
+    <div class="alert alert-danger alert-dismissible fade show mt-lg-4" role="alert">
+        {{ error.messageKey|trans(error.messageData, 'security') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 {% endif %}

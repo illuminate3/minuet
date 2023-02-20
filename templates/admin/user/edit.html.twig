@@ -1,11 +1,11 @@
 {% extends 'admin/layout/base.html.twig' %}
 
-{% block title %}{{ 'title.edit_user' | trans }}{% endblock %}
+{% block title %}{{ 'title.edit_user'|trans }}{% endblock %}
 
 {% block body %}
 
     <div class="card mb-3">
-        <div class="card-header"><i class="fas fa-edit text-danger"></i> {{ 'title.edit_user' | trans }}</div>
+        <div class="card-header"><i class="fas fa-edit text-danger"></i> {{ 'title.edit_user'|trans }}</div>
         <div class="card-body">
 
             {% form_theme form 'bootstrap_4_layout.html.twig' %}
@@ -22,7 +22,7 @@
             <div class="form-group">
 
                 <button type="submit" class="btn btn-primary">
-                    {{ 'action.save' | trans }}
+                    {{ 'action.save'|trans }}
                 </button>
 
             </div>

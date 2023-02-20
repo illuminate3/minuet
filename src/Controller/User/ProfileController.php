@@ -32,6 +32,7 @@ final class ProfileController extends BaseController
         return $this->render('user/profile/profile.html.twig', [
             'site' => $this->site($request),
             'form' => $form,
+            'error' => null,
         ]);
     }
 }

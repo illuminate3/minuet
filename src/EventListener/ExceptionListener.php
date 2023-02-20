@@ -19,5 +19,9 @@ final class ExceptionListener
             ], 419);
             $event->setResponse($customResponse);
         }
+
+//        $request->getSession()->getFlashBag()->add('notice', 'You have to login in order to access this page.');
+//        $this->addFlash('danger', 'message.registration_suspended');
+
     }
 }

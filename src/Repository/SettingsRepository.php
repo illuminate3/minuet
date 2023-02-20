@@ -16,15 +16,10 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 final class SettingsRepository extends ServiceEntityRepository
 {
-    /**
-     * @var CurrencyRepository
-     */
-    private $currency;
 
-    public function __construct(ManagerRegistry $registry, CurrencyRepository $currency)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Settings::class);
-        $this->currency = $currency;
     }
 
     public function findAllAsArray(): array
@@ -33,15 +28,7 @@ final class SettingsRepository extends ServiceEntityRepository
 
         $settingsArray = [];
         foreach ($settings as $setting) {
-            if ('currency_id' !== $setting->getSettingName()) {
-                $settingsArray[$setting->getSettingName()] = $setting->getSettingValue();
-            } else {
-                $currency = $this->currency->find((int) $setting->getSettingValue());
-                if (!$currency) {
-                    $currency = $this->currency->findOneBy(['code' => 'USD']);
-                }
-                $settingsArray['currency'] = $currency;
-            }
+            $settingsArray[$setting->getSettingName()] = $setting->getSettingValue();
         }
 
         return $settingsArray;

@@ -1,0 +1,34 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block title %}Request Validation Email Resend{% endblock %}
+
+{% block body %}
+
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+        triggered
+    {% endfor %}
+
+    <h1>Request Validation Email Resend</h1>
+
+    {{ form_start(requestForm) }}
+        {{ form_row(requestForm.email) }}
+        <button type="submit" class="btn">Request Validation Email</button>
+    {{ form_end(requestForm) }}
+
+    <div class="form-group row mb-0">
+        <div class="col-md-12">
+
+            <a class="btn btn-link" href="{{ path('password_reset') }}">
+                {{ 'action.forgot_password'|trans }}
+            </a>
+            <a class="btn btn-link" href="{{ path('security_login') }}">
+                {{ 'action.sign_in'|trans }}
+            </a>
+
+
+        </div>
+    </div>
+
+
+{% endblock %}

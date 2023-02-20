@@ -12,9 +12,6 @@
 
     <div class="hidden-sm" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('property') }}">{{ 'menu.homepage'|trans }}</a>
-            </li>
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -22,9 +19,6 @@
                     {{ 'menu.catalog'|trans }}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ path('admin_property') }}">{{ 'properties'|trans }}</a>
-                    <a class="dropdown-item" href="{{ path('admin_city') }}">{{ 'cities'|trans }}</a>
-                    <a class="dropdown-item" href="{{ path('admin_deal_type') }}">{{ 'deal_types'|trans }}</a>
                     <a class="dropdown-item" href="{{ path('admin_category') }}">{{ 'categories'|trans }}</a>
                     <a class="dropdown-item" href="{{ path('admin_page') }}">{{ 'pages'|trans }}</a>
                     <a class="dropdown-item" href="{{ path('admin_user') }}">{{ 'users'|trans }}</a>
@@ -50,18 +44,11 @@
                 <span class="hidden-sm">{{ 'menu.add_new'|trans }}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="addDropdown">
-                <a class="dropdown-item" href="{{ path('admin_property_new') }}">{{ 'property'|trans }}</a>
-                <a class="dropdown-item" href="{{ path('admin_city_new') }}">{{ 'city'|trans }}</a>
-                <a class="dropdown-item" href="{{ path('admin_deal_type_new') }}">{{ 'deal_type'|trans }}</a>
                 <a class="dropdown-item" href="{{ path('admin_category_new') }}">{{ 'category'|trans }}</a>
                 <a class="dropdown-item" href="{{ path('admin_page_new') }}">{{ 'page'|trans }}</a>
                 <a class="dropdown-item" href="{{ path('admin_user_new') }}">{{ 'user'|trans }}</a>
             </div>
         </li>
-
-        {% include 'layout/partials/_locale_switcher.html.twig' with {
-            no_arrow: true
-        } %}
 
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle"
@@ -73,9 +60,6 @@
                 {{ 'menu.admin'|trans }}
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="{{ path('user_property') }}">
-                    {{ 'menu.account'|trans }}
-                </a>
                 <a class="dropdown-item" href="{{ path('admin_user_edit', {id: app.user.id}) }}">
                     {{ 'menu.edit_profile'|trans }}
                 </a>

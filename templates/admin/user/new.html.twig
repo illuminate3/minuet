@@ -1,6 +1,6 @@
 {% extends 'admin/layout/base.html.twig' %}
 
-{% block title %}{{ 'title.add_user' | trans }}{% endblock %}
+{% block title %}{{ 'title.add_user'|trans }}{% endblock %}
 
 {% block body %}
 
@@ -12,7 +12,7 @@
         </li>
         <li class="nav-item active">
             <span class="nav-link active">
-                <i class="fas fa-plus-square text-danger"></i> {{ 'label.create_user' | trans }}
+                <i class="fas fa-plus-square text-danger"></i> {{ 'label.create_user'|trans }}
             </span>
         </li>
     </ul>
@@ -35,7 +35,7 @@
             <div class="form-group">
 
                 <button type="submit" class="btn btn-primary">
-                    {{ 'label.create_user' | trans }}
+                    {{ 'label.create_user'|trans }}
                 </button>
 
                 {{ form_widget(form.saveAndCreateNew, {label: 'label.save_and_create_new', attr: {class: 'btn btn-primary'}}) }}

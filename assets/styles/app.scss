@@ -1,3 +1,5 @@
+// assets/styles/app.scss
+
 // Variables
 @import "variables";
 
@@ -10,6 +12,49 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 @import '~@fortawesome/fontawesome-free/scss/regular';
 @import '~@fortawesome/fontawesome-free/scss/solid';
 
+/*
+* ==========================================================
+*     AUTH Layouts
+* ==========================================================
+*/
+.auth-page {
+  min-height: 100vh;
+  position: relative;
+}
+.auth-page::before {
+  content: "";
+  display: block;
+  z-index: -1;
+  background: url(../img/marius.jpg);
+  background-size: cover;
+  -webkit-filter: blur(0px);
+  filter: blur(0px);
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.auth-page .container {
+  z-index: 999;
+}
+.auth-page .info {
+  background: rgba(43,144,217,.9);
+  color: #fff;
+}
+@media (min-width: 992px) {
+  .auth-page .info {
+    min-height: 70vh;
+  }
+}
+
+
+/*
+* ==========================================================
+*     AUTH Layouts
+* ==========================================================
+*/
 body.body {
   margin-top: 56px !important;
 }

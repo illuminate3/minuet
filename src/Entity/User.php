@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Entity\Traits\EntityIdTrait;
+use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -15,7 +16,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Table(name: 'users')]
-#[ORM\Entity(repositoryClass: 'App\Repository\UserRepository')]
+#[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity('email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -28,30 +29,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Maximum time that the confirmation token will be valid.
      */
     public const TOKEN_TTL = 43200;
-    /**
-     * @var string
-     */
+
+
     #[ORM\Column(type: Types::STRING, unique: true)]
     #[Assert\NotBlank]
-    #[Assert\Length(min: 2, max: 50)]
-    private $username;
-    /**
-     * @var string
-     */
-    #[ORM\Column(type: Types::STRING, unique: true)]
     #[Assert\Email]
     private $email;
+
     /**
      * @var string
      */
-    #[ORM\Column(type: Types::STRING)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     private $password;
 
     #[ORM\Column(type: Types::JSON)]
     private array $roles = [];
 
-    #[ORM\OneToMany(mappedBy: 'author', targetEntity: 'App\Entity\Property')]
-    private $properties;
+//    #[ORM\OneToMany(mappedBy: 'author', targetEntity: 'App\Entity\Property')]
+//    private $properties;
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private $confirmation_token;
@@ -65,24 +60,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIMETZ_MUTABLE, nullable: true)]
     private $emailVerifiedAt = null;
 
+    #[ORM\Column(type: Types::BOOLEAN, length: 1, nullable: true)]
+    private $isVerified = false;
+
     public function __construct()
     {
         $this->properties = new ArrayCollection();
     }
 
-    public function getUsername(): ?string
+    public function getId(): ?int
     {
-        return $this->username;
+        return $this->id;
     }
 
     public function getUserIdentifier(): string
     {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): void
-    {
-        $this->username = $username;
+        return $this->email;
     }
 
     public function getEmail(): ?string
@@ -147,13 +140,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __serialize(): array
     {
         // add $this->salt too if you don't use Bcrypt or Argon2i
-        return [$this->id, $this->username, $this->password];
+        return [$this->id, $this->email, $this->password];
     }
 
     public function __unserialize(array $data): void
     {
         // add $this->salt too if you don't use Bcrypt or Argon2i
-        [$this->id, $this->username, $this->password] = $data;
+        [$this->id, $this->email, $this->password] = $data;
     }
 
     public function getProperties(): Collection
@@ -161,28 +154,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->properties;
     }
 
-    public function addProperty(Property $property): self
-    {
-        if (!$this->properties->contains($property)) {
-            $this->properties[] = $property;
-            $property->setAuthor($this);
-        }
+//    public function addProperty(Property $property): self
+//    {
+//        if (!$this->properties->contains($property)) {
+//            $this->properties[] = $property;
+//            $property->setAuthor($this);
+//        }
+//
+//        return $this;
+//    }
 
-        return $this;
-    }
-
-    public function removeProperty(Property $property): self
-    {
-        if ($this->properties->contains($property)) {
-            $this->properties->removeElement($property);
-            // set the owning side to null (unless already changed)
-            if ($property->getAuthor() === $this) {
-                $property->setAuthor(null);
-            }
-        }
-
-        return $this;
-    }
+//    public function removeProperty(Property $property): self
+//    {
+//        if ($this->properties->contains($property)) {
+//            $this->properties->removeElement($property);
+//            // set the owning side to null (unless already changed)
+//            if ($property->getAuthor() === $this) {
+//                $property->setAuthor(null);
+//            }
+//        }
+//
+//        return $this;
+//    }
 
     public function getConfirmationToken(): ?string
     {
@@ -231,6 +224,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         $this->profile = $profile;
 
+        return $this;
+    }
+
+    public function getIsVerified(): ?bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
         return $this;
     }
 

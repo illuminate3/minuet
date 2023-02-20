@@ -33,7 +33,7 @@
 
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">
-                            {{ 'action.save' | trans }}
+                            {{ 'action.save'|trans }}
                         </button>
                     </div>
                     {{ form_end(form) }}
@@ -47,13 +47,13 @@
 
     {% if is_granted('ROLE_ADMIN') %}
 
-        <a href="{{ url('admin_property_new') }}" class="btn btn-primary float">
+        <a href="{{ url('security_logout') }}" class="btn btn-primary float">
             <i class="fas fa-plus float-icon"></i>
         </a>
 
     {% elseif app.user.isVerified %}
 
-        <a href="{{ url('user_property_new') }}" class="btn btn-primary float">
+        <a href="{{ url('security_logout') }}" class="btn btn-primary float">
             <i class="fas fa-plus float-icon"></i>
         </a>
 

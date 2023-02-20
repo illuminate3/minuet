@@ -39,7 +39,7 @@ final class RegistrationFormAuthenticator extends AbstractAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        return new RedirectResponse($this->urlGenerator->generate('user_property'));
+        return new RedirectResponse($this->urlGenerator->generate('app_dash'));
     }
 
     public function supports(Request $request): ?bool

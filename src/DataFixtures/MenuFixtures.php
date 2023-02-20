@@ -29,9 +29,6 @@ final class MenuFixtures extends Fixture
             ['Homepage', '/', 'en'],
             ['About Us', '/info/about-us', 'en'],
             ['Contact', '/info/contact', 'en'],
-            ['Начало', '/', 'bg'],
-            ['За нас', '/info/about-us', 'bg'],
-            ['Контакти', '/info/contact', 'bg'],
             ['Source Code', 'https://github.com/Coderberg/ResidenceCMS', 'en'],
         ];
     }

@@ -57,7 +57,8 @@ final class SendEmailConfirmationLinkHandler
         return $this->verifyEmailHelper->generateSignature(
             'verify_email',
             (string) $user->getId(),
-            $user->getEmail()
+            $user->getEmail(),
+            ['id' => $user->getId()]
         );
     }
 

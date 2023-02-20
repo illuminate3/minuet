@@ -3,15 +3,15 @@
     <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="password.mismatch">
-                <source>password.mismatch</source>
+                <source>old.password.mismatch</source>
                 <target>The entered passwords don't match.</target>
             </trans-unit>
             <trans-unit id="agree_terms">
-                <source>agree_terms</source>
+                <source>old.agree_terms</source>
                 <target>You should agree to our terms.</target>
             </trans-unit>
             <trans-unit id="user_not_found">
-                <source>user_not_found</source>
+                <source>old.user_not_found</source>
                 <target>We can't find a user with that e-mail address.</target>
             </trans-unit>
         </body>

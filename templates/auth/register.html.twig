@@ -16,10 +16,9 @@
                 <div class="card-header">{{ 'title.register' | trans }}</div>
                 <div class="card-body">
 
-                    {% form_theme registrationForm 'bootstrap_4_layout.html.twig' %}
+{#                    {% form_theme registrationForm 'bootstrap_4_layout.html.twig' %}#}
 
                     {{ form_start(registrationForm) }}
-                    {{ form_row(registrationForm.username) }}
                     {{ form_row(registrationForm.email) }}
                     {{ form_row(registrationForm.password) }}
                     {{ form_row(registrationForm.agreeTerms) }}
@@ -29,6 +28,15 @@
                             <button type="submit" class="btn btn-primary">
                                 {{ 'action.register'|trans }}
                             </button>
+
+                            <a class="btn btn-link" href="{{ path('password_reset') }}">
+                                {{ 'action.forgot_password'|trans }}
+                            </a>
+                            <a class="btn btn-link" href="{{ path('security_login') }}">
+                                {{ 'action.sign_in'|trans }}
+                            </a>
+
+
                         </div>
                     </div>
 

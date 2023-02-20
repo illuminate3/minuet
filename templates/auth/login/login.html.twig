@@ -1,0 +1,105 @@
+{% extends 'layout/auth.html.twig' %}
+
+{% block body %}
+
+    <div class="auth-page d-flex align-items-center">
+    <div class="container d-flex align-items-center position-relative py-5">
+
+    <div class="card shadow-sm w-100 rounded overflow-hidden bg-none">
+    <div class="card-body p-0">
+
+    <div class="row gx-0 align-items-stretch">
+
+
+        <!-- Logo & Information Panel-->
+        <div class="col-lg-6">
+            <div class="info d-flex justify-content-center flex-column p-4 h-100">
+                <div class="py-5">
+
+                    <header class="text-center mb-5">
+                        <h1 class="text-xxl text-gray-400 text-uppercase">
+                            <strong class="text-primary">
+                                <a href="{{ path('security_login') }}">{{ app_site_name }}</a>
+                            </strong>
+                        </h1>
+                        <p class="text-gray-100 fw-light">
+                            {{ app_site_branding }}
+                        </p>
+                    </header>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Form Panel    -->
+        <div class="col-lg-6 bg-white">
+            <div class="d-flex align-items-center px-4 px-lg-5 h-100">
+
+                <div class="row">
+                    {% if error %}
+                        <div>{{ error.messageKey|trans(error.messageData, 'security') }} errros</div>
+                    {% endif %}
+
+                    {{ include('common/_flash_messages.html.twig') }}
+
+
+                {#                <form action="{{ path('auth_login') }}" method="post" class="login-form" >#}
+                {{ form_start(form) }}
+
+                        <div class="col-lg-12 mx-auto">
+
+                            <h1>Login</h1>
+
+                            {{ form_row(form.email) }}
+{#                            {{ form_row(form.username) }}#}
+                            {{ form_row(form.password) }}
+
+{#                            <div class="input-material-group mb-3">#}
+{#                                <input class="input-material" id="login-username" type="text" name="_username" value="{{ last_username }}" autocomplete="off" required data-validate-field="loginUsername">#}
+{#                                <label class="label-material" for="login-username">Email:</label>#}
+{#                            </div>#}
+{#                            <div class="input-material-group mb-4">#}
+{#                                <input class="input-material" id="login-password" type="password" name="_password" required data-validate-field="loginPassword">#}
+{#                                <label class="label-material" for="login-password">Password:</label>#}
+{#                            </div>#}
+
+                        </div>
+                        <div class="col-12 text-center">
+
+                            {# If you want to control the URL the user is redirected to on success #}
+                            {# <input type="hidden" name="_target_path" value="/account"> #}
+                            <button class="btn btn-primary mb-3" id="login" type="submit" >login</button>
+
+                        </div>
+                        <div class="col-12 text-center">
+
+                            <a class="text-xs text-paleBlue" href="{{ path('security_login') }}">Forgot Password?</a>
+
+                        </div>
+                        <div class="col-12 text-center">
+
+                            <span class="text-xs mb-0 text-gray-500">
+                                Do not have an account?
+                            </span>
+                            <a class="text-xs text-paleBlue ms-1" href="{{ path('security_login') }}">Signup</a>
+
+                        </div>
+
+{#                </form>#}
+                {{ form_end(form) }}
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    </div>
+    </div>
+
+    </div>
+    </div>
+
+{% endblock %}

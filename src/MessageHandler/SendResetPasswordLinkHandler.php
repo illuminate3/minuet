@@ -40,7 +40,7 @@ final class SendResetPasswordLinkHandler
 
     private function getSubject(): string
     {
-        return $this->translator->trans('resetting.email.subject');
+        return $this->translator->trans('email.subject.password.reset');
     }
 
     private function getConfirmationUrl(User $user): string
@@ -59,7 +59,7 @@ final class SendResetPasswordLinkHandler
               ->textTemplate('emails/reset.txt.twig')
               ->context([
                   'confirmationUrl' => $this->getConfirmationUrl($user),
-                  'username' => $user->getUsername(),
+                  'username' => $user->getEmail(),
               ]);
     }
 }

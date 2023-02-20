@@ -6,7 +6,6 @@ namespace App\Entity;
 
 use App\Entity\Traits\EntityIdTrait;
 use App\Entity\Traits\EntityNameTrait;
-use App\Entity\Traits\PropertyTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -16,7 +15,6 @@ class Category
 {
     use EntityIdTrait;
     use EntityNameTrait;
-    use PropertyTrait;
 
     public const MAPPED_BY = 'category';
 }

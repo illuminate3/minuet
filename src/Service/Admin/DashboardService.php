@@ -14,22 +14,8 @@ use App\Service\Cache\GetCache;
 
 final class DashboardService
 {
+
     use GetCache;
-
-    public function countProperties(): int
-    {
-        return $this->getCount('properties_count', Property::class);
-    }
-
-    public function countCities(): int
-    {
-        return $this->getCount('cities_count', City::class);
-    }
-
-    public function countDealTypes(): int
-    {
-        return $this->getCount('deal_types_count', DealType::class);
-    }
 
     public function countCategories(): int
     {
@@ -45,4 +31,5 @@ final class DashboardService
     {
         return $this->getCount('users_count', User::class);
     }
+
 }

@@ -30,40 +30,12 @@ abstract class BaseController extends AbstractController
         ];
     }
 
-    private function searchFields(): array
-    {
-        // Get city
-        $cities = $this->doctrine
-            ->getRepository(City::class)->findAll();
-
-        // Get categories
-        $categories = $this->doctrine
-            ->getRepository(Category::class)->findAll();
-
-        // Get deal types
-        $dealTypes = $this->doctrine
-            ->getRepository(DealType::class)->findAll();
-
-        // Get features
-        $features = $this->doctrine
-            ->getRepository(Feature::class)->findAll();
-
-        return [
-            'cities' => $cities,
-            'features' => $features,
-            'categories' => $categories,
-            'deal_types' => $dealTypes,
-        ];
-    }
-
     public function site(Request $request): array
     {
         $settings = $this->settingsRepository->findAllAsArray();
 
-        $fields = $this->searchFields();
-
         $menu = $this->menu($request);
 
-        return array_merge($settings, $fields, $menu);
+        return array_merge($settings, $menu);
     }
 }
