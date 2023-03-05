@@ -20,7 +20,7 @@ final class PasswordType extends AbstractType
     {
         $builder
             ->add('password', SymfonyPasswordType::class, [
-                'label' => 'label.new_password',
+                'label' => 'label.password_new',
                 'attr' => [
                     'autofocus' => true,
                     'autocomplete' => 'new-password',
@@ -34,7 +34,7 @@ final class PasswordType extends AbstractType
                 ],
             ])
             ->add('password_confirmation', SymfonyPasswordType::class, [
-                'label' => 'label.confirm_password',
+                'label' => 'label.password_confirm',
                 'constraints' => [
                     new Length([
                         'min' => 5

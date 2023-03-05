@@ -20,11 +20,14 @@ final class UserEmailType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'attr' => [
-                    'placeholder' => 'placeholder.enter_email',
-                ],
                 'label' => 'label.email',
-                'constraints' => [new Length(['min' => 5]), new RegisteredUser()],
+                'attr' => [
+                    'placeholder' => 'label.email',
+                ],
+                'constraints' => [
+                    new Length(['min' => 5]),
+                    new RegisteredUser(),
+                ],
             ]);
     }
 

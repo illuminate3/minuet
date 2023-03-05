@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use Symfony\Bundle\SecurityBundle\Security;
@@ -12,15 +14,29 @@ class DashController extends BaseController
     #[Route('/dash', name: 'app_dash')]
     public function index(Request $request, Security $security): Response
     {
-
-// Redirect Admin Users
+        // Redirect Admin Users
         if ($security->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute('admin_dashboard');
         }
 
         return $this->render('dash/index.html.twig', [
-            'title' => 'Dash',
-            'site'  => $this->site($request),
+            'title' => 'title.dashboard',
+            'site' => $this->site($request),
+            'error' => null,
+        ]);
+    }
+
+    #[Route('/root', name: 'app_root')]
+    public function root(Request $request, Security $security): Response
+    {
+        // Redirect Admin Users
+        if ($security->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('admin_dashboard');
+        }
+
+        return $this->render('dash/index.html.twig', [
+            'title' => 'ROOT',
+            'site' => $this->site($request),
             'error' => null,
         ]);
     }

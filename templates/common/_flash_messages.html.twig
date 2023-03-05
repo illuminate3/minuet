@@ -23,9 +23,22 @@
     {% endif %}
 {% endif %}
 
+{#{% if error %}#}
+{#    <div class="alert alert-danger alert-dismissible fade show mt-lg-4" role="alert">#}
+{#        {{ error.messageKey|trans(error.messageData, 'security') }}#}
+{#        <div class="alert alert-danger">{{ error.messageKey }}</div>#}
+{#        333333333333#}
+{#        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>#}
+{#    </div>#}
+{#{% endif %}#}
+
 {% if error %}
-    <div class="alert alert-danger alert-dismissible fade show mt-lg-4" role="alert">
-        {{ error.messageKey|trans(error.messageData, 'security') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+    {% for message in error_message %}
+
+        <div class="alert alert-danger alert-dismissible fade show mt-lg-4" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+    {% endfor %}
 {% endif %}

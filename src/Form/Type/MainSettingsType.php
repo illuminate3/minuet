@@ -78,9 +78,9 @@ final class MainSettingsType extends AbstractType
                     'label' => 'label.settings.show_language_selector',
                 ]
             )
-            ->add('anyone_can_register', ChoiceType::class, [
+            ->add('allow_register', ChoiceType::class, [
                     'choices' => self::CHOICES,
-                    'label' => 'label.settings.anyone_can_register',
+                    'label' => 'label.settings.allow_register',
                 ]
             )
             ->add('allow_html', ChoiceType::class, [

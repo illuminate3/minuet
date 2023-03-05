@@ -20,12 +20,12 @@ final class Version20220325072850 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql("INSERT INTO settings (setting_name, setting_value) VALUES ('anyone_can_register', '0')");
+        $this->addSql("INSERT INTO settings (setting_name, setting_value) VALUES ('allow_register', '0')");
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql("DELETE FROM settings WHERE setting_name='anyone_can_register'");
+        $this->addSql("DELETE FROM settings WHERE setting_name='allow_register'");
     }
 }

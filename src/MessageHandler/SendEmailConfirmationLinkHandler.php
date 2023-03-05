@@ -49,7 +49,7 @@ final class SendEmailConfirmationLinkHandler
 
     private function getSubject(): string
     {
-        return $this->translator->trans('confirmation.email.subject');
+        return $this->translator->trans('message.email.subject.confirmation');
     }
 
     private function getSignatureComponents(User $user): VerifyEmailSignatureComponents
@@ -79,7 +79,7 @@ final class SendEmailConfirmationLinkHandler
             ->from($this->getSender())
             ->to($user->getEmail())
             ->subject($this->getSubject())
-            ->textTemplate('emails/confirmation_email.html.twig')
+            ->textTemplate('auth/email/confirmation_email.html.twig')
             ->context($this->createContext($signatureComponents));
     }
 }

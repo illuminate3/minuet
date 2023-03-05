@@ -11,17 +11,26 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 final class ProfileController extends BaseController
 {
-    #[Route('/user/profile', name: 'user_profile')]
-    public function profile(Request $request, EntityManagerInterface $entityManager): Response
-    {
+    #[Route(path: '/user/profile', name: 'user_profile')]
+    public function profile(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        AuthenticationUtils $helper,
+    ): Response {
+
         /** @var User $user */
         $user = $this->getUser();
+
         $profile = $user->getProfile();
+
         $form = $this->createForm(ProfileType::class, $profile);
         $form->handleRequest($request);
+
+        $error = $helper->getLastAuthenticationError();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($profile);
@@ -30,9 +39,11 @@ final class ProfileController extends BaseController
         }
 
         return $this->render('user/profile/profile.html.twig', [
+            'title' => 'title.profile',
             'site' => $this->site($request),
+            'error' => $error,
             'form' => $form,
-            'error' => null,
         ]);
     }
+
 }

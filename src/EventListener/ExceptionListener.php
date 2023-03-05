@@ -15,13 +15,11 @@ final class ExceptionListener
         $exception = $event->getThrowable();
         if ($exception instanceof TokenNotFoundException) {
             $customResponse = new JsonResponse([
-                'status' => 'fail', 'message' => $exception->getMessage(),
+                'status' => 'fail',
+                'message' => $exception->getMessage(),
             ], 419);
             $event->setResponse($customResponse);
         }
-
-//        $request->getSession()->getFlashBag()->add('notice', 'You have to login in order to access this page.');
-//        $this->addFlash('danger', 'message.registration_suspended');
-
     }
+
 }

@@ -6,70 +6,10 @@
         "http://localhost:8080/build/js/app.js"
       ]
     },
-    "js/admin": {
+    "js/layout": {
       "js": [
         "http://localhost:8080/build/runtime.js",
-        "http://localhost:8080/build/js/admin.js"
-      ]
-    },
-    "js/auth": {
-      "js": [
-        "http://localhost:8080/build/runtime.js",
-        "http://localhost:8080/build/js/auth.js"
-      ]
-    },
-    "js/ekko-lightbox": {
-      "js": [
-        "http://localhost:8080/build/runtime.js",
-        "http://localhost:8080/build/js/ekko-lightbox.js"
-      ]
-    },
-    "js/map": {
-      "js": [
-        "http://localhost:8080/build/runtime.js",
-        "http://localhost:8080/build/js/map.js"
-      ]
-    },
-    "js/menu-sorting": {
-      "js": [
-        "http://localhost:8080/build/runtime.js",
-        "http://localhost:8080/build/js/menu-sorting.js"
-      ]
-    },
-    "js/select2": {
-      "js": [
-        "http://localhost:8080/build/runtime.js",
-        "http://localhost:8080/build/js/select2.js"
-      ]
-    },
-    "js/settings": {
-      "js": [
-        "http://localhost:8080/build/runtime.js",
-        "http://localhost:8080/build/js/settings.js"
-      ]
-    },
-    "js/slugger": {
-      "js": [
-        "http://localhost:8080/build/runtime.js",
-        "http://localhost:8080/build/js/slugger.js"
-      ]
-    },
-    "js/page": {
-      "js": [
-        "http://localhost:8080/build/runtime.js",
-        "http://localhost:8080/build/js/page.js"
-      ]
-    },
-    "js/user": {
-      "js": [
-        "http://localhost:8080/build/runtime.js",
-        "http://localhost:8080/build/js/user.js"
-      ]
-    },
-    "js/password": {
-      "js": [
-        "http://localhost:8080/build/runtime.js",
-        "http://localhost:8080/build/js/password.js"
+        "http://localhost:8080/build/js/layout.js"
       ]
     },
     "css/app": {
@@ -86,30 +26,6 @@
       ],
       "css": [
         "http://localhost:8080/build/css/admin.css"
-      ]
-    },
-    "css/ekko-lightbox": {
-      "js": [
-        "http://localhost:8080/build/runtime.js"
-      ],
-      "css": [
-        "http://localhost:8080/build/css/ekko-lightbox.css"
-      ]
-    },
-    "css/detail": {
-      "js": [
-        "http://localhost:8080/build/runtime.js"
-      ],
-      "css": [
-        "http://localhost:8080/build/css/detail.css"
-      ]
-    },
-    "css/select2": {
-      "js": [
-        "http://localhost:8080/build/runtime.js"
-      ],
-      "css": [
-        "http://localhost:8080/build/css/select2.css"
       ]
     }
   }

@@ -1,0 +1,64 @@
+<ul class="sidebar navbar-nav{% if app.request.cookies.get('sidebar-toggled') == 'true' %} toggled{% endif %}">
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_root') }}">
+            <i class="fas fa-home"></i>
+            <span>{{ 'properties'|trans }}</span>
+        </a>
+    </li>
+
+    <li class="nav-item dropdown no-arrow">
+        <a class="nav-link dropdown-toggle"
+           href="#locations"
+           id="citiesDropdown"
+           role="button"
+           data-toggle="dropdown"
+           data-bs-toggle="dropdown"
+           aria-haspopup="true"
+           aria-expanded="false">
+            {{ 'menu.catalog'|trans }}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="citiesDropdown">
+            <a class="dropdown-item" href="{{ path('app_dash') }}">{{ 'cities'|trans }}</a>
+            <a class="dropdown-item" href="{{ path('app_root') }}">{{ 'districts'|trans }}</a>
+            <a class="dropdown-item" href="{{ path('app_account') }}">{{ 'neighborhoods'|trans }}</a>
+            <a class="dropdown-item" href="{{ path('auth_no_register') }}">{{ 'metro_stations'|trans }}</a>
+        </div>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_account') }}">
+            <i class="fas fa-gavel"></i>
+            <span>{{ 'deal_types'|trans }}</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('auth_request_verify_email') }}">
+            <i class="far fa-building"></i>
+            <span>{{ 'categories'|trans }}</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('auth_password_reset') }}">
+            <i class="far fa-file-alt"></i>
+            <span>{{ 'pages'|trans }}</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('auth_register') }}">
+            <i class="fas fa-users-cog"></i>
+            <span>{{ 'users'|trans }}</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('security_login') }}">
+            <i class="fas fa-bars"></i>
+            <span>{{ 'menu'|trans }}</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('security_logout') }}">
+            <i class="fas fa-cog"></i>
+            <span>{{ 'menu.settings'|trans }}</span>
+        </a>
+    </li>
+</ul>

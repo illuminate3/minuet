@@ -7,21 +7,19 @@ namespace App\Controller\Auth;
 use App\Controller\BaseController;
 use App\Entity\Profile;
 use App\Entity\User;
-use App\Form\Type\RequestVerifyUserEmailFormType;
 use App\Form\Type\RegistrationFormType;
+use App\Form\Type\RequestVerifyUserEmailFormType;
 use App\Message\SendEmailConfirmationLink;
 use App\Repository\SettingsRepository;
 use App\Repository\UserRepository;
 use App\Security\RegistrationFormAuthenticator;
 use App\Service\Admin\UserService;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
@@ -43,15 +41,17 @@ final class RegisterController extends BaseController implements AuthController
         $this->settings = $this->site($requestStack->getCurrentRequest());
     }
 
-    #[Route('/register', name: 'register')]
+    #[Route(path: '/register', name: 'auth_register')]
     public function register(Request $request): ?Response
     {
         if ($this->security->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('app_dash');
-        } elseif ('1' !== $this->settings['anyone_can_register']) {
+        }
+
+        if ('1' !== $this->settings['allow_register']) {
             $this->addFlash('danger', 'message.registration_suspended');
 
-            return $this->redirectToRoute('no_register');
+            return $this->redirectToRoute('auth_no_register');
         }
 
         $user = new User();
@@ -66,25 +66,27 @@ final class RegisterController extends BaseController implements AuthController
             return $this->authenticate($user, $request);
         }
 
-        return $this->render('auth/register.html.twig', [
-            'registrationForm' => $form,
+        return $this->render('auth/register/register.html.twig', [
+            'title' => 'title.register',
             'site' => $this->settings,
             'error' => null,
+            'form' => $form,
         ]);
     }
 
-    #[Route('/closed', name: 'no_register')]
+    #[Route(path: '/closed', name: 'auth_no_register')]
     public function noRegister(Request $request): ?Response
     {
         if ($this->security->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('app_dash');
         }
 
-        if ('1' === $this->settings['anyone_can_register']) {
-            return $this->redirectToRoute('register');
+        if ('1' === $this->settings['allow_register']) {
+            return $this->redirectToRoute('auth_register');
         }
 
-        return $this->render('auth/no-register.html.twig', [
+        return $this->render('auth/register/closed-register.html.twig', [
+            'title' => 'title.closed_register',
             'site' => $this->settings,
         ]);
     }
@@ -92,54 +94,50 @@ final class RegisterController extends BaseController implements AuthController
     /**
      * requestVerifyUserEmail.
      */
-    #[Route('/request-verify-email', name: 'app_request_verify_email')]
+    #[Route(path: '/request-verify-email', name: 'auth_request_verify_email')]
     public function requestVerifyUserEmail(
         Request $request,
         UserRepository $userRepository
     ): Response {
         $form = $this->createForm(RequestVerifyUserEmailFormType::class);
+
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             // generate a signed url and email it to the user
-            $user = $userRepository->findOneByEmail($form->get('email')->getData());
+            $user = $userRepository->findOneByEmail(
+                $form->get('email')->getData());
 
             if ($user) {
-//                $this->emailVerifier->sendEmailConfirmation(
-//                    'app_verify_email',
-//                    $user,
-//                    (new TemplatedEmail())
-//                        ->from(new Address('email@example.com', 'Sender'))
-//                        ->to($user->getEmail())
-//                        ->subject('Validation Link')
-//                        ->htmlTemplate('auth/registration/confirmation_email.html.twig')
-//                );
+                $this->messageBus->dispatch(
+                    new SendEmailConfirmationLink($user));
 
-                $this->messageBus->dispatch(new SendEmailConfirmationLink($user));
-
-                // do anything else you need here, like flash message
-                $this->addFlash('success', 'message.email.resent');
-
-                return $this->redirectToRoute('auth_messages');
+                return $this->forward(
+                    'App\Controller\Auth\MessageController::authMessages',
+                    [
+                        'title' => 'title.verify_account_email_sent',
+                        'message' => 'message.verify_account_email_sent',
+                        'link' => 'app_root',
+                        'link_title' => 'action.return_to_root',
+                    ]);
             }
 
             $this->addFlash('error', 'Email inconnu.');
-
         }
 
-        return $this->render('auth/registration/request.html.twig', [
-            'requestForm' => $form->createView(),
-            'title' => 'Request Verification Email',
-            'site' => $this->settings,
-            'error' => null,
-        ]);
-    }
+        $error = null;
+        if (null !== $request->getSession()->getFlashBag()) {
+            $error = $request->getSession()->getFlashBag()->get('danger');
+        }
 
-    #[Route('/auth/messages', name: 'auth_messages')]
-    public function authTimeout(Request $request): ?Response
-    {
-        return $this->render('auth/auth-messages.html.twig', [
-            'site' => $this->settings,
-        ]);
+        return $this->render(
+            'auth/registration/request_verify_email.html.twig',
+            [
+                'title' => 'title.request_new_verification_email',
+                'site' => $this->settings,
+                'error' => $error,
+                'form' => $form->createView(),
+            ]);
     }
 
     private function authenticate(User $user, Request $request): ?Response

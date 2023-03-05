@@ -43,7 +43,7 @@
                 <i class="fas fa-plus-square text-danger"></i>
                 <span class="hidden-sm">{{ 'menu.add_new'|trans }}</span>
             </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="addDropdown">
+            <div class="dropdown-menu" aria-labelledby="addDropdown">
                 <a class="dropdown-item" href="{{ path('admin_category_new') }}">{{ 'category'|trans }}</a>
                 <a class="dropdown-item" href="{{ path('admin_page_new') }}">{{ 'page'|trans }}</a>
                 <a class="dropdown-item" href="{{ path('admin_user_new') }}">{{ 'user'|trans }}</a>
@@ -59,7 +59,7 @@
                aria-expanded="false">
                 {{ 'menu.admin'|trans }}
             </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+            <div class="dropdown-menu" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="{{ path('admin_user_edit', {id: app.user.id}) }}">
                     {{ 'menu.edit_profile'|trans }}
                 </a>

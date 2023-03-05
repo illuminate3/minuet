@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>{{ app_site_name }} - {% block title %}{{ title|trans }}{% endblock %}</title>
+
+    <!-- Styles -->
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('css/app') }}
+        {{ encore_entry_link_tags('css/admin') }}
+        <!-- Google fonts - Roboto -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    {% endblock %}
+
+    <!-- Scripts -->
+    {% block javascripts %}
+        {{ encore_entry_script_tags('js/app') }}
+        {{ encore_entry_script_tags('js/layout') }}
+    {% endblock %}
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+
+
+<body{% if app.request.cookies.get('sidebar-toggled') == 'true' %} class="sidebar-toggled"{% endif %}>
+
+<!-- Navbar -->
+{{ include('layout/dash/partials/_navbar.html.twig') }}
+
+<!-- end #menu -->
+
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    {{ include('layout/dash/partials/_sidebar.html.twig') }}
+
+    <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+            {{ include('common/_flash_messages.html.twig') }}
+
+            {% block body %}{% endblock %}
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <a href="https://github.com/Coderberg/ResidenceCMS">
+                        ResidenceCMS
+                    </a> © {{ "now" | date("Y") }}.
+                    {{ 'all_rights_reserved' | trans }}. <br><br>
+                    Version {{ app_version }}
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>{{ app_site_name }} - {% block title %}{{ title }}{% endblock %}</title>
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('css/app') }}
+        <!-- Google fonts - Roboto -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    {% endblock %}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('js/app') }}
+    {% endblock %}
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+
+<body id="{% block body_id %}{% endblock %}">
+
+
+<!-- Side Navbar -->
+<nav class="side-navbar">
+    <div class="side-navbar-inner">
+        <!-- Sidebar Header    -->
+        <div class="sidebar-header d-flex align-items-center justify-content-center p-3 mb-3">
+            <!-- User Info-->
+            <div class="sidenav-header-inner text-center">
+                <img class="img-fluid rounded-circle avatar mb-3" src="{{ asset('logo/logo.svg') }}" alt="person">
+                <h2 class="h5 text-white text-uppercase mb-0">Nathan Andrews</h2>
+            </div>
+            <!-- Small Brand information, appears on minimized sidebar-->
+            <a class="brand-small text-center" href="{{ path('app_root') }}">
+                <p class="h1 m-0">
+                    BD
+                </p>
+            </a>
+        </div>
+        <!-- Sidebar Navigation Menus-->
+        <span class="text-uppercase text-gray-500 text-sm fw-bold letter-spacing-0 mx-lg-2 heading">Main</span>
+        <ul class="list-unstyled">
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="{{ path('app_root') }}">
+                    <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
+                        <use xlink:href="#real-estate-1"> </use>
+                    </svg>
+                    Home
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="forms.html">
+                    <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
+                        <use xlink:href="#survey-1"> </use>
+                    </svg>Forms </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="page">
+
+    <!-- navbar-->
+    <header class="header mb-5 pb-3">
+        <nav class="nav navbar fixed-top">
+            <div class="container-fluid">
+                <div class="d-flex align-items-center justify-content-between w-100">
+                    <div class="d-flex align-items-center">
+                        <a class="menu-btn d-flex align-items-center justify-content-center p-2 --bs-white" id="toggle-btn" href="#">
+                            <i class="fa-sharp fa-solid fa-arrows-left-right-to-line fa-xl"></i>
+                        </a>
+                        <a class="navbar-brand ms-2" href="{{ path('app_root') }}">
+                            <div class="brand-text d-none d-md-inline-block text-uppercase letter-spacing-0">
+                                <span class="text-white fw-normal text-xs">Bootstrap </span>
+                                <strong class="text-primary text-sm">
+                                    Dashboard
+                                    <i class="fa-solid fa-slider"></i>
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                                </strong>
+                            </div>
+                        </a>
+                    </div>
+                    <ul class="nav-menu mb-0 list-unstyled d-flex flex-md-row align-items-md-center">
+
+
+                        <!-- Log out-->
+                        <li class="nav-item">
+                            <a class="nav-link text-white text-sm ps-0" href="{{ path('security_logout') }}">
+                                <span class="d-none d-sm-inline-block">
+                                    {{ 'menu.logout'|trans }}
+                                </span>
+                                <svg class="svg-icon svg-icon-xs svg-icon-heavy">
+                                    <use xlink:href="#security-1"> </use>
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- navbar-->
+
+    <!-- content-->
+    <section class="bg-white py-5">
+        <div class="container-fluid">
+
+            {{ include('common/_flash_messages.html.twig') }}
+
+            {% block body %}
+            {% endblock %}
+
+        </div>
+    </section>
+    <!-- content-->
+
+
+    <!-- footer-->
+    <footer class="main-footer w-100 position-absolute bottom-0 start-0 py-2" style="background: #222">
+        <div class="container-fluid">
+            <div class="row text-center gy-3">
+                <div class="col-sm-6 text-sm-start">
+                    <p class="mb-0 text-sm text-gray-600">Your company &copy; 2017-2022</p>
+                </div>
+                <div class="col-sm-6 text-sm-end">
+                    <p class="mb-0 text-sm text-gray-600">Design by <a href="https://bootstrapious.com/p/bootstrap-4-dashboard" class="external">Bootstrapious</a>
+                    </p>
+                    <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions and it helps me to run Bootstrapious. Thank you for understanding :)-->
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer-->
+
+
+</div>
+
+</body>
+</html>

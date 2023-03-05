@@ -1,4 +1,4 @@
-{% extends 'layout/base.html.twig' %}
+{% extends 'layout/dash/dash.html.twig' %}
 
 {% block title %}{{ 'title.dash' | trans }}{% endblock %}
 
@@ -22,7 +22,7 @@
                         <li class="breadcrumb-item"><a href="{{ path('user_profile') }}">Profile</a></li>
                         <li class="breadcrumb-item"><a href="{{ path('security_login') }}">login</a></li>
                         <li class="breadcrumb-item"><a href="{{ path('security_logout') }}">logout</a></li>
-                        <li class="breadcrumb-item"><a href="{{ path('register') }}">Register</a></li>
+                        <li class="breadcrumb-item"><a href="{{ path('auth_register') }}">Register</a></li>
                     </ul>
 
 

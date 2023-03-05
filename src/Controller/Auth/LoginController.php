@@ -15,27 +15,41 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 final class LoginController extends BaseController
 {
     #[Route(path: '/login', name: 'security_login')]
-    public function login(Request $request, Security $security, AuthenticationUtils $helper): Response
-    {
-
-//        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-//        $this->getUser()->isVerified()
-
+    public function login(
+        Request $request,
+        Security $security,
+        AuthenticationUtils $helper,
+    ): Response {
 
         // if user is already logged in, don't display the login page again
         if ($security->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute('admin_dashboard');
-        } elseif ($security->isGranted('ROLE_USER')) {
+        }
+
+        if ($security->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('app_dash');
+        }
+
+        $error = $helper->getLastAuthenticationError();
+
+        if ($error && null !== $error->getMessage()) {
+            return $this->forward(
+                'App\Controller\Auth\MessageController::authMessages',
+                [
+                    'title' => 'title.verify_account',
+                    'message' => $error->getMessage(),
+                    'link' => 'auth_request_verify_email',
+                    'link_title' => 'action.verify_account',
+                ]);
         }
 
         $form = $this->createForm(LoginFormType::class);
 
-        return $this->render('auth/login.html.twig', [
-            'title' => 'Login',
-            'site'  => $this->site($request),
+        return $this->render('auth/login/login.html.twig', [
+            'title' => 'title.login',
+            'site' => $this->site($request),
             'error' => $helper->getLastAuthenticationError(),
-            'form'  => $form,
+            'form' => $form,
         ]);
     }
 
@@ -47,4 +61,5 @@ final class LoginController extends BaseController
     {
         throw new \Exception('This should never be reached!');
     }
+
 }

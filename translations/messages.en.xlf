@@ -2,12 +2,198 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
         <body>
-            <trans-unit id="confirmation.email.subject">
-                <source>confirmation.email.subject</source>
+
+            <trans-unit id="label.agree">
+                <source>label.agree</source>
+                <target>I agree to the terms and conditions.</target>
+            </trans-unit>
+            <trans-unit id="label.current_password">
+                <source>label.current_password</source>
+                <target>Current Password</target>
+            </trans-unit>
+            <trans-unit id="label.new_password">
+                <source>label.new_password</source>
+                <target>New Password</target>
+            </trans-unit>
+            <trans-unit id="label.new_password_confirm">
+                <source>label.new_password_confirm</source>
+                <target>Confirm New Password</target>
+            </trans-unit>
+            <trans-unit id="label.full_name">
+                <source>label.full_name</source>
+                <target>Full name</target>
+            </trans-unit>
+            <trans-unit id="label.email">
+                <source>label.email</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="label.password">
+                <source>label.password</source>
+                <target>Password</target>
+            </trans-unit>
+            <trans-unit id="label.password_new">
+                <source>label.password_new</source>
+                <target>New Password</target>
+            </trans-unit>
+            <trans-unit id="label.password_confirm">
+                <source>label.password_confirm</source>
+                <target>Confirm Password</target>
+            </trans-unit>
+            <trans-unit id="label.phone">
+                <source>label.phone</source>
+                <target>Phone</target>
+            </trans-unit>
+            <trans-unit id="label.remember_me">
+                <source>label.remember_me</source>
+                <target>Keep me logged in</target>
+            </trans-unit>
+
+            <trans-unit id="menu.account">
+                <source>menu.account</source>
+                <target>Account</target>
+            </trans-unit>
+            <trans-unit id="menu.login">
+                <source>menu.login</source>
+                <target>Log In</target>
+            </trans-unit>
+            <trans-unit id="menu.logout">
+                <source>menu.logout</source>
+                <target>Log Out</target>
+            </trans-unit>
+            <trans-unit id="menu.password">
+                <source>menu.password</source>
+                <target>Password</target>
+            </trans-unit>
+            <trans-unit id="menu.password_change">
+                <source>menu.password_change</source>
+                <target>Change Password</target>
+            </trans-unit>
+            <trans-unit id="menu.profile">
+                <source>menu.profile</source>
+                <target>Profile</target>
+            </trans-unit>
+            <trans-unit id="menu.register">
+                <source>menu.register</source>
+                <target>Register</target>
+            </trans-unit>
+            <trans-unit id="menu.user">
+                <source>menu.user</source>
+                <target>User</target>
+            </trans-unit>
+
+            <trans-unit id="action.return_to_root">
+                <source>action.return_to_root</source>
+                <target>Return to Home</target>
+            </trans-unit>
+            <trans-unit id="action.change_password">
+                <source>action.change_password</source>
+                <target>Change Password</target>
+            </trans-unit>
+            <trans-unit id="action.forgot_password">
+                <source>action.forgot_password</source>
+                <target>Forgot Your Password?</target>
+            </trans-unit>
+            <trans-unit id="action.register">
+                <source>action.register</source>
+                <target>Register</target>
+            </trans-unit>
+            <trans-unit id="action.request_new_verification_email">
+                <source>action.request_new_verification_email</source>
+                <target>Request New Verification Email</target>
+            </trans-unit>
+            <trans-unit id="action.save">
+                <source>action.save</source>
+                <target>Save</target>
+            </trans-unit>
+            <trans-unit id="action.send_reset_link">
+                <source>action.send_reset_link</source>
+                <target>Send Password Reset Link</target>
+            </trans-unit>
+            <trans-unit id="action.sign_in">
+                <source>action.sign_in</source>
+                <target>Sign In</target>
+            </trans-unit>
+            <trans-unit id="action.verify_account">
+                <source>action.verify_account</source>
+                <target>Request Verification Link</target>
+            </trans-unit>
+
+            <trans-unit id="title.change_password">
+                <source>title.change_password</source>
+                <target>Change Password</target>
+            </trans-unit>
+            <trans-unit id="title.dashboard">
+                <source>title.dashboard</source>
+                <target>Dashboard</target>
+            </trans-unit>
+            <trans-unit id="title.forgot_password">
+                <source>title.forgot_password</source>
+                <target>Forgot Password</target>
+            </trans-unit>
+            <trans-unit id="title.login">
+                <source>title.login</source>
+                <target>Secure Sign In</target>
+            </trans-unit>
+            <trans-unit id="title.password_reset_emailed">
+                <source>title.password_reset_emailed</source>
+                <target>Reset Password</target>
+            </trans-unit>
+            <trans-unit id="title.profile">
+                <source>title.profile</source>
+                <target>Profile</target>
+            </trans-unit>
+            <trans-unit id="title.register">
+                <source>title.register</source>
+                <target>Register</target>
+            </trans-unit>
+            <trans-unit id="title.request_new_verification_email">
+                <source>title.request_new_verification_email</source>
+                <target>Request New Verification Email</target>
+            </trans-unit>
+            <trans-unit id="title.closed_register">
+                <source>title.closed_register</source>
+                <target>Registration Closed</target>
+            </trans-unit>
+            <trans-unit id="title.verify_account">
+                <source>title.verify_account</source>
+                <target>Verify Your Account</target>
+            </trans-unit>
+            <trans-unit id="title.verify_account_email_sent">
+                <source>title.verify_account_email_sent</source>
+                <target>Request Verification Link Sent</target>
+            </trans-unit>
+
+            <trans-unit id="email.subject.password_reset">
+                <source>email.subject.password_reset</source>
+                <target>Reset Password</target>
+            </trans-unit>
+
+            <trans-unit id="message.closed_register">
+                <source>message.closed_register</source>
+                <target>The Site is still open for viewing.</target>
+            </trans-unit>
+            <trans-unit id="message.created">
+                <source>message.created</source>
+                <target>Created successfully</target>
+            </trans-unit>
+            <trans-unit id="message.updated">
+                <source>message.updated</source>
+                <target>Updated successfully</target>
+            </trans-unit>
+            <trans-unit id="message.confirm_email">
+                <source>message.confirm_email</source>
+                <target>
+                    To use your account, you need to confirm your email address.
+                    Check your email and locate the confirmation email.
+                    Follow the steps in the email to confirm your email address.
+                </target>
+            </trans-unit>
+            <trans-unit id="message.email.subject.confirmation">
+                <source>message.email.subject.confirmation</source>
                 <target>Please Confirm your Email</target>
             </trans-unit>
-            <trans-unit id="confirmation.email.message">
-                <source>confirmation.email.message</source>
+            <trans-unit id="message.email.confirmation">
+                <source>message.email.confirmation</source>
                 <target>
                     Hello!
                     Please confirm your email address by clicking the following link:
@@ -21,873 +207,54 @@
                     Cheers!
                 </target>
             </trans-unit>
-            <trans-unit id="message.email.password.reset">
-                <source>message.email.password.reset</source>
+            <trans-unit id="message.emailed_reset_link">
+                <source>message.emailed_reset_link</source>
+                <target>We have e-mailed your password reset link!</target>
+            </trans-unit>
+            <trans-unit id="message.email_password_reset">
+                <source>message.email_password_reset</source>
                 <target>
                     Hello %username%!
                     To reset your password - please visit %confirmationUrl%
                     Regards, the Team.
                 </target>
             </trans-unit>
-
-            <trans-unit id="email.subject.password.reset">
-                <source>resetting.email.subject</source>
-                <target>Reset Password</target>
-            </trans-unit>
-
-            <trans-unit id="menu.back">
-                <source>old.menu.back</source>
-                <target>Back</target>
-            </trans-unit>
-            <trans-unit id="menu.homepage">
-                <source>old.menu.homepage</source>
-                <target>Homepage</target>
-            </trans-unit>
-            <trans-unit id="menu.catalog">
-                <source>old.menu.catalog</source>
-                <target>Catalog</target>
-            </trans-unit>
-            <trans-unit id="menu.add_new">
-                <source>old.menu.add_new</source>
-                <target>Add new</target>
-            </trans-unit>
-            <trans-unit id="menu.settings">
-                <source>old.menu.settings</source>
-                <target>Settings</target>
-            </trans-unit>
-            <trans-unit id="menu.my_properties">
-                <source>old.menu.my_properties</source>
-                <target>My properties</target>
-            </trans-unit>
-            <trans-unit id="menu.unpublished">
-                <source>old.menu.unpublished</source>
-                <target>Unpublished</target>
-            </trans-unit>
-            <trans-unit id="menu.admin">
-                <source>old.menu.admin</source>
-                <target>Admin</target>
-            </trans-unit>
-            <trans-unit id="menu.account">
-                <source>old.menu.account</source>
-                <target>Account</target>
-            </trans-unit>
-            <trans-unit id="menu.edit_profile">
-                <source>old.menu.edit_profile</source>
-                <target>Edit profile</target>
-            </trans-unit>
-            <trans-unit id="menu.login">
-                <source>old.menu.login</source>
-                <target>Log in</target>
-            </trans-unit>
-            <trans-unit id="menu.register">
-                <source>old.menu.register</source>
-                <target>Register</target>
-            </trans-unit>
-            <trans-unit id="menu.profile">
-                <source>old.menu.profile</source>
-                <target>My Profile</target>
-            </trans-unit>
-            <trans-unit id="menu.password">
-                <source>old.menu.password</source>
-                <target>Change Password</target>
-            </trans-unit>
-            <trans-unit id="menu.logout">
-                <source>old.menu.logout</source>
-                <target>Log Out</target>
-            </trans-unit>
-
-            <trans-unit id="yes">
-                <source>old.yes</source>
-                <target>Yes</target>
-            </trans-unit>
-            <trans-unit id="no_items_found">
-                <source>old.no_items_found</source>
-                <target>No items found.</target>
-            </trans-unit>
-            <trans-unit id="view_details">
-                <source>old.view_details</source>
-                <target>View Details</target>
-            </trans-unit>
-            <trans-unit id="show_on_map">
-                <source>old.show_on_map</source>
-                <target>Show on Map</target>
-            </trans-unit>
-
-            <trans-unit id="dashboard">
-                <source>old.dashboard</source>
-                <target>Dashboard</target>
-            </trans-unit>
-            <trans-unit id="categories">
-                <source>old.categories</source>
-                <target>Categories</target>
-            </trans-unit>
-            <trans-unit id="pages">
-                <source>old.pages</source>
-                <target>Pages</target>
-            </trans-unit>
-            <trans-unit id="users">
-                <source>old.users</source>
-                <target>Users</target>
-            </trans-unit>
-            <trans-unit id="menu">
-                <source>old.menu</source>
-                <target>Menu</target>
-            </trans-unit>
-            <trans-unit id="category">
-                <source>old.category</source>
-                <target>Category</target>
-            </trans-unit>
-            <trans-unit id="page">
-                <source>old.page</source>
-                <target>Page</target>
-            </trans-unit>
-            <trans-unit id="user">
-                <source>old.user</source>
-                <target>User</target>
-            </trans-unit>
-
-            <trans-unit id="message.created">
-                <source>old.message.created</source>
-                <target>Created successfully</target>
-            </trans-unit>
-            <trans-unit id="message.updated">
-                <source>old.message.updated</source>
-                <target>Updated successfully</target>
-            </trans-unit>
-            <trans-unit id="message.deleted">
-                <source>old.message.deleted</source>
-                <target>Deleted successfully</target>
-            </trans-unit>
-            <trans-unit id="message.uploaded">
-                <source>old.message.uploaded</source>
-                <target>Photo uploaded successfully</target>
-            </trans-unit>
-            <trans-unit id="message.was_sent">
-                <source>old.message.was_sent</source>
-                <target>Your message was sent successfully. Thanks.</target>
-            </trans-unit>
-            <trans-unit id="message.registration_suspended">
-                <source>old.message.registration_suspended</source>
-                <target>Registration of new users has been temporarily suspended.</target>
-            </trans-unit>
-            <trans-unit id="message.token_expired">
-                <source>old.message.token_expired</source>
-                <target>Sorry, your token has expired. Please try again.</target>
-            </trans-unit>
-            <trans-unit id="message.password_has_been_reset">
-                <source>old.message.password_has_been_reset</source>
-                <target>Password has been changed successfully. Now you can log in with new password.</target>
-            </trans-unit>
-            <trans-unit id="message.emailed_reset_link">
-                <source>old.message.emailed_reset_link</source>
-                <target>We have e-mailed your password reset link!</target>
-            </trans-unit>
             <trans-unit id="message.email_verified">
-                <source>old.message.email_verified</source>
+                <source>message.email_verified</source>
                 <target>Your email address has been verified.</target>
             </trans-unit>
-            <trans-unit id="message.confirm_email">
-                <source>old.message.confirm_email</source>
+            <trans-unit id="message.password_has_been_reset">
+                <source>message.password_has_been_reset</source>
+                <target>Password has been changed successfully. Now you can log in with new password.</target>
+            </trans-unit>
+            <trans-unit id="message.registration_suspended">
+                <source>message.registration_suspended</source>
+                <target>Registration of new users has been temporarily suspended.</target>
+            </trans-unit>
+            <trans-unit id="message.token_processed">
+                <source>message.token_processed</source>
                 <target>
-                    To use your account, you need to confirm your email address.
-                    Check your email and locate the confirmation email.
-                    Follow the steps in the email to confirm your email address.
+                Your password has already been changed recently.
+                Please use the "Forgot Your Password" button below.
                 </target>
             </trans-unit>
-
-            <trans-unit id="widget.contact_information">
-                <source>old.widget.contact_information</source>
-                <target>Contact Information</target>
-            </trans-unit>
-            <trans-unit id="widget.agent">
-                <source>old.widget.agent</source>
-                <target>Agent</target>
-            </trans-unit>
-            <trans-unit id="widget.phone">
-                <source>old.widget.phone</source>
-                <target>Phone</target>
-            </trans-unit>
-            <trans-unit id="widget.email">
-                <source>old.widget.email</source>
-                <target>Email</target>
-            </trans-unit>
-            <trans-unit id="widget.search">
-                <source>old.widget.search</source>
-                <target>Search</target>
-            </trans-unit>
-            <trans-unit id="widget.all_cities">
-                <source>old.widget.all_cities</source>
-                <target>All cities</target>
-            </trans-unit>
-            <trans-unit id="widget.all_deal_types">
-                <source>old.widget.all_deal_types</source>
-                <target>All deal types</target>
-            </trans-unit>
-            <trans-unit id="widget.all_categories">
-                <source>old.widget.all_categories</source>
-                <target>All categories</target>
-            </trans-unit>
-            <trans-unit id="widget.all_features">
-                <source>old.widget.all_features</source>
-                <target>All features</target>
-            </trans-unit>
-
-            <trans-unit id="action.search">
-                <source>old.action.search</source>
-                <target>Search</target>
-            </trans-unit>
-            <trans-unit id="action.save">
-                <source>old.action.save</source>
-                <target>Save changes</target>
-            </trans-unit>
-            <trans-unit id="action.edit">
-                <source>old.action.edit</source>
-                <target>Edit</target>
-            </trans-unit>
-            <trans-unit id="action.finish_editing">
-                <source>old.action.finish_editing</source>
-                <target>Finish editing</target>
-            </trans-unit>
-            <trans-unit id="action.edit_photos">
-                <source>old.action.edit_photos</source>
-                <target>Edit photos</target>
-            </trans-unit>
-            <trans-unit id="action.reorder_photos">
-                <source>old.action.reorder_photos</source>
-                <target>Reorder photos</target>
-            </trans-unit>
-            <trans-unit id="action.save_reordering">
-                <source>old.action.save_reordering</source>
-                <target>Save reordering</target>
-            </trans-unit>
-            <trans-unit id="action.delete">
-                <source>old.action.delete</source>
-                <target>Delete</target>
-            </trans-unit>
-            <trans-unit id="action.sign_in">
-                <source>old.action.sign_in</source>
-                <target>Sign in</target>
-            </trans-unit>
-            <trans-unit id="action.register">
-                <source>old.action.register</source>
-                <target>Create account</target>
-            </trans-unit>
-            <trans-unit id="action.forgot_password">
-                <source>old.action.forgot_password</source>
-                <target>Forgot Your Password?</target>
-            </trans-unit>
-            <trans-unit id="action.send_reset_link">
-                <source>old.action.send_reset_link</source>
-                <target>Send Password Reset Link</target>
-            </trans-unit>
-            <trans-unit id="action.add_menu_item">
-                <source>old.action.add_menu_item</source>
-                <target>Add Menu Item</target>
-            </trans-unit>
-            <trans-unit id="action.submit">
-                <source>old.action.submit</source>
-                <target>Submit</target>
-            </trans-unit>
-            <trans-unit id="action.continue">
-                <source>old.action.continue</source>
-                <target>Continue</target>
-            </trans-unit>
-            <trans-unit id="action.publish">
-                <source>old.action.publish</source>
-                <target>Publish</target>
-            </trans-unit>
-            <trans-unit id="action.unpublish">
-                <source>old.action.unpublish</source>
-                <target>Unpublish</target>
-            </trans-unit>
-            <trans-unit id="action.cancel">
-                <source>old.action.cancel</source>
-                <target>Cancel</target>
-            </trans-unit>
-
-            <trans-unit id="table.link_text">
-                <source>old.table.link_text</source>
-                <target>Link Text</target>
-            </trans-unit>
-            <trans-unit id="table.url">
-                <source>old.table.url</source>
-                <target>URL</target>
-            </trans-unit>
-            <trans-unit id="table.move">
-                <source>old.table.move</source>
-                <target>Move</target>
-            </trans-unit>
-            <trans-unit id="table.category_name">
-                <source>old.table.category_name</source>
-                <target>Category name</target>
-            </trans-unit>
-            <trans-unit id="table.code">
-                <source>old.table.code</source>
-                <target>Code</target>
-            </trans-unit>
-            <trans-unit id="table.username">
-                <source>old.table.username</source>
-                <target>Username</target>
-            </trans-unit>
-            <trans-unit id="table.email">
-                <source>old.table.email</source>
-                <target>Email</target>
-            </trans-unit>
-            <trans-unit id="table.slug">
-                <source>old.table.slug</source>
-                <target>Slug</target>
-            </trans-unit>
-            <trans-unit id="table.action">
-                <source>old.table.action</source>
-                <target>Action</target>
-            </trans-unit>
-
-            <trans-unit id="confirmation.delete_item">
-                <source>old.confirmation.delete_item</source>
-                <target>Are you sure you want to delete this item?</target>
-            </trans-unit>
-            <trans-unit id="confirmation.delete_photo">
-                <source>old.confirmation.delete_photo</source>
-                <target>Are you sure you want to delete this photo?</target>
-            </trans-unit>
-            <trans-unit id="confirmation.delete_user">
-                <source>old.confirmation.delete_user</source>
-                <target>Are you sure you want to delete this user?</target>
-            </trans-unit>
-
-            <trans-unit id="title.my_profile">
-                <source>old.title.my_profile</source>
-                <target>My profile</target>
-            </trans-unit>
-            <trans-unit id="title.my_properties">
-                <source>old.title.my_properties</source>
-                <target>My properties</target>
-            </trans-unit>
-            <trans-unit id="title.properties_on_map">
-                <source>old.title.properties_on_map</source>
-                <target>All properties on the map</target>
-            </trans-unit>
-            <trans-unit id="title.login">
-                <source>old.title.login</source>
-                <target>Secure Sign in</target>
-            </trans-unit>
-            <trans-unit id="title.register">
-                <source>old.title.register</source>
-                <target>Register</target>
-            </trans-unit>
-            <trans-unit id="title.no_register">
-                <source>old.title.no_register</source>
-                <target>Registration Closed</target>
-            </trans-unit>
-            <trans-unit id="title.reset_password">
-                <source>old.title.reset_password</source>
-                <target>Reset Password</target>
-            </trans-unit>
-            <trans-unit id="title.set_new_pass">
-                <source>old.title.set_new_pass</source>
-                <target>Set a new password</target>
-            </trans-unit>
-            <trans-unit id="title.pages">
-                <source>old.title.pages</source>
-                <target>Pages</target>
-            </trans-unit>
-            <trans-unit id="title.latest_properties">
-                <source>old.title.latest_properties</source>
-                <target>Latest properties</target>
-            </trans-unit>
-            <trans-unit id="title.add_page">
-                <source>old.title.add_page</source>
-                <target>Add page</target>
-            </trans-unit>
-            <trans-unit id="title.edit_page">
-                <source>old.title.edit_page</source>
-                <target>Edit page</target>
-            </trans-unit>
-
-            <trans-unit id="title.edit_deal_type">
-                <source>old.title.edit_deal_type</source>
-                <target>Edit deal type</target>
-            </trans-unit>
-            <trans-unit id="title.add_category">
-                <source>old.title.add_category</source>
-                <target>Add New Category</target>
-            </trans-unit>
-            <trans-unit id="title.edit_category">
-                <source>old.title.edit_category</source>
-                <target>Edit category</target>
-            </trans-unit>
-            <trans-unit id="title.add_feature">
-                <source>old.title.add_feature</source>
-                <target>Add New Feature</target>
-            </trans-unit>
-            <trans-unit id="title.edit_feature">
-                <source>old.title.edit_feature</source>
-                <target>Edit feature</target>
-            </trans-unit>
-            <trans-unit id="title.add_currency">
-                <source>old.title.add_currency</source>
-                <target>Add New Currency</target>
-            </trans-unit>
-            <trans-unit id="title.edit_currency">
-                <source>old.title.edit_currency</source>
-                <target>Edit Currency</target>
-            </trans-unit>
-            <trans-unit id="title.add_user">
-                <source>old.title.add_user</source>
-                <target>Add New User</target>
-            </trans-unit>
-            <trans-unit id="title.edit_user">
-                <source>old.title.edit_user</source>
-                <target>Edit user</target>
-            </trans-unit>
-            <trans-unit id="title.add_menu_item">
-                <source>old.title.add_menu_item</source>
-                <target>Add Menu Item</target>
-            </trans-unit>
-            <trans-unit id="title.edit_menu_item">
-                <source>old.title.edit_menu_item</source>
-                <target>Edit Menu Item</target>
-            </trans-unit>
-            <trans-unit id="title.upload_photos">
-                <source>old.title.upload_photos</source>
-                <target>Upload photos</target>
-            </trans-unit>
-            <trans-unit id="title.settings">
-                <source>old.title.settings</source>
-                <target>Settings</target>
-            </trans-unit>
-            <trans-unit id="title.settings.header_settings">
-                <source>old.title.settings.header_settings</source>
-                <target>Header settings</target>
-            </trans-unit>
-            <trans-unit id="title.settings.map_settings">
-                <source>old.title.settings.map_settings</source>
-                <target>Map settings</target>
-            </trans-unit>
-            <trans-unit id="title.settings.logo_image_label">
-                <source>old.title.settings.logo_image_label</source>
-                <target>Site logo</target>
-            </trans-unit>
-            <trans-unit id="title.settings.header_image_label">
-                <source>old.title.settings.header_image_label</source>
-                <target>Header image</target>
-            </trans-unit>
-
-            <trans-unit id="label.remember_me">
-                <source>old.label.remember_me</source>
-                <target>Keep me logged in</target>
-            </trans-unit>
-            <trans-unit id="label.settings.name">
-                <source>old.label.settings.name</source>
-                <target>Site Name</target>
-            </trans-unit>
-            <trans-unit id="label.settings.title">
-                <source>old.label.settings.title</source>
-                <target>Site Title</target>
-            </trans-unit>
-            <trans-unit id="label.meta_title">
-                <source>old.label.meta_title</source>
-                <target>Meta Title</target>
-            </trans-unit>
-            <trans-unit id="label.meta_description">
-                <source>old.label.meta_description</source>
-                <target>Meta Description</target>
-            </trans-unit>
-            <trans-unit id="label.settings.code">
-                <source>old.label.settings.code</source>
-                <target>Custom Code in Header (Google Analytics etc.)</target>
-            </trans-unit>
-            <trans-unit id="label.settings.custom_footer_text">
-                <source>old.label.settings.custom_footer_text</source>
-                <target>Custom Footer Text</target>
-            </trans-unit>
-            <trans-unit id="label.settings.limit">
-                <source>old.label.settings.limit</source>
-                <target>Number Of Items Per Page</target>
-            </trans-unit>
-            <trans-unit id="label.settings.show_language_selector">
-                <source>old.label.settings.show_language_selector</source>
-                <target>Show language selector</target>
-            </trans-unit>
-            <trans-unit id="label.settings.anyone_can_register">
-                <source>old.label.settings.anyone_can_register</source>
-                <target>Anyone can register</target>
-            </trans-unit>
-            <trans-unit id="label.settings.allow_html">
-                <source>old.label.settings.allow_html</source>
-                <target>Allow users to use HTML</target>
-            </trans-unit>
-            <trans-unit id="label.settings.currency">
-                <source>old.label.settings.currency</source>
-                <target>Currency</target>
-            </trans-unit>
-            <trans-unit id="label.settings.fixed_top_navbar">
-                <source>old.label.settings.fixed_top_navbar</source>
-                <target>Fixed Top Navbar</target>
-            </trans-unit>
-            <trans-unit id="label.settings.show_similar_properties">
-                <source>old.label.settings.show_similar_properties</source>
-                <target>Show Similar Properties</target>
-            </trans-unit>
-            <trans-unit id="label.settings.ymaps_key">
-                <source>old.label.settings.ymaps_key</source>
-                <target>Yandex.Maps JavaScript API key</target>
-            </trans-unit>
-            <trans-unit id="label.settings.map_center">
-                <source>old.label.settings.map_center</source>
-                <target>Map center</target>
-            </trans-unit>
-            <trans-unit id="label.settings.map_zoom">
-                <source>old.label.settings.map_zoom</source>
-                <target>Zoom level. Acceptable values: from 0 (the entire world) to 19</target>
-            </trans-unit>
-            <trans-unit id="label.roles.admin">
-                <source>old.label.roles.admin</source>
-                <target>Admin permissions</target>
-            </trans-unit>
-            <trans-unit id="label.full_name">
-                <source>old.label.full_name</source>
-                <target>Full name</target>
-            </trans-unit>
-            <trans-unit id="label.username">
-                <source>old.label.username</source>
-                <target>Username</target>
-            </trans-unit>
-            <trans-unit id="label.phone">
-                <source>old.label.phone</source>
-                <target>Phone</target>
-            </trans-unit>
-            <trans-unit id="label.email">
-                <source>old.label.email</source>
-                <target>Email</target>
-            </trans-unit>
-            <trans-unit id="label.email_verified">
-                <source>old.label.email_verified</source>
-                <target>Email Verified</target>
-            </trans-unit>
-            <trans-unit id="label.agree">
-                <source>old.label.agree</source>
-                <target>I agree to the terms and conditions.</target>
-            </trans-unit>
-            <trans-unit id="label.password">
-                <source>old.label.password</source>
-                <target>Password</target>
-            </trans-unit>
-            <trans-unit id="label.new_password">
-                <source>old.label.new_password</source>
-                <target>New password</target>
-            </trans-unit>
-            <trans-unit id="label.confirm_password">
-                <source>old.label.confirm_password</source>
-                <target>Confirm new password</target>
-            </trans-unit>
-            <trans-unit id="label.name">
-                <source>old.label.name</source>
-                <target>Name</target>
-            </trans-unit>
-            <trans-unit id="label.slug">
-                <source>old.label.slug</source>
-                <target>Slug</target>
-            </trans-unit>
-            <trans-unit id="label.currency_title">
-                <source>old.label.currency_title</source>
-                <target>Currency Title</target>
-            </trans-unit>
-            <trans-unit id="label.code">
-                <source>old.label.code</source>
-                <target>Code</target>
-            </trans-unit>
-            <trans-unit id="label.symbol_left">
-                <source>old.label.symbol_left</source>
-                <target>Symbol Left</target>
-            </trans-unit>
-            <trans-unit id="label.symbol_right">
-                <source>old.label.symbol_right</source>
-                <target>Symbol Right</target>
-            </trans-unit>
-            <trans-unit id="label.photo">
-                <source>old.label.photo</source>
-                <target>Photo</target>
-            </trans-unit>
-            <trans-unit id="label.category">
-                <source>old.label.category</source>
-                <target>Category</target>
-            </trans-unit>
-            <trans-unit id="label.features">
-                <source>old.label.features</source>
-                <target>Features</target>
-            </trans-unit>
-            <trans-unit id="label.priority_number">
-                <source>old.label.priority_number</source>
-                <target>Listing priority number</target>
-            </trans-unit>
-            <trans-unit id="label.priority_number.help">
-                <source>old.label.priority_number.help</source>
-                <target>The default priority is zero; relative to the default a priority can be higher (positive
-                    numbers) or lower (negative numbers).
-                </target>
-            </trans-unit>
-            <trans-unit id="label.agent">
-                <source>old.label.agent</source>
-                <target>Agent</target>
-            </trans-unit>
-            <trans-unit id="label.moderation_status">
-                <source>old.label.moderation_status</source>
-                <target>Moderation status</target>
-            </trans-unit>
-            <trans-unit id="option.published">
-                <source>old.option.published</source>
-                <target>Published</target>
-            </trans-unit>
-            <trans-unit id="option.private">
-                <source>old.option.private</source>
-                <target>Private</target>
-            </trans-unit>
-            <trans-unit id="option.pending">
-                <source>old.option.pending</source>
-                <target>Pending review</target>
-            </trans-unit>
-            <trans-unit id="option.rejected">
-                <source>old.option.rejected</source>
-                <target>Rejected</target>
-            </trans-unit>
-            <trans-unit id="option.all">
-                <source>old.option.all</source>
-                <target>All</target>
-            </trans-unit>
-            <trans-unit id="label.feature">
-                <source>old.label.feature</source>
-                <target>Feature name</target>
-            </trans-unit>
-            <trans-unit id="label.custom_icon">
-                <source>old.label.custom_icon</source>
-                <target>Custom icon (optional)</target>
-            </trans-unit>
-            <trans-unit id="label.bathrooms_number">
-                <source>old.label.bathrooms_number</source>
-                <target>Number of Bathrooms</target>
-            </trans-unit>
-            <trans-unit id="label.bedrooms_number">
-                <source>old.label.bedrooms_number</source>
-                <target>Number of Bedrooms</target>
-            </trans-unit>
-            <trans-unit id="label.max_guests">
-                <source>old.label.max_guests</source>
-                <target>Max Guests</target>
-            </trans-unit>
-            <trans-unit id="label.guests">
-                <source>old.label.guests</source>
-                <target>Guests</target>
-            </trans-unit>
-            <trans-unit id="label.title">
-                <source>old.label.title</source>
-                <target>Title</target>
-            </trans-unit>
-            <trans-unit id="label.link_text">
-                <source>old.label.link_text</source>
-                <target>Link Text</target>
-            </trans-unit>
-            <trans-unit id="label.url">
-                <source>old.label.url</source>
-                <target>URL</target>
-            </trans-unit>
-            <trans-unit id="label.locale">
-                <source>old.label.locale</source>
-                <target>Language</target>
-            </trans-unit>
-            <trans-unit id="label.new_tab">
-                <source>old.label.new_tab</source>
-                <target>Open in new tab</target>
-            </trans-unit>
-            <trans-unit id="label.nofollow">
-                <source>old.label.nofollow</source>
-                <target>Nofollow</target>
-            </trans-unit>
-            <trans-unit id="label.description">
-                <source>old.label.description</source>
-                <target>Description</target>
-            </trans-unit>
-            <trans-unit id="label.address">
-                <source>old.label.address</source>
-                <target>Address</target>
-            </trans-unit>
-            <trans-unit id="label.latitude">
-                <source>old.label.latitude</source>
-                <target>Latitude</target>
-            </trans-unit>
-            <trans-unit id="label.longitude">
-                <source>old.label.longitude</source>
-                <target>Longitude</target>
-            </trans-unit>
-            <trans-unit id="label.show_map">
-                <source>old.label.show_map</source>
-                <target>Show map</target>
-            </trans-unit>
-            <trans-unit id="label.price">
-                <source>old.label.price</source>
-                <target>Price</target>
-            </trans-unit>
-            <trans-unit id="label.price_type">
-                <source>old.label.price_type</source>
-                <target>Price type</target>
-            </trans-unit>
-            <trans-unit id="label.available_now">
-                <source>old.label.available_now</source>
-                <target>Available now</target>
-            </trans-unit>
-            <trans-unit id="label.content">
-                <source>old.label.content</source>
-                <target>Content</target>
-            </trans-unit>
-            <trans-unit id="label.show_in_menu">
-                <source>old.label.show_in_menu</source>
-                <target>Show in menu</target>
-            </trans-unit>
-            <trans-unit id="label.add_contact_form">
-                <source>old.label.add_contact_form</source>
-                <target>Add a Contact Form</target>
-            </trans-unit>
-            <trans-unit id="label.contact_email_address">
-                <source>old.label.contact_email_address</source>
-                <target>Contact Email Address</target>
-            </trans-unit>
-            <trans-unit id="label.message">
-                <source>old.label.message</source>
-                <target>Message</target>
-            </trans-unit>
-            <trans-unit id="label.create_category">
-                <source>old.label.create_category</source>
-                <target>Create category</target>
-            </trans-unit>
-            <trans-unit id="label.create_currency">
-                <source>old.label.create_currency</source>
-                <target>Create currency</target>
-            </trans-unit>
-            <trans-unit id="label.create_feature">
-                <source>old.label.create_feature</source>
-                <target>Create feature</target>
-            </trans-unit>
-            <trans-unit id="label.create_deal_type">
-                <source>old.label.create_deal_type</source>
-                <target>Create deal type</target>
-            </trans-unit>
-            <trans-unit id="label.create_page">
-                <source>old.label.create_page</source>
-                <target>Create page</target>
-            </trans-unit>
-            <trans-unit id="label.create_user">
-                <source>old.label.create_user</source>
-                <target>Create user</target>
-            </trans-unit>
-            <trans-unit id="label.save_and_create_new">
-                <source>old.label.save_and_create_new</source>
-                <target>Save and create new</target>
-            </trans-unit>
-            <trans-unit id="label.sort_by">
-                <source>old.label.sort_by</source>
-                <target>Sort by</target>
-            </trans-unit>
-
-            <trans-unit id="option.on">
-                <source>old.option.on</source>
-                <target>On</target>
-            </trans-unit>
-            <trans-unit id="option.off">
-                <source>old.option.off</source>
-                <target>Off</target>
-            </trans-unit>
-            <trans-unit id="option.any">
-                <source>old.option.any</source>
-                <target>Any</target>
-            </trans-unit>
-            <trans-unit id="option.bedroom">
-                <source>old.option.bedroom</source>
-                <target>bedroom</target>
-            </trans-unit>
-            <trans-unit id="option.bedrooms">
-                <source>old.option.bedrooms</source>
-                <target>bedrooms</target>
-            </trans-unit>
-            <trans-unit id="option.priority">
-                <source>old.option.priority</source>
-                <target>Priority</target>
-            </trans-unit>
-            <trans-unit id="option.latest">
-                <source>old.option.latest</source>
-                <target>Latest</target>
-            </trans-unit>
-
-            <trans-unit id="password.change">
-                <source>old.password.change</source>
-                <target>Change Password</target>
-            </trans-unit>
-            <trans-unit id="password.length">
-                <source>old.password.length</source>
-                <target>10 Characters Minimum</target>
-            </trans-unit>
-            <trans-unit id="password.uppercase">
-                <source>old.password.uppercase</source>
-                <target>Uppercase Letters</target>
-            </trans-unit>
-            <trans-unit id="password.lowercase">
-                <source>old.password.lowercase</source>
-                <target>Lowercase Letters</target>
-            </trans-unit>
-            <trans-unit id="password.numbers">
-                <source>old.password.numbers</source>
-                <target>Numbers</target>
-            </trans-unit>
-            <trans-unit id="password.match">
-                <source>old.password.match</source>
-                <target>Passwords Match</target>
-            </trans-unit>
-            <trans-unit id="password.progress">
-                <source>old.password.progress</source>
-                <target>Changing Password...</target>
-            </trans-unit>
-
-            <trans-unit id="placeholder.map_center_example">
-                <source>old.placeholder.map_center_example</source>
-                <target>e.g. 27.188534, -81.128735</target>
-            </trans-unit>
-            <trans-unit id="placeholder.enter_email">
-                <source>old.placeholder.enter_email</source>
-                <target>Enter your email</target>
-            </trans-unit>
-            <trans-unit id="placeholder.example_icon">
-                <source>old.placeholder.example_icon</source>
-                <target>e.g. &lt;i class=&quot;fas fa-check&quot;&gt;&lt;/i&gt;</target>
-            </trans-unit>
-
-
-            <trans-unit id="all_rights_reserved">
-                <source>old.all_rights_reserved</source>
-                <target>All Rights Reserved</target>
-            </trans-unit>
-            <trans-unit id="drag_photos">
-                <source>old.drag_photos</source>
-                <target>Drag photos to reorder</target>
-            </trans-unit>
-            <trans-unit id="click_save_reordering">
-                <source>old.click_save_reordering</source>
-                <target>Click 'Save Reordering' when finished.</target>
-            </trans-unit>
-            <trans-unit id="processing">
-                <source>old.processing</source>
-                <target>Please wait...</target>
-            </trans-unit>
-
-            <trans-unit id="email.new_message">
-                <source>old.email.new_message</source>
-                <target>New Message From Your Website</target>
-            </trans-unit>
-            <trans-unit id="confirmation.email.resend">
-                <source>old.confirmation.email.resend</source>
-                <target>Resend Verification Link</target>
-            </trans-unit>
-            <trans-unit id="confirmation.email.success">
-                <source>old.confirmation.email.success</source>
-                <target>Verification email has been sent to</target>
+            <trans-unit id="message.verify_account">
+                <source>message.verify_account</source>
+                <target><![CDATA[
+                    Your account needs to be verified.
+                    <br />
+                    Please check your email.
+                    <br />
+                    IF you need the verification email resent, please click on the "Request Verification Link" button below.
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="message.verify_account_email_sent">
+                <source>message.verify_account_email_sent</source>
+                <target><![CDATA[
+                    We have sent you a new verify email link!
+                    <br />
+                    Please check your email.
+                ]]></target>
             </trans-unit>
         </body>
     </file>

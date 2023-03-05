@@ -100,12 +100,14 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
   vertical-align: 0;
   border: 0;
   font-weight: 900;
-  content: '\f105';
-  font-family: 'Font Awesome 5 Free', serif;
+  content: '\f054';
+  font-family: 'Font Awesome 6 Free', serif;
 }
 
 .navbar-nav .nav-item.dropdown.show .dropdown-toggle::after {
-  content: '\f107';
+  font-weight: 900;
+  font-family: 'Font Awesome 6 Free', serif;
+  content: '\f078';
 }
 
 .navbar-nav .nav-item.dropdown.no-arrow .dropdown-toggle::after {
@@ -201,7 +203,6 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
   }
   .sidebar .nav-item .dropdown-menu {
     position: static !important;
-    margin: 0 1rem;
     top: 0;
   }
   .sidebar .nav-item.dropdown .dropdown-toggle::after {

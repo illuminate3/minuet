@@ -18,17 +18,20 @@ Encore
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
     .addEntry('js/app', './assets/app.js')
-    .addEntry('js/admin', './assets/js/admin/admin.js')
-    .addEntry('js/auth', './assets/js/auth/auth.js')
-    .addEntry('js/ekko-lightbox', './assets/js/ekko-lightbox.js')
-    .addEntry('js/map', './assets/js/map.js')
-    .addEntry('js/menu-sorting', './assets/js/admin/menu-sorting.js')
-    .addEntry('js/select2', './assets/js/select2.js')
-    .addEntry('js/settings', './assets/js/admin/settings.js')
-    .addEntry('js/slugger', './assets/js/slugger.js')
-    .addEntry('js/page', './assets/js/page.js')
-    .addEntry('js/user', './assets/js/user/user.js')
-    .addEntry('js/password', './assets/js/user/password/password.js')
+    .addEntry('js/layout', './assets/js/layout.js')
+    // .addEntry('js/admin', './assets/js/admin/admin.js')
+    // .addEntry('js/auth', './assets/js/auth/auth.js')
+    // .addEntry('js/select2', './assets/js/select2.js')
+    // .addEntry('js/settings', './assets/js/admin/settings.js')
+    // .addEntry('js/slugger', './assets/js/slugger.js')
+    // .addEntry('js/ekko-lightbox', './assets/js/ekko-lightbox.js')
+    // .addEntry('js/map', './assets/js/map.js')
+    // .addEntry('js/menu-sorting', './assets/js/admin/menu-sorting.js')
+    // .addEntry('js/city', './assets/js/city.js')
+    // .addEntry('js/photo', './assets/js/photo.js')
+    // .addEntry('js/page', './assets/js/page.js')
+    // .addEntry('js/user', './assets/js/user/user.js')
+    // .addEntry('js/password', './assets/js/user/password/password.js')
 
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
@@ -56,7 +59,7 @@ Encore
     //.enableTypeScriptLoader()
 
     // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+    .autoProvidejQuery()
 
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()
@@ -64,9 +67,11 @@ Encore
 
     .addStyleEntry('css/app', ['./assets/styles/app.scss'])
     .addStyleEntry('css/admin', ['./assets/styles/admin.scss'])
-    .addStyleEntry('css/ekko-lightbox', ['./assets/styles/ekko-lightbox.scss'])
-    .addStyleEntry('css/detail', ['./assets/styles/detail.scss'])
-    .addStyleEntry('css/select2', ['./assets/styles/select2.scss'])
+    // .addStyleEntry('css/ekko-lightbox', ['./assets/styles/ekko-lightbox.scss'])
+    // .addStyleEntry('css/city', ['./assets/styles/city.scss'])
+    // .addStyleEntry('css/detail', ['./assets/styles/detail.scss'])
+    // .addStyleEntry('css/photo', ['./assets/styles/photo.scss'])
+    // .addStyleEntry('css/select2', ['./assets/styles/select2.scss'])
     //.enableIntegrityHashes()
     .configureBabel(null, {
         useBuiltIns: 'usage',

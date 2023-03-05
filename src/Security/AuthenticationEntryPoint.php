@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Security;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -17,19 +19,17 @@ class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function start(Request $request, AuthenticationException $authException = null): RedirectResponse
-    {
+    public function start(
+        Request $request,
+        AuthenticationException $authException = null
+    ): RedirectResponse {
         // add a custom flash message and redirect to the login page
-        $request->getSession()->getFlashBag()->add('notice', 'You have to login in order to access this page.');
+        $request->getSession()->getFlashBag()->add(
+            'danger',
+            'You have to login in order to access this page 6666666666666666.');
 
-
-//        if ($this->getUser()) {
-//            $session = $request->getSession();
-//            $session->getFlashBag()->set('verify_email_error', 'YOU ARE LOGGED IN DUH');
-//        }
-
-        return new RedirectResponse($this->urlGenerator->generate('auth_login'));
-//        return $this->redirectToRoute('auth_login');
-
+        return new RedirectResponse(
+            $this->urlGenerator->generate('security_login'));
     }
+
 }

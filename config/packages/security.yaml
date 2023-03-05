@@ -1,5 +1,6 @@
 security:
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    hide_user_not_found: false
     password_hashers:
         # By default, password hashers are resource intensive and take time. This is
         # important to generate secure password hashes. In tests however, secure hashes
@@ -59,6 +60,8 @@ security:
                 path: security_logout
                 # The name of the route to redirect to after logging out
                 target: security_login
+                # Secure the logout against CSRF
+                # enable_csrf: true
 
             remember_me:
                 secret:   '%kernel.secret%'
@@ -80,6 +83,9 @@ security:
 #        - { path: '^/(%app_locales%)/user', roles: ROLE_USER }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/user, roles: ROLE_USER }
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
 
 when@test:
     # this configuration simplifies testing URLs protected by the security mechanism

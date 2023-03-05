@@ -1,0 +1,88 @@
+{% extends 'layout/auth.html.twig' %}
+
+{% block body %}
+
+    <div class="auth-page d-flex align-items-center">
+        <div class="container d-flex align-items-center position-relative py-5">
+
+            <div class="card shadow-sm w-100 rounded overflow-hidden bg-none">
+                <div class="card-body p-0">
+
+                    <div class="row gx-0 align-items-stretch">
+
+
+                        <!-- Logo & Information Panel-->
+                        <div class="col-lg-6">
+                            <div class="info d-flex justify-content-center flex-column p-4 h-100">
+                                <div class="py-5">
+
+                                    <header class="text-center mb-5">
+                                        <h1 class="text-xxl text-gray-400 text-uppercase">
+                                            <strong class="text-primary">
+                                                <a href="{{ path('security_login') }}">{{ app_site_name }}</a>
+                                            </strong>
+                                        </h1>
+                                        <p class="text-gray-100 fw-light">
+                                            {{ app_site_branding }}
+                                        </p>
+                                    </header>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Form Panel    -->
+                        <div class="col-lg-6 bg-white">
+                            <div class="align-items-center px-4 px-lg-5 h-100">
+
+                                <div class="row mt-lg-5">
+                                    <h2 class="row mt-lg-5">
+                                        {{ title|trans }}
+                                    </h2>
+                                </div>
+
+                                <div class="row mt-lg-5">
+                                    {% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+                                    {{ form_start(form) }}
+                                    {{ form_row(form.email) }}
+                                    {{ form_row(form.password) }}
+                                    {{ form_row(form.agreeTerms) }}
+
+                                    <div class="form-group row mb-0 mt-3 mb-auto">
+                                        <div class="col-md-12">
+
+                                            <button type="submit" class="btn btn-success btn-lg">
+                                                {{ 'action.register'|trans }}
+                                            </button>
+
+                                            <div class="mt-4">
+                                                <a class="btn btn-info" href="{{ path('security_login') }}">
+                                                    {{ 'action.sign_in'|trans }}
+                                                </a>
+                                                <a class="btn btn-info" href="{{ path('auth_password_reset') }}">
+                                                    {{ 'action.forgot_password'|trans }}
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    {{ form_end(form) }}
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

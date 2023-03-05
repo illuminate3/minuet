@@ -1,16 +1,17 @@
-// assets/styles/app.scss
-
 // Variables
 @import "variables";
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+//@import '~bootstrap/scss/bootstrap';
 
 // Font Awesome
 $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import '~@fortawesome/fontawesome-free/scss/regular';
 @import '~@fortawesome/fontawesome-free/scss/solid';
+
+@import 'style.default.css';
+
 
 /*
 * ==========================================================
@@ -48,13 +49,45 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
     min-height: 70vh;
   }
 }
-
+/*
+* ==========================================================
+*     Main NAVBAR
+* ==========================================================
+*/
+nav.navbar {
+  background: #393836;
+  width: calc(100%);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  margin-left: 0px;
+}
 
 /*
 * ==========================================================
 *     AUTH Layouts
 * ==========================================================
 */
+
+//.dropdown-menu[data-bs-popper] {
+//  top: calc(100% + var(--#{$prefix}dropdown-spacer));
+//  margin-top: 0;
+//
+//  .dropup & {
+//    bottom: calc(100% + var(--#{$prefix}dropdown-spacer));
+//    margin-bottom: 0;
+//  }
+//
+//  .dropend & {
+//    left: calc(100% + var(--#{$prefix}dropdown-spacer));
+//    margin-left: 0;
+//  }
+//
+//  .dropstart & {
+//    right: calc(100% + var(--#{$prefix}dropdown-spacer));
+//    margin-right: 0;
+//  }
+//}
+
 body.body {
   margin-top: 56px !important;
 }
@@ -69,6 +102,11 @@ body.body {
       max-height: 40px;
     }
   }
+}
+
+.dropdown-menu[data-bs-popper] {
+  left: auto;
+  right: 0px;
 }
 
 .attribute {
