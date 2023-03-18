@@ -19,11 +19,16 @@
                     {{ 'action.save'|trans }}
                 </button>
 
+                <a class="btn btn-danger" href="{{ path('admin_menu') }}">
+                    {{ 'action.cancel'|trans }}
+                </a>
+
             </div>
 
             {{ form_end(form) }}
 
         </div>
-    </div><br>
+    </div>
+    <br>
 
 {% endblock %}

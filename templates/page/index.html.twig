@@ -1,0 +1,43 @@
+{% extends 'layout/base.html.twig' %}
+
+{#{% block title %}{{ page.title }}{% endblock %}#}
+
+{#{% block description %}{{ page.description }}{% endblock %}#}
+
+{#{% block header %}#}
+{#    <div class="header"#}
+{#     style="background-image: url(#}
+{#        {% if site.header_image == '' %}#}
+{#            '/images/bg-1.5.jpg'#}
+{#         {% else %}#}
+{#            '/uploads/images/full/{{ site.header_image }}'#}
+{#         {% endif %}#}
+{#     )">#}
+{#        <div class="header-overlay"></div>#}
+{#        <div class="container">#}
+{#            <div class="search_form text-center">#}
+{#                <h1 style="color:#fff">{{ page.title }}</h1>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#{% endblock %}#}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-8">
+
+            <div class="card full-xs">
+
+                <div class="card-body">
+page info here
+{#                    {{ page.content | raw }}#}
+
+                </div>
+            </div>
+            <br>
+        </div>
+
+    </div>
+
+{% endblock %}

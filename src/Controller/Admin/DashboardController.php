@@ -6,6 +6,7 @@ namespace App\Controller\Admin;
 
 use App\Controller\BaseController;
 use App\Service\Admin\DashboardService;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,8 +15,17 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 final class DashboardController extends BaseController
 {
     #[Route(path: '/admin', name: 'admin_dashboard')]
-    public function index(Request $request, DashboardService $service, AuthenticationUtils $helper): Response
+    public function index(
+        Request $request,
+        DashboardService $service,
+        AuthenticationUtils $helper,
+        Security $security,
+    ): Response
     {
+
+//        if ($security->isGranted('ROLE_USER')) {
+//            return $this->redirectToRoute('app_index');
+//        }
 
         $categories = $service->countCategories();
 

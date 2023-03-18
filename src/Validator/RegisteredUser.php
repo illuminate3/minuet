@@ -11,5 +11,5 @@ use Symfony\Component\Validator\Constraint;
  */
 class RegisteredUser extends Constraint
 {
-    public string $message = 'user_not_found';
+    public string $message = 'validate.user.not.found';
 }

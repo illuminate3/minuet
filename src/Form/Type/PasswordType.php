@@ -37,9 +37,9 @@ final class PasswordType extends AbstractType
                 'label' => 'label.password_confirm',
                 'constraints' => [
                     new Length([
-                        'min' => 5
+                        'min' => 5,
                     ]),
-                    new ConfirmPassword()
+                    new ConfirmPassword(),
                 ],
             ]);
     }

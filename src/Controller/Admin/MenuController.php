@@ -30,8 +30,8 @@ final class MenuController extends BaseController
     {
         $menu = new Menu();
 
-        $form = $this->createForm(MenuType::class, $menu)
-            ->add('saveAndCreateNew', SubmitType::class);
+        $form = $this->createForm(MenuType::class, $menu);
+//            ->add('saveAndCreateNew', SubmitType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -41,11 +41,11 @@ final class MenuController extends BaseController
 
             $this->addFlash('success', 'message.created');
 
-            /** @var ClickableInterface $button */
-            $button = $form->get('saveAndCreateNew');
-            if ($button->isClicked()) {
-                return $this->redirectToRoute('admin_menu_new');
-            }
+//            /** @var ClickableInterface $button */
+//            $button = $form->get('saveAndCreateNew');
+//            if ($button->isClicked()) {
+//                return $this->redirectToRoute('admin_menu_new');
+//            }
 
             return $this->redirectToRoute('admin_menu');
         }

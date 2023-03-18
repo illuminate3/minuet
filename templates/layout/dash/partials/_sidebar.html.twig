@@ -1,6 +1,6 @@
 <ul class="sidebar navbar-nav{% if app.request.cookies.get('sidebar-toggled') == 'true' %} toggled{% endif %}">
     <li class="nav-item">
-        <a class="nav-link" href="{{ path('app_root') }}">
+        <a class="nav-link" href="{{ path('app_index') }}">
             <i class="fas fa-home"></i>
             <span>{{ 'properties'|trans }}</span>
         </a>
@@ -19,7 +19,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="citiesDropdown">
             <a class="dropdown-item" href="{{ path('app_dash') }}">{{ 'cities'|trans }}</a>
-            <a class="dropdown-item" href="{{ path('app_root') }}">{{ 'districts'|trans }}</a>
+            <a class="dropdown-item" href="{{ path('app_index') }}">{{ 'districts'|trans }}</a>
             <a class="dropdown-item" href="{{ path('app_account') }}">{{ 'neighborhoods'|trans }}</a>
             <a class="dropdown-item" href="{{ path('auth_no_register') }}">{{ 'metro_stations'|trans }}</a>
         </div>

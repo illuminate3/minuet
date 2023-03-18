@@ -11,5 +11,5 @@ use Symfony\Component\Validator\Constraint;
  */
 class ConfirmPassword extends Constraint
 {
-    public string $message = 'password.mismatch';
+    public string $message = 'validate.password.mismatch';
 }

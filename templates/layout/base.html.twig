@@ -4,9 +4,9 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
 
-    <meta name="description" content="{% block description %}Welcome!{% endblock %}"/>
+    <meta name="description" content="{% block description %}{% endblock %}"/>
 
     {{ site.custom_code | raw }}
 
@@ -36,10 +36,11 @@
 
     <!-- Styles -->
     {{ encore_entry_link_tags('css/app') }}
+    {{ encore_entry_link_tags('css/admin') }}
     {% block stylesheets %}{% endblock %}
 </head>
 
-<body{% if site.fixed_top_navbar == '1' %} class="body"{% endif %}>
+<body{% if site.fixed_top_navbar == '1' %} class="body d-flex flex-column h-100"{% endif %}>
 
 {{ include('layout/partials/_navbar.html.twig') }}
 
@@ -53,17 +54,21 @@
 
 </div>
 
-<div class="container text-muted">
-    <p>© {{ "now" | date("Y") }} <a class="text-muted" href="{{ path('security_logout') }}">{{ site.name }}</a>.
-        {{ site.custom_footer_text | raw }}
-    </p>
-</div>
+{#<div class="container text-muted">#}
+{#    <p>© {{ "now" | date("Y") }} <a class="text-muted" href="{{ path('security_logout') }}">{{ site.name }}</a>.#}
+{#        {{ site.custom_footer_text | raw }}#}
+{#    </p>#}
+{#</div>#}
+
+<!-- Footer -->
+{{ include('layout/partials/_footer.html.twig') }}
+
 
 <!-- Scripts -->
 {{ encore_entry_script_tags('js/app') }}
-{% if app.user %}
-    {{ encore_entry_script_tags('js/auth') }}
-{% endif %}
+{#{% if app.user %}#}
+{#    {{ encore_entry_script_tags('js/auth') }}#}
+{#{% endif %}#}
 
 {% block javascripts %}{% endblock %}
 

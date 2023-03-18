@@ -1,0 +1,78 @@
+<nav class="navbar navbar-expand-lg bg-light static-top">
+    <div class="container-fluid px-lg-2">
+
+        <span class="navbar-brand mb-0">
+            <a class="nav-link" href="{{ path('app_index') }}">
+                {{ app_site_name }}
+            </a>
+        </span>
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarToggler"
+            aria-controls="navbarToggler"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse pe-3" id="navbarToggler">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                <li class="nav-item dropdown no-arrow">
+{#                    {% set url = '/' %}#}
+                    {% for item in site.menu %}
+
+{#                        {% if (item.url == '/' and locale == item.locale) %}#}
+{#                            {% set url = '/' %}#}
+{#                        {% elseif ('https://' not in item.url) %}#}
+{#                            {% set url = '/' ~ item.locale ~ item.url %}#}
+{#                        {% else %}#}
+{#                            {% set url = item.url %}#}
+{#                        {% endif %}#}
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ item.url }}"
+                                {% if item.nofollow == true %} rel="nofollow" {% endif %}
+                                {% if item.newTab == true %} target="_blank" {% endif %}
+                            >
+                                {{ item.title }}
+                            </a>
+                        </li>
+
+                    {% endfor %}
+                </li>
+
+                <li class="nav-item dropdown no-arrow">
+                    <a class="nav-link dropdown-toggle"
+                       href="#" id="userDropdown"
+                       role="button"
+                       data-toggle="dropdown"
+                       data-bs-toggle="dropdown"
+                       aria-haspopup="true"
+                       aria-expanded="false">
+                        {{ 'menu.user'|trans }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="{{ path('app_dash') }}">
+                            {{ 'menu.account'|trans }}
+                        </a>
+                        <a class="dropdown-item" href="{{ path('user_profile') }}">
+                            {{ 'menu.profile'|trans }}
+                        </a>
+                        <a class="dropdown-item" href="{{ path('user_password_change') }}">
+                            {{ 'menu.password_change'|trans }}
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ path('security_logout') }}">
+                            {{ 'menu.logout'|trans }}
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>

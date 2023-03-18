@@ -34,18 +34,18 @@ final class CategoryController extends BaseController
     {
         $category = new Category();
 
-        $form = $this->createForm(CategoryType::class, $category)
-            ->add('saveAndCreateNew', SubmitType::class);
+        $form = $this->createForm(CategoryType::class, $category);
+//            ->add('saveAndCreateNew', SubmitType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $service->create($category);
 
-            /** @var ClickableInterface $button */
-            $button = $form->get('saveAndCreateNew');
-            if ($button->isClicked()) {
-                return $this->redirectToRoute('admin_category_new');
-            }
+//            /** @var ClickableInterface $button */
+//            $button = $form->get('saveAndCreateNew');
+//            if ($button->isClicked()) {
+//                return $this->redirectToRoute('admin_category_new');
+//            }
 
             return $this->redirectToRoute('admin_category');
         }

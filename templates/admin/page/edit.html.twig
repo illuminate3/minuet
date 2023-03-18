@@ -1,52 +1,58 @@
 {% extends 'admin/layout/base.html.twig' %}
 
-{% block title %}{{ 'title.edit_page'|trans }}{% endblock %}
+{% block title %}{{ title|trans }}{% endblock %}
 
 {% block stylesheets %}
-    <link href="{{ asset('libs/summernote/0.8.20/summernote-bs4.css') }}" rel="stylesheet"/>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    {{ encore_entry_script_tags('js/quill') }}
 {% endblock %}
 
 {% block body %}
 
-    <div class="card mb-3">
-        <div class="card-header"><i class="fas fa-edit text-danger"></i> {{ 'title.edit_page'|trans }}</div>
-        <div class="card-body">
+    <!-- Navbar -->
+    {{ include('admin/_partials/_title.html.twig') }}
+
+    <div class="row">
+        <div class="col">
 
             {{ form_start(form) }}
 
-            <div class="form-group">
+            <div class="form-floating my-3">
                 {{ form_row(form.title) }}
             </div>
 
-            <div class="form-group">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        {{ form_row(form.slug) }}
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-check mt-1">
+                        {{ form_widget(form.publish) }}
+                        {{ form_label(form.publish) }}
+                    </div>
+                    <div class="form-check mt-2">
+                        {{ form_widget(form.show_in_menu) }}
+                        {{ form_label(form.show_in_menu) }}
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <div class="form-floating">
                 {{ form_row(form.description) }}
             </div>
 
-            <div class="form-group">
-                {{ form_row(form.slug) }}
-            </div>
-
-            <div class="form-group">
-                {{ form_row(form.locale) }}
-            </div>
-
-            <div class="form-group mb-3 custom-control custom-switch d-none">
-                {{ form_widget(form.show_in_menu) }}
-                {{ form_label(form.show_in_menu) }}
-            </div>
-
-            <div class="form-group mb-3 custom-control custom-switch">
-                {{ form_widget(form.add_contact_form) }}
-                {{ form_label(form.add_contact_form) }}
-            </div>
-
-            <div class="form-group" id="email-address" style="display: none">
-                {{ form_row(form.contact_email_address) }}
-            </div>
-
-            <div class="form-group">
+            <div class="form-group my-4">
                 {{ form_row(form.content) }}
             </div>
+
 
             <div class="form-group">
 
@@ -54,19 +60,15 @@
                     {{ 'action.save'|trans }}
                 </button>
 
+                <a class="btn btn-danger" href="{{ path('admin_page') }}">
+                    {{ 'action.cancel'|trans }}
+                </a>
+
             </div>
 
             {{ form_end(form) }}
 
         </div>
-    </div><br>
-
-{% endblock %}
-
-{% block javascripts %}
-
-    {{ encore_entry_script_tags('js/page') }}
-
-    <script src="{{ asset('libs/summernote/0.8.20/summernote-bs4.min.js') }}"></script>
+    </div>
 
 {% endblock %}

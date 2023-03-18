@@ -50,9 +50,11 @@ final class PageRepository extends ServiceEntityRepository
         return (int) $limit->getSettingValue();
     }
 
-    public function findLatest(Request $request): PaginationInterface
+    public function findLatest(Request $request, $locale): PaginationInterface
     {
         $qb = $this->createQueryBuilder('p')
+            ->where('p.locale = :locale')
+            ->setParameter('locale', $locale)
             ->orderBy('p.id', 'DESC');
 
         return $this->createPaginator($qb->getQuery(), $request);

@@ -1,4 +1,21 @@
+{#{{ form_errors(form) }}#}
+{#{% set formErrors = errors.form.getErrors(true) %}#}
+
+{# If there are errors in the form, display them in this unorganized list #}
+{#{% if formErrors|length %}#}
+{#    <ul>#}
+{#        {% for error in formErrors %}#}
+{#            <li>{{ error.message }}</li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+{#{% endif %}#}
+
+
+
 {% for type, messages in app.flashes %}
+
+app.flash!
+
     {% for message in messages %}
 
         <div class="alert alert-{{ type }} alert-dismissible fade show mt-lg-4" role="alert">
@@ -8,6 +25,30 @@
 
     {% endfor %}
 {% endfor %}
+
+
+{#{% if error %}#}
+{#    <div class="alert alert-danger alert-dismissible fade show mt-lg-4" role="alert">#}
+{#        {{ error.messageKey|trans(error.messageData, 'security') }}#}
+{#        <div class="alert alert-danger">{{ error.messageKey }}</div>#}
+{#        333333333333#}
+{#        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>#}
+{#    </div>#}
+{#{% endif %}#}
+
+{% if error %}
+
+    errror!
+
+    {% for message in error_message %}
+
+        <div class="alert alert-danger alert-dismissible fade show mt-lg-4" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+    {% endfor %}
+{% endif %}
 
 {% if app.user %}
     {% if not app.user.isVerified %}
@@ -21,24 +62,4 @@
             </a>
         </div>
     {% endif %}
-{% endif %}
-
-{#{% if error %}#}
-{#    <div class="alert alert-danger alert-dismissible fade show mt-lg-4" role="alert">#}
-{#        {{ error.messageKey|trans(error.messageData, 'security') }}#}
-{#        <div class="alert alert-danger">{{ error.messageKey }}</div>#}
-{#        333333333333#}
-{#        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>#}
-{#    </div>#}
-{#{% endif %}#}
-
-{% if error %}
-    {% for message in error_message %}
-
-        <div class="alert alert-danger alert-dismissible fade show mt-lg-4" role="alert">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-
-    {% endfor %}
 {% endif %}

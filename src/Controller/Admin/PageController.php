@@ -9,6 +9,7 @@ use App\Entity\Page;
 use App\Form\Type\PageType;
 use App\Repository\PageRepository;
 use App\Service\Admin\PageService;
+use App\Utils\SluggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,19 +18,62 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 final class PageController extends BaseController
 {
     #[Route(path: '/admin/page', name: 'admin_page', defaults: ['page' => 1], methods: ['GET'])]
-    public function index(Request $request, PageRepository $repository): Response
+    public function index(
+        Request $request,
+        PageRepository $repository,
+    ): Response
     {
         // Get pages
-        $pages = $repository->findLatest($request);
+        $locale = $this->getParameter('kernel.default_locale');
+        $pages = $repository->findLatest($request, $locale);
 
         return $this->render('admin/page/index.html.twig', [
+            'title' => 'title.pages',
+            'delete_url' => 'admin_page_delete',
+            'edit_url' => 'admin_page_edit',
+            'new_url' => 'admin_page_new',
             'site' => $this->site($request),
             'pages' => $pages,
         ]);
     }
 
+    /**
+     * Displays a form to edit an existing Page entity.
+     */
+    #[Route(path: '/admin/page/{id<\d+>}/edit', name: 'admin_page_edit', methods: ['GET', 'POST'])]
+    public function edit(
+        Request $request,
+        Page $page,
+        PageService $pageService,
+    ): Response
+    {
+        $form = $this->createForm(PageType::class, $page);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+//            $this->doctrine->getManager()->flush();
+
+            $pageService->edit($page);
+
+            $this->addFlash('success', 'message.updated');
+
+//            return $this->redirectToRoute('page', ['slug' => $page->getSlug()]);
+            return $this->redirectToRoute('admin_page');
+
+        }
+
+        return $this->render('admin/page/edit.html.twig', [
+            'title' => 'title.pages',
+            'site' => $this->site($request),
+            'form' => $form,
+        ]);
+    }
+
     #[Route(path: '/admin/page/new', name: 'admin_page_new')]
-    public function new(Request $request, PageService $pageService): Response
+    public function new(
+        Request $request,
+        PageService $pageService,
+    ): Response
     {
         $page = new Page();
         $form = $this->createForm(PageType::class, $page);
@@ -38,34 +82,16 @@ final class PageController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $pageService->create($page);
 
-            return $this->redirectToRoute('page', ['slug' => $page->getSlug()]);
+            $this->addFlash('success', 'message.created');
+
+//            return $this->redirectToRoute('page', ['slug' => $page->getSlug()]);
+            return $this->redirectToRoute('admin_page');
         }
 
         return $this->render('admin/page/new.html.twig', [
+            'title' => 'title.pages',
             'site' => $this->site($request),
             'page' => $page,
-            'form' => $form,
-        ]);
-    }
-
-    /**
-     * Displays a form to edit an existing Page entity.
-     */
-    #[Route(path: '/admin/page/{id<\d+>}/edit', name: 'admin_page_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Page $page): Response
-    {
-        $form = $this->createForm(PageType::class, $page);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->doctrine->getManager()->flush();
-            $this->addFlash('success', 'message.updated');
-
-            return $this->redirectToRoute('page', ['slug' => $page->getSlug()]);
-        }
-
-        return $this->render('admin/page/edit.html.twig', [
-            'site' => $this->site($request),
             'form' => $form,
         ]);
     }
@@ -75,7 +101,11 @@ final class PageController extends BaseController
      */
     #[Route(path: '/page/{id<\d+>}/delete', name: 'admin_page_delete', methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN')]
-    public function delete(Request $request, Page $page, PageService $pageService): Response
+    public function delete(
+        Request $request,
+        Page $page,
+        PageService $pageService
+    ): Response
     {
         if (!$this->isCsrfTokenValid('delete', $request->request->get('token'))) {
             return $this->redirectToRoute('admin_page');

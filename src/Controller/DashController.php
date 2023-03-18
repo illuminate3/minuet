@@ -25,19 +25,4 @@ class DashController extends BaseController
             'error' => null,
         ]);
     }
-
-    #[Route('/root', name: 'app_root')]
-    public function root(Request $request, Security $security): Response
-    {
-        // Redirect Admin Users
-        if ($security->isGranted('ROLE_ADMIN')) {
-            return $this->redirectToRoute('admin_dashboard');
-        }
-
-        return $this->render('dash/index.html.twig', [
-            'title' => 'ROOT',
-            'site' => $this->site($request),
-            'error' => null,
-        ]);
-    }
 }

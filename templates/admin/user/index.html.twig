@@ -7,12 +7,12 @@
     <ul class="nav nav-tabs">
         <li class="nav-item active">
             <span class="nav-link active">
-                <i class="fas fa-users-cog text-danger"></i> {{ 'users'|trans }}
+                <i class="fas fa-users-cog text-danger"></i> {{ 'label.users'|trans }}
             </span>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ path('admin_user_new') }}">
-                <i class="fas fa-plus-square text-danger"></i> {{ 'label.create_user'|trans }}
+                <i class="fas fa-plus-square text-danger"></i> {{ 'label.new'|trans }}
             </a>
         </li>
     </ul>
@@ -24,7 +24,7 @@
                 <table class="table" style="background-color: #FFFFFF">
                     <thead class="thead">
                     <tr>
-                        <th class="hidden-sm">{{ 'table.username'|trans }}</th>
+{#                        <th class="hidden-sm">{{ 'table.username'|trans }}</th>#}
                         <th>{{ 'table.email'|trans }}</th>
                         <th>{{ 'table.action'|trans }}</th>
                     </tr>
@@ -33,7 +33,7 @@
 
                     {% for user in users %}
                         <tr>
-                            <td class="hidden-sm">{{ user.username }}</td>
+{#                            <td class="hidden-sm">{{ user.username }}</td>#}
                             <td>{{ user.email }}</td>
                             <td>
                                 {{ include('admin/user/_action_form.html.twig', {user: user}, with_context = false) }}

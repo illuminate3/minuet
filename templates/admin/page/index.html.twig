@@ -1,47 +1,62 @@
 {% extends 'admin/layout/base.html.twig' %}
 
-{% block title %}{{ 'title.pages'|trans }}{% endblock %}
+{% block title %}{{ title|trans }}{% endblock %}
 
 {% block body %}
 
-    <h3>{{ 'title.pages'|trans }}
-        <a href="{{ path('admin_page_new') }}" class="btn btn-light" title="{{ 'menu.add_new'|trans }}">
-            <i class="fas fa-plus-square text-danger"></i>
-        </a>
-    </h3>
+<!-- Navbar -->
+{{ include('admin/_partials/_action_title.html.twig') }}
 
-    <br>
-    <div class="row">
+<div class="row">
+    <div class="col">
 
-        {% for page in pages %}
+        <div class="table-responsive">
+            <table class="table" style="background-color: #FFFFFF">
+                <thead class="thead">
+                <tr>
+                    <th>{{ 'table.title'|trans }}</th>
+                    <th>{{ 'table.description'|trans }}</th>
+                    <th>{{ 'table.slug'|trans }}</th>
+                    <th>{{ 'table.action'|trans }}</th>
+                </tr>
+                </thead>
+                <tbody>
 
-            <!-- Item -->
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="card">
-                    <div class="card-body">
-                        {% set language = page.locale|locale_name(page.locale)|u.title %}
-                        <span class="float-right badge badge-info">{{ language }}</span>
-                        <h4 class="card-title">
-                            <a href="{{ path('page', { 'slug':  page.slug }) }}">{{ page.title }}</a>
-                        </h4>
-                        <p class="card-text">{{ page.description }}</p>
+                {% for page in pages %}
+                    <tr>
+                        <td>
+                            {{ page.title }}
+                        </td>
+                        <td>
+                            {{ page.description }}
+                       </td>
+                        <td>
+                            {{ page.slug }}
+                        </td>
+                        <td>
+                            {{ include(
+                                'admin/_partials/_action_form.html.twig',
+                                {
+                                    id: page.id,
+                                    delete_url: delete_url,
+                                    edit_url: edit_url
+                                },
+                                with_context = false
+                            ) }}
+                        </td>
+                    </tr>
 
-                        {{ include('admin/page/_action_form.html.twig', {page: page}, with_context = false) }}
+                {% else %}
+                    <div class="well">Nothing</div>
+                {% endfor %}
 
-                    </div>
-                </div>
-                <br>
-            </div>
-            <!-- / Item -->
-
-        {% else %}
-            <div class="col-sm-12">
-                {{ 'no_items_found'|trans }}
-            </div>
-        {% endfor %}
-
-    </div>
+                </tbody>
+            </table>
+        </div>
 
     {{ knp_pagination_render(pages) }}
+
+    </div>
+</div>
 
 {% endblock %}

@@ -37,9 +37,9 @@ final class UserType extends AbstractType
                     'label_attr' => ['class' => 'switch-custom'],
                 ]
             )
-            ->add('username', null, [
-                'label' => 'label.username',
-            ])
+//            ->add('username', null, [
+//                'label' => 'label.username',
+//            ])
             ->add('profile', ProfileType::class)
             ->add('email', null, [
                 'label' => 'label.email',

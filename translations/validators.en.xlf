@@ -2,6 +2,18 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
         <body>
+            <trans-unit id="validate.password.mismatch">
+                <source>validate.password.mismatch</source>
+                <target>The entered passwords don't match.</target>
+            </trans-unit>
+            <trans-unit id="validate.agree.terms">
+                <source>validate.agree.terms</source>
+                <target>You should agree to our terms.</target>
+            </trans-unit>
+            <trans-unit id="validate.user.not.found">
+                <source>validate.user.not.found</source>
+                <target>We can't find a user with that e-mail address.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

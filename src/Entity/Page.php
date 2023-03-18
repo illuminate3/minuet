@@ -11,32 +11,37 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Table]
-#[ORM\UniqueConstraint(name: 'slug_locale_unique_key', columns: ['slug', 'locale'])]
+#[UniqueEntity(['title'])]
+//#[ORM\UniqueConstraint(name: 'slug_title_unique_key', columns: ['slug', 'title'])]
 #[ORM\Entity(repositoryClass: 'App\Repository\PageRepository')]
-#[UniqueEntity(['slug', 'locale'])]
+//#[UniqueEntity(['slug', 'title'])]
 class Page
 {
+
     use EntityIdTrait;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $title;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
-    private ?string $description;
-
-    #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $slug;
 
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $description;
+
     #[ORM\Column(type: Types::STRING, length: 2, options: ['default' => 'en'])]
-    private string $locale;
+    private string $locale = 'en';
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $content;
 
-    #[ORM\Column(type: Types::BOOLEAN)]
+    #[ORM\Column(type: Types::BOOLEAN, nullable: true)]
     private ?bool $show_in_menu;
 
-    #[ORM\Column(type: Types::BOOLEAN)]
+    #[ORM\Column(type: Types::BOOLEAN, nullable: true)]
+    private ?bool $publish;
+
+    #[ORM\Column(type: Types::BOOLEAN, nullable: true)]
     private ?bool $add_contact_form;
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
@@ -99,6 +104,18 @@ class Page
     public function setShowInMenu(bool $show_in_menu): self
     {
         $this->show_in_menu = $show_in_menu;
+
+        return $this;
+    }
+
+    public function getPublish(): ?bool
+    {
+        return $this->publish;
+    }
+
+    public function setPublish(bool $publish): self
+    {
+        $this->publish = $publish;
 
         return $this;
     }

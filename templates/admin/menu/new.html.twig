@@ -51,7 +51,9 @@
                     {{ 'action.save'|trans }}
                 </button>
 
-                {{ form_widget(form.saveAndCreateNew, {label: 'label.save_and_create_new', attr: {class: 'btn btn-primary'}}) }}
+                <a class="btn btn-danger" href="{{ path('admin_menu') }}">
+                    {{ 'action.cancel'|trans }}
+                </a>
 
             </div>
 

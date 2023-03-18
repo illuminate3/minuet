@@ -12,7 +12,7 @@
         </li>
         <li class="nav-item active">
             <span class="nav-link active">
-                <i class="fas fa-plus-square text-danger"></i> {{ 'label.create_user'|trans }}
+                <i class="fas fa-plus-square text-danger"></i> {{ 'label.new'|trans }}
             </span>
         </li>
     </ul>
@@ -26,7 +26,7 @@
             {{ form_start(form) }}
                 {{ form_row(form.roles) }}
                 {{ form_row(form.profile.full_name) }}
-                {{ form_row(form.username) }}
+{#                {{ form_row(form.username) }}#}
                 {{ form_row(form.profile.phone) }}
                 {{ form_row(form.email) }}
                 {{ form_row(form.email_verified) }}
@@ -35,10 +35,12 @@
             <div class="form-group">
 
                 <button type="submit" class="btn btn-primary">
-                    {{ 'label.create_user'|trans }}
+                    {{ 'action.save'|trans }}
                 </button>
 
-                {{ form_widget(form.saveAndCreateNew, {label: 'label.save_and_create_new', attr: {class: 'btn btn-primary'}}) }}
+                <a class="btn btn-danger" href="{{ path('admin_menu') }}">
+                    {{ 'action.cancel'|trans }}
+                </a>
 
             </div>
 

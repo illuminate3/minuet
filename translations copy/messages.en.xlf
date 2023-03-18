@@ -21,10 +21,6 @@
                 <source>menu.add_new</source>
                 <target>Add new</target>
             </trans-unit>
-            <trans-unit id="menu.settings">
-                <source>menu.settings</source>
-                <target>Settings</target>
-            </trans-unit>
             <trans-unit id="menu.my_properties">
                 <source>menu.my_properties</source>
                 <target>My properties</target>
@@ -66,10 +62,6 @@
             <trans-unit id="pages">
                 <source>pages</source>
                 <target>Pages</target>
-            </trans-unit>
-            <trans-unit id="users">
-                <source>users</source>
-                <target>Users</target>
             </trans-unit>
             <trans-unit id="menu">
                 <source>menu</source>
@@ -146,10 +138,6 @@
                 <source>action.search</source>
                 <target>Search</target>
             </trans-unit>
-            <trans-unit id="action.edit">
-                <source>action.edit</source>
-                <target>Edit</target>
-            </trans-unit>
             <trans-unit id="action.finish_editing">
                 <source>action.finish_editing</source>
                 <target>Finish editing</target>
@@ -166,21 +154,9 @@
                 <source>action.save_reordering</source>
                 <target>Save reordering</target>
             </trans-unit>
-            <trans-unit id="action.delete">
-                <source>action.delete</source>
-                <target>Delete</target>
-            </trans-unit>
-            <trans-unit id="action.add_menu_item">
-                <source>action.add_menu_item</source>
-                <target>Add Menu Item</target>
-            </trans-unit>
             <trans-unit id="action.submit">
                 <source>action.submit</source>
                 <target>Submit</target>
-            </trans-unit>
-            <trans-unit id="action.continue">
-                <source>action.continue</source>
-                <target>Continue</target>
             </trans-unit>
             <trans-unit id="action.publish">
                 <source>action.publish</source>
@@ -190,23 +166,7 @@
                 <source>action.unpublish</source>
                 <target>Unpublish</target>
             </trans-unit>
-            <trans-unit id="action.cancel">
-                <source>action.cancel</source>
-                <target>Cancel</target>
-            </trans-unit>
 
-            <trans-unit id="table.link_text">
-                <source>table.link_text</source>
-                <target>Link Text</target>
-            </trans-unit>
-            <trans-unit id="table.url">
-                <source>table.url</source>
-                <target>URL</target>
-            </trans-unit>
-            <trans-unit id="table.move">
-                <source>table.move</source>
-                <target>Move</target>
-            </trans-unit>
             <trans-unit id="table.category_name">
                 <source>table.category_name</source>
                 <target>Category name</target>
@@ -218,18 +178,6 @@
             <trans-unit id="table.username">
                 <source>table.username</source>
                 <target>Username</target>
-            </trans-unit>
-            <trans-unit id="table.email">
-                <source>table.email</source>
-                <target>Email</target>
-            </trans-unit>
-            <trans-unit id="table.slug">
-                <source>table.slug</source>
-                <target>Slug</target>
-            </trans-unit>
-            <trans-unit id="table.action">
-                <source>table.action</source>
-                <target>Action</target>
             </trans-unit>
 
             <trans-unit id="confirmation.delete_item">
@@ -264,10 +212,6 @@
             <trans-unit id="title.set_new_pass">
                 <source>title.set_new_pass</source>
                 <target>Set a new password</target>
-            </trans-unit>
-            <trans-unit id="title.pages">
-                <source>title.pages</source>
-                <target>Pages</target>
             </trans-unit>
             <trans-unit id="title.latest_properties">
                 <source>title.latest_properties</source>
@@ -322,10 +266,6 @@
                 <source>title.add_menu_item</source>
                 <target>Add Menu Item</target>
             </trans-unit>
-            <trans-unit id="title.edit_menu_item">
-                <source>title.edit_menu_item</source>
-                <target>Edit Menu Item</target>
-            </trans-unit>
             <trans-unit id="title.upload_photos">
                 <source>title.upload_photos</source>
                 <target>Upload photos</target>
@@ -363,7 +303,7 @@
                 <source>label.meta_title</source>
                 <target>Meta Title</target>
             </trans-unit>
-            <trans-unit id="label.meta_description">
+            <trans-unit id="label. ">
                 <source>label.meta_description</source>
                 <target>Meta Description</target>
             </trans-unit>
@@ -415,25 +355,13 @@
                 <source>label.settings.map_zoom</source>
                 <target>Zoom level. Acceptable values: from 0 (the entire world) to 19</target>
             </trans-unit>
-            <trans-unit id="label.roles.admin">
-                <source>label.roles.admin</source>
-                <target>Admin permissions</target>
-            </trans-unit>
             <trans-unit id="label.username">
                 <source>label.username</source>
                 <target>Username</target>
             </trans-unit>
-            <trans-unit id="label.email_verified">
-                <source>label.email_verified</source>
-                <target>Email Verified</target>
-            </trans-unit>
             <trans-unit id="label.name">
                 <source>label.name</source>
                 <target>Name</target>
-            </trans-unit>
-            <trans-unit id="label.slug">
-                <source>label.slug</source>
-                <target>Slug</target>
             </trans-unit>
             <trans-unit id="label.currency_title">
                 <source>label.currency_title</source>
@@ -525,33 +453,14 @@
                 <source>label.guests</source>
                 <target>Guests</target>
             </trans-unit>
-            <trans-unit id="label.title">
-                <source>label.title</source>
-                <target>Title</target>
             </trans-unit>
             <trans-unit id="label.link_text">
                 <source>label.link_text</source>
                 <target>Link Text</target>
             </trans-unit>
-            <trans-unit id="label.url">
-                <source>label.url</source>
-                <target>URL</target>
-            </trans-unit>
             <trans-unit id="label.locale">
                 <source>label.locale</source>
                 <target>Language</target>
-            </trans-unit>
-            <trans-unit id="label.new_tab">
-                <source>label.new_tab</source>
-                <target>Open in new tab</target>
-            </trans-unit>
-            <trans-unit id="label.nofollow">
-                <source>label.nofollow</source>
-                <target>Nofollow</target>
-            </trans-unit>
-            <trans-unit id="label.description">
-                <source>label.description</source>
-                <target>Description</target>
             </trans-unit>
             <trans-unit id="label.address">
                 <source>label.address</source>
@@ -580,14 +489,6 @@
             <trans-unit id="label.available_now">
                 <source>label.available_now</source>
                 <target>Available now</target>
-            </trans-unit>
-            <trans-unit id="label.content">
-                <source>label.content</source>
-                <target>Content</target>
-            </trans-unit>
-            <trans-unit id="label.show_in_menu">
-                <source>label.show_in_menu</source>
-                <target>Show in menu</target>
             </trans-unit>
             <trans-unit id="label.add_contact_form">
                 <source>label.add_contact_form</source>
@@ -621,10 +522,6 @@
                 <source>label.create_page</source>
                 <target>Create page</target>
             </trans-unit>
-            <trans-unit id="label.create_user">
-                <source>label.create_user</source>
-                <target>Create user</target>
-            </trans-unit>
             <trans-unit id="label.save_and_create_new">
                 <source>label.save_and_create_new</source>
                 <target>Save and create new</target>
@@ -634,14 +531,6 @@
                 <target>Sort by</target>
             </trans-unit>
 
-            <trans-unit id="option.on">
-                <source>option.on</source>
-                <target>On</target>
-            </trans-unit>
-            <trans-unit id="option.off">
-                <source>option.off</source>
-                <target>Off</target>
-            </trans-unit>
             <trans-unit id="option.any">
                 <source>option.any</source>
                 <target>Any</target>

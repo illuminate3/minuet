@@ -35,8 +35,8 @@ final class UserController extends BaseController
     {
         $user = new User();
 
-        $form = $this->createForm(UserType::class, $user)
-            ->add('saveAndCreateNew', SubmitType::class);
+        $form = $this->createForm(UserType::class, $user);
+//            ->add('saveAndCreateNew', SubmitType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -44,11 +44,11 @@ final class UserController extends BaseController
             $user->setEmailVerifiedAt($emailVerifiedAt);
             $service->create($user);
 
-            /** @var ClickableInterface $button */
-            $button = $form->get('saveAndCreateNew');
-            if ($button->isClicked()) {
-                return $this->redirectToRoute('admin_user_new');
-            }
+//            /** @var ClickableInterface $button */
+//            $button = $form->get('saveAndCreateNew');
+//            if ($button->isClicked()) {
+//                return $this->redirectToRoute('admin_user_new');
+//            }
 
             return $this->redirectToRoute('admin_user');
         }
@@ -64,7 +64,12 @@ final class UserController extends BaseController
      * Displays a form to edit an existing User entity.
      */
     #[Route(path: '/admin/user/{id<\d+>}/edit', name: 'admin_user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, UserService $service, UserFormDataSelector $selector): Response
+    public function edit(
+        Request $request,
+        User $user,
+        UserService $service,
+        UserFormDataSelector $selector
+    ): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);

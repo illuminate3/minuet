@@ -6,7 +6,9 @@
         </button>
 
         <span class="navbar-brand mb-0">
-            {{ app_site_name }}
+            <a class="nav-link" href="{{ path('app_dash') }}">
+                {{ app_site_name }}
+            </a>
         </span>
 
         <button
@@ -23,7 +25,9 @@
         <div class="collapse navbar-collapse pe-3" id="navbarToggler">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="{{ path('app_index') }}">
+                        {{ 'menu.site'|trans }}
+                    </a>
                 </li>
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle"

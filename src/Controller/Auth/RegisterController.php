@@ -117,7 +117,7 @@ final class RegisterController extends BaseController implements AuthController
                     [
                         'title' => 'title.verify_account_email_sent',
                         'message' => 'message.verify_account_email_sent',
-                        'link' => 'app_root',
+                        'link' => 'app_index',
                         'link_title' => 'action.return_to_root',
                     ]);
             }
