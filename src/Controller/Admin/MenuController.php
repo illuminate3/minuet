@@ -8,8 +8,7 @@ use App\Controller\BaseController;
 use App\Entity\Menu;
 use App\Form\Type\MenuType;
 use App\Repository\MenuRepository;
-use Symfony\Component\Form\ClickableInterface;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use App\Service\Admin\MenuService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,40 +16,42 @@ use Symfony\Component\Routing\Annotation\Route;
 final class MenuController extends BaseController
 {
     #[Route(path: '/admin/menu', name: 'admin_menu')]
-    public function index(Request $request, MenuRepository $repository): Response
-    {
+    public function index(
+        Request $request,
+        MenuRepository $repository
+    ): Response {
+        $menu = $repository->findAll();
+
         return $this->render('admin/menu/index.html.twig', [
+            'title' => 'title.menu',
+            'action_delete_url' => 'admin_menu_delete',
+            'action_edit_url' => 'admin_menu_edit',
+            'new_url' => 'admin_menu_new',
             'site' => $this->site($request),
-            'menu' => $repository->findItems(),
+//            'menu' => $repository->findItems(),
+            'menu' => $menu,
         ]);
     }
 
     #[Route(path: '/admin/menu/new', name: 'admin_menu_new')]
-    public function new(Request $request): Response
-    {
+    public function new(
+        Request $request,
+        MenuService $menuService,
+    ): Response {
         $menu = new Menu();
-
         $form = $this->createForm(MenuType::class, $menu);
-//            ->add('saveAndCreateNew', SubmitType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->doctrine->getManager();
-            $em->persist($menu);
-            $em->flush();
-
+            $menuService->create($menu);
             $this->addFlash('success', 'message.created');
-
-//            /** @var ClickableInterface $button */
-//            $button = $form->get('saveAndCreateNew');
-//            if ($button->isClicked()) {
-//                return $this->redirectToRoute('admin_menu_new');
-//            }
 
             return $this->redirectToRoute('admin_menu');
         }
 
         return $this->render('admin/menu/new.html.twig', [
+            'title' => 'title.menu',
+            'cancel_url' => 'admin_menu',
             'site' => $this->site($request),
             'menu' => $menu,
             'form' => $form,
@@ -61,19 +62,24 @@ final class MenuController extends BaseController
      * Displays a form to edit an existing menu item.
      */
     #[Route(path: '/admin/menu/{id<\d+>}/edit', name: 'admin_menu_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Menu $menu): Response
-    {
+    public function edit(
+        Request $request,
+        Menu $menu,
+        MenuService $menuService,
+    ): Response {
         $form = $this->createForm(MenuType::class, $menu);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->doctrine->getManager()->flush();
+            $menuService->edit($menu);
             $this->addFlash('success', 'message.updated');
 
             return $this->redirectToRoute('admin_menu');
         }
 
         return $this->render('admin/menu/edit.html.twig', [
+            'title' => 'title.menu',
+            'cancel_url' => 'admin_menu',
             'site' => $this->site($request),
             'form' => $form,
         ]);

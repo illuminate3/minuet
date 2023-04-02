@@ -38,8 +38,9 @@
                                 'admin/_partials/_action_form.html.twig',
                                 {
                                     id: page.id,
-                                    delete_url: delete_url,
-                                    edit_url: edit_url
+                                    delete_url: action_delete_url,
+                                    edit_url: action_edit_url,
+                                    cancel_url: cancel_url
                                 },
                                 with_context = false
                             ) }}
@@ -47,14 +48,16 @@
                     </tr>
 
                 {% else %}
-                    <div class="well">Nothing</div>
+                    <div class="well">{{ 'message.not_found'|trans }}</div>
                 {% endfor %}
 
                 </tbody>
             </table>
         </div>
 
+        <div class="row mb-lg-5">
     {{ knp_pagination_render(pages) }}
+        </div>
 
     </div>
 </div>

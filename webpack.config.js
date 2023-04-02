@@ -8,6 +8,16 @@ Encore
     // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
 
+    // CKEditor configs
+    // .copyFiles([
+    //     {from: './node_modules/ckeditor4/', to: 'ckeditor/[path][name].[ext]', pattern: /\.(js|css)$/, includeSubdirectories: false},
+    //     {from: './node_modules/ckeditor4/adapters', to: 'ckeditor/adapters/[path][name].[ext]'},
+    //     {from: './node_modules/ckeditor4/lang', to: 'ckeditor/lang/[path][name].[ext]'},
+    //     {from: './node_modules/ckeditor4/plugins', to: 'ckeditor/plugins/[path][name].[ext]'},
+    //     {from: './node_modules/ckeditor4/skins', to: 'ckeditor/skins/[path][name].[ext]'},
+    //     {from: './node_modules/ckeditor4/vendor', to: 'ckeditor/vendor/[path][name].[ext]'}
+    // ])
+
     /*
      * ENTRY CONFIG
      *
@@ -20,20 +30,7 @@ Encore
     .addEntry('js/app', './assets/app.js')
     .addEntry('js/layout', './assets/js/layout.js')
     .addEntry('js/menu-sorting', './assets/js/admin/menu-sorting.js')
-    .addEntry('js/select2', './assets/js/admin/select2.js')
-    .addEntry('js/quill', './assets/js/admin/quill.js')
-    // .addEntry('js/editor', './assets/js/admin/editor.js')
-    // .addEntry('js/slugger', './assets/js/admin/slugger.js')
-    // .addEntry('js/page', './assets/js/admin/page.js')
-    // .addEntry('js/admin', './assets/js/admin/admin.js')
-    // .addEntry('js/auth', './assets/js/auth/auth.js')
-    // .addEntry('js/settings', './assets/js/admin/settings.js')
-    // .addEntry('js/ekko-lightbox', './assets/js/ekko-lightbox.js')
-    // .addEntry('js/map', './assets/js/map.js')
-    // .addEntry('js/city', './assets/js/city.js')
-    // .addEntry('js/photo', './assets/js/photo.js')
-    // .addEntry('js/user', './assets/js/user/user.js')
-    // .addEntry('js/password', './assets/js/user/password/password.js')
+    .addEntry('js/admin', './assets/js/admin/admin.js')
 
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
@@ -65,15 +62,9 @@ Encore
 
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()
-    //.addEntry('admin', './assets/js/admin.js')
 
     .addStyleEntry('css/app', ['./assets/styles/app.scss'])
-    .addStyleEntry('css/admin', ['./assets/styles/admin.scss'])
-    .addStyleEntry('css/select2', ['./assets/styles/select2.scss'])
-    // .addStyleEntry('css/ekko-lightbox', ['./assets/styles/ekko-lightbox.scss'])
-    // .addStyleEntry('css/city', ['./assets/styles/city.scss'])
-    // .addStyleEntry('css/detail', ['./assets/styles/detail.scss'])
-    // .addStyleEntry('css/photo', ['./assets/styles/photo.scss'])
+
     //.enableIntegrityHashes()
     .configureBabel(null, {
         useBuiltIns: 'usage',

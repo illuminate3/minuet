@@ -1,28 +1,19 @@
-<form
-    action="{{ url(delete_url, {id: id}) }}"
-    method="post"
-    id="delete-form-{{ id }}">
+<!-- Action -->
+<div class="row mt-4">
+    <div class="col">
 
-    <input type="hidden" name="token" value="{{ csrf_token('delete') }}"/>
 
-    <div class="btn-group btn-group-sm" role="group">
+<div class="form-group">
 
-        <span class="me-1">
-            <a href="{{ url(edit_url, {id: id}) }}" class="btn btn-sm btn-info">
-                {{ 'action.edit'|trans }}
-            </a>
-        </span>
+    <button type="submit" class="btn btn-success">
+        {{ 'action.save'|trans }}
+    </button>
 
-        <span>
-            <button type="submit"
-                    data-type="delete"
-                    class="btn btn-sm btn-danger"
-                    data-message="{{ 'action.continue'|trans }}"
-                    data-confirmation-text="{{ 'action.delete'|trans }}"
-                    data-cancellation-text="{{ 'action.cancel'|trans }}">
-                {{ 'action.delete'|trans }}
-            </button>
-        </span>
+    <a class="btn btn-danger" href="{{ path(cancel_url) }}">
+        {{ 'action.cancel'|trans }}
+    </a>
+
+</div>
 
     </div>
-</form>
+</div>

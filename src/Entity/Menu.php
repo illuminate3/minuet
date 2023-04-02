@@ -10,9 +10,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Table]
-#[ORM\UniqueConstraint(name: 'url_locale_unique_key', columns: ['url', 'locale'])]
+#[UniqueEntity(['url'])]
+#[ORM\UniqueConstraint(name: 'url_title_unique_key', columns: ['url', 'title'])]
 #[ORM\Entity(repositoryClass: 'App\Repository\MenuRepository')]
-#[UniqueEntity(['url', 'locale'])]
+//#[ORM\UniqueConstraint(name: 'url_locale_unique_key', columns: ['url', 'locale'])]
+//#[ORM\Entity(repositoryClass: 'App\Repository\MenuRepository')]
+//#[UniqueEntity(['url', 'locale'])]
 class Menu
 {
     use EntityIdTrait;
@@ -20,14 +23,17 @@ class Menu
     #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $title;
 
-    #[ORM\Column(type: Types::STRING, length: 2)]
-    private string $locale;
+    #[ORM\Column(type: Types::STRING, length: 2, options: ['default' => 'en'])]
+    private string $locale = 'en';
 
     #[ORM\Column(type: Types::SMALLINT, nullable: true)]
     private ?int $sort_order;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
-    private ?string $url;
+    private ?string $url = '';
+
+    #[ORM\Column(type: Types::BOOLEAN, nullable: true)]
+    private ?bool $isSlug;
 
     #[ORM\Column(type: Types::BOOLEAN, nullable: true)]
     private ?bool $nofollow;
@@ -67,6 +73,18 @@ class Menu
     public function setUrl(string $url): self
     {
         $this->url = $url;
+
+        return $this;
+    }
+
+    public function getIsSlug(): ?bool
+    {
+        return $this->isSlug;
+    }
+
+    public function setIsSlug(?bool $isSlug): self
+    {
+        $this->isSlug = $isSlug;
 
         return $this;
     }

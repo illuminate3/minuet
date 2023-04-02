@@ -1,12 +1,6 @@
 <?php
 
 declare(strict_types=1);
-/**
- * Created by PhpStorm.
- * User: Valery Maslov
- * Date: 24.08.2018
- * Time: 10:07.
- */
 
 namespace App\Form\Type;
 
@@ -14,9 +8,11 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType as SymfonyPasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class UserType extends AbstractType
 {
@@ -31,31 +27,47 @@ final class UserType extends AbstractType
                     'choices' => [
                         'label.roles.admin' => 'ROLE_ADMIN',
                     ],
+                    'label_attr' => [
+                        'class' => 'form-control',
+                    ],
+                    'required' => false,
                     'expanded' => true,
                     'multiple' => true,
                     'label' => false,
-                    'label_attr' => ['class' => 'switch-custom'],
                 ]
             )
-//            ->add('username', null, [
-//                'label' => 'label.username',
-//            ])
-            ->add('profile', ProfileType::class)
-            ->add('email', null, [
-                'label' => 'label.email',
-            ])
-            ->add(
-                'email_verified', CheckboxType::class, [
+            ->add('email_verified', CheckboxType::class, [
                     'label' => 'label.email_verified',
-                    'label_attr' => ['class' => 'switch-custom'],
+                    'label_attr' => [
+                        'class' => 'custom-control-label',
+                    ],
                     'mapped' => false,
                     'required' => false,
                     'data' => null !== $options['data']->getEmailVerifiedAt(),
                 ]
             )
-            ->add('password', PasswordType::class, [
+            ->add('email', TextType::class, [
+                'label' => 'label.email',
+                'attr' => [
+                    'placeholder' => 'label.email',
+                    'class' => 'form-control',
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'validate.not.blank',
+                    ]),
+                ],
+            ])
+            ->add('password', SymfonyPasswordType::class, [
                 'label' => 'label.password',
-            ]);
+                'attr' => [
+                    'placeholder' => 'label.password',
+                    'class' => 'form-control',
+                ],
+                'required' => false,
+            ])
+            ->add('profile', ProfileType::class)
+        ;
     }
 
     /**

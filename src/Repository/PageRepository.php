@@ -26,8 +26,10 @@ final class PageRepository extends ServiceEntityRepository
      */
     private $paginator;
 
-    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
-    {
+    public function __construct(
+        ManagerRegistry $registry,
+        PaginatorInterface $paginator
+    ) {
         parent::__construct($registry, Page::class);
         $this->paginator = $paginator;
     }
@@ -45,13 +47,17 @@ final class PageRepository extends ServiceEntityRepository
     private function findLimit(): int
     {
         $repository = $this->getEntityManager()->getRepository(Settings::class);
-        $limit = $repository->findOneBy(['setting_name' => 'items_per_page']);
+        $limit = $repository->findOneBy([]);
 
         return (int) $limit->getSettingValue();
     }
 
-    public function findLatest(Request $request, $locale): PaginationInterface
-    {
+    public function findLatest(
+        Request $request,
+    ): PaginationInterface {
+
+        $locale = 'en';
+
         $qb = $this->createQueryBuilder('p')
             ->where('p.locale = :locale')
             ->setParameter('locale', $locale)
@@ -60,10 +66,35 @@ final class PageRepository extends ServiceEntityRepository
         return $this->createPaginator($qb->getQuery(), $request);
     }
 
-    private function createPaginator(Query $query, Request $request): PaginationInterface
-    {
-        $page = $request->query->getInt('page', 1);
+    public function findPublished(
+        Request $request,
+    ): PaginationInterface {
 
-        return $this->paginator->paginate($query, $page, $this->findLimit());
+        $locale = 'en';
+        $publish = '1';
+
+        $qb = $this->createQueryBuilder('p')
+            ->where('p.locale = :locale')
+//            ->andWhere('p.publish = :publish')
+            ->setParameter('locale', $locale)
+//            ->setParameter('publish', $publish)
+            ->orderBy('p.id', 'DESC');
+
+        return $this->createPaginator($qb->getQuery(), $request);
+    }
+
+    private function createPaginator(
+        Query $query,
+        Request $request
+    ): PaginationInterface {
+        // Paginate the results of the query
+        return $this->paginator->paginate(
+            // Doctrine Query, not results
+            $query,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            10
+        );
     }
 }

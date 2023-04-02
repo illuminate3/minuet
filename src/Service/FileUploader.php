@@ -1,12 +1,6 @@
 <?php
 
 declare(strict_types=1);
-/**
- * Created by PhpStorm.
- * User: Valery Maslov
- * Date: 18.08.2018
- * Time: 17:29.
- */
 
 namespace App\Service;
 

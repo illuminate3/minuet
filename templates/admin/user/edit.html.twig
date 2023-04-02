@@ -1,35 +1,51 @@
 {% extends 'admin/layout/base.html.twig' %}
 
-{% block title %}{{ 'title.edit_user'|trans }}{% endblock %}
+{% block subheader %}
+    <!-- Title -->
+    {{ include('admin/_partials/_action_title.html.twig') }}
+{% endblock %}
 
 {% block body %}
 
-    <div class="card mb-3">
-        <div class="card-header"><i class="fas fa-edit text-danger"></i> {{ 'title.edit_user'|trans }}</div>
-        <div class="card-body">
+    <div class="row py-4">
+        <div class="col">
 
-            {% form_theme form 'bootstrap_4_layout.html.twig' %}
+            {% form_theme form 'bootstrap_5_layout.html.twig' %}
 
             {{ form_start(form) }}
-            {{ form_row(form.roles) }}
-            {{ form_row(form.profile.full_name) }}
-{#            {{ form_row(form.username) }}#}
-            {{ form_row(form.profile.phone) }}
-            {{ form_row(form.email) }}
-            {{ form_row(form.email_verified) }}
-            {{ form_row(form.password) }}
 
-            <div class="form-group">
-
-                <button type="submit" class="btn btn-primary">
-                    {{ 'action.save'|trans }}
-                </button>
-
+            <div class="my-3">
+                {{ form_widget(form.roles) }}
+                {{ form_label(form.roles) }}
             </div>
+
+            <div class="form-floating my-3">
+                {{ form_row(form.profile.full_name) }}
+            </div>
+
+            <div class="form-floating my-3">
+                {{ form_row(form.profile.phone) }}
+            </div>
+
+            <div class="form-floating my-3">
+                {{ form_row(form.email) }}
+            </div>
+
+            <div>
+                {{ form_widget(form.email_verified) }}
+                {{ form_label(form.email_verified) }}
+            </div>
+
+            <div class="form-floating my-3">
+                {{ form_row(form.password) }}
+            </div>
+
+            <!-- Action -->
+            {{ include('admin/_partials/_action_form.html.twig') }}
 
             {{ form_end(form) }}
 
         </div>
-    </div><br>
+    </div>
 
 {% endblock %}

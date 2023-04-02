@@ -1,12 +1,7 @@
 <?php
 
 declare(strict_types=1);
-/**
- * Created by PhpStorm.
- * User: Valery Maslov
- * Date: 30.08.2018
- * Time: 16:33.
- */
+
 
 namespace App\Utils;
 

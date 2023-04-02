@@ -1,14 +1,21 @@
-<!DOCTYPE html>
-<html lang="{{ app.request.locale }}">
+<!doctype html>
+<html lang="{{ app.request.locale }}" class="h-100">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>{% block title %}{% endblock %}</title>
+    <!-- Title -->
+    <title>{{ site.site_name }}:{% block title %}{% endblock %}</title>
 
-    <meta name="description" content="{% block description %}{% endblock %}"/>
-
-    {{ site.custom_code | raw }}
+    <!-- META Data -->
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="language" content="{{ app.request.locale }}">
+    <meta name="title" content="{{ site.meta_title }}:{{ title }}">
+    <meta name="description" content="{{ site.meta_description }}:{% block description %}{% endblock %}"/>
+    <meta name="keywords" content="{{ site.meta_keywords }}">
+    <meta name="author" content="{{ site.meta_author }}">
+    <meta name="robots" content="index,follow">
+    <meta name="revisit-after" content="{{ site.meta_revisit}} days">
 
     <!-- Disable tap highlight on IE -->
     <meta name="msapplication-tap-highlight" content="no">
@@ -18,13 +25,13 @@
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="{{ site.name }}">
+    <meta name="application-name" content="{{ site.site_name }}">
     <link rel="icon" sizes="192x192" href="{{ asset('/images/icons/chrome-touch-icon-192x192.png') }}">
 
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="{{ site.name }}">
+    <meta name="apple-mobile-web-app-title" content="{{ site.site_name }}">
     <link rel="apple-touch-icon" href="{{ asset('/images/icons/apple-touch-icon.png') }}">
 
     <!-- Tile icon for Win8 (144x144 + tile color) -->
@@ -34,43 +41,64 @@
     <!-- Color the status bar on mobile devices -->
     <meta name="theme-color" content="#ffffff">
 
-    <!-- Styles -->
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title="{{ 'text.rss_title'|trans }}" href="{{ path('page_rss') }}">
+
+    <!-- CSS -->
     {{ encore_entry_link_tags('css/app') }}
-    {{ encore_entry_link_tags('css/admin') }}
     {% block stylesheets %}{% endblock %}
+
 </head>
 
-<body{% if site.fixed_top_navbar == '1' %} class="body d-flex flex-column h-100"{% endif %}>
+<body>
 
-{{ include('layout/partials/_navbar.html.twig') }}
+<div class="container-fluid overflow-hidden">
 
-{% block header %}{% endblock %}
+    <!-- Header -->
+    <div class="row border">
+        <div class="col">
+            <!-- Navbar -->
+            {{ include('layout/partials/_header.html.twig') }}
+        </div>
+    </div>
 
-<div class="container">
+    <!-- View Port -->
+    <div class="row overflow-auto vh-102">
 
-    {{ include('common/_flash_messages.html.twig') }}
+        <!-- Main Content -->
+        <div class="col d-flex flex-column pt-4">
 
-    {% block body %}{% endblock %}
+            <main class="row overflow-auto">
+                <div class="col pb-4">
+                    <!-- Subheader -->
+                    {% block subheader %}
+                    {% endblock %}
+                    <!-- Content -->
+                    {% block body %}{% endblock %}
+                </div>
+            </main>
+
+        </div>
+
+    </div>
 
 </div>
 
-{#<div class="container text-muted">#}
-{#    <p>© {{ "now" | date("Y") }} <a class="text-muted" href="{{ path('security_logout') }}">{{ site.name }}</a>.#}
-{#        {{ site.custom_footer_text | raw }}#}
-{#    </p>#}
-{#</div>#}
-
-<!-- Footer -->
-{{ include('layout/partials/_footer.html.twig') }}
-
+<footer class="row bg-light mt-auto">
+    <div class="col">
+        <!-- Footer -->
+        {{ include('layout/partials/_footer.html.twig') }}
+    </div>
+</footer>
 
 <!-- Scripts -->
 {{ encore_entry_script_tags('js/app') }}
-{#{% if app.user %}#}
-{#    {{ encore_entry_script_tags('js/auth') }}#}
-{#{% endif %}#}
-
 {% block javascripts %}{% endblock %}
+<!-- Analytics -->
+{{ site.analytics_code | raw }}
 
 </body>
 </html>

@@ -4,12 +4,12 @@ const changeButtons = () => {
     $('.js-down-one')
         .removeClass('js-down-one')
         .addClass('js-up-one')
-        .html('<i class="fas fa-arrow-up"></i> Up one');
+        .html('<i class="fas fa-arrow-up"></i> Up');
 
     $('.js-move:first')
         .removeClass('js-up-one')
         .addClass('js-down-one')
-        .html('<i class="fas fa-arrow-down"></i> Down one');
+        .html('<i class="fas fa-arrow-down"></i> Down');
 };
 
 const sendRequest = () => {

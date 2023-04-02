@@ -25,10 +25,6 @@ final class MainSettingsControllerTest extends WebTestCase
 
         $form = $crawler->selectButton('Save changes')->form([
             'main_settings[title]' => $title.' - Test title',
-            'main_settings[fixed_top_navbar]' => '1',
-            'main_settings[show_similar_properties]' => '1',
-            'main_settings[items_per_page]' => '3',
-            'main_settings[custom_footer_text]' => 'Edited text',
         ]);
 
         $client->submit($form);

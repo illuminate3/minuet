@@ -1,33 +1,66 @@
-<ul class="sidebar navbar-nav{% if app.request.cookies.get('sidebar-toggled') == 'true' %} toggled{% endif %}">
+<!-- Sidebar -->
+<div class="flex-shrink-0">
 
-    <li class="nav-item">
-        <a class="nav-link" href="{{ path('admin_category') }}">
-            <i class="far fa-building"></i>
-            <span>{{ 'categories'|trans }}</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ path('admin_page') }}">
-            <i class="far fa-file-alt"></i>
-            <span>{{ 'menu.pages'|trans }}</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ path('admin_user') }}">
-            <i class="fas fa-users-cog"></i>
-            <span>{{ 'menu.users'|trans }}</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ path('admin_menu') }}">
-            <i class="fas fa-bars"></i>
-            <span>{{ 'menu.menu'|trans }}</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ path('admin_settings') }}">
-            <i class="fas fa-cog"></i>
-            <span>{{ 'menu.settings'|trans }}</span>
-        </a>
-    </li>
-</ul>
+    <ul class="list-unstyled ps-0">
+
+        <li class="mb-1">
+            <a href="{{ path('admin_dashboard') }}" class="link-light d-inline-flex text-decoration-none rounded">
+                {{ 'menu.dash'|trans }}
+            </a>
+        </li>
+
+        <li class="mb-1">
+            <a href="{{ path('admin_user') }}" class="link-light d-inline-flex text-decoration-none rounded">
+                {{ 'menu.users'|trans }}
+            </a>
+        </li>
+
+        <li class="mb-1">
+            <a href="{{ path('admin_settings') }}" class="link-light d-inline-flex text-decoration-none rounded">
+                {{ 'menu.settings'|trans }}
+            </a>
+        </li>
+
+        <li class="mb-1">
+            <button class="page btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#pages-collapse" aria-expanded="false">
+                {{ 'menu.pages'|trans }}
+            </button>
+            <div class="collapse" id="pages-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li>
+                        <a href="{{ path('admin_page') }}" class="link-light d-inline-flex text-decoration-none rounded">
+                            {{ 'action.view'|trans }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('admin_page_new') }}" class="link-light d-inline-flex text-decoration-none rounded">
+                            {{ 'action.new'|trans }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="mb-1">
+            <button class="menu btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#menu-collapse" aria-expanded="false">
+                {{ 'menu.menu'|trans }}
+            </button>
+            <div class="collapse" id="menu-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li>
+                        <a href="{{ path('admin_menu') }}" class="link-light d-inline-flex text-decoration-none rounded">
+                            {{ 'action.view'|trans }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('admin_menu_new') }}" class="link-light d-inline-flex text-decoration-none rounded">
+                            {{ 'action.new'|trans }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+    </ul>
+
+</div>

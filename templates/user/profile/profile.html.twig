@@ -1,41 +1,28 @@
 {% extends 'layout/dash/dash.html.twig' %}
 
+{% block subheader %}
+<!-- Title -->
+{{ include('layout/partials/_title.html.twig') }}
+{% endblock %}
+
 {% block body %}
 
-    <div class="row mt-4 mb-4">
+<div class="row mt-4 mb-4">
+    <div class="col">
 
-        <div class="card full-xs">
-            <div class="card-body">
+        {% form_theme form 'bootstrap_5_layout.html.twig' %}
 
-                <h3 class="card-title">{{ title|trans }}</h3>
+        {{ form_start(form) }}
 
-                <p class="card-text">
+        {{ form_row(form.full_name) }}
+        {{ form_row(form.phone) }}
 
-                    {% form_theme form 'bootstrap_5_layout.html.twig' %}
+        <!-- Submit -->
+        {{ include('layout/dash/partials/_submit.html.twig') }}
 
-                    {{ form_start(form) }}
-
-                    {{ form_row(form.full_name) }}
-                    {{ form_row(form.phone) }}
-
-                </p>
-
-                <div class="form-group row mb-0 mt-3 mb-auto">
-                    <div class="col-md-12">
-
-                        <button type="submit" class="btn btn-success btn-lg">
-                            {{ 'action.save'|trans }}
-                        </button>
-
-                    </div>
-                </div>
-
-                {{ form_end(form) }}
-
-            </div>
-        </div>
-
+        {{ form_end(form) }}
 
     </div>
+</div>
 
 {% endblock %}

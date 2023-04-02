@@ -1,34 +1,19 @@
 {% extends 'layout/dash/dash.html.twig' %}
 
-{% block title %}{{ 'title.dash' | trans }}{% endblock %}
+{% block subheader %}
+    <!-- Title -->
+    {{ include('layout/partials/_title.html.twig') }}
+{% endblock %}
 
 {% block body %}
 
-    <br>
+    <div class="row mt-4 mb-4">
+        <div class="col">
 
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+            <h1>
+                {{ title|trans }}
+            </h1>
 
-    <div class="row justify-content-center mb-5">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">{{ 'title.register' | trans }}</div>
-                <div class="card-body">
-
-
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ path('user_profile') }}">Profile</a></li>
-                        <li class="breadcrumb-item"><a href="{{ path('security_login') }}">login</a></li>
-                        <li class="breadcrumb-item"><a href="{{ path('security_logout') }}">logout</a></li>
-                        <li class="breadcrumb-item"><a href="{{ path('auth_register') }}">Register</a></li>
-                    </ul>
-
-
-
-                </div>
-            </div>
         </div>
     </div>
 

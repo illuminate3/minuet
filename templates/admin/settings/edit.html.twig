@@ -1,0 +1,26 @@
+{% extends 'admin/layout/base.html.twig' %}
+
+{% block subheader %}
+    <!-- Title -->
+    {{ include('admin/_partials/_action_title.html.twig') }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="row mt-4 mb-4">
+        <div class="col">
+
+
+            {{ form_start(form) }}
+
+            {{ form_widget(form) }}
+
+            <!-- Action -->
+            {{ include('admin/_partials/_action_form.html.twig') }}
+
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+
+{% endblock %}

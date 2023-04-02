@@ -94,7 +94,7 @@ final class RegisterController extends BaseController implements AuthController
     /**
      * requestVerifyUserEmail.
      */
-    #[Route(path: '/request-verify-email', name: 'auth_request_verify_email')]
+    #[Route(path: '/request/verify-email', name: 'auth_request_verify_email')]
     public function requestVerifyUserEmail(
         Request $request,
         UserRepository $userRepository

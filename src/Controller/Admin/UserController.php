@@ -10,8 +10,6 @@ use App\Form\Type\UserType;
 use App\Repository\UserRepository;
 use App\Service\Admin\UserService;
 use App\Utils\UserFormDataSelector;
-use Symfony\Component\Form\ClickableInterface;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,42 +18,48 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 final class UserController extends BaseController
 {
     #[Route(path: '/admin/user', name: 'admin_user')]
-    public function index(Request $request, UserRepository $repository): Response
-    {
-        $users = $repository->findAll();
+    public function index(
+        Request $request,
+        UserRepository $repository
+    ): Response {
+        $users = $repository->findUsers($request);
 
         return $this->render('admin/user/index.html.twig', [
+            'title' => 'title.users',
+            'action_delete_url' => 'admin_user_delete',
+            'action_edit_url' => 'admin_user_edit',
+            'new_url' => 'admin_user_new',
+            'cancel_url' => 'admin_user',
             'site' => $this->site($request),
             'users' => $users,
         ]);
     }
 
     #[Route(path: '/admin/user/new', name: 'admin_user_new')]
-    public function new(Request $request, UserService $service, UserFormDataSelector $selector): Response
-    {
+    public function new(
+        Request $request,
+        UserService $service,
+        UserFormDataSelector $selector
+    ): Response {
         $user = new User();
 
         $form = $this->createForm(UserType::class, $user);
-//            ->add('saveAndCreateNew', SubmitType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $emailVerifiedAt = $selector->getEmailVerifiedAt($form);
             $user->setEmailVerifiedAt($emailVerifiedAt);
             $service->create($user);
-
-//            /** @var ClickableInterface $button */
-//            $button = $form->get('saveAndCreateNew');
-//            if ($button->isClicked()) {
-//                return $this->redirectToRoute('admin_user_new');
-//            }
+            $this->addFlash('success', 'message.created');
 
             return $this->redirectToRoute('admin_user');
         }
 
         return $this->render('admin/user/new.html.twig', [
+            'title' => 'title.users',
+            'cancel_url' => 'admin_user',
             'site' => $this->site($request),
-            'user' => $user,
+            'page' => $user,
             'form' => $form,
         ]);
     }
@@ -69,8 +73,7 @@ final class UserController extends BaseController
         User $user,
         UserService $service,
         UserFormDataSelector $selector
-    ): Response
-    {
+    ): Response {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -85,6 +88,8 @@ final class UserController extends BaseController
         }
 
         return $this->render('admin/user/edit.html.twig', [
+            'title' => 'title.users',
+            'cancel_url' => 'admin_user',
             'site' => $this->site($request),
             'form' => $form,
         ]);
@@ -95,8 +100,11 @@ final class UserController extends BaseController
      */
     #[Route(path: '/user/{id<\d+>}/delete', name: 'admin_user_delete', methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN')]
-    public function delete(Request $request, User $user, UserService $service): Response
-    {
+    public function delete(
+        Request $request,
+        User $user,
+        UserService $service
+    ): Response {
         if (!$this->isCsrfTokenValid('delete', $request->request->get('token'))) {
             return $this->redirectToRoute('admin_user');
         }

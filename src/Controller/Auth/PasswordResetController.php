@@ -119,7 +119,7 @@ final class PasswordResetController extends BaseController implements AuthContro
             return $this->redirectToRoute('app_dash');
         }
 
-        return $this->render('auth/password/password_change.html.twig', [
+        return $this->render('user/password/password_change.html.twig', [
             'title' => 'title.change_password',
             'site' => $this->site($request),
             'form' => $form->createView(),

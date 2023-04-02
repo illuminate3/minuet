@@ -3,6 +3,60 @@
     <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
         <body>
 
+            <trans-unit id="text_yes">
+                <source>text_yes</source>
+                <target>Yes</target>
+            </trans-unit>
+            <trans-unit id="text_no">
+                <source>text_no</source>
+                <target>No</target>
+            </trans-unit>
+            <trans-unit id="text.down">
+                <source>text.down</source>
+                <target>Down</target>
+            </trans-unit>
+            <trans-unit id="text.up">
+                <source>text.up</source>
+                <target>Up</target>
+            </trans-unit>
+            <trans-unit id="text.all_rights_reserved">
+                <source>text.all_rights_reserved</source>
+                <target>All rights reserved.</target>
+            </trans-unit>
+            <trans-unit id="text.copyrights">
+                <source>text.copyrights</source>
+                <target>Copyrights</target>
+            </trans-unit>
+            <trans-unit id="text.navigation">
+                <source>text.navigation</source>
+                <target>Navigation</target>
+            </trans-unit>
+            <trans-unit id="text.quick_links">
+                <source>text.quick_links</source>
+                <target>Quick Links</target>
+            </trans-unit>
+            <trans-unit id="text.read_more">
+                <source>text.read_more</source>
+                <target>Read More</target>
+            </trans-unit>
+            <trans-unit id="text.rss_title">
+                <source>text.rss_title</source>
+                <target>Page Content</target>
+            </trans-unit>
+            <trans-unit id="text.version">
+                <source>text.version</source>
+                <target>Version</target>
+            </trans-unit>
+
+            <trans-unit id="option.on">
+                <source>option.on</source>
+                <target>On</target>
+            </trans-unit>
+            <trans-unit id="option.off">
+                <source>option.off</source>
+                <target>Off</target>
+            </trans-unit>
+
             <trans-unit id="action.add_menu_item">
                 <source>action.add_menu</source>
                 <target>Add Menu</target>
@@ -63,6 +117,10 @@
                 <source>action.verify_account</source>
                 <target>Request Verification Link</target>
             </trans-unit>
+            <trans-unit id="action.view">
+                <source>action.view</source>
+                <target>View</target>
+            </trans-unit>
 
             <trans-unit id="label.agree">
                 <source>label.agree</source>
@@ -90,7 +148,11 @@
             </trans-unit>
             <trans-unit id="label.full_name">
                 <source>label.full_name</source>
-                <target>Full name</target>
+                <target>Full Name</target>
+            </trans-unit>
+            <trans-unit id="label.isSlug">
+                <source>label.isSlug</source>
+                <target>Is this a Slug?</target>
             </trans-unit>
             <trans-unit id="label.link_text">
                 <source>label.link_text</source>
@@ -114,7 +176,7 @@
             </trans-unit>
             <trans-unit id="label.nofollow">
                 <source>label.nofollow</source>
-                <target>Nofollow</target>
+                <target>No follow</target>
             </trans-unit>
             <trans-unit id="label.password">
                 <source>label.password</source>
@@ -165,9 +227,54 @@
                 <target>Users</target>
             </trans-unit>
 
+            <trans-unit id="label.site_name">
+                <source>label.site_name</source>
+                <target>Site Name</target>
+            </trans-unit>
+            <trans-unit id="label.site_title">
+                <source>label.site_title</source>
+                <target>Site Title</target>
+            </trans-unit>
+            <trans-unit id="label.analytics_code">
+                <source>label.analytics_code</source>
+                <target>Code for Analytics</target>
+            </trans-unit>
+            <trans-unit id="label.site_meta_keywords">
+                <source>label.site_meta_keywords</source>
+                <target>Meta Keywords</target>
+            </trans-unit>
+            <trans-unit id="label.site_meta_title">
+                <source>label.site_meta_title</source>
+                <target>Meta Title</target>
+            </trans-unit>
+            <trans-unit id="label.site_meta_description">
+                <source>label.site_meta_description</source>
+                <target>Meta Description</target>
+            </trans-unit>
+            <trans-unit id="label.site_allow_register">
+                <source>label.site_allow_register</source>
+                <target>Allow Registration</target>
+            </trans-unit>
+            <trans-unit id="label.site_meta_author">
+                <source>label.site_meta_author</source>
+                <target>Meta Author</target>
+            </trans-unit>
+            <trans-unit id="label.site_meta_revisit">
+                <source>label.site_meta_revisit</source>
+                <target>Meta Revisit in Days</target>
+            </trans-unit>
+            <trans-unit id="label.site_branding">
+                <source>label.site_branding</source>
+                <target>Site Branding</target>
+            </trans-unit>
+
             <trans-unit id="menu.account">
                 <source>menu.account</source>
                 <target>Account</target>
+            </trans-unit>
+            <trans-unit id="menu.dash">
+                <source>menu.dash</source>
+                <target>Dashboard</target>
             </trans-unit>
             <trans-unit id="menu.login">
                 <source>menu.login</source>
@@ -201,6 +308,10 @@
                 <source>menu.register</source>
                 <target>Register</target>
             </trans-unit>
+            <trans-unit id="menu.rss">
+                <source>menu.rss</source>
+                <target>Pages RSS</target>
+            </trans-unit>
             <trans-unit id="menu.settings">
                 <source>menu.settings</source>
                 <target>Settings</target>
@@ -209,6 +320,10 @@
                 <source>menu.site</source>
                 <target>Back to Website</target>
             </trans-unit>
+            <trans-unit id="menu.site_info">
+                <source>menu.site_info</source>
+                <target>Site Information</target>
+            </trans-unit>
             <trans-unit id="menu.user">
                 <source>menu.user</source>
                 <target>User</target>
@@ -216,15 +331,6 @@
             <trans-unit id="menu.users">
                 <source>menu.users</source>
                 <target>Users</target>
-            </trans-unit>
-
-            <trans-unit id="option.on">
-                <source>option.on</source>
-                <target>On</target>
-            </trans-unit>
-            <trans-unit id="option.off">
-                <source>option.off</source>
-                <target>Off</target>
             </trans-unit>
 
             <trans-unit id="table.action">
@@ -259,6 +365,10 @@
                 <source>table.url</source>
                 <target>URL</target>
             </trans-unit>
+            <trans-unit id="table.username">
+                <source>table.username</source>
+                <target>Username</target>
+            </trans-unit>
 
             <trans-unit id="title.change_password">
                 <source>title.change_password</source>
@@ -284,6 +394,10 @@
                 <source>title.login</source>
                 <target>Secure Sign In</target>
             </trans-unit>
+            <trans-unit id="title.menu">
+                <source>title.menu</source>
+                <target>Menu</target>
+            </trans-unit>
             <trans-unit id="title.pages">
                 <source>title.pages</source>
                 <target>Pages</target>
@@ -303,6 +417,14 @@
             <trans-unit id="title.request_new_verification_email">
                 <source>title.request_new_verification_email</source>
                 <target>Request New Verification Email</target>
+            </trans-unit>
+            <trans-unit id="title.settings">
+                <source>title.settings</source>
+                <target>Settings</target>
+            </trans-unit>
+            <trans-unit id="title.users">
+                <source>title.users</source>
+                <target>Users</target>
             </trans-unit>
             <trans-unit id="title.verify_account">
                 <source>title.verify_account</source>
@@ -325,6 +447,10 @@
             <trans-unit id="message.created">
                 <source>message.created</source>
                 <target>Created successfully</target>
+            </trans-unit>
+            <trans-unit id="message.deleted">
+                <source>message.deleted</source>
+                <target>Deleted successfully</target>
             </trans-unit>
             <trans-unit id="message.updated">
                 <source>message.updated</source>
@@ -372,6 +498,10 @@
             <trans-unit id="message.email_verified">
                 <source>message.email_verified</source>
                 <target>Your email address has been verified.</target>
+            </trans-unit>
+            <trans-unit id="message.not_found">
+                <source>message.not_found</source>
+                <target>Not Found</target>
             </trans-unit>
             <trans-unit id="message.password_has_been_reset">
                 <source>message.password_has_been_reset</source>

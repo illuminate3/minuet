@@ -74,9 +74,6 @@
     "knplabs/knp-paginator-bundle": {
         "version": "v5.9.0"
     },
-    "nicolassing/quill-bundle": {
-        "version": "v1.3"
-    },
     "phpunit/phpunit": {
         "version": "9.5",
         "recipe": {

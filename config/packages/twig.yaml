@@ -5,10 +5,9 @@ twig:
 #        locales: '%app_locales%'
 #        locale: '%locale%'
         app_version: '%env(APP_VERSION)%'
-        app_site_name: '%env(APP_SITE_NAME)%'
-        app_site_branding: '%env(APP_SITE_BRANDING)%'
         error: ''
-
+    form_themes:
+        - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
 
 when@dev:
     twig:

@@ -18,16 +18,10 @@
         "http://localhost:8080/build/js/menu-sorting.js"
       ]
     },
-    "js/select2": {
+    "js/admin": {
       "js": [
         "http://localhost:8080/build/runtime.js",
-        "http://localhost:8080/build/js/select2.js"
-      ]
-    },
-    "js/quill": {
-      "js": [
-        "http://localhost:8080/build/runtime.js",
-        "http://localhost:8080/build/js/quill.js"
+        "http://localhost:8080/build/js/admin.js"
       ]
     },
     "css/app": {
@@ -41,17 +35,6 @@
     "css/admin": {
       "js": [
         "http://localhost:8080/build/runtime.js"
-      ],
-      "css": [
-        "http://localhost:8080/build/css/admin.css"
-      ]
-    },
-    "css/select2": {
-      "js": [
-        "http://localhost:8080/build/runtime.js"
-      ],
-      "css": [
-        "http://localhost:8080/build/css/select2.css"
       ]
     }
   }

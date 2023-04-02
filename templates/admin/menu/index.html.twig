@@ -1,31 +1,26 @@
 {% extends 'admin/layout/base.html.twig' %}
 
-{% block title %}{{ 'menu'|trans }}{% endblock %}
+{% block subheader %}
+    <!-- Title -->
+    {{ include('admin/_partials/_action_title.html.twig') }}
+{% endblock %}
+
+{% block javascripts %}
+    <!-- Menu JS -->
+    {{ encore_entry_script_tags('js/menu-sorting') }}
+{% endblock %}
 
 {% block body %}
 
-    <ul class="nav nav-tabs">
-        <li class="nav-item active">
-            <span class="nav-link active">
-                <i class="fas fa-bars text-danger"></i> {{ 'menu'|trans }}
-            </span>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ path('admin_menu_new') }}">
-                <i class="fas fa-plus-square text-danger"></i> {{ 'action.add_menu'|trans }}
-            </a>
-        </li>
-    </ul>
+    <div class="row mt-4 mb-4">
+        <div class="col">
 
-    <div class="card mb-3" id="menu" data-token="{{ csrf_token('csrf_token') }}">
-
-        <div class="card-body">
             <div class="table-responsive">
                 <table class="table" style="background-color: #FFFFFF">
                     <thead class="thead">
                     <tr>
                         <th>{{ 'table.link_text'|trans }}</th>
-                        <th class="hidden-sm">{{ 'table.url'|trans }}</th>
+                        <th>{{ 'table.url'|trans }}</th>
                         <th>{{ 'table.move'|trans }}</th>
                         <th>{{ 'table.action'|trans }}</th>
                     </tr>
@@ -34,28 +29,42 @@
 
                     {% for item in menu %}
                         <tr>
-                            <td>{{ item.title }}</td>
-                            <td class="small hidden-sm">{{ item.url }}</td>
+                            <td>
+                                {{ item.title }}
+                            </td>
+                            <td>
+                                {{ item.url }}
+                            </td>
                             <td>
                                 {% if loop.first %}
                                     <button class="btn btn-sm btn-light js-move js-down-one"
                                             id="{{ item.id }}"
                                             type="button">
-                                        <i class="fas fa-arrow-down"></i> Down one
+                                        <i class="fas fa-arrow-down"></i> {{ 'text.down'|trans }}
                                     </button>
                                 {% else %}
                                     <button class="btn btn-sm btn-light js-move js-up-one"
                                             id="{{ item.id }}"
                                             type="button">
-                                        <i class="fas fa-arrow-up"></i> Up one
+                                        <i class="fas fa-arrow-up"></i> {{ 'text.up'|trans }}
                                     </button>
                                 {% endif %}
                             </td>
                             <td>
-                                {{ include('admin/menu/_action_form.html.twig', {item: item}, with_context = false) }}
+                                {{ include(
+                                    'admin/_partials/_action_group_form.html.twig',
+                                    {
+                                        id: item.id,
+                                        delete_url: action_delete_url,
+                                        edit_url: action_edit_url
+                                    },
+                                    with_context = false
+                                ) }}
                             </td>
                         </tr>
 
+                    {% else %}
+                        <div class="well">{{ 'message.not_found'|trans }}</div>
                     {% endfor %}
 
                     </tbody>
@@ -64,11 +73,5 @@
 
         </div>
     </div>
-
-{% endblock %}
-
-{% block javascripts %}
-
-    {{ encore_entry_script_tags('js/menu-sorting') }}
 
 {% endblock %}

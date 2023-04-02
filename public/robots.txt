@@ -4,3 +4,8 @@
 User-agent: *
 Disallow: /login
 Disallow: /admin
+Disallow: /password
+Disallow: /register
+Disallow: /email
+
+Sitemap: /sitemap.xml

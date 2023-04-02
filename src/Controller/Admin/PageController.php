@@ -9,7 +9,6 @@ use App\Entity\Page;
 use App\Form\Type\PageType;
 use App\Repository\PageRepository;
 use App\Service\Admin\PageService;
-use App\Utils\SluggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,19 +20,43 @@ final class PageController extends BaseController
     public function index(
         Request $request,
         PageRepository $repository,
-    ): Response
-    {
+    ): Response {
         // Get pages
-        $locale = $this->getParameter('kernel.default_locale');
-        $pages = $repository->findLatest($request, $locale);
+        $pages = $repository->findLatest($request);
 
         return $this->render('admin/page/index.html.twig', [
             'title' => 'title.pages',
-            'delete_url' => 'admin_page_delete',
-            'edit_url' => 'admin_page_edit',
+            'action_delete_url' => 'admin_page_delete',
+            'action_edit_url' => 'admin_page_edit',
+            'cancel_url' => 'admin_page',
             'new_url' => 'admin_page_new',
             'site' => $this->site($request),
             'pages' => $pages,
+        ]);
+    }
+
+    #[Route(path: '/admin/page/new', name: 'admin_page_new')]
+    public function new(
+        Request $request,
+        PageService $pageService,
+    ): Response {
+        $page = new Page();
+        $form = $this->createForm(PageType::class, $page);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $pageService->create($page);
+            $this->addFlash('success', 'message.created');
+
+            return $this->redirectToRoute('admin_page');
+        }
+
+        return $this->render('admin/page/new.html.twig', [
+            'title' => 'title.pages',
+            'cancel_url' => 'admin_page',
+            'site' => $this->site($request),
+            'page' => $page,
+            'form' => $form,
         ]);
     }
 
@@ -45,53 +68,21 @@ final class PageController extends BaseController
         Request $request,
         Page $page,
         PageService $pageService,
-    ): Response
-    {
+    ): Response {
         $form = $this->createForm(PageType::class, $page);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-//            $this->doctrine->getManager()->flush();
-
             $pageService->edit($page);
-
             $this->addFlash('success', 'message.updated');
 
-//            return $this->redirectToRoute('page', ['slug' => $page->getSlug()]);
             return $this->redirectToRoute('admin_page');
-
         }
 
         return $this->render('admin/page/edit.html.twig', [
             'title' => 'title.pages',
+            'cancel_url' => 'admin_page',
             'site' => $this->site($request),
-            'form' => $form,
-        ]);
-    }
-
-    #[Route(path: '/admin/page/new', name: 'admin_page_new')]
-    public function new(
-        Request $request,
-        PageService $pageService,
-    ): Response
-    {
-        $page = new Page();
-        $form = $this->createForm(PageType::class, $page);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $pageService->create($page);
-
-            $this->addFlash('success', 'message.created');
-
-//            return $this->redirectToRoute('page', ['slug' => $page->getSlug()]);
-            return $this->redirectToRoute('admin_page');
-        }
-
-        return $this->render('admin/page/new.html.twig', [
-            'title' => 'title.pages',
-            'site' => $this->site($request),
-            'page' => $page,
             'form' => $form,
         ]);
     }
@@ -105,12 +96,10 @@ final class PageController extends BaseController
         Request $request,
         Page $page,
         PageService $pageService
-    ): Response
-    {
+    ): Response {
         if (!$this->isCsrfTokenValid('delete', $request->request->get('token'))) {
             return $this->redirectToRoute('admin_page');
         }
-
         $pageService->delete($page);
 
         return $this->redirectToRoute('admin_page');

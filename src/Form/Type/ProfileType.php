@@ -21,8 +21,8 @@ final class ProfileType extends AbstractType
             ->add('full_name', null, [
                 'label' => 'label.full_name',
                 'attr' => [
-                    'autofocus' => true,
                     'placeholder' => 'label.full_name',
+                    'class' => 'form-control',
                 ],
                 'constraints' => [
                     new NotNull(),
@@ -32,11 +32,13 @@ final class ProfileType extends AbstractType
                 'label' => 'label.phone',
                 'attr' => [
                     'placeholder' => 'label.phone',
+                    'class' => 'form-control',
                 ],
                 'constraints' => [
                     new NotNull(),
                 ],
-            ]);
+            ])
+        ;
     }
 
     /**

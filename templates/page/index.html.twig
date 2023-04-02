@@ -1,43 +1,41 @@
 {% extends 'layout/base.html.twig' %}
 
-{#{% block title %}{{ page.title }}{% endblock %}#}
-
-{#{% block description %}{{ page.description }}{% endblock %}#}
-
-{#{% block header %}#}
-{#    <div class="header"#}
-{#     style="background-image: url(#}
-{#        {% if site.header_image == '' %}#}
-{#            '/images/bg-1.5.jpg'#}
-{#         {% else %}#}
-{#            '/uploads/images/full/{{ site.header_image }}'#}
-{#         {% endif %}#}
-{#     )">#}
-{#        <div class="header-overlay"></div>#}
-{#        <div class="container">#}
-{#            <div class="search_form text-center">#}
-{#                <h1 style="color:#fff">{{ page.title }}</h1>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#{% endblock %}#}
+{% block subheader %}
+    <!-- Title -->
+    {{ include('layout/partials/_title.html.twig') }}
+{% endblock %}
 
 {% block body %}
 
-    <div class="row">
-        <div class="col-md-8">
+{% for page in pages %}
 
-            <div class="card full-xs">
+<div class="card mb-lg-4">
 
-                <div class="card-body">
-page info here
-{#                    {{ page.content | raw }}#}
+    <div class="card-header">
+        <h5>
+            {{ page.title }}
+        </h5>
+    </div>
 
-                </div>
-            </div>
-            <br>
-        </div>
+    <div class="card-body">
+
+        <p class="card-text">
+            {{ page.description }}
+        </p>
+
+        <a class="btn btn-primary" href="{{ path('page', {slug: page.slug}) }}">
+            {{ 'text.read_more'|trans }}
+        </a>
 
     </div>
 
+</div>
+
+{% else %}
+    <div class="well">{{ 'message.not_found'|trans }}</div>
+{% endfor %}
+
+{{ knp_pagination_render(pages) }}
+
 {% endblock %}
+

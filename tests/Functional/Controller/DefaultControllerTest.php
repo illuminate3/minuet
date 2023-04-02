@@ -63,11 +63,7 @@ final class DefaultControllerTest extends WebTestCase
         yield ['/en/'];
         yield ['/en/?page=2'];
         yield ['/en/login'];
-        yield ['/en/map'];
         yield ['/en/info/contact'];
-        yield ['/en/city/palm-beach'];
-        yield ['/en/?city=0&deal_type=0&category=0'];
-        yield ['/en/?city=0&deal_type=0&category=0&page=2'];
     }
 
     public function getSecureUrls(): \Generator

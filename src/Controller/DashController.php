@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashController extends BaseController
 {
-    #[Route('/dash', name: 'app_dash')]
+    #[Route('/user/dash', name: 'app_dash')]
     public function index(Request $request, Security $security): Response
     {
         // Redirect Admin Users

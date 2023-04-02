@@ -1,0 +1,14 @@
+<!-- Footer -->
+<footer>
+    <div class="copyright text-center mt-3">
+
+        © {{ 'text.copyrights'|trans }} {{ "now" | date("Y") }}.
+        {{ 'text.all_rights_reserved'|trans }}
+        <a class="text-muted" href="{{ path('app_index') }}">
+            {{ site.site_name }}
+        </a>
+        - {{ 'text.version'|trans }} {{ app_version }}
+
+    </div>
+</footer>
+

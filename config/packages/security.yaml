@@ -59,7 +59,8 @@ security:
                 # The route name the user can go to in order to logout
                 path: security_logout
                 # The name of the route to redirect to after logging out
-                target: security_login
+                # target: security_login
+                target: app_index
                 # Secure the logout against CSRF
                 # enable_csrf: true
 

@@ -12,9 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Table]
 #[UniqueEntity(['title'])]
-//#[ORM\UniqueConstraint(name: 'slug_title_unique_key', columns: ['slug', 'title'])]
+#[ORM\UniqueConstraint(name: 'slug_title_unique_key', columns: ['slug', 'title'])]
 #[ORM\Entity(repositoryClass: 'App\Repository\PageRepository')]
-//#[UniqueEntity(['slug', 'title'])]
 class Page
 {
 
@@ -40,13 +39,6 @@ class Page
 
     #[ORM\Column(type: Types::BOOLEAN, nullable: true)]
     private ?bool $publish;
-
-    #[ORM\Column(type: Types::BOOLEAN, nullable: true)]
-    private ?bool $add_contact_form;
-
-    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
-    #[Assert\Email]
-    private ?string $contact_email_address;
 
     public function getTitle(): ?string
     {
@@ -116,30 +108,6 @@ class Page
     public function setPublish(bool $publish): self
     {
         $this->publish = $publish;
-
-        return $this;
-    }
-
-    public function getAddContactForm(): ?bool
-    {
-        return $this->add_contact_form;
-    }
-
-    public function setAddContactForm(bool $add_contact_form): self
-    {
-        $this->add_contact_form = $add_contact_form;
-
-        return $this;
-    }
-
-    public function getContactEmailAddress(): ?string
-    {
-        return $this->contact_email_address;
-    }
-
-    public function setContactEmailAddress(?string $contact_email_address): self
-    {
-        $this->contact_email_address = $contact_email_address;
 
         return $this;
     }

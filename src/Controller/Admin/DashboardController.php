@@ -22,21 +22,14 @@ final class DashboardController extends BaseController
         Security $security,
     ): Response
     {
-
-//        if ($security->isGranted('ROLE_USER')) {
-//            return $this->redirectToRoute('app_index');
-//        }
-
-        $categories = $service->countCategories();
-
         $pages = $service->countPages();
 
         $users = $service->countUsers();
 
         return $this->render('admin/dashboard/index.html.twig', [
+            'title' => 'title.dashboard',
             'site' => $this->site($request),
             'error' => $helper->getLastAuthenticationError(),
-            'number_of_categories' => $categories,
             'number_of_pages' => $pages,
             'number_of_users' => $users,
         ]);

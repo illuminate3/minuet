@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Repository\CityRepository;
-use App\Repository\PropertyRepository;
+use App\Repository\PageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -20,23 +20,20 @@ final class SitemapController extends AbstractController
         return $this->render('sitemap/sitemap.xml.twig', []);
     }
 
-    #[Route(path: '/sitemap/cities.xml', name: 'cities_sitemap', defaults: self::DEFAULTS)]
-    public function cities(CityRepository $cityRepository): Response
+    #[Route(path: '/sitemap/pages.xml', name: 'pages_sitemap', defaults: self::DEFAULTS)]
+    public function pages(
+        Request $request,
+        PageRepository $pageRepository
+    ): Response
     {
-        $cities = $cityRepository->findAll();
 
-        return $this->render('sitemap/cities.xml.twig', [
-            'cities' => $cities,
+        $locale = $request->getLocale();
+        $pages = $pageRepository->findLatest($request, $locale);
+
+        return $this->render('sitemap/pages.xml.twig', [
+            'pages' => $pages,
         ]);
     }
 
-    #[Route(path: '/sitemap/properties.xml', name: 'properties_sitemap', defaults: self::DEFAULTS)]
-    public function properties(PropertyRepository $propertyRepository): Response
-    {
-        $properties = $propertyRepository->findAllPublished();
 
-        return $this->render('sitemap/properties.xml.twig', [
-            'properties' => $properties,
-        ]);
-    }
 }

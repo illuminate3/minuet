@@ -1,70 +1,114 @@
-<!DOCTYPE html>
-<html lang="{{ app.request.locale }}">
+<!doctype html>
+<html lang="{{ app.request.locale }}" class="h-100">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>{{ app_site_name }} - {% block title %}{{ title|trans }}{% endblock %}</title>
 
-    <!-- Styles -->
-    {% block stylesheets %}
-        {{ encore_entry_link_tags('css/app') }}
-        {{ encore_entry_link_tags('css/admin') }}
-        <!-- Google fonts - Roboto -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
-    {% endblock %}
+    <!-- Title -->
+    <title>{{ site.site_name }}:{% block title %}{% endblock %}</title>
 
-    <!-- Scripts -->
-    {% block javascripts %}
-        {{ encore_entry_script_tags('js/app') }}
-        {{ encore_entry_script_tags('js/layout') }}
-    {% endblock %}
+    <!-- META Data -->
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="language" content="{{ app.request.locale }}">
+    <meta name="title" content="{{ site.meta_title }}:{{ title }}">
+    <meta name="description" content="{{ site.meta_description }}:{% block description %}{% endblock %}"/>
+    <meta name="keywords" content="{{ site.meta_keywords }}">
+    <meta name="author" content="{{ site.meta_author }}">
+    <meta name="robots" content="index,follow">
+    <meta name="revisit-after" content="{{ site.meta_revisit}} days">
 
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- Web Application Manifest -->
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="{{ site.site_name }}">
+    <link rel="icon" sizes="192x192" href="{{ asset('/images/icons/chrome-touch-icon-192x192.png') }}">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="{{ site.site_name }}">
+    <link rel="apple-touch-icon" href="{{ asset('/images/icons/apple-touch-icon.png') }}">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="{{ asset('/images/icons/icon-144x144.png') }}">
+    <meta name="msapplication-TileColor" content="#0069d9">
+
+    <!-- Color the status bar on mobile devices -->
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title="{{ 'text.rss_title'|trans }}" href="{{ path('page_rss') }}">
+
+    <!-- CSS -->
+    {{ encore_entry_link_tags('css/app') }}
+    {% block stylesheets %}{% endblock %}
+
 </head>
 
+<body>
 
-<body{% if app.request.cookies.get('sidebar-toggled') == 'true' %} class="sidebar-toggled"{% endif %}>
+<div class="container-fluid overflow-hidden">
 
-<!-- Navbar -->
-{{ include('layout/dash/partials/_navbar.html.twig') }}
+    <!-- Header -->
+    <div class="row border">
+        <div class="col">
+            <!-- Navbar -->
+            {{ include('layout/dash/partials/_header.html.twig') }}
+        </div>
+    </div>
 
-<!-- end #menu -->
+    <!-- View Port -->
+    <div class="row overflow-auto vh-101">
 
-<div id="wrapper">
-
-    <!-- Sidebar -->
-    {{ include('layout/dash/partials/_sidebar.html.twig') }}
-
-    <div id="content-wrapper">
-
-        <div class="container-fluid">
-
-            {{ include('common/_flash_messages.html.twig') }}
-
-            {% block body %}{% endblock %}
+        <!-- Sidebar -->
+        <div class="col-12 col-sm-2 d-flex sticky-top bg-dark pt-4">
+            <div class="d-flex flex-row align-items-sm-start">
+                <!-- Sidebar -->
+                {{ include('layout/dash/partials/_sidebar.html.twig') }}
+            </div>
 
         </div>
-        <!-- /.container-fluid -->
 
-        <!-- Sticky Footer -->
-        <footer class="sticky-footer">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <a href="https://github.com/Coderberg/ResidenceCMS">
-                        ResidenceCMS
-                    </a> © {{ "now" | date("Y") }}.
-                    {{ 'all_rights_reserved' | trans }}. <br><br>
-                    Version {{ app_version }}
+        <!-- Main Content -->
+        <div class="col d-flex flex-column pt-4">
+
+            <main class="row overflow-auto">
+                <div class="col pb-4">
+                    <!-- Subheader -->
+                    {% block subheader %}
+                    {% endblock %}
+                    <!-- Error -->
+                    {{ include('common/_flash_messages.html.twig') }}
+                    <!-- Content -->
+                    {% block body %}{% endblock %}
                 </div>
-            </div>
-        </footer>
+            </main>
+
+            <footer class="row bg-light mt-auto">
+                <div class="col">
+                    <!-- Footer -->
+                    {{ include('layout/dash/partials/_footer.html.twig') }}
+                </div>
+            </footer>
+
+        </div>
 
     </div>
-    <!-- /.content-wrapper -->
 
 </div>
-<!-- /#wrapper -->
 
+<!-- Scripts -->
+{{ encore_entry_script_tags('js/app') }}
+{{ encore_entry_script_tags('js/layout') }}
+{% block javascripts %}{% endblock %}
 
 </body>
 </html>

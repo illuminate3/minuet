@@ -2,31 +2,19 @@
 
 declare(strict_types=1);
 
-/**
- * Created by PhpStorm.
- * User: Valery Maslov
- * Date: 01.11.2018
- * Time: 11:13.
- */
-
 namespace App\Form\Type;
 
 use App\Entity\Page;
-use App\Entity\Post;
-use Nicolassing\QuillBundle\Form\Type\QuillType;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use App\Utils\Slugger;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\LanguageType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-//use Symfony\Component\String\Slugger\SluggerInterface;
-use App\Utils\Slugger;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class PageType extends AbstractType
@@ -43,10 +31,6 @@ final class PageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-//            ->add('locale', LanguageType::class)
-//            ->add('locale', HiddenType::class, [
-//                'data' => 'bg',
-//            ])
             ->add('show_in_menu', CheckboxType::class, [
                 'label' => 'label.show_in_menu',
                 'attr' => [
@@ -95,12 +79,11 @@ final class PageType extends AbstractType
                     'class' => 'form-control',
                 ],
             ])
-//            ->add('locale', LanguageType::class)
-            ->add('content', TextareaType::class, [
+            ->add('content', CKEditorType::class, [
                 'label' => 'label.content',
                 'attr' => [
                     'placeholder' => 'label.content',
-                    'class' => 'form-control quill',
+                    'class' => 'form-control',
                     'rows' => '7',
                 ],
                 'required' => false,
@@ -108,35 +91,14 @@ final class PageType extends AbstractType
             // form events let you modify information or fields at different steps
             // of the form handling process.
             // See https://symfony.com/doc/current/form/events.html
-            ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
+            ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event): void {
                 /** @var Page */
                 $page = $event->getData();
-                if ( $page->getTitle() !== null ) {
-
-//                    $slug = $this->slugger->slugify($object->getTitle());
-//                    $page->setSlug($this->slugger->slug($page->getTitle())->lower());
+                if (null !== $page->getTitle()) {
                     $page->setSlug($this->slugger->slugify($page->getTitle()));
-
                 }
-//                $page->setLocale('bg');
             })
         ;
-//            ->add('add_contact_form', null, [
-//                'attr' => [
-//                    'class' => 'custom-control-input',
-//                ],
-//                'label' => 'label.add_contact_form',
-//                'label_attr' => [
-//                    'class' => 'custom-control-label',
-//                ],
-//            ])
-//            ->add('contact_email_address', null, [
-//                'attr' => [
-//                    'class' => 'form-control',
-//                    'placeholder' => 'placeholder.enter_email',
-//                ],
-//                'label' => 'label.contact_email_address',
-//            ]);
     }
 
     /**
@@ -147,9 +109,6 @@ final class PageType extends AbstractType
         $resolver->setDefaults([
             'csrf_protection' => true,
             'data_class' => Page::class,
-//            'constraints' => [
-//                new UniqueEntity(['fields' => ['title']]),
-//            ],
         ]);
     }
 }

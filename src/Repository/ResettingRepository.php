@@ -7,14 +7,26 @@ namespace App\Repository;
 use App\Entity\User;
 use App\Transformer\UserTransformer;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 
 final class ResettingRepository extends UserRepository
 {
     private $transformer;
 
-    public function __construct(ManagerRegistry $registry, UserTransformer $transformer)
-    {
-        parent::__construct($registry);
+    /**
+     * @var PaginatorInterface
+     */
+    private $paginator;
+
+    public function __construct(
+        ManagerRegistry $registry,
+        UserTransformer $transformer,
+        PaginatorInterface $paginator
+    ) {
+        parent::__construct(
+            $registry,
+            $paginator
+        );
         $this->transformer = $transformer;
     }
 

@@ -1,64 +1,36 @@
-<ul class="sidebar navbar-nav{% if app.request.cookies.get('sidebar-toggled') == 'true' %} toggled{% endif %}">
-    <li class="nav-item">
-        <a class="nav-link" href="{{ path('app_index') }}">
-            <i class="fas fa-home"></i>
-            <span>{{ 'properties'|trans }}</span>
-        </a>
-    </li>
+<!-- Sidebar -->
+<div class="flex-shrink-0">
 
-    <li class="nav-item dropdown no-arrow">
-        <a class="nav-link dropdown-toggle"
-           href="#locations"
-           id="citiesDropdown"
-           role="button"
-           data-toggle="dropdown"
-           data-bs-toggle="dropdown"
-           aria-haspopup="true"
-           aria-expanded="false">
-            {{ 'menu.catalog'|trans }}
-        </a>
-        <div class="dropdown-menu" aria-labelledby="citiesDropdown">
-            <a class="dropdown-item" href="{{ path('app_dash') }}">{{ 'cities'|trans }}</a>
-            <a class="dropdown-item" href="{{ path('app_index') }}">{{ 'districts'|trans }}</a>
-            <a class="dropdown-item" href="{{ path('app_account') }}">{{ 'neighborhoods'|trans }}</a>
-            <a class="dropdown-item" href="{{ path('auth_no_register') }}">{{ 'metro_stations'|trans }}</a>
-        </div>
-    </li>
+    <ul class="list-unstyled ps-0">
 
-    <li class="nav-item">
-        <a class="nav-link" href="{{ path('app_account') }}">
-            <i class="fas fa-gavel"></i>
-            <span>{{ 'deal_types'|trans }}</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ path('auth_request_verify_email') }}">
-            <i class="far fa-building"></i>
-            <span>{{ 'categories'|trans }}</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ path('auth_password_reset') }}">
-            <i class="far fa-file-alt"></i>
-            <span>{{ 'pages'|trans }}</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ path('auth_register') }}">
-            <i class="fas fa-users-cog"></i>
-            <span>{{ 'users'|trans }}</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ path('security_login') }}">
-            <i class="fas fa-bars"></i>
-            <span>{{ 'menu'|trans }}</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ path('security_logout') }}">
-            <i class="fas fa-cog"></i>
-            <span>{{ 'menu.settings'|trans }}</span>
-        </a>
-    </li>
-</ul>
+        <li class="mb-3">
+            <a href="{{ path('app_dash') }}" class="link-light d-inline-flex text-decoration-none rounded">
+                <i class="fa-solid fa-gauge"></i>
+                {{ 'menu.dash'|trans }}
+            </a>
+        </li>
+
+        <li class="mb-3">
+            <a href="{{ path('user_profile') }}" class="link-light d-inline-flex text-decoration-none rounded">
+                <i class="fa-regular fa-address-card"></i>
+                {{ 'menu.profile'|trans }}
+            </a>
+        </li>
+
+        <li class="mb-3">
+            <a href="{{ path('user_password_change') }}" class="link-light d-inline-flex text-decoration-none rounded">
+                <i class="fa-solid fa-lock"></i>
+                {{ 'menu.password_change'|trans }}
+            </a>
+        </li>
+
+        <li class="mb-3">
+            <a href="{{ path('security_logout') }}" class="link-light d-inline-flex text-decoration-none rounded">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                {{ 'menu.logout'|trans }}
+            </a>
+        </li>
+
+    </ul>
+
+</div>
