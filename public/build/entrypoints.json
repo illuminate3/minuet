@@ -31,11 +31,6 @@
       "css": [
         "http://localhost:8080/build/css/app.css"
       ]
-    },
-    "css/admin": {
-      "js": [
-        "http://localhost:8080/build/runtime.js"
-      ]
     }
   }
 }

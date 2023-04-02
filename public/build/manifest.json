@@ -4,7 +4,6 @@
   "build/js/menu-sorting.js": "http://localhost:8080/build/js/menu-sorting.js",
   "build/js/admin.js": "http://localhost:8080/build/js/admin.js",
   "build/css/app.css": "http://localhost:8080/build/css/app.css",
-  "build/css/admin.css": "http://localhost:8080/build/css/admin.css",
   "build/runtime.js": "http://localhost:8080/build/runtime.js",
   "build/images/marius.jpg": "http://localhost:8080/build/images/marius.cb18515e.jpg",
   "build/fonts/fa-solid-900.ttf": "http://localhost:8080/build/fonts/fa-solid-900.2877d54f.ttf",
