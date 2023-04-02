@@ -1,8 +1,8 @@
-![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Coderberg/ResidenceCMS/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Coderberg/ResidenceCMS/?branch=master) [![Testing with MySQL](https://github.com/Coderberg/ResidenceCMS/actions/workflows/mysql.yml/badge.svg)](https://github.com/Coderberg/ResidenceCMS/actions/workflows/mysql.yml) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Coderberg_ResidenceCMS&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=Coderberg_ResidenceCMS)
+![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Coderberg/minuet/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Coderberg/minuet/?branch=master) [![Testing with MySQL](https://github.com/Coderberg/minuet/actions/workflows/mysql.yml/badge.svg)](https://github.com/Coderberg/minuet/actions/workflows/mysql.yml) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Coderberg_minuet&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=Coderberg_minuet)
 
-ResidenceCMS is a fast and lightweight Property Management System on top of [Symfony 6][1].
+minuet is a fast and lightweight Property Management System on top of [Symfony 6][1].
 
-![GitHub](https://raw.githubusercontent.com/Coderberg/ResidenceCMS/master/docs/images/screenshot.png)
+![GitHub](https://raw.githubusercontent.com/Coderberg/minuet/master/docs/images/screenshot.png)
 
 ## Requirements
 
@@ -70,4 +70,4 @@ ResidenceCMS is a fast and lightweight Property Management System on top of [Sym
 [1]: https://symfony.com/
 [2]: https://symfony.com/doc/current/setup.html#technical-requirements
 [3]: https://getcomposer.org/doc/03-cli.md#create-project
-[4]: https://github.com/Coderberg/ResidenceCMS/blob/master/docs/docker.md
+[4]: https://github.com/Coderberg/minuet/blob/master/docs/docker.md
