@@ -1,73 +1,60 @@
-![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Coderberg/minuet/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Coderberg/minuet/?branch=master) [![Testing with MySQL](https://github.com/Coderberg/minuet/actions/workflows/mysql.yml/badge.svg)](https://github.com/Coderberg/minuet/actions/workflows/mysql.yml) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Coderberg_minuet&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=Coderberg_minuet)
+minuet is a [Symfony 6][1] Bootstap / Boiler Plate / Starter Project.
 
-minuet is a fast and lightweight Property Management System on top of [Symfony 6][1].
+## Descritpion
 
-![GitHub](https://raw.githubusercontent.com/Coderberg/minuet/master/docs/images/screenshot.png)
+Minuet is similar to EasyAdmin but not at the same time.
+
+Minuet is intended to be a starting point for your application by giving you:
+- An Admin! hey that's unique.
+- Translations out of the box. Currently only English but the code should be 99% covered outside of some exception handling.
+- Typical user experience with logins, email verification, and passwords.
+- A user front end dashboard. This is different! Intended for more of store setup.
+- Basic admin based menus.
+- A very basic CMS. I'm not trying to win any awards here!
+- Twig and CSS is hopefully a somewhat sane system. Maybe I went overboard with the _partials! lol
+
+I didn't like EasyAdmin because I haven't really ever been a fan of running functionality out of the vendor directory unless it's a library.
+If you like doing that, don't mind me. I wanted a simple enough base starter app that I can start dropping Controllers on with some twig
+and get to work. I don't want to be extending some vendor package. So, now you know why.
+
+So, with Minuet, you get what EasyAdmin offers (I haven't compared and didn't try to feature compete) but in an app format
+that you can you use where ever. I did start with code from [ResidenceCMS][5] and riped out what didn't make sense for an
+a base application, tweaked the twig and CSS to my liking (nothing wrong with the stuff from Coderberg) abd then started making changes
+to fit what I have been wanting in the[Symfony][1] world. Another shoot out should go to [Laravel Boilerplate][6] by rappasoft.
+Who sort of inspired me to do Minuet.
 
 ## Requirements
 
 - PHP 8.1;
-- PDO PHP Extension;
-- GD PHP extension
 - MySQL >= 5.7;
 - And the [usual Symfony application requirements][2].
 
 ## Installation
 
-1. Install Composer (see http://getcomposer.org/download)
+TODO
 
-2. Create new project via [Composer][3]
+## License
+MIT ... but most of you don't care anyways. Just don't sell it on code canyon or somewhere like that.
+That's just not cool! But hey, got a paying customer? Go for it! Enjoy the free stuff!
 
-   ```
-   $ composer create-project coderberg/residence-cms mywebsite.loc
-   ```
-3. Enter the newly created folder
+## ASK
 
-   ```
-   $ cd mywebsite.loc
-   ```
+I don't want money. Well, I do but I'm not going to ask for some coffee from a hugely famous coffee shop.
+IF you really do want to through some money pocket change, would you mind doing an animal shelter or other worthy service?
 
-4. After installing you should configure your web server's document / web root to be the ```public``` directory.
+I do want to ask you for your thoughts, ideas, and help though.
+- Fixed a bug?
+- Have an idea?
+- Can do a translation?
+- Can do a Vue conversion?
+Please try to give back.
 
-5. Create ```.env.local``` from ```.env``` file and fill in your database credentials
-
-    ```
-    DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/db_name
-    ```
-
-6. Run
-
-    ```
-    $ php bin/console app:install
-    ```
-
-7. Go to http://mywebsite.loc/admin and log in.
-
-   ```
-   login: admin
-   password: admin
-   ```
-
-8. To use feedback forms, configure MAILER_DSN in ```.env.local```
-
-## Tests
-
-1. Modify your DATABASE_URL config in ```.env.test.local```
-
-   ```
-   DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/db_name
-   ```
-
-2. Execute this command to run tests:
-
-   ```
-   php bin/phpunit
-   ```
-
-## Additional documentation
-- [How to run Residence CMS in Docker Containers][4]
+## Additional Shout Outs
+- This code base was based on [ResidenceCMS][5] by Coderberg. I have made lost of changes but Minuet really does
+owe Coderberg a Thank you!
+- [Laravel Boilerplate][6] by rappasoft - no code ideas taken but the concept has motivated me!
 
 [1]: https://symfony.com/
 [2]: https://symfony.com/doc/current/setup.html#technical-requirements
-[3]: https://getcomposer.org/doc/03-cli.md#create-project
-[4]: https://github.com/Coderberg/minuet/blob/master/docs/docker.md
+[5]: https://github.com/Coderberg/ResidenceCMS
+[6]: https://github.com/rappasoft/laravel-boilerplate
