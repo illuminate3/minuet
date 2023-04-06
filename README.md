@@ -84,14 +84,15 @@ That's just not cool! But hey, got a paying customer? Go for it! Enjoy the free 
 ## ASK
 
 I don't want money. Well, I do but I'm not going to ask for some coffee from a hugely famous coffee shop.
-IF you really do want to through some money pocket change, would you mind doing an animal shelter or other worthy service?
+IF you really do want to throw some pocket change at me, would you mind donating to an animal shelter or other worthy service?
 
 I do want to ask you for your thoughts, ideas, and help though.
 - Fixed a bug?
 - Have an idea?
 - Can do a translation?
 - Can do a Vue conversion?
-Please try to give back.
+
+Why not submit a PR? Leave a question, or leave an answer for someone eles!
 
 ## Additional Shout Outs
 - This code base was based on [ResidenceCMS][5] by Coderberg. I have made lost of changes but Minuet really does
