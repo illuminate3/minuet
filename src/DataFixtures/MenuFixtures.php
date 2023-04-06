@@ -26,10 +26,10 @@ final class MenuFixtures extends Fixture
     private function getMenuData(): array
     {
         return [
-            ['Homepage', '/', 'en'],
-            ['About Us', '/info/about-us', 'en'],
-            ['Contact', '/info/contact', 'en'],
-            ['Source Code', 'https://github.com/Coderberg/ResidenceCMS', 'en'],
+            ['Site', '/', 'en'],
+            ['Lorem', '/page/lorem', 'en'],
+            ['Ipsum', '/page/ipsum', 'en'],
+            ['Source Code', 'https://github.com/illuminate3/minuet', 'en'],
         ];
     }
 }

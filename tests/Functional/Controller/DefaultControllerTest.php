@@ -81,6 +81,6 @@ final class DefaultControllerTest extends WebTestCase
         yield ['/en/'];
         yield ['/en/info/about-us'];
         yield ['/en/info/contact'];
-        yield ['https://github.com/Coderberg/ResidenceCMS'];
+        yield ['https://github.com/illuminate3/minuet'];
     }
 }

@@ -25,12 +25,16 @@ final class AppFixtures extends Fixture
     {
         return [
             // $data = [$setting_name, $setting_value];
-            ['name', 'Minuet Site Name'],
-            ['title', 'Minuet Branding'],
-            ['meta_title', 'Minuet Site Title'],
-            ['meta_description', 'Minuet Site Description'],
+            ['site_name', 'Minuet'],
+            ['site_title', 'Page Title'],
+            ['meta_title', 'Meta Title'],
+            ['meta_description', 'Meta Description'],
+            ['meta_keywords', 'Meta Keywords'],
+            ['meta_author', 'Meta Author'],
+            ['meta_revisit', '7'],
+            ['site_branding', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.'],
             ['analytics_code', ''],
-            ['allow_register', '0'],
+            ['allow_register', '1'],
         ];
     }
 }

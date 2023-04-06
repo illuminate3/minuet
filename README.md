@@ -31,7 +31,51 @@ Who sort of inspired me to do Minuet.
 
 ## Installation
 
-TODO
+1. Copy ```.env``` to make ```.env.local```
+2. Edit database credentials
+
+    ```
+    DATABASE_URL="mysql://USER:PASSWORD@127.0.0.1:3306/minuet?serverVersion=5.7"
+    ```
+    Probably change: ```USER:PASSWORD``` to ```root:root``` don't worry!
+    It was just a really good guess!
+    Don't forget to change ```minuet``` !
+
+3. Install
+
+    a. do the composer stuff
+    ```
+    composer install
+    ```
+
+    b. then node
+    ```
+     yarn install
+    ```
+    ```
+     yarn dev-server
+    ```
+
+    c. fire up the actual app
+    ```
+    php bin/console app:install
+    ```
+    No, I didn't use the ```$``` to show it's a terminal command.
+    It's a pain to delete that dang dollar sign.
+
+
+4. Log in
+
+    minuet.test/admin
+    ```
+    login: admin@admin.com
+    password: admin
+    ```
+    minuet.test
+    ```
+    login: user@user.com
+    password: user
+    ```
 
 ## License
 MIT ... but most of you don't care anyways. Just don't sell it on code canyon or somewhere like that.

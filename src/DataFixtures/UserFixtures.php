@@ -20,7 +20,6 @@ final class UserFixtures extends Fixture
     {
         foreach ($this->getUserData() as [$fullName, $username, $phone, $email, $roles]) {
             $user = new User();
-            $user->setUsername($username);
             $user->setPassword($username);
             $user->setEmail($email);
             $user->setRoles($roles);
@@ -40,8 +39,8 @@ final class UserFixtures extends Fixture
     private function getUserData(): array
     {
         return [
-            ['John Smith', 'admin', '0(0)99766899', 'admin@admin.com', ['ROLE_ADMIN', 'ROLE_USER']],
-            ['Rhonda Jordan', 'user', '0(0)99766899', 'user@user.com', ['ROLE_USER']],
+            ['Magna Aliqua', 'admin', '0(0)99766899', 'admin@admin.com', ['ROLE_ADMIN', 'ROLE_USER']],
+            ['Cillum Dolore', 'user', '0(0)99766899', 'user@user.com', ['ROLE_USER']],
         ];
     }
 }
