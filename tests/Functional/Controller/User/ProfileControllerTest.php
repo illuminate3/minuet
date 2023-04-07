@@ -13,7 +13,8 @@ final class ProfileControllerTest extends WebTestCase
     use WebTestHelper;
 
     private const TEST_DATA = [
-        'name' => 'Kristina R Maxwell',
+        'first_name' => 'Kristina',
+        'last_name' => 'Maxwell',
         'phone' => '404-518-8373',
     ];
 
@@ -26,7 +27,8 @@ final class ProfileControllerTest extends WebTestCase
         $this->assertSelectorTextContains('h3', 'My profile');
 
         $form = $crawler->selectButton('Save changes')->form([
-            'profile[full_name]' => self::TEST_DATA['name'],
+            'profile[first_name]' => self::TEST_DATA['name'],
+            'profile[last_name]' => self::TEST_DATA['name'],
             'profile[phone]' => self::TEST_DATA['phone'],
         ]);
         $client->submit($form);
@@ -41,7 +43,8 @@ final class ProfileControllerTest extends WebTestCase
         $this->assertSame($profile->getPhone(), self::TEST_DATA['phone']);
 
         $form = $crawler->selectButton('Save changes')->form([
-            'profile[full_name]' => 'Rhonda Jordan',
+            'profile[first_name]' => 'Rhonda',
+            'profile[last_name]' => 'Jordan',
             'profile[phone]' => '0(0)99766899',
         ]);
         $client->submit($form);

@@ -19,9 +19,26 @@
                 <source>text.up</source>
                 <target>Up</target>
             </trans-unit>
+            <trans-unit id="text.select">
+                <source>text.select</source>
+                <target>--- Select ---</target>
+            </trans-unit>
             <trans-unit id="text.all_rights_reserved">
                 <source>text.all_rights_reserved</source>
                 <target>All rights reserved.</target>
+            </trans-unit>
+
+            <trans-unit id="text.account">
+                <source>text.account</source>
+                <target>Account</target>
+            </trans-unit>
+            <trans-unit id="text.account_information">
+                <source>text.account_information</source>
+                <target>Account Information</target>
+            </trans-unit>
+            <trans-unit id="text.billing_address">
+                <source>text.billing_address</source>
+                <target>Billing Address</target>
             </trans-unit>
             <trans-unit id="text.copyrights">
                 <source>text.copyrights</source>
@@ -122,6 +139,73 @@
                 <target>View</target>
             </trans-unit>
 
+            <trans-unit id="label.first_name">
+                <source>label.first_name</source>
+                <target>First Name</target>
+            </trans-unit>
+            <trans-unit id="label.last_name">
+                <source>label.last_name</source>
+                <target>Last Name</target>
+            </trans-unit>
+
+            <trans-unit id="label.address_street">
+                <source>label.address_street</source>
+                <target>Street Address</target>
+            </trans-unit>
+            <trans-unit id="label.address_unit">
+                <source>label.address_unit</source>
+                <target>(Apartment, Unit, Suite)</target>
+            </trans-unit>
+            <trans-unit id="label.city">
+                <source>label.city</source>
+                <target>City</target>
+            </trans-unit>
+            <trans-unit id="label.post_code">
+                <source>label.post_code</source>
+                <target>Zip Code</target>
+            </trans-unit>
+            <trans-unit id="label.state">
+                <source>label.state</source>
+                <target>State</target>
+            </trans-unit>
+            <trans-unit id="label.display_email">
+                <source>label.display_email</source>
+                <target>Contact Email</target>
+            </trans-unit>
+
+            <trans-unit id="label.website">
+                <source>label.website</source>
+                <target>Website URL</target>
+            </trans-unit>
+            <trans-unit id="label.facebook">
+                <source>label.facebook</source>
+                <target>FaceBook</target>
+            </trans-unit>
+            <trans-unit id="label.twitter">
+                <source>label.twitter</source>
+                <target>Twitter</target>
+            </trans-unit>
+            <trans-unit id="label.linkedin">
+                <source>label.linkedin</source>
+                <target>LinkedIn</target>
+            </trans-unit>
+            <trans-unit id="label.instagram">
+                <source>label.instagram</source>
+                <target>Instagram</target>
+            </trans-unit>
+            <trans-unit id="label.pinterest">
+                <source>label.pinterest</source>
+                <target>Pinterest</target>
+            </trans-unit>
+            <trans-unit id="label.youtube">
+                <source>label.youtube</source>
+                <target>youTube</target>
+            </trans-unit>
+            <trans-unit id="label.banner">
+                <source>label.banner</source>
+                <target>Banner Image</target>
+            </trans-unit>
+
             <trans-unit id="label.agree">
                 <source>label.agree</source>
                 <target>I agree to the terms and conditions.</target>
@@ -145,10 +229,6 @@
             <trans-unit id="label.email_verified">
                 <source>label.email_verified</source>
                 <target>Email Verified</target>
-            </trans-unit>
-            <trans-unit id="label.full_name">
-                <source>label.full_name</source>
-                <target>Full Name</target>
             </trans-unit>
             <trans-unit id="label.isSlug">
                 <source>label.isSlug</source>

@@ -43,6 +43,7 @@ final class ProfileController extends BaseController
             'site' => $this->site($request),
             'error' => $error,
             'form' => $form,
+            'profile' => $profile,
         ]);
     }
 

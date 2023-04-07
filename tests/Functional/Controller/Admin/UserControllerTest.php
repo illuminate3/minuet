@@ -22,7 +22,8 @@ final class UserControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/en/admin/user/new');
 
         $form = $crawler->selectButton('Create user')->form([
-            'user[profile][full_name]' => 'test',
+            'user[profile][first_name]' => 'test',
+            'user[profile][last_name]' => 'test',
             'user[username]' => 'test',
             'user[profile][phone]' => 'test',
             'user[email]' => 'test@test.com',

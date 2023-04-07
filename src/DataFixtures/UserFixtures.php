@@ -18,14 +18,15 @@ final class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        foreach ($this->getUserData() as [$fullName, $username, $phone, $email, $roles]) {
+        foreach ($this->getUserData() as [$firstName, $lastName, $username, $phone, $email, $roles]) {
             $user = new User();
             $user->setPassword($username);
             $user->setEmail($email);
             $user->setRoles($roles);
             $user->setProfile(
                 (new Profile())
-                    ->setFullName($fullName)
+                    ->setFirstName($firstName)
+                    ->setLastName($lastName)
                     ->setPhone($phone)
             );
             $user->setEmailVerifiedAt(new \DateTime('now'));
@@ -39,8 +40,8 @@ final class UserFixtures extends Fixture
     private function getUserData(): array
     {
         return [
-            ['Magna Aliqua', 'admin', '0(0)99766899', 'admin@admin.com', ['ROLE_ADMIN', 'ROLE_USER']],
-            ['Cillum Dolore', 'user', '0(0)99766899', 'user@user.com', ['ROLE_USER']],
+            ['Magna', 'Aliqua', 'admin', '(123)555-1234', 'admin@admin.com', ['ROLE_ADMIN', 'ROLE_USER']],
+            ['Cillum', 'Dolore', 'user', '(456)555-1212', 'user@user.com', ['ROLE_USER']],
         ];
     }
 }
