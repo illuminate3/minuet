@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Entity\Traits\EntityIdTrait;
+use App\Repository\PageRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -13,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Table]
 #[UniqueEntity(['title'])]
 #[ORM\UniqueConstraint(name: 'slug_title_unique_key', columns: ['slug', 'title'])]
-#[ORM\Entity(repositoryClass: 'App\Repository\PageRepository')]
+#[ORM\Entity(repositoryClass: PageRepository::class)]
 class Page
 {
 

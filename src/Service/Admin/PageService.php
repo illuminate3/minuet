@@ -81,7 +81,7 @@ final class PageService extends AbstractService
         $this->addFlash('success', 'message.deleted');
 
         // Delete a menu item
-        $menu = $this->em->getRepository(Menu::class)->findOneBy(['url' => '/info/'.($page->getSlug() ?? '')]);
+        $menu = $this->em->getRepository(Menu::class)->findOneBy(['url' => '/page/'.($page->getSlug() ?? '')]);
         if ($menu) {
             $this->remove($menu);
         }

@@ -210,6 +210,10 @@
                 <source>label.agree</source>
                 <target>I agree to the terms and conditions.</target>
             </trans-unit>
+            <trans-unit id="label.category">
+                <source>label.category</source>
+                <target>Category</target>
+            </trans-unit>
             <trans-unit id="label.content">
                 <source>label.content</source>
                 <target>Content</target>
@@ -273,6 +277,10 @@
             <trans-unit id="label.phone">
                 <source>label.phone</source>
                 <target>Phone</target>
+            </trans-unit>
+            <trans-unit id="label.price">
+                <source>label.price</source>
+                <target>Price</target>
             </trans-unit>
             <trans-unit id="label.publish">
                 <source>label.publish</source>
@@ -352,6 +360,10 @@
                 <source>menu.account</source>
                 <target>Account</target>
             </trans-unit>
+            <trans-unit id="menu.categories">
+                <source>menu.categories</source>
+                <target>Categories</target>
+            </trans-unit>
             <trans-unit id="menu.dash">
                 <source>menu.dash</source>
                 <target>Dashboard</target>
@@ -379,6 +391,10 @@
             <trans-unit id="menu.menu">
                 <source>menu.menu</source>
                 <target>Menu</target>
+            </trans-unit>
+            <trans-unit id="menu.products">
+                <source>menu.products</source>
+                <target>Products</target>
             </trans-unit>
             <trans-unit id="menu.profile">
                 <source>menu.profile</source>
@@ -417,6 +433,10 @@
                 <source>table.action</source>
                 <target>Action</target>
             </trans-unit>
+            <trans-unit id="table.category">
+                <source>table.category</source>
+                <target>Category</target>
+            </trans-unit>
             <trans-unit id="table.description">
                 <source>table.description</source>
                 <target>Description</target>
@@ -433,7 +453,19 @@
                 <source>table.move</source>
                 <target>Move</target>
             </trans-unit>
-            <trans-unit id="table.slug">
+             <trans-unit id="table.order">
+                  <source>table.order</source>
+                  <target>Order</target>
+              </trans-unit>
+            <trans-unit id="table.parent">
+                 <source>table.parent</source>
+                 <target>Parent</target>
+             </trans-unit>
+            <trans-unit id="table.price">
+                 <source>table.price</source>
+                 <target>Price</target>
+             </trans-unit>
+              <trans-unit id="table.slug">
                 <source>table.slug</source>
                 <target>Slug</target>
             </trans-unit>
@@ -450,6 +482,10 @@
                 <target>Username</target>
             </trans-unit>
 
+            <trans-unit id="title.categories">
+                <source>title.categories</source>
+                <target>Categories</target>
+            </trans-unit>
             <trans-unit id="title.change_password">
                 <source>title.change_password</source>
                 <target>Change Password</target>
@@ -485,6 +521,10 @@
             <trans-unit id="title.password_reset_emailed">
                 <source>title.password_reset_emailed</source>
                 <target>Reset Password</target>
+            </trans-unit>
+            <trans-unit id="title.products">
+                <source>title.products</source>
+                <target>Products</target>
             </trans-unit>
             <trans-unit id="title.profile">
                 <source>title.profile</source>
@@ -531,6 +571,10 @@
             <trans-unit id="message.deleted">
                 <source>message.deleted</source>
                 <target>Deleted successfully</target>
+            </trans-unit>
+            <trans-unit id="message.delete_error">
+                <source>message.delete_error</source>
+                <target>Delete Error</target>
             </trans-unit>
             <trans-unit id="message.updated">
                 <source>message.updated</source>
@@ -582,6 +626,10 @@
             <trans-unit id="message.not_found">
                 <source>message.not_found</source>
                 <target>Not Found</target>
+            </trans-unit>
+            <trans-unit id="message.invalid_token">
+                <source>message.invalid_token</source>
+                <target>Invalid Token</target>
             </trans-unit>
             <trans-unit id="message.password_has_been_reset">
                 <source>message.password_has_been_reset</source>

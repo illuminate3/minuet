@@ -25,7 +25,7 @@ class Profile
 
     #[ORM\OneToOne(inversedBy: 'profile', targetEntity: User::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $user;
+    private $user;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $address_street = null;

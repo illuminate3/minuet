@@ -15,6 +15,12 @@ $(document).ready(() => {
             if ( segments[2] === 'page' ) {
                 $('.page').attr('aria-expanded', 'true');
             }
+            if ( segments[2] === 'product' ) {
+                $('.product').attr('aria-expanded', 'true');
+            }
+            if ( segments[2] === 'category' ) {
+                $('.category').attr('aria-expanded', 'true');
+            }
         }
     });
 });

@@ -22,25 +22,24 @@
                 </thead>
                 <tbody>
 
-                {% for page in pages %}
+                {% for item in pages %}
                     <tr>
                         <td>
-                            {{ page.title }}
+                            {{ item.title }}
                         </td>
                         <td>
-                            {{ page.description }}
+                            {{ item.description }}
                        </td>
                         <td>
-                            {{ page.slug }}
+                            {{ item.slug }}
                         </td>
                         <td>
                             {{ include(
-                                'admin/_partials/_action_form.html.twig',
+                                'admin/_partials/_action_group_form.html.twig',
                                 {
-                                    id: page.id,
+                                    id: item.id,
                                     delete_url: action_delete_url,
-                                    edit_url: action_edit_url,
-                                    cancel_url: cancel_url
+                                    edit_url: action_edit_url
                                 },
                                 with_context = false
                             ) }}

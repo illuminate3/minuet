@@ -10,6 +10,14 @@
                 <source>validate.agree.terms</source>
                 <target>You should agree to our terms.</target>
             </trans-unit>
+            <trans-unit id="validate.not.blank">
+                <source>validate.not.blank</source>
+                <target>Can not be blank.</target>
+            </trans-unit>
+            <trans-unit id="validate.not.negative">
+                <source>validate.not.negative</source>
+                <target>Can not be negative.</target>
+            </trans-unit>
             <trans-unit id="validate.user.not.found">
                 <source>validate.user.not.found</source>
                 <target>We can't find a user with that e-mail address.</target>

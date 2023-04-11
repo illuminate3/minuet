@@ -20,7 +20,7 @@ final class MenuController extends BaseController
         Request $request,
         MenuRepository $repository
     ): Response {
-        $menu = $repository->findAll();
+        $menus = $repository->findAll();
 
         return $this->render('admin/menu/index.html.twig', [
             'title' => 'title.menu',
@@ -29,7 +29,7 @@ final class MenuController extends BaseController
             'new_url' => 'admin_menu_new',
             'site' => $this->site($request),
 //            'menu' => $repository->findItems(),
-            'menu' => $menu,
+            'menus' => $menus,
         ]);
     }
 

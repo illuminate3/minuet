@@ -90,7 +90,7 @@ final class PageController extends BaseController
     /**
      * Deletes a Page entity.
      */
-    #[Route(path: '/page/{id<\d+>}/delete', name: 'admin_page_delete', methods: ['POST'])]
+    #[Route(path: '/admin/page/{id<\d+>}/delete', name: 'admin_page_delete', methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function delete(
         Request $request,
@@ -104,4 +104,5 @@ final class PageController extends BaseController
 
         return $this->redirectToRoute('admin_page');
     }
+
 }

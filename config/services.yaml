@@ -10,6 +10,7 @@ parameters:
 #    app.stripe.publishable_api_key: '%env(resolve:STRIPE_PUBLISHABLE_API_KEY)%'
 #    app.stripe.secret_api_key: '%env(resolve:STRIPE_SECRET_API_KEY)%'
     images_directory: '%kernel.project_dir%/public/uploads/images'
+#    app.jwtsecret: '%env(JWT_SECRET)%'
 
 services:
     # default configuration for services in *this* file
