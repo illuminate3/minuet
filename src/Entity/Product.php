@@ -22,10 +22,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
 {
-    use CreatedAtTrait;
-
+//    use CreatedAtTrait;
     use SlugTrait;
-
     use EntityIdTrait;
 
 //    #[ORM\Column(type: 'string', length: 255)]
@@ -62,13 +60,13 @@ class Product
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Image::class, orphanRemoval: true, cascade: ['persist'])]
     private $image;
 
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: OrderDetails::class)]
-    private $ordersDetail;
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: OrderDetail::class)]
+    private $orderDetail;
 
     public function __construct()
     {
         $this->image = new ArrayCollection();
-        $this->ordersDetail = new ArrayCollection();
+        $this->orderDetail = new ArrayCollection();
         $this->created_at = new \DateTimeImmutable();
     }
 
@@ -153,29 +151,29 @@ class Product
     }
 
     /**
-     * @return Collection|OrderDetails[]
+     * @return Collection|OrderDetail[]
      */
-    public function getOrderDetails(): Collection
+    public function getOrderDetail(): Collection
     {
-        return $this->ordersDetail;
+        return $this->orderDetail;
     }
 
-    public function addOrdersDetail(OrderDetails $ordersDetail): self
+    public function addOrdersDetail(OrderDetail $orderDetail): self
     {
-        if (!$this->ordersDetail->contains($ordersDetail)) {
-            $this->ordersDetail[] = $ordersDetail;
-            $ordersDetail->setProduct($this);
+        if (!$this->orderDetail->contains($orderDetail)) {
+            $this->orderDetail[] = $orderDetail;
+            $orderDetail->setProduct($this);
         }
 
         return $this;
     }
 
-    public function removeOrdersDetail(OrderDetails $ordersDetail): self
+    public function removeOrdersDetail(OrderDetail $orderDetail): self
     {
-        if ($this->ordersDetail->removeElement($ordersDetail)) {
+        if ($this->orderDetail->removeElement($orderDetail)) {
             // set the owning side to null (unless already changed)
-            if ($ordersDetail->getProduct() === $this) {
-                $ordersDetail->setProduct(null);
+            if ($orderDetail->getProduct() === $this) {
+                $orderDetail->setProduct(null);
             }
         }
 

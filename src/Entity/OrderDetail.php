@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Repository\OrderDetailsRepository;
+use App\Repository\OrderDetailRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: OrderDetailsRepository::class)]
-class OrderDetails
+#[ORM\Entity(repositoryClass: OrderDetailRepository::class)]
+class OrderDetail
 {
     #[ORM\Column(type: 'integer')]
     private $quantity;
@@ -17,12 +17,12 @@ class OrderDetails
     private $price;
 
     #[ORM\Id]
-    #[ORM\ManyToOne(targetEntity: Order::class, inversedBy: 'orderDetails')]
+    #[ORM\ManyToOne(targetEntity: Order::class, inversedBy: 'orderDetail')]
     #[ORM\JoinColumn(nullable: false)]
     private $order;
 
     #[ORM\Id]
-    #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: 'orderDetails')]
+    #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: 'orderDetail')]
     #[ORM\JoinColumn(nullable: false)]
     private $product;
 

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Entity;
 use App\Entity\Trait\CreatedAtTrait;
-use App\Repository\OrdersRepository;
+use App\Repository\OrderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: OrdersRepository::class)]
+#[ORM\Entity(repositoryClass: OrderRepository::class)]
 class Order
 {
     use CreatedAtTrait;
@@ -22,19 +22,19 @@ class Order
     #[ORM\Column(type: 'string', length: 20, unique: true)]
     private $reference;
 
-//    #[ORM\ManyToOne(targetEntity: Coupons::class, inversedBy: 'orders')]
+//    #[ORM\ManyToOne(targetEntity: Coupons::class, inversedBy: 'order')]
 //    private $coupons;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'orders')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'order')]
     #[ORM\JoinColumn(nullable: false)]
-    private $users;
+    private $user;
 
-    #[ORM\OneToMany(mappedBy: 'orders', targetEntity: OrderDetails::class, orphanRemoval: true)]
-    private $ordersDetails;
+    #[ORM\OneToMany(mappedBy: 'order', targetEntity: OrderDetail::class, orphanRemoval: true)]
+    private $orderDetail;
 
     public function __construct()
     {
-        $this->ordersDetails = new ArrayCollection();
+        $this->orderDetail = new ArrayCollection();
         $this->created_at = new \DateTimeImmutable();
     }
 
@@ -57,40 +57,40 @@ class Order
 
     public function getUser(): ?User
     {
-        return $this->users;
+        return $this->user;
     }
 
-    public function setUser(?User $users): self
+    public function setUser(?User $user): self
     {
-        $this->users = $users;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * @return Collection|OrderDetails[]
+     * @return Collection|OrderDetail[]
      */
-    public function getOrderDetails(): Collection
+    public function getOrderDetail(): Collection
     {
-        return $this->ordersDetails;
+        return $this->orderDetail;
     }
 
-    public function addOrdersDetail(OrderDetails $ordersDetail): self
+    public function addOrderDetail(OrderDetail $orderDetail): self
     {
-        if (!$this->ordersDetails->contains($ordersDetail)) {
-            $this->ordersDetails[] = $ordersDetail;
-            $ordersDetail->setOrder($this);
+        if (!$this->orderDetail->contains($orderDetail)) {
+            $this->orderDetail[] = $orderDetail;
+            $orderDetail->setOrder($this);
         }
 
         return $this;
     }
 
-    public function removeOrdersDetail(OrderDetails $ordersDetail): self
+    public function removeOrderDetail(OrderDetail $orderDetail): self
     {
-        if ($this->ordersDetails->removeElement($ordersDetail)) {
+        if ($this->orderDetail->removeElement($orderDetail)) {
             // set the owning side to null (unless already changed)
-            if ($ordersDetail->getOrder() === $this) {
-                $ordersDetail->setOrder(null);
+            if ($orderDetail->getOrder() === $this) {
+                $orderDetail->setOrder(null);
             }
         }
 

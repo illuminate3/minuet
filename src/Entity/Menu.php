@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Entity\Trait\CreatedAtTrait;
 use App\Entity\Traits\EntityIdTrait;
 use App\Repository\MenuRepository;
 use Doctrine\DBAL\Types\Types;
@@ -19,7 +20,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 //#[UniqueEntity(['url', 'locale'])]
 class Menu
 {
+//    use CreatedAtTrait;
     use EntityIdTrait;
+
 
     #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $title;

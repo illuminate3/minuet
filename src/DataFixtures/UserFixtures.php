@@ -18,9 +18,9 @@ final class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        foreach ($this->getUserData() as [$firstName, $lastName, $username, $phone, $email, $roles]) {
+        foreach ($this->getUserData() as [$firstName, $lastName, $password, $verfied, $phone, $email, $roles]) {
             $user = new User();
-            $user->setPassword($username);
+            $user->setPassword($password);
             $user->setEmail($email);
             $user->setRoles($roles);
             $user->setProfile(
@@ -30,9 +30,10 @@ final class UserFixtures extends Fixture
                     ->setPhone($phone)
             );
             $user->setEmailVerifiedAt(new \DateTime('now'));
+            $user->setIsVerified($verfied);
             $user = $this->transformer->transform($user);
             $manager->persist($user);
-            $this->addReference($username, $user);
+            $this->addReference($lastName, $user);
         }
         $manager->flush();
     }
@@ -40,8 +41,11 @@ final class UserFixtures extends Fixture
     private function getUserData(): array
     {
         return [
-            ['Magna', 'Aliqua', 'admin', '(123)555-1234', 'admin@admin.com', ['ROLE_ADMIN', 'ROLE_USER']],
-            ['Cillum', 'Dolore', 'user', '(456)555-1212', 'user@user.com', ['ROLE_USER']],
+            ['Magna', 'Aliqua', 'admin', true, '(123)555-1234', 'admin@admin.com', ['ROLE_ADMIN', 'ROLE_USER']],
+            ['Cillum', 'Dolore', 'user', true, '(456)555-1212', 'user@user.com', ['ROLE_USER']],
+            ['Test1', 'User1', 'test', true, '(456)555-1212', 'test1@test.com', ['ROLE_USER']],
+            ['Test2', 'User2', 'test', true, '(456)555-1212', 'test2@test.com', ['ROLE_USER']],
+            ['Test3', 'User3', 'test', false, '(456)555-1212', 'test3@test.com', ['ROLE_USER']],
         ];
     }
 }

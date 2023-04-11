@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Entity\Trait\CreatedAtTrait;
+use App\Entity\Traits\EntityIdTrait;
 use App\Repository\AccountRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -13,26 +14,26 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: AccountRepository::class)]
 class Account
 {
-    use CreatedAtTrait;
+//    use CreatedAtTrait;
+    use EntityIdTrait;
 
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private $id;
-
-    #[ORM\Column(type: 'string', length: 20, unique: true)]
-    private $reference;
+    #[ORM\Column(type: 'string', length: 100, unique: true)]
+    private $name;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'account')]
     #[ORM\JoinColumn(nullable: false)]
-    private $users;
+    private $user;
 
     #[ORM\OneToMany(mappedBy: 'account', targetEntity: AccountListing::class, orphanRemoval: true)]
     private $accountListing;
 
+    #[ORM\OneToMany(mappedBy: 'account', targetEntity: AccountUser::class, orphanRemoval: true)]
+    private $accountUser;
+
     public function __construct()
     {
         $this->accountListing = new ArrayCollection();
+        $this->accountUser = new ArrayCollection();
         $this->created_at = new \DateTimeImmutable();
     }
 
@@ -41,26 +42,26 @@ class Account
         return $this->id;
     }
 
-    public function getReference(): ?string
+    public function getName(): ?string
     {
-        return $this->reference;
+        return $this->name;
     }
 
-    public function setReference(string $reference): self
+    public function setName(string $name): self
     {
-        $this->reference = $reference;
+        $this->name = $name;
 
         return $this;
     }
 
     public function getUser(): ?User
     {
-        return $this->users;
+        return $this->user;
     }
 
-    public function setUser(?User $users): self
+    public function setUser(?User $user): self
     {
-        $this->users = $users;
+        $this->user = $user;
 
         return $this;
     }
@@ -73,22 +74,53 @@ class Account
         return $this->accountListing;
     }
 
-    public function addAccountDetail(AccountListing $accountDetail): self
+    public function addAccountListing(AccountListing $accountListing): self
     {
-        if (!$this->accountListing->contains($accountDetail)) {
-            $this->accountListing[] = $accountDetail;
-            $accountDetail->setAccount($this);
+        if (!$this->accountListing->contains($accountListing)) {
+            $this->accountListing[] = $accountListing;
+            $accountListing->setAccount($this);
         }
 
         return $this;
     }
 
-    public function removeAccountDetail(AccountListing $accountDetail): self
+    public function removeAccountListing(AccountListing $accountListing): self
     {
-        if ($this->accountListing->removeElement($accountDetail)) {
+        if ($this->accountListing->removeElement($accountListing)) {
             // set the owning side to null (unless already changed)
-            if ($accountDetail->getAccount() === $this) {
-                $accountDetail->setAccount(null);
+            if ($accountListing->getAccount() === $this) {
+                $accountListing->setAccount(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * @return Collection|AccountUser[]
+     */
+    public function getAccountUser(): Collection
+    {
+        return $this->accountUser;
+    }
+
+    public function addAccountUser(AccountUser $accountUser): self
+    {
+        if (!$this->accountUser->contains($accountUser)) {
+            $this->accountUser[] = $accountUser;
+            $accountUser->setAccount($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAccountUser(AccountUser $accountUser): self
+    {
+        if ($this->accountUser->removeElement($accountUser)) {
+            // set the owning side to null (unless already changed)
+            if ($accountUser->getAccount() === $this) {
+                $accountUser->setAccount(null);
             }
         }
 

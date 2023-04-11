@@ -16,15 +16,15 @@ class ImageFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Faker\Factory::create('en_US');
 
-        for ($img = 1; $img <= 20; ++$img) {
-            $image = new Image();
-            $image->setName($faker->image(null, 640, 480));
-            $product = $this->getReference('prod-'.random_int(1, 10));
-            $image->setProduct($product);
-            $manager->persist($image);
-        }
-
-        $manager->flush();
+//        for ($img = 1; $img <= 20; ++$img) {
+//            $image = new Image();
+//            $image->setName($faker->image(null, 640, 480));
+//            $product = $this->getReference('prod-'.random_int(1, 10));
+//            $image->setProduct($product);
+//            $manager->persist($image);
+//        }
+//
+//        $manager->flush();
     }
 
     public function getDependencies(): array

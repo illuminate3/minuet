@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Entity\Trait\CreatedAtTrait;
 use App\Entity\Traits\EntityIdTrait;
 use App\Repository\ProfileRepository;
 use Doctrine\DBAL\Types\Types;
@@ -12,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ProfileRepository::class)]
 class Profile
 {
+//    use CreatedAtTrait;
     use EntityIdTrait;
 
     #[ORM\Column(length: 40, nullable: true)]

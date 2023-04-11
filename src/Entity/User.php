@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Entity\Trait\CreatedAtTrait;
 use App\Entity\Traits\EntityIdTrait;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -20,16 +21,18 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[UniqueEntity('email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+//    use CreatedAtTrait;
     use EntityIdTrait;
+
     /**
      * Requests older than this many seconds will be considered expired.
      */
     public const RETRY_TTL = 3600;
+
     /**
      * Maximum time that the confirmation token will be valid.
      */
     public const TOKEN_TTL = 43200;
-
 
     #[ORM\Column(type: Types::STRING, unique: true)]
     #[Assert\NotBlank]
@@ -44,9 +47,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::JSON)]
     private array $roles = [];
-
-//    #[ORM\OneToMany(mappedBy: 'author', targetEntity: 'App\Entity\Property')]
-//    private $properties;
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private $confirmation_token;
@@ -235,6 +235,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
         return $this;
     }
 

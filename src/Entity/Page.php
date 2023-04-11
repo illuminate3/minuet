@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Entity\Trait\CreatedAtTrait;
 use App\Entity\Traits\EntityIdTrait;
 use App\Repository\PageRepository;
 use Doctrine\DBAL\Types\Types;
@@ -18,6 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Page
 {
 
+//    use CreatedAtTrait;
     use EntityIdTrait;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
