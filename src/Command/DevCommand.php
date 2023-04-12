@@ -52,6 +52,10 @@ final class DevCommand extends Command
                 'command' => 'doctrine:fixtures:load',
                 'arguments' => [],
             ],
+            [
+                'command' => 'app:load-accounts',
+                'arguments' => [],
+            ],
         ];
     }
 }
