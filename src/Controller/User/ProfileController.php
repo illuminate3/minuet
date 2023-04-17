@@ -16,7 +16,24 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 final class ProfileController extends BaseController
 {
     #[Route(path: '/user/profile', name: 'user_profile')]
-    public function profile(
+    public function index(
+        Request $request,
+    ): Response {
+
+        /** @var User $user */
+        $user = $this->getUser();
+        $profile = $user->getProfile();
+
+        return $this->render('user/profile/index.html.twig', [
+            'title' => 'title.profile',
+            'action_edit_url' => 'user_profile_edit',
+            'site' => $this->site($request),
+            'profile' => $profile,
+        ]);
+    }
+
+    #[Route(path: '/user/profile/edit', name: 'user_profile_edit', methods: ['GET', 'POST'])]
+    public function edit(
         Request $request,
         EntityManagerInterface $entityManager,
         AuthenticationUtils $helper,
@@ -38,8 +55,9 @@ final class ProfileController extends BaseController
             $this->addFlash('success', 'message.updated');
         }
 
-        return $this->render('user/profile/profile.html.twig', [
+        return $this->render('user/profile/edit.html.twig', [
             'title' => 'title.profile',
+            'action_cancel_url' => 'user_profile',
             'site' => $this->site($request),
             'error' => $error,
             'form' => $form,

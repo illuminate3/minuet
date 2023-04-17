@@ -86,6 +86,10 @@
                 <source>action.change_password</source>
                 <target>Change Password</target>
             </trans-unit>
+            <trans-unit id="action.change_plane">
+                <source>action.change_plane</source>
+                <target>Change Plan</target>
+            </trans-unit>
             <trans-unit id="action.continue">
                 <source>action.continue</source>
                 <target>Continue ?</target>
@@ -210,6 +214,10 @@
                 <source>label.agree</source>
                 <target>I agree to the terms and conditions.</target>
             </trans-unit>
+            <trans-unit id="label.availability">
+                <source>label.availability</source>
+                <target>Availability</target>
+            </trans-unit>
             <trans-unit id="label.category">
                 <source>label.category</source>
                 <target>Category</target>
@@ -278,6 +286,10 @@
                 <source>label.phone</source>
                 <target>Phone</target>
             </trans-unit>
+            <trans-unit id="label.plan">
+                <source>label.plan</source>
+                <target>Plan</target>
+            </trans-unit>
             <trans-unit id="label.price">
                 <source>label.price</source>
                 <target>Price</target>
@@ -302,9 +314,17 @@
                 <source>label.slug</source>
                 <target>Slug</target>
             </trans-unit>
-            <trans-unit id="label.title">
-                <source>label.title</source>
-                <target>Title</target>
+            <trans-unit id="label.stripe_price_id">
+               <source>label.stripe_price_id</source>
+               <target>Stripe Price ID</target>
+           </trans-unit>
+           <trans-unit id="label.support">
+               <source>label.support</source>
+               <target>Support</target>
+           </trans-unit>
+           <trans-unit id="label.title">
+               <source>label.title</source>
+               <target>Title</target>
             </trans-unit>
             <trans-unit id="label.url">
                 <source>label.url</source>
@@ -313,6 +333,10 @@
             <trans-unit id="label.users">
                 <source>label.users</source>
                 <target>Users</target>
+            </trans-unit>
+            <trans-unit id="label.valid_until">
+                <source>label.valid_until</source>
+                <target>Valid Until</target>
             </trans-unit>
 
             <trans-unit id="label.site_name">
@@ -396,6 +420,10 @@
                 <source>menu.products</source>
                 <target>Products</target>
             </trans-unit>
+            <trans-unit id="menu.pricing">
+                <source>menu.pricing</source>
+                <target>Pricing</target>
+            </trans-unit>
             <trans-unit id="menu.profile">
                 <source>menu.profile</source>
                 <target>Profile</target>
@@ -420,6 +448,10 @@
                 <source>menu.site_info</source>
                 <target>Site Information</target>
             </trans-unit>
+            <trans-unit id="menu.subscription">
+                <source>menu.subscription</source>
+                <target>Subscriptions</target>
+            </trans-unit>
             <trans-unit id="menu.user">
                 <source>menu.user</source>
                 <target>User</target>
@@ -432,6 +464,10 @@
             <trans-unit id="table.action">
                 <source>table.action</source>
                 <target>Action</target>
+            </trans-unit>
+            <trans-unit id="table.availability">
+                <source>table.availability</source>
+                <target>Availability</target>
             </trans-unit>
             <trans-unit id="table.category">
                 <source>table.category</source>
@@ -453,21 +489,33 @@
                 <source>table.move</source>
                 <target>Move</target>
             </trans-unit>
-             <trans-unit id="table.order">
+            <trans-unit id="table.order">
                   <source>table.order</source>
                   <target>Order</target>
-              </trans-unit>
+            </trans-unit>
             <trans-unit id="table.parent">
                  <source>table.parent</source>
                  <target>Parent</target>
-             </trans-unit>
+            </trans-unit>
+            <trans-unit id="table.plan">
+                 <source>table.plan</source>
+                 <target>Plan</target>
+            </trans-unit>
             <trans-unit id="table.price">
                  <source>table.price</source>
                  <target>Price</target>
-             </trans-unit>
-              <trans-unit id="table.slug">
+            </trans-unit>
+            <trans-unit id="table.slug">
                 <source>table.slug</source>
                 <target>Slug</target>
+            </trans-unit>
+            <trans-unit id="table.stripe_price_Id">
+                <source>table.stripe_price_Id</source>
+                <target>Stripe Price ID</target>
+            </trans-unit>
+            <trans-unit id="table.support">
+                <source>table.support</source>
+                <target>Support</target>
             </trans-unit>
             <trans-unit id="table.title">
                 <source>table.title</source>
@@ -480,6 +528,10 @@
             <trans-unit id="table.username">
                 <source>table.username</source>
                 <target>Username</target>
+            </trans-unit>
+            <trans-unit id="table.valid_until">
+                <source>table.valid_until</source>
+                <target>Valid Until</target>
             </trans-unit>
 
             <trans-unit id="title.categories">
@@ -526,6 +578,10 @@
                 <source>title.products</source>
                 <target>Products</target>
             </trans-unit>
+            <trans-unit id="title.pricing">
+                <source>title.pricing</source>
+                <target>Pricing</target>
+            </trans-unit>
             <trans-unit id="title.profile">
                 <source>title.profile</source>
                 <target>Profile</target>
@@ -541,6 +597,10 @@
             <trans-unit id="title.settings">
                 <source>title.settings</source>
                 <target>Settings</target>
+            </trans-unit>
+            <trans-unit id="title.subscription">
+                <source>title.subscription</source>
+                <target>Subscriptions</target>
             </trans-unit>
             <trans-unit id="title.users">
                 <source>title.users</source>

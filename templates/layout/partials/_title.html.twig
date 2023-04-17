@@ -5,5 +5,14 @@
         {{ title|trans }}
     </div>
 
+    {% if action_edit_url is defined %}
+        <div class="col text-end">
+            <a class="btn btn-success" href="{{ path(action_edit_url) }}">
+                <i class="fa-solid fa-plus"></i>
+                {{ 'action.edit'|trans }}
+            </a>
+        </div>
+    {% endif %}
+
 </div>
 <hr>

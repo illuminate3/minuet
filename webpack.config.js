@@ -70,7 +70,10 @@ Encore
         useBuiltIns: 'usage',
         corejs: 3
     })
-
+    .configureDevServerOptions(options => {
+        options.allowedHosts = 'all';
+        options.hot = true;
+    })
 ;
 
 module.exports = Encore.getWebpackConfig();

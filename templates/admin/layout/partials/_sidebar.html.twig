@@ -41,26 +41,6 @@
         </li>
 
         <li class="mb-2">
-            <button class="category btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#category-collapse" aria-expanded="false">
-                {{ 'menu.categories'|trans }}
-            </button>
-            <div class="collapse" id="category-collapse">
-                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li>
-                        <a href="{{ path('admin_category') }}" class="link-light d-inline-flex text-decoration-none rounded">
-                            {{ 'action.view'|trans }}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ path('admin_category_new') }}" class="link-light d-inline-flex text-decoration-none rounded">
-                            {{ 'action.new'|trans }}
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-
-        <li class="mb-2">
             <button class="page btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#pages-collapse" aria-expanded="false">
                 {{ 'menu.pages'|trans }}
             </button>
@@ -106,6 +86,20 @@
             <a href="{{ path('admin_settings') }}" class="link-light d-inline-flex text-decoration-none rounded">
                 <i class="fa-solid fa-screwdriver-wrench"></i>
                 {{ 'menu.settings'|trans }}
+            </a>
+        </li>
+
+        <li class="mb-2">
+            <a href="{{ path('admin_category') }}" class="link-light d-inline-flex text-decoration-none rounded">
+                <i class="fa-solid fa-folder-tree"></i>
+                {{ 'menu.categories'|trans }}
+            </a>
+        </li>
+
+        <li class="mb-2">
+            <a href="{{ path('admin_subscription') }}" class="link-light d-inline-flex text-decoration-none rounded">
+                <i class="fa-solid fa-credit-card"></i>
+                {{ 'menu.subscription'|trans }}
             </a>
         </li>
 

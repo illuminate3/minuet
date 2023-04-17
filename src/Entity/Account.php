@@ -30,6 +30,11 @@ class Account
     #[ORM\OneToMany(mappedBy: 'account', targetEntity: AccountUser::class, orphanRemoval: true)]
     private $accountUser;
 
+    #[ORM\ManyToOne(inversedBy: 'account_id')]
+    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Subscription $subscription = null;
+
     public function __construct()
     {
         $this->accountListing = new ArrayCollection();
@@ -123,6 +128,18 @@ class Account
                 $accountUser->setAccount(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSubscription(): ?Subscription
+    {
+        return $this->subscription;
+    }
+
+    public function setSubscription(?Subscription $subscription): self
+    {
+        $this->subscription = $subscription;
 
         return $this;
     }

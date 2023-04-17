@@ -82,7 +82,17 @@
                             {{ 'menu.profile'|trans }}
                         </a>
                     </li>
+                    <li>
+                        <a class="nav-link" href="{{ path('app_pricing') }}">
+                            {{ 'menu.pricing'|trans }}
+                        </a>
+                    </li>
                 {% else %}
+                    <li>
+                        <a class="nav-link" href="{{ path('app_pricing') }}">
+                            {{ 'menu.pricing'|trans }}
+                        </a>
+                    </li>
                     <li>
                         <a class="nav-link" href="{{ path('auth_register') }}">
                             {{ 'menu.register'|trans }}

@@ -15,8 +15,7 @@ class LandingController extends BaseController
     public function index(
         Request $request,
         Security $security
-    ): Response
-    {
+    ): Response {
         return $this->render('landing/index.html.twig', [
             'title' => 'ROOT',
             'site' => $this->site($request),
