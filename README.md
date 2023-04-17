@@ -58,8 +58,10 @@ Who sort of inspired me to do Minuet.
 
     c. fire up the actual app
     ```
-    php bin/console app:install
+    php bin/console app:dev
     ```
+    use app:dev instead of app:install until further notice
+
     No, I didn't use the ```$``` to show it's a terminal command.
     It's a pain to delete that dang dollar sign.
 
