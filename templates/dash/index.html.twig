@@ -12,12 +12,24 @@
 
             <h1>
                 {{ title|trans }}
+
+                {% if is_primary == false %}
+                    <p>
+                        NOT PRIMARY USER
+                    </p>
+                {% endif %}
+
             </h1>
 
         </div>
     </div>
 
-    {% if is_primary == true %}
+
+
+{#    {% if is_primary == true %}#}
+
+    <hr>
+    <p>account_users</p>
 
         {% for data in account_users %}
             <p>
@@ -29,19 +41,28 @@
             </p>
         {% endfor %}
 
-        <p>
+    <hr>
+    <p>subscription</p>
+
+    <p>
             {#        {{ dump(subscription) }}#}
             {{ subscription.plan }}
         </p>
 
-    {% endif %}
+{#    {% endif %}#}
 
 
+    <hr>
+    <p>account</p>
 
     <p>
 {#        {{ dump(account) }}#}
         {{ account.name }}
     </p>
+
+
+    <hr>
+    <p>products</p>
 
 
     {% for data in products %}
@@ -54,5 +75,31 @@
     </p>
     {% endfor %}
 
+    <hr>
+    <p>threads</p>
+
+    {% for data in threads %}
+        <p>
+            {#        {{ dump(data) }}#}
+            {#        {{ dump(data.product.id) }}#}
+            {{ data.id }}
+            --
+            {{ data.product.title }}
+        </p>
+    {% endfor %}
+
+
+    <hr>
+    <p>messages</p>
+
+    {% for data in messages %}
+        <p>
+            {#        {{ dump(data) }}#}
+            {#        {{ dump(data.product.id) }}#}
+            {{ data.id }}
+            --
+            {{ data.content }}
+        </p>
+    {% endfor %}
 
 {% endblock %}

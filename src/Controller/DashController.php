@@ -6,8 +6,10 @@ namespace App\Controller;
 
 use App\Repository\AccountRepository;
 use App\Repository\AccountUserRepository;
+use App\Repository\MessageRepository;
 use App\Repository\ProductRepository;
 use App\Repository\SubscriptionRepository;
+use App\Repository\ThreadRepository;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,6 +25,8 @@ class DashController extends BaseController
         AccountUserRepository $accountUserRepository,
         SubscriptionRepository $subscriptionRepository,
         ProductRepository $productRepository,
+        ThreadRepository $threadRepository,
+        MessageRepository $messageRepository
     ): Response {
         // Redirect Admin Users
         if ($security->isGranted('ROLE_ADMIN')) {
@@ -44,13 +48,18 @@ class DashController extends BaseController
         // get the subscription for the account
         $subscription = $subscriptionRepository->findOneBy(['id' => $account->getSubscription()]);
 
-
         // get all the users for the accout
         $account_users = $accountUserRepository->findBy(['account' => $account]);
 
         // if the user isn't a primary user they still can manage products
         // get all the products associated to the account
         $products = $productRepository->findBy(['account' => $account_id]);
+
+        // threads
+        $threads = $threadRepository->findAll();
+
+        // messages
+        $messages = $messageRepository->findAll();
 
         return $this->render('dash/index.html.twig', [
             'title' => 'title.dashboard',
@@ -61,6 +70,8 @@ class DashController extends BaseController
             'is_primary' => $is_primary,
             'account_users' => $account_users,
             'products' => $products,
+            'threads' => $threads,
+            'messages' => $messages,
         ]);
     }
 }

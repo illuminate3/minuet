@@ -67,48 +67,6 @@ class Account
         return $this;
     }
 
-//    public function setUser(?User $user): self
-//    {
-//        $this->user = $user;
-//
-//        return $this;
-//    }
-//
-//    public function getUser(): ?User
-//    {
-//        return $this->user;
-//    }
-
-//    /**
-//     * @return Collection|AccountUser[]
-//     */
-//    public function getAccountUser(): Collection
-//    {
-//        return $this->accountUser;
-//    }
-//
-//    public function addAccountUser(AccountUser $accountUser): self
-//    {
-//        if (!$this->accountUser->contains($accountUser)) {
-//            $this->accountUser[] = $accountUser;
-//            $accountUser->setAccount($this);
-//        }
-//
-//        return $this;
-//    }
-//
-//    public function removeAccountUser(AccountUser $accountUser): self
-//    {
-//        if ($this->accountUser->removeElement($accountUser)) {
-//            // set the owning side to null (unless already changed)
-//            if ($accountUser->getAccount() === $this) {
-//                $accountUser->setAccount(null);
-//            }
-//        }
-//
-//        return $this;
-//    }
-
     public function getSubscription(): ?Subscription
     {
         return $this->subscription;

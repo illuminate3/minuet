@@ -41,6 +41,7 @@ final class UserFixtures extends Fixture
     private function getUserData(): array
     {
         return [
+            // data = [$firstName, $lastName, $password, $verfied, $phone, $email, $roles]
             ['Magna', 'Aliqua', 'admin', true, '(123)555-1234', 'admin@admin.com', ['ROLE_ADMIN', 'ROLE_USER']],
             ['Cillum', 'Dolore', 'user', true, '(456)555-1212', 'user@user.com', ['ROLE_USER']],
             ['Test1', 'User1', 'test', true, '(456)555-1212', 'test1@test.com', ['ROLE_USER']],

@@ -53,10 +53,6 @@ final class DevCommand extends Command
                 'arguments' => [],
             ],
             [
-                'command' => 'app:load-accounts',
-                'arguments' => [],
-            ],
-            [
                 'command' => 'app:load-product-account',
                 'arguments' => [],
             ],
