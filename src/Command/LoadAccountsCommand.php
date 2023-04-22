@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\Entity\Account;
-use App\Entity\AccountListing;
 use App\Entity\AccountUser;
 use App\Repository\ProductRepository;
 use App\Repository\SubscriptionRepository;
@@ -45,27 +44,27 @@ final class LoadAccountsCommand extends Command
         $subscription = $this->subscriptions->findOneBy(['id' => 1]);
 
         $account = new Account();
-        $account->setName('account demo test');
-        $account->setUser($user);
+        $account->setName('account demo Two 2 Two');
+        $account->setPrimaryUser(2);
         $account->setSubscription($subscription);
         $this->em->persist($account);
 
         $this->em->flush();
+
+        $account = new Account();
+        $account->setName('account demo Three 3 three');
+        $account->setPrimaryUser(3);
+        $account->setSubscription($subscription);
+        $this->em->persist($account);
+
+        $this->em->flush();
+
 
         foreach ($this->getAccountUserData() as [$userID]) {
             $user = $this->users->find($userID);
             $accountUser = new AccountUser();
             $accountUser->setAccount($account);
             $accountUser->setUser($user);
-            $this->em->persist($accountUser);
-        }
-        $this->em->flush();
-
-        foreach ($this->getAccountUserData() as [$productID]) {
-            $products = $this->products->find($productID);
-            $accountUser = new AccountListing();
-            $accountUser->setAccount($account);
-            $accountUser->setProduct($products);
             $this->em->persist($accountUser);
         }
         $this->em->flush();

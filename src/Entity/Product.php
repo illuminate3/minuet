@@ -63,6 +63,9 @@ class Product
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: OrderDetail::class)]
     private $orderDetail;
 
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    private ?Account $account = null;
+
     public function __construct()
     {
         $this->image = new ArrayCollection();
@@ -176,6 +179,18 @@ class Product
                 $orderDetail->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAccount(): ?Account
+    {
+        return $this->account;
+    }
+
+    public function setAccount(?Account $account): self
+    {
+        $this->account = $account;
 
         return $this;
     }

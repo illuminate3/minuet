@@ -20,27 +20,35 @@ class Account
     #[ORM\Column(type: 'string', length: 100, unique: true)]
     private $name;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'account')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $user;
+    #[ORM\Column(length: 10, unique: true)]
+    private ?int $primaryUser = null;
 
-    #[ORM\OneToMany(mappedBy: 'account', targetEntity: AccountListing::class, orphanRemoval: true)]
-    private $accountListing;
 
-    #[ORM\OneToMany(mappedBy: 'account', targetEntity: AccountUser::class, orphanRemoval: true)]
-    private $accountUser;
+//    #[ORM\Column(type: 'integer', length: 11)]
+//    private $primary_user_id;
+
+
+//    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'account')]
+//    #[ORM\JoinColumn(nullable: false)]
+//    private $user;
 
     #[ORM\ManyToOne(inversedBy: 'account_id')]
     #[ORM\JoinColumn(nullable: true)]
     #[ORM\JoinColumn(nullable: true)]
     private ?Subscription $subscription = null;
 
+    #[ORM\OneToMany(mappedBy: 'accountId', targetEntity: Product::class)]
+    private Collection $products;
+
     public function __construct()
     {
-        $this->accountListing = new ArrayCollection();
-        $this->accountUser = new ArrayCollection();
-        $this->created_at = new \DateTimeImmutable();
+        $this->products = new ArrayCollection();
     }
+
+//    public function __construct()
+//    {
+//        $this->created_at = new \DateTimeImmutable();
+//    }
 
     public function getId(): ?int
     {
@@ -59,78 +67,47 @@ class Account
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
+//    public function setUser(?User $user): self
+//    {
+//        $this->user = $user;
+//
+//        return $this;
+//    }
+//
+//    public function getUser(): ?User
+//    {
+//        return $this->user;
+//    }
 
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|AccountListing[]
-     */
-    public function getAccountListing(): Collection
-    {
-        return $this->accountListing;
-    }
-
-    public function addAccountListing(AccountListing $accountListing): self
-    {
-        if (!$this->accountListing->contains($accountListing)) {
-            $this->accountListing[] = $accountListing;
-            $accountListing->setAccount($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAccountListing(AccountListing $accountListing): self
-    {
-        if ($this->accountListing->removeElement($accountListing)) {
-            // set the owning side to null (unless already changed)
-            if ($accountListing->getAccount() === $this) {
-                $accountListing->setAccount(null);
-            }
-        }
-
-        return $this;
-    }
-
-
-    /**
-     * @return Collection|AccountUser[]
-     */
-    public function getAccountUser(): Collection
-    {
-        return $this->accountUser;
-    }
-
-    public function addAccountUser(AccountUser $accountUser): self
-    {
-        if (!$this->accountUser->contains($accountUser)) {
-            $this->accountUser[] = $accountUser;
-            $accountUser->setAccount($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAccountUser(AccountUser $accountUser): self
-    {
-        if ($this->accountUser->removeElement($accountUser)) {
-            // set the owning side to null (unless already changed)
-            if ($accountUser->getAccount() === $this) {
-                $accountUser->setAccount(null);
-            }
-        }
-
-        return $this;
-    }
+//    /**
+//     * @return Collection|AccountUser[]
+//     */
+//    public function getAccountUser(): Collection
+//    {
+//        return $this->accountUser;
+//    }
+//
+//    public function addAccountUser(AccountUser $accountUser): self
+//    {
+//        if (!$this->accountUser->contains($accountUser)) {
+//            $this->accountUser[] = $accountUser;
+//            $accountUser->setAccount($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeAccountUser(AccountUser $accountUser): self
+//    {
+//        if ($this->accountUser->removeElement($accountUser)) {
+//            // set the owning side to null (unless already changed)
+//            if ($accountUser->getAccount() === $this) {
+//                $accountUser->setAccount(null);
+//            }
+//        }
+//
+//        return $this;
+//    }
 
     public function getSubscription(): ?Subscription
     {
@@ -140,6 +117,48 @@ class Account
     public function setSubscription(?Subscription $subscription): self
     {
         $this->subscription = $subscription;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Product>
+     */
+    public function getProducts(): Collection
+    {
+        return $this->products;
+    }
+
+    public function addProduct(Product $product): self
+    {
+        if (!$this->products->contains($product)) {
+            $this->products->add($product);
+            $product->setAccountId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): self
+    {
+        if ($this->products->removeElement($product)) {
+            // set the owning side to null (unless already changed)
+            if ($product->getAccountId() === $this) {
+                $product->setAccountId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getPrimaryUser(): ?int
+    {
+        return $this->primaryUser;
+    }
+
+    public function setPrimaryUser(int $primaryUser): self
+    {
+        $this->primaryUser = $primaryUser;
 
         return $this;
     }

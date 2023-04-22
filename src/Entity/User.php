@@ -63,6 +63,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::BOOLEAN, length: 1, nullable: true)]
     private $isVerified = false;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isAccount = null;
+
     public function __construct()
     {
         $this->properties = new ArrayCollection();
@@ -149,34 +152,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         [$this->id, $this->email, $this->password] = $data;
     }
 
-    public function getProperties(): Collection
-    {
-        return $this->properties;
-    }
-
-//    public function addProperty(Property $property): self
-//    {
-//        if (!$this->properties->contains($property)) {
-//            $this->properties[] = $property;
-//            $property->setAuthor($this);
-//        }
-//
-//        return $this;
-//    }
-
-//    public function removeProperty(Property $property): self
-//    {
-//        if ($this->properties->contains($property)) {
-//            $this->properties->removeElement($property);
-//            // set the owning side to null (unless already changed)
-//            if ($property->getAuthor() === $this) {
-//                $property->setAuthor(null);
-//            }
-//        }
-//
-//        return $this;
-//    }
-
     public function getConfirmationToken(): ?string
     {
         return $this->confirmation_token;
@@ -252,6 +227,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmailVerifiedAt(?\DateTime $dateTime): self
     {
         $this->emailVerifiedAt = $dateTime;
+
+        return $this;
+    }
+
+    public function isIsAccount(): ?bool
+    {
+        return $this->isAccount;
+    }
+
+    public function setIsAccount(?bool $isAccount): self
+    {
+        $this->isAccount = $isAccount;
 
         return $this;
     }

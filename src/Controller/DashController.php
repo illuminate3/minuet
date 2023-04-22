@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Repository\AccountListingRepository;
 use App\Repository\AccountRepository;
 use App\Repository\AccountUserRepository;
+use App\Repository\ProductRepository;
 use App\Repository\SubscriptionRepository;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,9 +20,9 @@ class DashController extends BaseController
         Request $request,
         Security $security,
         AccountRepository $accountRepository,
-        AccountListingRepository $accountListingRepository,
         AccountUserRepository $accountUserRepository,
         SubscriptionRepository $subscriptionRepository,
+        ProductRepository $productRepository,
     ): Response {
         // Redirect Admin Users
         if ($security->isGranted('ROLE_ADMIN')) {
@@ -30,20 +30,37 @@ class DashController extends BaseController
         }
 
         $user = $security->getUser();
-        $account = $accountRepository->findOneBy(['user' => $user->getId()]);
-        $usersData = $account->getAccountUser()->toArray();
-        $listingData = $account->getAccountListing()->toArray();
-        $subscription_id = $account->getSubscription()->getId();
-        $subscription = $subscriptionRepository->findOneBy(['id' => $subscription_id]);
+
+        // get the account information the user is registered to
+        $accountUser = $accountUserRepository->findOneBy(['user' => $user->getId()]);
+
+        // get the account information
+        $account = $accountRepository->findOneBy(['id' => $accountUser->getAccount()]);
+        $account_id = $account->getId();
+        // check to see if the current user is the primary user for the account
+        $primaryUser = $account->getPrimaryUser();
+        $is_primary = $primaryUser === $user->getId();
+
+        // get the subscription for the account
+        $subscription = $subscriptionRepository->findOneBy(['id' => $account->getSubscription()]);
+
+
+        // get all the users for the accout
+        $account_users = $accountUserRepository->findBy(['account' => $account]);
+
+        // if the user isn't a primary user they still can manage products
+        // get all the products associated to the account
+        $products = $productRepository->findBy(['account' => $account_id]);
 
         return $this->render('dash/index.html.twig', [
             'title' => 'title.dashboard',
             'site' => $this->site($request),
             'error' => null,
             'account' => $account,
-            'usersData' => $usersData,
-            'listingData' => $listingData,
             'subscription' => $subscription,
+            'is_primary' => $is_primary,
+            'account_users' => $account_users,
+            'products' => $products,
         ]);
     }
 }
