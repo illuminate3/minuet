@@ -239,7 +239,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function isIsAccount(): ?bool
+    public function getIsAccount(): ?bool
     {
         return $this->isAccount;
     }

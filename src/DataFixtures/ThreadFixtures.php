@@ -22,7 +22,7 @@ class ThreadFixtures extends Fixture implements DependentFixtureInterface
 //        is_pin
 //        total_messages
 
-        foreach ($this->getData() as [$product_id, $user_id]) {
+        foreach ($this->getData() as [$user_id, $product_id]) {
             $user = $manager->getRepository(User::class)->findOneBy(['id' => $user_id]);
             $product = $manager->getRepository(Product::class)->findOneBy(['id' => $product_id]);
 
@@ -46,8 +46,10 @@ class ThreadFixtures extends Fixture implements DependentFixtureInterface
     private function getData(): array
     {
         return [
-            // data = [$product_id, $user_id]
+            // data = [$user_id, $product_id]
             [4, 4],
+//            [4, 5],
+//            [4, 6],
         ];
     }
 

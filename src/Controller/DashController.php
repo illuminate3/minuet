@@ -35,6 +35,10 @@ class DashController extends BaseController
 
         $user = $security->getUser();
 
+        if ($user->getIsAccount() === FALSE) {
+            return $this->redirectToRoute('app_index');
+        }
+
         // get the account information the user is registered to
         $accountUser = $accountUserRepository->findOneBy(['user' => $user->getId()]);
 

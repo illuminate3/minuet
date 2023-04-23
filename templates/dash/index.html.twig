@@ -78,12 +78,14 @@
     <hr>
     <p>threads</p>
 
+{#    {{ dump(threads) }}#}
     {% for data in threads %}
         <p>
             {#        {{ dump(data) }}#}
             {#        {{ dump(data.product.id) }}#}
             {{ data.id }}
             --
+            {{ data.product.id }}
             {{ data.product.title }}
         </p>
     {% endfor %}
@@ -92,12 +94,18 @@
     <hr>
     <p>messages</p>
 
+{#    {{ dump(messages) }}#}
     {% for data in messages %}
         <p>
             {#        {{ dump(data) }}#}
             {#        {{ dump(data.product.id) }}#}
             {{ data.id }}
             --
+            (user:
+            {{ data.user.id }}
+            /thread:
+            {{ data.thread.id }}
+            )
             {{ data.content }}
         </p>
     {% endfor %}
