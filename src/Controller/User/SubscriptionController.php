@@ -6,7 +6,9 @@ namespace App\Controller\User;
 
 use App\Controller\BaseController;
 use App\Entity\User;
+use App\Repository\SettingsRepository;
 use App\Repository\SubscriptionRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Stripe\Stripe;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -18,8 +20,9 @@ final class SubscriptionController extends BaseController
 {
     private $requestStack;
 
-    public function __construct(RequestStack $requestStack)
+    public function __construct(RequestStack $requestStack,ManagerRegistry $registry,SettingsRepository $sr)
     {
+        parent::__construct($sr,$registry);
         $this->requestStack = $requestStack;
     }
 
@@ -32,9 +35,11 @@ final class SubscriptionController extends BaseController
         ]);
     }
 
-    #[Route('/subscribe/{user}/{plan}', name: 'checkout')]
-    public function subscribe(Request $request, $stripeAPI, SubscriptionRepository $sr)
+    #[Route('/subscribe/{priceId}', name: 'checkout')]
+    public function subscribe(Request $request,SubscriptionRepository $sr)
     {
+
+        $stripeAPI = $_ENV['STRIPE_SECRET_KEY'];
         // \dd($request->request->get('priceId'));
         // \dd($request->attributes->get('plan'));
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
@@ -52,11 +57,12 @@ final class SubscriptionController extends BaseController
                 'cancel_url' => $this->generateUrl('cancel_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
                 'payment_method_types' => ['card'],
                 'mode' => 'subscription',
-                'client_reference_id' => $this->getUser()->getId(),
-                'customer_email' => $this->getUser()->getEmail(),
+                'customer'=>$this->getUser()->getStripeCustomerId(),
+                // 'client_reference_id' => $this->getUser()->getId(),
+                // 'customer_email' => $this->getUser()->getEmail(),
 
                 'line_items' => [[
-                    'price' => $priceId,
+                    'price' => 'price_1HfnE6EhT0YNkXdX845U6Umd',
                     // For metered billing, do not pass quantity
                     'quantity' => 1,
                 ]],
@@ -64,15 +70,15 @@ final class SubscriptionController extends BaseController
 
             // \dd($this->getUser()->getStrSubscriptionId());
 
-            if ($this->getUser()->getStrSubscriptionId()) {
+           if ($this->getUser()->getStrSubscriptionId()) {
                 $stripe = new \Stripe\StripeClient(
                     $stripeAPI
                 );
                 $stripe->subscriptions->update(
                     $this->getUser()->getStrSubscriptionId(),
-                    ['metadata' => ['customer_id' => $this->getUser()->getStrCustomerId()]]
+                    ['metadata' => ['customer_id' => $this->getUser()->getStripeCustomerId()]]
                 );
-            }
+           }
 
             $session->set('stripe-session-id', $stripeSession->id);
 
@@ -80,6 +86,11 @@ final class SubscriptionController extends BaseController
         }
         // \dd($request);
         $user = $this->getUser();
+
+        if (condition) {
+            # code...
+        }
+
         $basicPlan = $sr->findOneBy(['price' => 0]);
         $freeTrialTime = explode(' ', $basicPlan->getValidUntil());
         $timeExpolode = $freeTrialTime[0];
@@ -98,15 +109,22 @@ final class SubscriptionController extends BaseController
     }
 
     #[Route('/success-url', name: 'success_url')]
-    public function successUrl(): Response
+    public function successUrl(Request $request): Response
     {
-        return $this->render('payment/success.html.twig', []);
+        return $this->render('user/stripe/success.html.twig', [
+            "site"=>$this->site($request),
+            "title"=>"title.payment-success"
+        ]);
     }
 
     #[Route('/cancel-url', name: 'cancel_url')]
-    public function cancelUrl(): Response
+    public function cancelUrl(Request $request): Response
     {
-        return $this->render('payment/cancel.html.twig', []);
+        return $this->render('user/stripe/cancel.html.twig', [
+            "site"=>$this->site($request),
+            "title"=>"title.payment-success"
+        ]);
+        return $this->render('user/stripe/cancel.html.twig', []);
     }
 
     #[Route('/cancel/{user}/{plan}', name: 'cancel_plan')]
