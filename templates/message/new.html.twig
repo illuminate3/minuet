@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+
+<title>New Message</title>
+
+{% block body %}
+    <h1>Create new Message</h1>
+
+    {{ include('message/_form.html.twig') }}
+
+    <a href="{{ path('app_message_index') }}">back to list</a>
+{% endblock %}

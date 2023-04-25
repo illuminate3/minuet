@@ -60,10 +60,10 @@ class DashController extends BaseController
         $products = $productRepository->findBy(['account' => $account_id]);
 
         // threads
-        $threads = $threadRepository->findAll();
-
+        $productThreads = $productRepository->findAllThreadsByAccount($account_id);
+//        $threads = $threadRepository->findAll();
         // messages
-        $messages = $messageRepository->findAll();
+//        $messages = $messageRepository->findAll();
 
         return $this->render('dash/index.html.twig', [
             'title' => 'title.dashboard',
@@ -74,8 +74,9 @@ class DashController extends BaseController
             'is_primary' => $is_primary,
             'account_users' => $account_users,
             'products' => $products,
-            'threads' => $threads,
-            'messages' => $messages,
+            'productThreads' => $productThreads,
+//            'threads' => $threads,
+//            'messages' => $messages,
         ]);
     }
 }

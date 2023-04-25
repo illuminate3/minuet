@@ -37,6 +37,9 @@ class Thread
     #[ORM\OneToMany(mappedBy: 'thread', targetEntity: Message::class)]
     private Collection $messages;
 
+    #[ORM\ManyToOne(inversedBy: 'threads')]
+    private ?Account $account = null;
+
     public function __construct()
     {
         $this->messages = new ArrayCollection();
@@ -133,6 +136,18 @@ class Thread
                 $message->setThread(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAccount(): ?Account
+    {
+        return $this->account;
+    }
+
+    public function setAccount(?Account $account): self
+    {
+        $this->account = $account;
 
         return $this;
     }

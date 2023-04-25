@@ -7,6 +7,66 @@
 
 {% block body %}
 
+    <div class="row my-5">
+
+        <div class="col col-lg-6">
+            <hr>
+            <p>subscription</p>
+
+            <p>
+                {#        {{ dump(subscription) }}#}
+                {{ subscription.plan }}
+            </p>
+
+            {#    {% endif %}#}
+
+
+            <hr>
+            <p>account</p>
+
+            <p>
+                {#        {{ dump(account) }}#}
+                {{ account.name }}
+            </p>
+
+        </div>
+
+
+        <div class="col col-lg-6">
+
+            <h1>Message index</h1>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>UpdatedBy</th>
+                    <th>Content</th>
+                    <th>Id</th>
+                    <th>thread Id</th>
+                    <th>user Id</th>
+                    <th>Created_at</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for data in account_users %}
+                    {#        {{ dump(data) }}#}
+                    <tr>
+                        <td>{{ data.user.email }}</td>
+                        <td>{{ data.user.profile.firstName }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+
     <div class="row mt-4 mb-4">
         <div class="col">
 
@@ -28,37 +88,7 @@
 
 {#    {% if is_primary == true %}#}
 
-    <hr>
-    <p>account_users</p>
 
-        {% for data in account_users %}
-            <p>
-                {#        {{ dump(data) }}#}
-                {#        {{ dump(data.user.profile.firstName) }}#}
-                {{ data.user.email }}
-                --
-                {{ data.user.profile.firstName }}
-            </p>
-        {% endfor %}
-
-    <hr>
-    <p>subscription</p>
-
-    <p>
-            {#        {{ dump(subscription) }}#}
-            {{ subscription.plan }}
-        </p>
-
-{#    {% endif %}#}
-
-
-    <hr>
-    <p>account</p>
-
-    <p>
-{#        {{ dump(account) }}#}
-        {{ account.name }}
-    </p>
 
 
     <hr>
@@ -79,35 +109,43 @@
     <p>threads</p>
 
 {#    {{ dump(threads) }}#}
-    {% for data in threads %}
-        <p>
-            {#        {{ dump(data) }}#}
-            {#        {{ dump(data.product.id) }}#}
-            {{ data.id }}
-            --
-            {{ data.product.id }}
-            {{ data.product.title }}
-        </p>
+{#    {% for data in threads %}#}
+{#        <p>#}
+{#            #}{#        {{ dump(data) }}#}
+{#            #}{#        {{ dump(data.product.id) }}#}
+{#            {{ data.id }}#}
+{#            --#}
+{#            {{ data.product.id }}#}
+{#            {{ data.product.title }}#}
+{#        </p>#}
+{#    {% endfor %}#}
+
+    {% for category in productThreads %}
+        {{ category.title }}
+        <br>
+        {% for thread in category.threads %}
+            {{ thread.createdAt ? thread.createdAt|date('Y-m-d H:i:s') : '' }}
+            <br>
+        {% endfor %}
     {% endfor %}
 
-
-    <hr>
-    <p>messages</p>
+    {#    <hr>#}
+{#    <p>messages</p>#}
 
 {#    {{ dump(messages) }}#}
-    {% for data in messages %}
-        <p>
-            {#        {{ dump(data) }}#}
-            {#        {{ dump(data.product.id) }}#}
-            {{ data.id }}
-            --
-            (user:
-            {{ data.user.id }}
-            /thread:
-            {{ data.thread.id }}
-            )
-            {{ data.content }}
-        </p>
-    {% endfor %}
+{#    {% for data in messages %}#}
+{#        <p>#}
+{#            #}{#        {{ dump(data) }}#}
+{#            #}{#        {{ dump(data.product.id) }}#}
+{#            {{ data.id }}#}
+{#            --#}
+{#            (user:#}
+{#            {{ data.user.id }}#}
+{#            /thread:#}
+{#            {{ data.thread.id }}#}
+{#            )#}
+{#            {{ data.content }}#}
+{#        </p>#}
+{#    {% endfor %}#}
 
 {% endblock %}

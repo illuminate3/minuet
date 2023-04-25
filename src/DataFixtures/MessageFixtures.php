@@ -49,8 +49,13 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             // data = [$user_id, $thread_id, $updated_by, $content]
-            [4, 1, null, 'Duis aute irure dolor in reprehenderit'],
-            [4, 1, null, 'quis nostrud exercitation ullamco laboris nisi ut aliquip'],
+            [1, 1, null, 'Duis aute irure dolor in reprehenderit'],
+            [6, 2, null, 'Duis aute irure dolor in reprehenderit'],
+            [6, 2, null, 'quis nostrud exercitation ullamco laboris nisi ut aliquip'],
+            [7, 2, null, 'Duis aute irure dolor in reprehenderit'],
+            [6, 3, null, 'Duis aute irure dolor in reprehenderit'],
+            [6, 3, null, 'quis nostrud exercitation ullamco laboris nisi ut aliquip'],
+            [7, 4, null, 'Duis aute irure dolor in reprehenderit'],
         ];
     }
 

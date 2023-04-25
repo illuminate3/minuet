@@ -40,9 +40,13 @@ class Account
     #[ORM\OneToMany(mappedBy: 'accountId', targetEntity: Product::class)]
     private Collection $products;
 
+    #[ORM\OneToMany(mappedBy: 'account', targetEntity: Thread::class)]
+    private Collection $threads;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->threads = new ArrayCollection();
     }
 
 //    public function __construct()
@@ -117,6 +121,36 @@ class Account
     public function setPrimaryUser(int $primaryUser): self
     {
         $this->primaryUser = $primaryUser;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Thread>
+     */
+    public function getThreads(): Collection
+    {
+        return $this->threads;
+    }
+
+    public function addThread(Thread $thread): self
+    {
+        if (!$this->threads->contains($thread)) {
+            $this->threads->add($thread);
+            $thread->setAccount($this);
+        }
+
+        return $this;
+    }
+
+    public function removeThread(Thread $thread): self
+    {
+        if ($this->threads->removeElement($thread)) {
+            // set the owning side to null (unless already changed)
+            if ($thread->getAccount() === $this) {
+                $thread->setAccount(null);
+            }
+        }
 
         return $this;
     }
