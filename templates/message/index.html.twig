@@ -1,0 +1,44 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block subheader %}
+    <!-- Title -->
+    {{ include('layout/partials/_title.html.twig') }}
+{% endblock %}
+
+{% block body %}
+
+    <h1>Message index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>UpdatedBy</th>
+                <th>Content</th>
+                <th>Id</th>
+                <th>thread Id</th>
+                <th>user Id</th>
+                <th>Created_at</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for message in messages %}
+            <tr>
+                <td>{{ message.updatedBy }}</td>
+                <td>{{ message.content }}</td>
+                <td>{{ message.id }}</td>
+                <td>{{ message.thread.id }}</td>
+                <td>{{ message.user.profile.fullName }}</td>
+                <td>{{ message.createdAt ? message.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_message_new') }}">Create new</a>
+{% endblock %}

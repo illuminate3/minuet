@@ -1,0 +1,125 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block subheader %}
+    <!-- Title -->
+    {{ include('layout/partials/_title.html.twig') }}
+{% endblock %}
+
+{% block body %}
+{#
+    {% for product in products %}
+        {{ dump(product) }}
+        1
+    {% endfor %}
+#}
+
+
+{#    {% for product in products %}#}
+{#-- product#}
+{#        {% for thread in product.threads %}#}
+{#-- thread product#}
+{#        {% endfor %}#}
+{#    {% endfor %}#}
+
+
+    {% for category in products %}
+{#        {{ dump(category) }}#}
+
+<div class="row my-4">
+    <div class="col col-lg-12 col-md-12 col-sm-12">
+
+        <div class="card">
+            <div class="card-header">
+                {{ category.title }}
+            </div>
+
+
+
+{#-- thread#}
+{#            {{ dump(thread) }}#}
+
+            <div class="card-body">
+
+<table class="table">
+            <thead>
+                <tr>
+                    <th>IsClosed</th>
+                    <th>IsPin</th>
+                    <th>TotalMessages</th>
+                    <th>Id</th>
+                    <th>account Id</th>
+                    <th>Product Id</th>
+                    <th>User Id</th>
+                    <th>Created_at</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+    {% for thread in category.threads %}
+    <tr>
+        <td>{{ thread.isClosed ? 'Yes' : 'No' }}</td>
+        <td>{{ thread.isPin ? 'Yes' : 'No' }}</td>
+        <td>{{ thread.totalMessages }}</td>
+        <td>{{ thread.id }}</td>
+        <td>{{ thread.account.id }}</td>
+        <td>{{ thread.product.id }}</td>
+        <td>{{ thread.user.id }}</td>
+        <td>{{ thread.createdAt ? thread.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+        <td>
+            <a href="{{ path('app_message_show_thread', {'id': thread.id}) }}">show</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+    {% endfor %}
+
+
+
+{#    <h1>Thread index</h1>#}
+
+{#    <table class="table">#}
+{#        <thead>#}
+{#            <tr>#}
+{#                <th>IsClosed</th>#}
+{#                <th>IsPin</th>#}
+{#                <th>TotalMessages</th>#}
+{#                <th>Id</th>#}
+{#                <th>Product Id</th>#}
+{#                <th>User Id</th>#}
+{#                <th>Created_at</th>#}
+{#                <th>actions</th>#}
+{#            </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#        {% for thread in threads %}#}
+{#            <tr>#}
+{#                <td>{{ thread.isClosed ? 'Yes' : 'No' }}</td>#}
+{#                <td>{{ thread.isPin ? 'Yes' : 'No' }}</td>#}
+{#                <td>{{ thread.totalMessages }}</td>#}
+{#                <td>{{ thread.id }}</td>#}
+{#                <td>{{ thread.product.id }}</td>#}
+{#                <td>{{ thread.user.id }}</td>#}
+{#                <td>{{ thread.createdAt ? thread.createdAt|date('Y-m-d H:i:s') : '' }}</td>#}
+{#                <td>#}
+{#                    <a href="{{ path('app_thread_show', {'id': thread.id}) }}">show</a>#}
+{#                    <a href="{{ path('app_thread_edit', {'id': thread.id}) }}">edit</a>#}
+{#                </td>#}
+{#            </tr>#}
+{#        {% else %}#}
+{#            <tr>#}
+{#                <td colspan="6">no records found</td>#}
+{#            </tr>#}
+{#        {% endfor %}#}
+{#        </tbody>#}
+{#    </table>#}
+
+{#    <a href="{{ path('app_thread_new') }}">Create new</a>#}
+
+{% endblock %}

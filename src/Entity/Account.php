@@ -40,9 +40,13 @@ class Account
     #[ORM\OneToMany(mappedBy: 'accountId', targetEntity: Product::class)]
     private Collection $products;
 
+    #[ORM\OneToMany(mappedBy: 'account', targetEntity: Thread::class)]
+    private Collection $threads;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->threads = new ArrayCollection();
     }
 
 //    public function __construct()
@@ -66,48 +70,6 @@ class Account
 
         return $this;
     }
-
-//    public function setUser(?User $user): self
-//    {
-//        $this->user = $user;
-//
-//        return $this;
-//    }
-//
-//    public function getUser(): ?User
-//    {
-//        return $this->user;
-//    }
-
-//    /**
-//     * @return Collection|AccountUser[]
-//     */
-//    public function getAccountUser(): Collection
-//    {
-//        return $this->accountUser;
-//    }
-//
-//    public function addAccountUser(AccountUser $accountUser): self
-//    {
-//        if (!$this->accountUser->contains($accountUser)) {
-//            $this->accountUser[] = $accountUser;
-//            $accountUser->setAccount($this);
-//        }
-//
-//        return $this;
-//    }
-//
-//    public function removeAccountUser(AccountUser $accountUser): self
-//    {
-//        if ($this->accountUser->removeElement($accountUser)) {
-//            // set the owning side to null (unless already changed)
-//            if ($accountUser->getAccount() === $this) {
-//                $accountUser->setAccount(null);
-//            }
-//        }
-//
-//        return $this;
-//    }
 
     public function getSubscription(): ?Subscription
     {
@@ -159,6 +121,36 @@ class Account
     public function setPrimaryUser(int $primaryUser): self
     {
         $this->primaryUser = $primaryUser;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Thread>
+     */
+    public function getThreads(): Collection
+    {
+        return $this->threads;
+    }
+
+    public function addThread(Thread $thread): self
+    {
+        if (!$this->threads->contains($thread)) {
+            $this->threads->add($thread);
+            $thread->setAccount($this);
+        }
+
+        return $this;
+    }
+
+    public function removeThread(Thread $thread): self
+    {
+        if ($this->threads->removeElement($thread)) {
+            // set the owning side to null (unless already changed)
+            if ($thread->getAccount() === $this) {
+                $thread->setAccount(null);
+            }
+        }
 
         return $this;
     }

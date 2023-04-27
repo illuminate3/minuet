@@ -20,11 +20,6 @@ class Subscription
 //    use CreatedAtTrait;
     use EntityIdTrait;
 
-//    /**
-//     * @ORM\OneToOne(targetEntity=User::class, mappedBy="subscription", cascade={"persist", "remove"})
-//     */
-//    private $user;
-
     #[ORM\Column(type: Types::STRING, length: 255)]
     private string $plan;
 

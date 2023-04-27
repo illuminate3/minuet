@@ -25,6 +25,12 @@
 
             <ul class="navbar-nav ms-auto mb-2 mb-md-0">
 
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_thread_index') }}">
+                        {{ 'menu.forum'|trans }}
+                    </a>
+                </li>
+
                 {{ include('layout/partials/_menu.html.twig') }}
 
                 {{ include('layout/partials/_user.html.twig') }}
