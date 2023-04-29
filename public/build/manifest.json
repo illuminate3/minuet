@@ -1,13 +1,13 @@
 {
-  "build/js/app.js": "http://localhost:8080/build/js/app.js",
-  "build/js/layout.js": "http://localhost:8080/build/js/layout.js",
-  "build/js/menu-sorting.js": "http://localhost:8080/build/js/menu-sorting.js",
-  "build/js/admin.js": "http://localhost:8080/build/js/admin.js",
-  "build/css/app.css": "http://localhost:8080/build/css/app.css",
-  "build/runtime.js": "http://localhost:8080/build/runtime.js",
-  "build/images/marius.jpg": "http://localhost:8080/build/images/marius.cb18515e.jpg",
-  "build/fonts/fa-solid-900.ttf": "http://localhost:8080/build/fonts/fa-solid-900.2877d54f.ttf",
-  "build/fonts/fa-solid-900.woff2": "http://localhost:8080/build/fonts/fa-solid-900.bdb9e232.woff2",
-  "build/fonts/fa-regular-400.ttf": "http://localhost:8080/build/fonts/fa-regular-400.14640490.ttf",
-  "build/fonts/fa-regular-400.woff2": "http://localhost:8080/build/fonts/fa-regular-400.8bedd7cf.woff2"
+  "build/js/app.js": "/build/js/app.808c223b.js",
+  "build/js/layout.js": "/build/js/layout.342f5aad.js",
+  "build/js/menu-sorting.js": "/build/js/menu-sorting.5c44da73.js",
+  "build/js/admin.js": "/build/js/admin.b99fc344.js",
+  "build/css/app.css": "/build/css/app.888a092d.css",
+  "build/runtime.js": "/build/runtime.5d189f8c.js",
+  "build/images/marius.jpg": "/build/images/marius.cb18515e.jpg",
+  "build/fonts/fa-solid-900.ttf": "/build/fonts/fa-solid-900.2877d54f.ttf",
+  "build/fonts/fa-solid-900.woff2": "/build/fonts/fa-solid-900.bdb9e232.woff2",
+  "build/fonts/fa-regular-400.ttf": "/build/fonts/fa-regular-400.14640490.ttf",
+  "build/fonts/fa-regular-400.woff2": "/build/fonts/fa-regular-400.8bedd7cf.woff2"
 }

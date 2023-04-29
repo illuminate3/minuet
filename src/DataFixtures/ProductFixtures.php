@@ -43,4 +43,13 @@ class ProductFixtures extends Fixture
 
         $manager->flush();
     }
+
+    public function getDependencies(): array
+    {
+        return [
+            CategoryFixtures::class,
+            AccountFixtures::class,
+        ];
+    }
+
 }

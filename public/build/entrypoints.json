@@ -2,34 +2,34 @@
   "entrypoints": {
     "js/app": {
       "js": [
-        "http://localhost:8080/build/runtime.js",
-        "http://localhost:8080/build/js/app.js"
+        "/build/runtime.5d189f8c.js",
+        "/build/js/app.808c223b.js"
       ]
     },
     "js/layout": {
       "js": [
-        "http://localhost:8080/build/runtime.js",
-        "http://localhost:8080/build/js/layout.js"
+        "/build/runtime.5d189f8c.js",
+        "/build/js/layout.342f5aad.js"
       ]
     },
     "js/menu-sorting": {
       "js": [
-        "http://localhost:8080/build/runtime.js",
-        "http://localhost:8080/build/js/menu-sorting.js"
+        "/build/runtime.5d189f8c.js",
+        "/build/js/menu-sorting.5c44da73.js"
       ]
     },
     "js/admin": {
       "js": [
-        "http://localhost:8080/build/runtime.js",
-        "http://localhost:8080/build/js/admin.js"
+        "/build/runtime.5d189f8c.js",
+        "/build/js/admin.b99fc344.js"
       ]
     },
     "css/app": {
       "js": [
-        "http://localhost:8080/build/runtime.js"
+        "/build/runtime.5d189f8c.js"
       ],
       "css": [
-        "http://localhost:8080/build/css/app.css"
+        "/build/css/app.888a092d.css"
       ]
     }
   }

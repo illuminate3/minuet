@@ -1,3 +1,4 @@
+.DS_Store
 /drivers/
 /.idea/
 /public/uploads/images/*/*.*
