@@ -416,6 +416,10 @@
                 <source>menu.menu</source>
                 <target>Menu</target>
             </trans-unit>
+            <trans-unit id="menu.messages">
+                <source>menu.messages</source>
+                <target>Messages</target>
+            </trans-unit>
             <trans-unit id="menu.products">
                 <source>menu.products</source>
                 <target>Products</target>

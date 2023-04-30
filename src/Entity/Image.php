@@ -4,37 +4,53 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Entity\Traits\EntityIdTrait;
 use App\Repository\ImageRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 class Image
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private $id;
+    use EntityIdTrait;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $name;
+    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
+    private ?int $sortOrder = null;
 
-    #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: 'image')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $product;
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\File(mimeTypes: ['image/*'])]
+    private ?string $file = null;
+
+    #[ORM\ManyToOne(inversedBy: 'images')]
+    private ?Product $product = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getSortOrder(): ?int
     {
-        return $this->name;
+        return $this->sortOrder;
     }
 
-    public function setName(string $name): self
+    public function setSortOrder(?int $sortOrder): self
     {
-        $this->name = $name;
+        $this->sortOrder = $sortOrder;
+
+        return $this;
+    }
+
+    public function getFile(): ?string
+    {
+        return $this->file;
+    }
+
+    public function setFile(?string $file): self
+    {
+        $this->file = $file;
 
         return $this;
     }

@@ -24,12 +24,34 @@
         "/build/js/admin.b99fc344.js"
       ]
     },
+    "js/ekko-lightbox": {
+      "js": [
+        "/build/runtime.5d189f8c.js",
+        "/build/js/ekko-lightbox.4d82eb9b.js"
+      ]
+    },
     "css/app": {
       "js": [
         "/build/runtime.5d189f8c.js"
       ],
       "css": [
         "/build/css/app.888a092d.css"
+      ]
+    },
+    "css/ekko-lightbox": {
+      "js": [
+        "/build/runtime.5d189f8c.js"
+      ],
+      "css": [
+        "/build/css/ekko-lightbox.2b7a8299.css"
+      ]
+    },
+    "css/detail": {
+      "js": [
+        "/build/runtime.5d189f8c.js"
+      ],
+      "css": [
+        "/build/css/detail.3d2d5214.css"
       ]
     }
   }

@@ -15,9 +15,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/user/dash')]
 class DashController extends BaseController
 {
-    #[Route('/user/dash', name: 'app_dash')]
+    #[Route('/', name: 'app_dash')]
     public function index(
         Request $request,
         Security $security,
@@ -35,7 +36,7 @@ class DashController extends BaseController
 
         $user = $security->getUser();
 
-        if ($user->getIsAccount() === FALSE) {
+        if (false === $user->getIsAccount()) {
             return $this->redirectToRoute('app_index');
         }
 
@@ -52,7 +53,7 @@ class DashController extends BaseController
         // get the subscription for the account
         $subscription = $subscriptionRepository->findOneBy(['id' => $account->getSubscription()]);
 
-        // get all the users for the accout
+        // get all the users for the account
         $account_users = $accountUserRepository->findBy(['account' => $account]);
 
         // if the user isn't a primary user they still can manage products

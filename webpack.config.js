@@ -31,6 +31,7 @@ Encore
     .addEntry('js/layout', './assets/js/layout.js')
     .addEntry('js/menu-sorting', './assets/js/admin/menu-sorting.js')
     .addEntry('js/admin', './assets/js/admin/admin.js')
+    .addEntry('js/ekko-lightbox', './assets/js/ekko-lightbox')
 
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
@@ -64,6 +65,8 @@ Encore
     //.enableReactPreset()
 
     .addStyleEntry('css/app', ['./assets/styles/app.scss'])
+    .addStyleEntry('css/ekko-lightbox', ['./assets/styles/ekko-lightbox.scss'])
+    .addStyleEntry('css/detail', ['./assets/styles/detail.scss'])
 
     //.enableIntegrityHashes()
     .configureBabel(null, {
