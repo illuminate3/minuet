@@ -8,11 +8,13 @@ use App\Entity\User;
 use App\Repository\AccountListingRepository;
 use App\Repository\AccountRepository;
 use App\Repository\AccountUserRepository;
+use App\Repository\MessageRepository;
 use App\Repository\ProductRepository;
 use App\Repository\SubscriptionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Stripe\Customer;
 use Stripe\Stripe;
+use App\Repository\ThreadRepository;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,6 +33,8 @@ class DashController extends BaseController
         AccountUserRepository $accountUserRepository,
         SubscriptionRepository $subscriptionRepository,
         ProductRepository $productRepository,
+        ThreadRepository $threadRepository,
+        MessageRepository $messageRepository
     ): Response {
         // Redirect Admin Users
         if ($security->isGranted('ROLE_ADMIN')) {
@@ -40,6 +44,19 @@ class DashController extends BaseController
         $user = $security->getUser();
         $account = $accountRepository->findOneBy(['user' => $user->getId()]);
 
+        if ($user->getIsAccount() === FALSE) {
+            return $this->redirectToRoute('app_index');
+        }
+
+        // get the account information the user is registered to
+        $accountUser = $accountUserRepository->findOneBy(['user' => $user->getId()]);
+
+        // get the account information
+        $account = $accountRepository->findOneBy(['id' => $accountUser->getAccount()]);
+        $account_id = $account->getId();
+        // check to see if the current user is the primary user for the account
+        $primaryUser = $account->getPrimaryUser();
+        $is_primary = $primaryUser === $user->getId();
 
 
         if (!$account) {
@@ -64,6 +81,18 @@ class DashController extends BaseController
         $listingData = $account->getAccountListing()->toArray();
         $subscription_id = $account->getSubscription()->getId();
         $subscription = $subscriptionRepository->findOneBy(['id' => $subscription_id]);
+        // get all the users for the accout
+        $account_users = $accountUserRepository->findBy(['account' => $account]);
+
+        // if the user isn't a primary user they still can manage products
+        // get all the products associated to the account
+        $products = $productRepository->findBy(['account' => $account_id]);
+
+        // threads
+        $productThreads = $productRepository->findAllThreadsByAccount($account_id);
+//        $threads = $threadRepository->findAll();
+        // messages
+//        $messages = $messageRepository->findAll();
 
         return $this->render('dash/index.html.twig', [
             'title' => 'title.dashboard',
@@ -74,6 +103,9 @@ class DashController extends BaseController
             'is_primary' => $is_primary,
             'account_users' => $account_users,
             'products' => $products,
+            'productThreads' => $productThreads,
+//            'threads' => $threads,
+//            'messages' => $messages,
         ]);
     }
 }

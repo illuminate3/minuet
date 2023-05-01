@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Entity\Category;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Exception;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -39,12 +41,12 @@ class ProductRepository extends ServiceEntityRepository
         $paginator = new Paginator($query);
         $data = $paginator->getQuery()->getResult();
 
-        //On vérifie qu'on a des données
-        if(empty($data)){
+        // On vérifie qu'on a des données
+        if (empty($data)) {
             return $result;
         }
 
-        //On calcule le nombre de pages
+        // On calcule le nombre de pages
         $pages = ceil($paginator->count() / $limit);
 
         // On remplit le tableau
@@ -55,6 +57,21 @@ class ProductRepository extends ServiceEntityRepository
 
         return $result;
     }
+
+    /**
+     * @return Product[]
+     */
+    public function findAllThreadsByAccount($account): array
+    {
+        return $this->createQueryBuilder('P')
+            ->join('P.threads', 'T')
+            ->where('P.account = :account')
+            ->setParameter('account', $account)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 
     // /**
     //  * @return Products[] Returns an array of Products objects

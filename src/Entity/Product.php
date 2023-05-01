@@ -66,11 +66,15 @@ class Product
     #[ORM\ManyToOne(inversedBy: 'products')]
     private ?Account $account = null;
 
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Thread::class)]
+    private Collection $threads;
+
     public function __construct()
     {
         $this->image = new ArrayCollection();
         $this->orderDetail = new ArrayCollection();
         $this->created_at = new \DateTimeImmutable();
+        $this->threads = new ArrayCollection();
     }
 
 
@@ -191,6 +195,36 @@ class Product
     public function setAccount(?Account $account): self
     {
         $this->account = $account;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Thread>
+     */
+    public function getThreads(): Collection
+    {
+        return $this->threads;
+    }
+
+    public function addThread(Thread $thread): self
+    {
+        if (!$this->threads->contains($thread)) {
+            $this->threads->add($thread);
+            $thread->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeThread(Thread $thread): self
+    {
+        if ($this->threads->removeElement($thread)) {
+            // set the owning side to null (unless already changed)
+            if ($thread->getProduct() === $this) {
+                $thread->setProduct(null);
+            }
+        }
 
         return $this;
     }

@@ -18,7 +18,7 @@ final class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        foreach ($this->getUserData() as [$firstName, $lastName, $password, $verfied, $phone, $email, $roles]) {
+        foreach ($this->getUserData() as [$firstName, $lastName, $password, $verfied, $is_accocunt, $phone, $email, $roles]) {
             $user = new User();
             $user->setPassword($password);
             $user->setEmail($email);
@@ -31,6 +31,7 @@ final class UserFixtures extends Fixture
             );
             $user->setEmailVerifiedAt(new \DateTime('now'));
             $user->setIsVerified($verfied);
+            $user->setIsAccount($is_accocunt);
             $user = $this->transformer->transform($user);
             $manager->persist($user);
             $this->addReference($lastName, $user);
@@ -41,11 +42,14 @@ final class UserFixtures extends Fixture
     private function getUserData(): array
     {
         return [
-            ['Magna', 'Aliqua', 'admin', true, '(123)555-1234', 'admin@admin.com', ['ROLE_ADMIN', 'ROLE_USER']],
-            ['Cillum', 'Dolore', 'user', true, '(456)555-1212', 'user@user.com', ['ROLE_USER']],
-            ['Test1', 'User1', 'test', true, '(456)555-1212', 'test1@test.com', ['ROLE_USER']],
-            ['Test2', 'User2', 'test', true, '(456)555-1212', 'test2@test.com', ['ROLE_USER']],
-            ['Test3', 'User3', 'test', false, '(456)555-1212', 'test3@test.com', ['ROLE_USER']],
+            // data = [$firstName, $lastName, $password, $verfied, $is_accocunt, $phone, $email, $roles]
+            ['Magna', 'Aliqua', 'admin', true, true, '(123)555-1234', 'admin@admin.com', ['ROLE_ADMIN', 'ROLE_USER']],
+            ['Cillum', 'Dolore', 'user', true, true, '(456)555-1212', 'user@user.com', ['ROLE_USER']],
+            ['Test1', 'User1', 'test', true, true, '(456)555-1212', 'test1@test.com', ['ROLE_USER']],
+            ['Test2', 'User2', 'test', true, true, '(456)555-1212', 'test2@test.com', ['ROLE_USER']],
+            ['Test3', 'User3', 'test', true, true, '(456)555-1212', 'test3@test.com', ['ROLE_USER']],
+            ['Test4', 'User4', 'test', true, true, '(456)555-1212', 'test4@test.com', ['ROLE_USER']],
+            ['Test5', 'User5', 'test', true, true, '(456)555-1212', 'test5@test.com', ['ROLE_USER']],
         ];
     }
 }

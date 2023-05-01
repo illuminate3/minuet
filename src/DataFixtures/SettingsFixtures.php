@@ -12,7 +12,7 @@ final class SettingsFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        foreach (self::getData() as [$setting_name, $setting_value]) {
+        foreach ($this->getData() as [$setting_name, $setting_value]) {
             $setting = new Settings();
             $setting->setSettingName($setting_name);
             $setting->setSettingValue($setting_value);
@@ -21,10 +21,10 @@ final class SettingsFixtures extends Fixture
         $manager->flush();
     }
 
-    public static function getData(): array
+    private function getData(): array
     {
         return [
-            // $data = [$setting_name, $setting_value];
+            // data = [$setting_name, $setting_value]
             ['site_name', 'Minuet'],
             ['site_title', 'Page Title'],
             ['meta_title', 'Meta Title'],

@@ -24,7 +24,8 @@ class ProductFixtures extends Fixture
 
         for ($prod = 1; $prod <= 10; ++$prod) {
             $product = new Product();
-            $product->setTitle($faker->text(15));
+//            $product->setTitle($faker->text(15));
+            $product->setTitle('Product ' . $prod);
             $product->setDescription($faker->text());
 //            $product->setSlug($this->slugger->slug($product->getName())->lower());
             $name = mb_strtolower($product->getTitle());
@@ -42,4 +43,13 @@ class ProductFixtures extends Fixture
 
         $manager->flush();
     }
+
+    public function getDependencies(): array
+    {
+        return [
+            CategoryFixtures::class,
+            AccountFixtures::class,
+        ];
+    }
+
 }

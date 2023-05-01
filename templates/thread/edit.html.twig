@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<title>Edit Thread</title>
+
+{% block body %}
+    <h1>Edit Thread</h1>
+
+    {{ include('thread/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_thread_index') }}">back to list</a>
+
+    {{ include('thread/_delete_form.html.twig') }}
+{% endblock %}
