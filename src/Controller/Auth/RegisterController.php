@@ -63,7 +63,7 @@ final class RegisterController extends BaseController implements AuthController
             $this->service->create($user);
             $this->messageBus->dispatch(new SendEmailConfirmationLink($user));
 
-            return $this->authenticate($user, $request);
+         //   return $this->authenticate($user, $request);
         }
 
         return $this->render('auth/register/register.html.twig', [

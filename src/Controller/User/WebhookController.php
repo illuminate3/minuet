@@ -65,13 +65,15 @@ final class WebhookController extends BaseController
                 case 'invoice.paid':
     
                     $user = $ur->findOneBy(['email' => $object->customer_email]);
-                    $plan = $sr->findOneBy(['id' =>2]);
-                    $account = new Account();
-                    $ar->findOnyBy(["user_id"=>$user->id,'']);
-                    $ar->setName($object->customer_email);
-                    $ar->setUser($user);
-                    $ar->setSubscription($plan);
-                    $em->persist($ar);
+                    $plan = $sr->findOneBy(['stripe_price_id' =>$object->lines->data[0]->price->id]);
+                    $account = $ar->findOneBy(["primaryUser"=>$user->getId()]);
+                    if (!$account) {
+                        $account = new Account();
+                    }
+                    $account->setName($object->customer_email);
+                    $account->setPrimaryUser($user->getId());
+                    $account->setSubscription($plan);
+                    $em->persist($account);
                     $em->flush();
     
                   //  $user->setSubscription($plan);

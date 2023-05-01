@@ -8,6 +8,7 @@ use App\Controller\BaseController;
 use App\Entity\User;
 use App\Repository\SettingsRepository;
 use App\Repository\SubscriptionRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Stripe\Stripe;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,7 +37,7 @@ final class SubscriptionController extends BaseController
     }
 
     #[Route('/subscribe/{priceId}', name: 'checkout')]
-    public function subscribe(Request $request,SubscriptionRepository $sr)
+    public function subscribe(Request $request,SubscriptionRepository $sr,EntityManagerInterface $em)
     {
 
         $stripeAPI = $_ENV['STRIPE_SECRET_KEY'];
@@ -50,8 +51,24 @@ final class SubscriptionController extends BaseController
 
         // \dd($request);
 
-        $priceId = $request->request->get('priceId');
+        $priceId = $request->attributes->get('priceId');
         if ('free_price' !== $priceId) {
+
+
+            if (!$this->getUser()->getStripeCustomerId()) {
+                $stripeCustomerObj =  \Stripe\Customer::create([
+                    'description' => 'Minuet customer',
+                    'email'=>$this->getUser()->getEmail(),
+                    'metadata'=>[
+                        "userId"=>$this->getUser()->getId()
+                    ]                  
+                ]);                 
+                $stripeCustomerId =  $stripeCustomerObj->id;
+                $this->getUser()->setStripeCustomerId($stripeCustomerId);                 
+                $em->persist($this->getUser());   
+                $em->flush(); 
+            }
+
             $stripeSession = \Stripe\Checkout\Session::create([
                 'success_url' => $this->generateUrl('success_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
                 'cancel_url' => $this->generateUrl('cancel_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
@@ -62,7 +79,7 @@ final class SubscriptionController extends BaseController
                 // 'customer_email' => $this->getUser()->getEmail(),
 
                 'line_items' => [[
-                    'price' => 'price_1HfnE6EhT0YNkXdX845U6Umd',
+                    'price' => $priceId ,
                     // For metered billing, do not pass quantity
                     'quantity' => 1,
                 ]],

@@ -42,23 +42,7 @@ class DashController extends BaseController
         }
         $this->em = $entityManager;
         $user = $security->getUser();
-        $account = $accountRepository->findOneBy(['user' => $user->getId()]);
-
-        if ($user->getIsAccount() === FALSE) {
-            return $this->redirectToRoute('app_index');
-        }
-
-        // get the account information the user is registered to
-        $accountUser = $accountUserRepository->findOneBy(['user' => $user->getId()]);
-
-        // get the account information
-        $account = $accountRepository->findOneBy(['id' => $accountUser->getAccount()]);
-        $account_id = $account->getId();
-        // check to see if the current user is the primary user for the account
-        $primaryUser = $account->getPrimaryUser();
-        $is_primary = $primaryUser === $user->getId();
-
-
+        $account = $accountRepository->findOneBy(['primaryUser' => $user->getId()]);
         if (!$account) {
             $stripeAPIKey = $_ENV['STRIPE_SECRET_KEY'];
             Stripe::setApiKey($stripeAPIKey);
@@ -77,8 +61,24 @@ class DashController extends BaseController
                 }                                    
             return $this->redirectToRoute('app_pricing');
         }
-        $usersData = $account->getAccountUser()->toArray();
-        $listingData = $account->getAccountListing()->toArray();
+        if ($user->getIsAccount() === FALSE) {
+            return $this->redirectToRoute('app_index');
+        }
+
+        // get the account information the user is registered to
+        $accountUser = $accountUserRepository->findOneBy(['user' => $user->getId()]);
+
+        // get the account information
+        $account = $accountRepository->findOneBy(['id' => $accountUser->getAccount()]);
+        $account_id = $account->getId();
+        // check to see if the current user is the primary user for the account
+        $primaryUser = $account->getPrimaryUser();
+        $is_primary = $primaryUser === $user->getId();
+
+
+       
+        // $usersData = $account->getAccountUser()->toArray();
+        // $listingData = $account->getAccountListing()->toArray();
         $subscription_id = $account->getSubscription()->getId();
         $subscription = $subscriptionRepository->findOneBy(['id' => $subscription_id]);
         // get all the users for the accout
