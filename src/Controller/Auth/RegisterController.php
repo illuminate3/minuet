@@ -62,7 +62,7 @@ final class RegisterController extends BaseController implements AuthController
             $user->setProfile(new Profile());
             $this->service->create($user);
             $this->messageBus->dispatch(new SendEmailConfirmationLink($user));
-
+            $this->addFlash('success', 'message.registration_successful');
          //   return $this->authenticate($user, $request);
         }
 
