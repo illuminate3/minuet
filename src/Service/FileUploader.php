@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Validator\PhotoRequirements;
+use App\Validator\imageRequirements;
 use Gregwar\Image\Image;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -30,7 +30,7 @@ final class FileUploader
         return $validator->validate(
             $file,
             [
-                new PhotoRequirements(),
+                new imageRequirements(),
             ]
         );
     }
@@ -68,8 +68,8 @@ final class FileUploader
         $folders = [
             '/small/',
             '/medium/',
-            '/full/',
             '/large/',
+            '/full/',
         ];
 
         foreach ($folders as $folder) {

@@ -80,7 +80,11 @@
         <!-- / Item -->
 
     {% else %}
-        <div class="well">{{ 'message.not_found'|trans }}</div>
+
+        <div class="well">
+            {{ 'message.not_found'|trans }}
+        </div>
+
     {% endfor %}
 
 </div>

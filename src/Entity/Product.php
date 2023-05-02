@@ -54,6 +54,7 @@ class Product
     private Collection $threads;
 
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Image::class)]
+    #[ORM\OrderBy(['sortOrder' => 'ASC'])]
     private Collection $images;
 
     public function __construct()
