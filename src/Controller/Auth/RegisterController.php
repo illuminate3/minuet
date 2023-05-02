@@ -62,8 +62,8 @@ final class RegisterController extends BaseController implements AuthController
             $user->setProfile(new Profile());
             $this->service->create($user);
             $this->messageBus->dispatch(new SendEmailConfirmationLink($user));
-
-            return $this->authenticate($user, $request);
+            $this->addFlash('success', 'message.registration_successful');
+         //   return $this->authenticate($user, $request);
         }
 
         return $this->render('auth/register/register.html.twig', [
@@ -118,6 +118,7 @@ final class RegisterController extends BaseController implements AuthController
                         'title' => 'title.verify_account_email_sent',
                         'message' => 'message.verify_account_email_sent',
                         'link' => 'app_index',
+                        'error_message' => null,
                         'link_title' => 'action.return_to_root',
                     ]);
             }

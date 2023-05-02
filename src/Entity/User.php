@@ -50,6 +50,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private $confirmation_token;
+    
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private $stripe_customer_id;
+
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private $stripe_subscription_id;
 
     #[ORM\Column(type: Types::DATETIMETZ_MUTABLE, nullable: true)]
     private $password_requested_at;
@@ -218,6 +224,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+    public function getStripeCustomerId(): ?string
+    {
+        return $this->stripe_customer_id;
+    }
+
+    public function setStripeCustomerId(string $stripe_customer_id): self
+    {
+        $this->stripe_customer_id = $stripe_customer_id;
+
+        return $this;
+    }
+    public function getStrSubscriptionId(): ?string
+    {
+        return $this->stripe_subscription_id;
+    }
+
+    public function setStrSubscriptionId(string $stripe_subscription_id): self
+    {
+        $this->stripe_subscription_id = $stripe_subscription_id;
 
         return $this;
     }
