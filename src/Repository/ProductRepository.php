@@ -8,8 +8,14 @@ use App\Entity\Category;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Exception;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 
 /**
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,9 +25,61 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ProductRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
+//    public function __construct(ManagerRegistry $registry)
+//    {
+//        parent::__construct($registry, Product::class);
+//    }
+
+    public function __construct(
+        ManagerRegistry $registry,
+        private PaginatorInterface $paginator,
+        protected Security $security,
+    ) {
         parent::__construct($registry, Product::class);
+    }
+
+    public const NUM_ITEMS = 20;
+
+
+    public function findAllPublished(): array
+    {
+        $qb = $this->createQueryBuilder('p');
+        $query = $qb->where("p.state = 'published'")
+            ->orderBy('p.id', 'DESC')
+            ->getQuery();
+
+        return $query->execute();
+    }
+
+
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
+    public function countAll(): int
+    {
+        $count = $this->createQueryBuilder('p')
+            ->select('count(p.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return (int) $count;
+    }
+
+//    private function findLimit(): int
+//    {
+//        $repository = $this->getEntityManager()->getRepository(Settings::class);
+//        $limit = $repository->findOneBy(['setting_name' => 'items_per_page']);
+//
+//        return (int) $limit->getSettingValue();
+//        return (int) NUM_ITEMS;
+//
+//    }
+
+    protected function createPaginator(Query $query, int $page): PaginationInterface
+    {
+//        return $this->paginator->paginate($query, $page, $this->findLimit());
+        return $this->paginator->paginate($query, $page, 4);
     }
 
     public function findProductsPaginated(int $page, string $slug, int $limit = 6): array

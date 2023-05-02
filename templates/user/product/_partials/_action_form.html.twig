@@ -1,0 +1,30 @@
+<form action="{{ url('user_product_delete', {id: product.id}) }}"
+      method="post"
+      id="delete-form-{{ product.id }}"
+>
+
+    <input type="hidden" name="token" value="{{ csrf_token('delete') }}"/>
+
+    <div class="btn-group btn-group-sm" role="group">
+
+        <a href="{{ url('user_product_edit', {id: product.id}) }}" class="btn btn-light">
+            {{ 'action.edit' | trans }}
+        </a>
+
+        <a href="{{ url('user_image_edit', {id: product.id}) }}" class="btn btn-light">
+            {{ 'action.edit_images' | trans }}
+        </a>
+
+        <button type="submit"
+                data-type="delete"
+                class="btn btn-sm btn-danger"
+                data-message="{{ 'text.confirm_delete' | trans }}"
+                data-confirmation-text="{{ 'action.delete' | trans }}"
+                data-cancellation-text="{{ 'action.cancel' | trans }}"
+        >
+            {{ 'action.delete' | trans }}
+        </button>
+
+    </div>
+
+</form>

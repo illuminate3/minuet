@@ -1,0 +1,96 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block subheader %}
+    <!-- Title -->
+{#    {{ include('layout/partials/_title.html.twig') }}#}
+    <!-- Search -->
+{#    {{ include('product/partials/_search_form.html.twig') }}#}
+{% endblock %}
+
+{% block body %}
+
+<div class="row">
+
+    {% for product in products %}
+
+        <!-- Item -->
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="card full-xs">
+
+                <div class="product-box-img">
+
+                    <a href="{{ path('product_show', {
+                        'id':  product.id,
+                        'slug': product.slug}) }}">
+
+                    {% for photo in product.images | slice(0, 1) %}
+
+                        <img class="card-img-top lazyload" src="{{ asset('/images/transparent.png') }}"
+                             data-src="/uploads/images/small/{{ photo.file }}"
+                             alt="{{ product.slug }}"
+                             title="{{ product.title }}"/>
+
+                    {% else %}
+
+                        <img class="card-img-top border-bottom" src="{{ asset('/images/no-photo.png') }}"
+                             alt="{{ product.slug }}"
+                             title="{{ product.title }}"/>
+
+                    {% endfor %}
+
+                    {% if product.price != '' %}
+                        <span class="price">
+                            $ {{ product.price }}
+{#                            {% if product.priceType != '' %}#}
+{#                                / {{ product.priceType }}#}
+{#                            {% endif %}#}
+                        </span>
+                    {% endif %}
+
+                    </a>
+
+                </div>
+
+                <div class="card-body">
+                    <h5 class="card-title">
+
+                        <a href="{{ path('product_show', {
+                            'id':  product.id,
+                            'slug': product.slug}) }}">
+                            {{ product.title }}
+                        </a>
+
+                    </h5>
+                    <p class="small icon-green">
+                        <i class="fas fa-map-marker-alt"></i>
+{#                            {{ product.address }}#}
+                        {{ product.id }}
+                    </p>
+
+
+{#                        <span class="attribute">{{ product.dealType.name }}</span>#}
+                    <span class="attribute">{{ product.category.name }}</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- / Item -->
+
+    {% else %}
+
+        <div class="well">
+            {{ 'message.not_found'|trans }}
+        </div>
+
+    {% endfor %}
+
+</div>
+
+<div class="py-lg-4">
+    {{ knp_pagination_render(products) }}
+</div>
+
+{% endblock %}

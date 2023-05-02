@@ -22,4 +22,5 @@ class LandingController extends BaseController
             'error' => null,
         ]);
     }
+
 }

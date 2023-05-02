@@ -20,10 +20,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/user/dash')]
 class DashController extends BaseController
 {
-
-
     #[Route('/user/dash', name: 'app_dash')]
     public function index(
         Request $request,
@@ -42,6 +41,9 @@ class DashController extends BaseController
         }
         $this->em = $entityManager;
         $user = $security->getUser();
+
+        if (false === $user->getIsAccount()) {
+
         $account = $accountRepository->findOneBy(['primaryUser' => $user->getId()]);
         if (!$account) {
             $stripeAPIKey = $_ENV['STRIPE_SECRET_KEY'];
@@ -61,8 +63,8 @@ class DashController extends BaseController
                 }                                    
             return $this->redirectToRoute('app_pricing');
         }
-        if ($user->getIsAccount() === FALSE) {
-            return $this->redirectToRoute('app_index');
+
+        return $this->redirectToRoute('app_index');
         }
 
         // get the account information the user is registered to
@@ -76,12 +78,14 @@ class DashController extends BaseController
         $is_primary = $primaryUser === $user->getId();
 
 
-       
+        // get all the users for the account
+
         // $usersData = $account->getAccountUser()->toArray();
         // $listingData = $account->getAccountListing()->toArray();
         $subscription_id = $account->getSubscription()->getId();
         $subscription = $subscriptionRepository->findOneBy(['id' => $subscription_id]);
         // get all the users for the accout
+
         $account_users = $accountUserRepository->findBy(['account' => $account]);
 
         // if the user isn't a primary user they still can manage products

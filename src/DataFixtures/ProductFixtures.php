@@ -28,16 +28,17 @@ class ProductFixtures extends Fixture
             $product->setTitle('Product ' . $prod);
             $product->setDescription($faker->text());
 //            $product->setSlug($this->slugger->slug($product->getName())->lower());
-            $name = mb_strtolower($product->getTitle());
-            $product->setSlug(Slugger::slugify($name));
+//            $name = mb_strtolower($product->getTitle());
+            $title = mb_strtolower($product->getTitle());
+            $product->setSlug(Slugger::slugify($title));
             $product->setPrice($faker->numberBetween(900, 150000));
 //            $product->setStock($faker->numberBetween(0, 10));
 
-            // On va chercher une référence de catégorie
-            $category = $this->getReference('cat-'.random_int(1, 8));
+            // Category
+            $category = $this->getReference('category-'.random_int(1, 8));
             $product->setCategory($category);
 
-            $this->setReference('prod-'.$prod, $product);
+            $this->setReference('product-'.$prod, $product);
             $manager->persist($product);
         }
 

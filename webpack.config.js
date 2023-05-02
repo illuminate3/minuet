@@ -28,9 +28,12 @@ Encore
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
     .addEntry('js/app', './assets/app.js')
-    .addEntry('js/layout', './assets/js/layout.js')
-    .addEntry('js/menu-sorting', './assets/js/admin/menu-sorting.js')
     .addEntry('js/admin', './assets/js/admin/admin.js')
+    .addEntry('js/menu-sorting', './assets/js/admin/menu-sorting.js')
+    .addEntry('js/layout', './assets/js/layout.js')
+    .addEntry('js/image', './assets/js/image.js')
+    .addEntry('js/ekko-lightbox', './assets/js/ekko-lightbox')
+    .addEntry('js/select2', './assets/js/select2.js')
 
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
@@ -64,6 +67,10 @@ Encore
     //.enableReactPreset()
 
     .addStyleEntry('css/app', ['./assets/styles/app.scss'])
+    .addStyleEntry('css/detail', ['./assets/styles/detail.scss'])
+    .addStyleEntry('css/image', ['./assets/styles/image.scss'])
+    .addStyleEntry('css/ekko-lightbox', ['./assets/styles/ekko-lightbox.scss'])
+    .addStyleEntry('css/select2', ['./assets/styles/select2.scss'])
 
     //.enableIntegrityHashes()
     .configureBabel(null, {

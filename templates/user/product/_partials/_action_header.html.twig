@@ -1,0 +1,61 @@
+<div class="row">
+
+    <div class="col text-start">
+
+        <label for="sort_by" class="col-auto col-form-label">{{ 'label.sort_by'|trans }}:</label>
+        <div class="col-auto">
+            {#                    <select class="form-control" id="sort_by" name="sort_by">#}
+            {#                        <option value="id" {% if searchParams.sort_by == 'id' %} selected{% endif %}>#}
+            {#                            {{ 'option.latest'|trans }}#}
+            {#                        </option>#}
+            {#                        <option#}
+            {#                            value="priority_number" {% if searchParams.sort_by == 'priority_number' %} selected{% endif %}>#}
+            {#                            {{ 'option.priority'|trans }}#}
+            {#                        </option>#}
+            {#                    </select>#}
+        </div>
+
+        <div class="col-auto pl-0">
+            {#                    <select class="form-control" id="state" name="state" aria-label="{{ 'label.moderation_status'|trans }}">#}
+            {#                        <option value="published" {% if searchParams.state == 'published' %} selected{% endif %}>#}
+            {#                            {{ 'option.published'|trans }}#}
+            {#                        </option>#}
+            {#                        <option value="private" {% if searchParams.state == 'private' %} selected{% endif %}>#}
+            {#                            {{ 'option.private'|trans }}#}
+            {#                        </option>#}
+            {#                        <option value="pending" {% if searchParams.state == 'pending' %} selected{% endif %}>#}
+            {#                            {{ 'option.pending'|trans }}#}
+            {#                        </option>#}
+            {#                        <option value="rejected" {% if searchParams.state == 'rejected' %} selected{% endif %}>#}
+            {#                            {{ 'option.rejected'|trans }}#}
+            {#                        </option>#}
+            {#                        <option#}
+            {#                            value="all" {% if searchParams.state == 'all' %} selected{% endif %}>#}
+            {#                            {{ 'option.all'|trans }}#}
+            {#                        </option>#}
+            {#                    </select>#}
+        </div>
+
+    </div>
+
+    {% if new_url is defined %}
+        <div class="col text-end">
+            <a class="btn btn-success" href="{{ path(new_url) }}">
+                <i class="fa-solid fa-plus"></i>
+                {{ 'action.new'|trans }}
+            </a>
+        </div>
+    {% endif %}
+
+    {% if edit_url is defined %}
+        <div class="col text-end">
+            <a class="btn btn-success" href="{{ path(edit_url) }}">
+                <i class="fa-solid fa-plus"></i>
+                {{ 'action.edit'|trans }}
+            </a>
+        </div>
+    {% endif %}
+
+</div>
+
+<hr>

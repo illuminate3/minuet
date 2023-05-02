@@ -9,10 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-// #[Route('/page')]
+#[Route('/page')]
 final class PageController extends BaseController
 {
-    #[Route(path: '/page/', name: 'page_index', defaults: ['page' => '1'], methods: ['GET'])]
+    #[Route(path: '/', name: 'page_index', defaults: ['page' => '1'], methods: ['GET'])]
     #[Route('/rss.xml', defaults: ['page' => '1', '_format' => 'xml'], methods: ['GET'], name: 'page_rss')]
     public function pageIndex(
         Request $request,
@@ -29,7 +29,7 @@ final class PageController extends BaseController
         );
     }
 
-    #[Route(path: '/page/{slug}', name: 'page', methods: ['GET'])]
+    #[Route(path: '/{slug}', name: 'page', methods: ['GET'])]
     public function pageShow(
         Request $request,
         PageRepository $pageRepository
