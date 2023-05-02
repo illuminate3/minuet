@@ -699,6 +699,10 @@
                 <source>message.registration_suspended</source>
                 <target>Registration of new users has been temporarily suspended.</target>
             </trans-unit>
+            <trans-unit id="message.registration_successful">
+                <source>message.registration_successful</source>
+                <target>Thanks for registration, please verify your email-id.</target>
+            </trans-unit>
             <trans-unit id="message.token_processed">
                 <source>message.token_processed</source>
                 <target>
