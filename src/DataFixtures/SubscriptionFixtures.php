@@ -35,9 +35,9 @@ class SubscriptionFixtures extends Fixture
     {
         return [
             // data = [$plan, $price, $stripe_price_Id, $valid_until, $availability, $support]
-            ['basic', 0, 'price_1Jr7rNChbjQY7PCSCR1Ofm7E', '7 days', 'limited', 'limited support'],
-            ['premium', 24.99, 'price_1Jr7rNChbjQY7PCSCR1Ofm7E', '1 month', 'lifetime', '24/7 Support'],
-            ['cinematic', 39.99, 'price_1Jr7sLChbjQY7PCSFwBO3q9Z', '2 months', 'lifetime', '24/7 Support'],
+            ['basic', 0, 'price_1N1LrhHxcL7TQhSHcRcfL89i', '7 days', 'limited', 'limited support'],
+            ['premium', 24.99, 'price_1N1LtDHxcL7TQhSHA7lHKgjk', '1 month', 'lifetime', '24/7 Support'],
+            ['cinematic', 39.99, 'price_1N1LtuHxcL7TQhSHhp6oIzuQ', '2 months', 'lifetime', '24/7 Support'],
         ];
     }
 }

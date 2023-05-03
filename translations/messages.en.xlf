@@ -642,6 +642,10 @@
                 <source>title.subscription</source>
                 <target>Subscriptions</target>
             </trans-unit>
+            <trans-unit id="title.success">
+                <source>title.success</source>
+                <target>Success</target>
+            </trans-unit>
             <trans-unit id="title.users">
                 <source>title.users</source>
                 <target>Users</target>
