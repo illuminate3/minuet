@@ -83,6 +83,7 @@ final class WebhookController extends BaseController
                     $em->persist($user);
                     $em->flush();
                     http_response_code(200);
+                    echo json_encode(["status"=>true]);
                     exit();                   
                    // break;
                    
