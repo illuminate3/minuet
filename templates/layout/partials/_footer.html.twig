@@ -78,13 +78,18 @@
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{ path('user_profile') }}">
-                            {{ 'menu.profile'|trans }}
+                        <a class="nav-link" href="{{ path('app_thread_index') }}">
+                            {{ 'menu.messages'|trans }}
                         </a>
                     </li>
                     <li>
                         <a class="nav-link" href="{{ path('app_pricing') }}">
                             {{ 'menu.pricing'|trans }}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ path('user_profile') }}">
+                            {{ 'menu.profile'|trans }}
                         </a>
                     </li>
                 {% else %}

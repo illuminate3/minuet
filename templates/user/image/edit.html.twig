@@ -1,0 +1,75 @@
+{% extends 'layout/dash/dash.html.twig' %}
+
+{% block subheader %}
+    <!-- Title -->
+    {{ include('common/_action_title.html.twig') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('css/image') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('js/image') }}
+{% endblock %}
+
+{% block body %}
+
+<div class="row">
+
+    <div class="row mt-4">
+        <div class="col">
+
+            <form action="{{ path('user_image_upload', {id: product_id}) }}"
+                  method="POST"
+                  enctype="multipart/form-data"
+                  data-token="{{ csrf_token('csrf_token') }}"
+                  class="dropzone js-image-dropzone">
+                <div class="fallback">
+                    <input name="file" type="file" accept="image/*" multiple/>
+                    <input name="csrf_token" type="hidden" value="{{ csrf_token('csrf_token') }}" />
+                </div>
+            </form>
+
+            <div class="images-list py-lg-5">
+
+                {% if images | default %}
+                    <button type="button"
+                            data-processing="{{ 'action.processing'|trans }}"
+                            data-save="{{ 'action.save'|trans }}"
+                            class="btn btn btn-outline-dark btn-lg btn-reorder">
+                        {{ 'action.reorder'|trans }}
+                    </button>
+                {% endif %}
+
+                <div class="reorder-help bg-light text-center" style="display:none;">
+                    1. {{ 'text.drag_images'|trans }}.<br>
+                    2. {{ 'text.click_save'|trans }}.
+                </div>
+
+                <div class="gallery">
+                    <ul class="reorder-ul">
+
+                        {% for image in images %}
+
+                            <li id="image_{{ image.id }}" class="ui-sortable-handle">
+                                <a href="javascript:void(0);" class="single-img">
+                                    <img src="/uploads/images/small/{{ image.file }}"
+                                         alt="{{ 'title.images' | trans }} #{{ image.id }}"/>
+                                </a>
+
+                                {{ include('user/image/_delete_form.html.twig', {image: image, product_id: product_id}, with_context = false) }}
+                            </li>
+
+                        {% endfor %}
+
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

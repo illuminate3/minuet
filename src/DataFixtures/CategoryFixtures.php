@@ -46,7 +46,7 @@ class CategoryFixtures extends Fixture
         $category->setParent($parent);
         $manager->persist($category);
 
-        $this->addReference('cat-'.$this->counter, $category);
+        $this->addReference('category-'.$this->counter, $category);
         ++$this->counter;
 
         return $category;

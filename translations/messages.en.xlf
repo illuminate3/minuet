@@ -40,9 +40,21 @@
                 <source>text.billing_address</source>
                 <target>Billing Address</target>
             </trans-unit>
+            <trans-unit id="text.confirm_delete">
+                <source>text.confirm_delete</source>
+                <target>Are you sure you want to delete?</target>
+            </trans-unit>
+            <trans-unit id="text.click_save">
+                <source>text.click_save</source>
+                <target>Click 'Save' when finished.</target>
+            </trans-unit>
             <trans-unit id="text.copyrights">
                 <source>text.copyrights</source>
                 <target>Copyrights</target>
+            </trans-unit>
+            <trans-unit id="text.drag_images">
+                <source>text.drag_images</source>
+                <target>Drag photos to reorder.</target>
             </trans-unit>
             <trans-unit id="text.navigation">
                 <source>text.navigation</source>
@@ -102,6 +114,10 @@
                 <source>action.edit</source>
                 <target>Edit</target>
             </trans-unit>
+            <trans-unit id="action.edit_images">
+                <source>action.edit_images</source>
+                <target>Edit Images</target>
+            </trans-unit>
             <trans-unit id="action.forgot_password">
                 <source>action.forgot_password</source>
                 <target>Forgot Your Password?</target>
@@ -110,6 +126,10 @@
                 <source>action.new</source>
                 <target>New</target>
             </trans-unit>
+            <trans-unit id="action.processing">
+                <source>action.processing</source>
+                <target>Processing</target>
+            </trans-unit>
             <trans-unit id="action.register">
                 <source>action.register</source>
                 <target>Register</target>
@@ -117,6 +137,10 @@
             <trans-unit id="action.request_new_verification_email">
                 <source>action.request_new_verification_email</source>
                 <target>Request New Verification Email</target>
+            </trans-unit>
+            <trans-unit id="action.reorder">
+                <source>action.reorder</source>
+                <target>Reorder</target>
             </trans-unit>
             <trans-unit id="action.return_to_root">
                 <source>action.return_to_root</source>
@@ -133,6 +157,10 @@
             <trans-unit id="action.sign_in">
                 <source>action.sign_in</source>
                 <target>Sign In</target>
+            </trans-unit>
+            <trans-unit id="action.upload">
+                <source>action.upload</source>
+                <target>Upload</target>
             </trans-unit>
             <trans-unit id="action.verify_account">
                 <source>action.verify_account</source>
@@ -167,6 +195,10 @@
             <trans-unit id="label.post_code">
                 <source>label.post_code</source>
                 <target>Zip Code</target>
+            </trans-unit>
+            <trans-unit id="label.sort_by">
+                <source>label.sort_by</source>
+                <target>Sort By</target>
             </trans-unit>
             <trans-unit id="label.state">
                 <source>label.state</source>
@@ -416,6 +448,10 @@
                 <source>menu.menu</source>
                 <target>Menu</target>
             </trans-unit>
+            <trans-unit id="menu.messages">
+                <source>menu.messages</source>
+                <target>Messages</target>
+            </trans-unit>
             <trans-unit id="menu.products">
                 <source>menu.products</source>
                 <target>Products</target>
@@ -558,6 +594,10 @@
                 <source>title.forgot_password</source>
                 <target>Forgot Password</target>
             </trans-unit>
+            <trans-unit id="title.images">
+                <source>title.images</source>
+                <target>Images</target>
+            </trans-unit>
             <trans-unit id="title.login">
                 <source>title.login</source>
                 <target>Secure Sign In</target>
@@ -698,6 +738,10 @@
             <trans-unit id="message.registration_suspended">
                 <source>message.registration_suspended</source>
                 <target>Registration of new users has been temporarily suspended.</target>
+            </trans-unit>
+            <trans-unit id="message.registration_successful">
+                <source>message.registration_successful</source>
+                <target>Thanks for registration, please verify your email-id.</target>
             </trans-unit>
             <trans-unit id="message.token_processed">
                 <source>message.token_processed</source>
