@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
+use App\Entity\Category;
 use App\Entity\Product;
 use App\Utils\Slugger;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -36,6 +37,8 @@ class ProductFixtures extends Fixture
 
             // Category
             $category = $this->getReference('category-'.random_int(1, 8));
+//            $id = random_int(1, 1000);
+//            $category = $manager->getRepository(Category::class)->findOneBy(['id' => $id]);
             $product->setCategory($category);
 
             $this->setReference('product-'.$prod, $product);
