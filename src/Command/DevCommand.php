@@ -56,6 +56,14 @@ final class DevCommand extends Command
                 'command' => 'app:load-product-account',
                 'arguments' => [],
             ],
+            [
+                'command' => 'app:load-csv',
+                'arguments' => [],
+            ],
+            [
+                'command' => 'app:category',
+                'arguments' => [],
+            ],
         ];
     }
 }
