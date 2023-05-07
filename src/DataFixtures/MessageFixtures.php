@@ -51,19 +51,24 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
             // data = [$user_id, $thread_id, $updated_by, $content]
             [1, 1, null, 'Duis aute irure dolor in reprehenderit'],
             [6, 2, null, 'Duis aute irure dolor in reprehenderit'],
-            [6, 2, null, 'quis nostrud exercitation ullamco laboris nisi ut aliquip'],
-            [7, 2, null, 'Duis aute irure dolor in reprehenderit'],
-            [6, 3, null, 'Duis aute irure dolor in reprehenderit'],
-            [6, 3, null, 'quis nostrud exercitation ullamco laboris nisi ut aliquip'],
-            [7, 4, null, 'Duis aute irure dolor in reprehenderit'],
+            [7, 3, null, 'Duis aute irure dolor in reprehenderit'],
+            [6, 4, null, 'Duis aute irure dolor in reprehenderit'],
+            [7, 5, null, 'Duis aute irure dolor in reprehenderit'],
         ];
     }
+
+
+//    // data = [$user_id, $product_id, $account_id]
+//    1 [1, 1, 1],
+//    2 [6, 8, 2],
+//    3 [7, 8, 2],
+//    4 [6, 9, 2],
+//    5 [7, 10, 2],
 
     public function getDependencies(): array
     {
         return [
             ThreadFixtures::class,
-            UserFixtures::class,
         ];
     }
 }

@@ -18,6 +18,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class AccountFixtures extends Fixture implements DependentFixtureInterface
 {
+    private int $counter = 1;
 
     public function load(ObjectManager $manager): void
     {
@@ -32,6 +33,9 @@ class AccountFixtures extends Fixture implements DependentFixtureInterface
             $account->setSubscription($subscription);
             $account->setName($name);
             $account->setPrimaryUser($primary_user);
+
+            $this->addReference('account-'.$this->counter, $account);
+            ++$this->counter;
 
             $manager->persist($account);
         }
@@ -56,7 +60,6 @@ class AccountFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             SubscriptionFixtures::class,
-            UserFixtures::class,
         ];
     }
 }
