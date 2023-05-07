@@ -57,14 +57,6 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
         ];
     }
 
-
-//    // data = [$user_id, $product_id, $account_id]
-//    1 [1, 1, 1],
-//    2 [6, 8, 2],
-//    3 [7, 8, 2],
-//    4 [6, 9, 2],
-//    5 [7, 10, 2],
-
     public function getDependencies(): array
     {
         return [

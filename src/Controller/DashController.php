@@ -26,8 +26,8 @@ class DashController extends BaseController
     #[Route('/user/dash', name: 'app_dash')]
     public function index(
         Request $request,
-        Security $security,   
-        EntityManagerInterface $entityManager,     
+        Security $security,
+        EntityManagerInterface $entityManager,
         AccountRepository $accountRepository,
         AccountUserRepository $accountUserRepository,
         SubscriptionRepository $subscriptionRepository,
@@ -48,19 +48,19 @@ class DashController extends BaseController
         if (!$account) {
             $stripeAPIKey = $_ENV['STRIPE_SECRET_KEY'];
             Stripe::setApiKey($stripeAPIKey);
-            if (is_null($user->getStripeCustomerId())) {               
+            if (is_null($user->getStripeCustomerId())) {
                 $stripeCustomerObj =  \Stripe\Customer::create([
                     'description' => 'Minuet customer',
                     'email'=>$user->getEmail(),
                     'metadata'=>[
                         "userId"=>$user->getId()
-                    ]                  
-                ]);                 
+                    ]
+                ]);
                 $stripeCustomerId =  $stripeCustomerObj->id;
-                $user->setStripeCustomerId($stripeCustomerId);            
-                $this->em->persist($user);   
-                $this->em->flush();  
-                }                                    
+                $user->setStripeCustomerId($stripeCustomerId);
+                $this->em->persist($user);
+                $this->em->flush();
+                }
             return $this->redirectToRoute('app_pricing');
         }
 
@@ -76,7 +76,7 @@ class DashController extends BaseController
         // check to see if the current user is the primary user for the account
         $primaryUser = $account->getPrimaryUser();
         $is_primary = $primaryUser === $user->getId();
-
+        $user_id = $user->getId();
 
         // get all the users for the account
 
@@ -108,6 +108,7 @@ class DashController extends BaseController
             'account_users' => $account_users,
             'products' => $products,
             'productThreads' => $productThreads,
+            'userId' => $user_id,
 //            'threads' => $threads,
 //            'messages' => $messages,
         ]);
