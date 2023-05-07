@@ -46,6 +46,8 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
 
             // Category
             $category = $this->getReference('category-'.random_int(1, 8));
+//            $id = random_int(1, 1000);
+//            $category = $manager->getRepository(Category::class)->findOneBy(['id' => $id]);
             $product->setCategory($category);
 //            $random_int = random_int(1, 800);
 //            $category = $manager->getRepository(Category::class)->findOneBy(['id' => $random_int]);
