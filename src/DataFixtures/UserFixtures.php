@@ -8,9 +8,10 @@ use App\Entity\Profile;
 use App\Entity\User;
 use App\Transformer\UserTransformer;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-final class UserFixtures extends Fixture
+final class UserFixtures extends Fixture implements DependentFixtureInterface
 {
     public function __construct(private UserTransformer $transformer)
     {
@@ -50,6 +51,15 @@ final class UserFixtures extends Fixture
             ['Test3', 'User3', 'test', true, true, '(456)555-1212', 'test3@test.com', ['ROLE_USER']],
             ['Test4', 'User4', 'test', true, true, '(456)555-1212', 'test4@test.com', ['ROLE_USER']],
             ['Test5', 'User5', 'test', true, true, '(456)555-1212', 'test5@test.com', ['ROLE_USER']],
+        ];
+    }
+
+    public function getDependencies(): array
+    {
+        return [
+            SettingsFixtures::class,
+            PageFixtures::class,
+            MenuFixtures::class,
         ];
     }
 }

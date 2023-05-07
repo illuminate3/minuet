@@ -55,7 +55,6 @@ class AccountUserFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             AccountFixtures::class,
-            SubscriptionFixtures::class,
             UserFixtures::class,
         ];
     }

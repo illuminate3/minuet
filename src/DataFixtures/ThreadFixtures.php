@@ -53,19 +53,20 @@ class ThreadFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             // data = [$user_id, $product_id, $account_id]
-            [1, 8, 1],
-            [6, 4, 2],
-            [7, 4, 2],
-            [6, 5, 2],
-            [7, 5, 2],
+            [1, 1, 1],
+            [6, 8, 2],
+            [7, 8, 2],
+            [6, 9, 2],
+            [7, 10, 2],
         ];
     }
 
     public function getDependencies(): array
     {
         return [
-            ProductFixtures::class,
             UserFixtures::class,
+            AccountFixtures::class,
+            ProductFixtures::class,
         ];
     }
 }
