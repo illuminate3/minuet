@@ -5,13 +5,7 @@ declare(strict_types=1);
 namespace App\DataFixtures;
 
 use App\Entity\Account;
-use App\Entity\Message;
-use App\Entity\Product;
 use App\Entity\Subscription;
-use App\Entity\Thread;
-use App\Entity\User;
-use App\Repository\ProductRepository;
-use App\Repository\UserRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;

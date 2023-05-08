@@ -4,22 +4,16 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\Entity\Category;
 use App\Entity\Product;
 use App\Utils\Slugger;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ProductFixtures extends Fixture implements DependentFixtureInterface
 {
     private int $counter = 1;
-
-    public function __construct(private SluggerInterface $slugger)
-    {
-    }
 
     /**
      * @throws \Exception
@@ -38,7 +32,6 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             $product->setTitle('Product '.$prod);
             $product->setDescription($faker->text());
 //            $product->setSlug($this->slugger->slug($product->getName())->lower());
-//            $name = mb_strtolower($product->getTitle());
             $title = mb_strtolower($product->getTitle());
             $product->setSlug(Slugger::slugify($title));
             $product->setPrice($faker->numberBetween(900, 150000));
@@ -46,12 +39,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
 
             // Category
             $category = $this->getReference('category-'.random_int(1, 8));
-//            $id = random_int(1, 1000);
-//            $category = $manager->getRepository(Category::class)->findOneBy(['id' => $id]);
             $product->setCategory($category);
-//            $random_int = random_int(1, 800);
-//            $category = $manager->getRepository(Category::class)->findOneBy(['id' => $random_int]);
-//            $product->setCategory($category);
 
             // Account
             if ($this->counter <= 7) {

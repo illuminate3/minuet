@@ -5,17 +5,15 @@ declare(strict_types=1);
 namespace App\DataFixtures;
 
 use App\Entity\Category;
-use App\Utils\Slugger;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 class CategoryFixtures extends Fixture implements DependentFixtureInterface
+    // class CategoryFixtures extends Fixture
 {
     private int $counter = 1;
-    private SluggerInterface $slugger;
 
     public function __construct(private ParameterBagInterface $params)
     {
@@ -44,35 +42,20 @@ class CategoryFixtures extends Fixture implements DependentFixtureInterface
         // comment out these lines and uncomment the lines above to use the generic ones
         // Change needs to be made in the ProductFixtures too
         $path = $this->params->get('kernel.project_dir');
+
         $file_make = $path.'/data/make.sql';
 
         $sql = file_get_contents($file_make);
+        $manager->getConnection()->getConfiguration()->setSQLLogger(null);
         $manager->getConnection()->exec($sql);
-        $manager->flush();
 
         $file_category = $path.'/data/category.sql';
 
         $sql = file_get_contents($file_category);
+        $manager->getConnection()->getConfiguration()->setSQLLogger(null);
         $manager->getConnection()->exec($sql);
 
         $this->setCategoryReference($manager);
-    }
-
-    private function createCategory(string $name, $manager, Category $parent = null)
-    {
-        $category = new Category();
-        $category->setName($name);
-        $category->setCategoryOrder($this->counter);
-//        $category->setSlug($this->slugger->slug($category->getName())->lower());
-        $name = mb_strtolower($category->getName());
-        $category->setSlug(Slugger::slugify($name));
-        $category->setParent($parent);
-        $manager->persist($category);
-
-        $this->addReference('category-'.$this->counter, $category);
-        ++$this->counter;
-
-        return $category;
     }
 
     private function setCategoryReference($manager): void

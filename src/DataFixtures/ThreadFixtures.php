@@ -14,7 +14,6 @@ use Doctrine\Persistence\ObjectManager;
 
 class ThreadFixtures extends Fixture implements DependentFixtureInterface
 {
-
     public function load(ObjectManager $manager): void
     {
 //        product_id
