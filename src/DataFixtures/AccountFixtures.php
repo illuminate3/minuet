@@ -5,19 +5,14 @@ declare(strict_types=1);
 namespace App\DataFixtures;
 
 use App\Entity\Account;
-use App\Entity\Message;
-use App\Entity\Product;
 use App\Entity\Subscription;
-use App\Entity\Thread;
-use App\Entity\User;
-use App\Repository\ProductRepository;
-use App\Repository\UserRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 class AccountFixtures extends Fixture implements DependentFixtureInterface
 {
+    private int $counter = 1;
 
     public function load(ObjectManager $manager): void
     {
@@ -32,6 +27,9 @@ class AccountFixtures extends Fixture implements DependentFixtureInterface
             $account->setSubscription($subscription);
             $account->setName($name);
             $account->setPrimaryUser($primary_user);
+
+            $this->addReference('account-'.$this->counter, $account);
+            ++$this->counter;
 
             $manager->persist($account);
         }
@@ -56,7 +54,6 @@ class AccountFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             SubscriptionFixtures::class,
-            UserFixtures::class,
         ];
     }
 }

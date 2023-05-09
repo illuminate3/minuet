@@ -51,11 +51,9 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
             // data = [$user_id, $thread_id, $updated_by, $content]
             [1, 1, null, 'Duis aute irure dolor in reprehenderit'],
             [6, 2, null, 'Duis aute irure dolor in reprehenderit'],
-            [6, 2, null, 'quis nostrud exercitation ullamco laboris nisi ut aliquip'],
-            [7, 2, null, 'Duis aute irure dolor in reprehenderit'],
-            [6, 3, null, 'Duis aute irure dolor in reprehenderit'],
-            [6, 3, null, 'quis nostrud exercitation ullamco laboris nisi ut aliquip'],
-            [7, 4, null, 'Duis aute irure dolor in reprehenderit'],
+            [7, 3, null, 'Duis aute irure dolor in reprehenderit'],
+            [6, 4, null, 'Duis aute irure dolor in reprehenderit'],
+            [7, 5, null, 'Duis aute irure dolor in reprehenderit'],
         ];
     }
 
@@ -63,7 +61,6 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             ThreadFixtures::class,
-            UserFixtures::class,
         ];
     }
 }

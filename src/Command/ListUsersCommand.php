@@ -46,11 +46,10 @@ final class ListUsersCommand extends Command
 
         $allUsers = $this->users->findBy([], ['id' => 'DESC'], $limit);
 
-        $usersAsPlainArrays = array_map(function (User $user) {
+        $usersAsPlainArrays = array_map(static function (User $user) {
             return [
                 $user->getId(),
                 $user->getProfile()->getFullName(),
-                $user->getUsername(),
                 $user->getEmail(),
                 implode(', ', $user->getRoles()),
             ];
@@ -59,7 +58,7 @@ final class ListUsersCommand extends Command
         $bufferedOutput = new BufferedOutput();
         $io = new SymfonyStyle($input, $bufferedOutput);
         $io->table(
-            ['ID', 'Full Name', 'Username', 'Email', 'Roles'],
+            ['ID', 'Full Name', 'Email', 'Roles'],
             $usersAsPlainArrays
         );
 

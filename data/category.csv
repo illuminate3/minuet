@@ -1,0 +1,1480 @@
+NULL,Acura,acura
+1,CL,acura-cl
+1,ILX,acura-ilx
+1,Integra,acura-integra
+1,Legend,acura-legend
+1,MDX,acura-mdx
+1,MDX Sport Hybrid,acura-mdx-sport-hybrid
+1,NSX,acura-nsx
+1,RDX,acura-rdx
+1,RL,acura-rl
+1,RLX,acura-rlx
+1,RLX Sport Hybrid,acura-rlx-sport-hybrid
+1,RSX,acura-rsx
+1,SLX,acura-slx
+1,TL,acura-tl
+1,TLX,acura-tlx
+1,TSX,acura-tsx
+1,Vigor,acura-vigor
+1,ZDX,acura-zdx
+NULL,Alfa Romeo,alfa-romeo
+20,164,alfa-romeo-164
+20,4C,alfa-romeo-4c
+20,4C Spider,alfa-romeo-4c-spider
+20,Giulia,alfa-romeo-giulia
+20,Spider,alfa-romeo-spider
+20,Stelvio,alfa-romeo-stelvio
+20,Tonale,alfa-romeo-tonale
+NULL,Aston Martin,aston-martin
+28,DB11,aston-martin-db11
+28,DB9,aston-martin-db9
+28,DB9 GT,aston-martin-db9-gt
+28,DBS,aston-martin-dbs
+28,DBS Superleggera,aston-martin-dbs-superleggera
+28,DBX,aston-martin-dbx
+28,Rapide,aston-martin-rapide
+28,Rapide S,aston-martin-rapide-s
+28,Vanquish,aston-martin-vanquish
+28,Vanquish S,aston-martin-vanquish-s
+28,Vantage,aston-martin-vantage
+28,Virage,aston-martin-virage
+NULL,Audi,audi
+41,100,audi-100
+41,80,audi-80
+41,90,audi-90
+41,A3,audi-a3
+41,A3 Sportback e-tron,audi-a3-sportback-e-tron
+41,A4,audi-a4
+41,A4 2005.5,audi-a4-2005-5
+41,A4 allroad,audi-a4-allroad
+41,A5,audi-a5
+41,A5 Sport,audi-a5-sport
+41,A6,audi-a6
+41,A6 allroad,audi-a6-allroad
+41,A7,audi-a7
+41,A8,audi-a8
+41,allroad,audi-allroad
+41,Cabriolet,audi-cabriolet
+41,e-tron,audi-e-tron
+41,e-tron GT,audi-e-tron-gt
+41,e-tron S,audi-e-tron-s
+41,e-tron S Sportback,audi-e-tron-s-sportback
+41,e-tron Sportback,audi-e-tron-sportback
+41,Q3,audi-q3
+41,Q4 e-tron,audi-q4-e-tron
+41,Q4 Sportback e-tron,audi-q4-sportback-e-tron
+41,Q5,audi-q5
+41,Q5 Sportback,audi-q5-sportback
+41,Q7,audi-q7
+41,Q8,audi-q8
+41,Quattro,audi-quattro
+41,R8,audi-r8
+41,RS 3,audi-rs-3
+41,RS 4,audi-rs-4
+41,RS 5,audi-rs-5
+41,RS 6,audi-rs-6
+41,RS 7,audi-rs-7
+41,RS e-tron GT,audi-rs-e-tron-gt
+41,RS Q8,audi-rs-q8
+41,S3,audi-s3
+41,S4,audi-s4
+41,S4 2005.5,audi-s4-2005-5
+41,S5,audi-s5
+41,S6,audi-s6
+41,S7,audi-s7
+41,S8,audi-s8
+41,SQ5,audi-sq5
+41,SQ5 Sportback,audi-sq5-sportback
+41,SQ7,audi-sq7
+41,SQ8,audi-sq8
+41,TT,audi-tt
+NULL,Bentley,bentley
+91,Arnage,bentley-arnage
+91,Azure,bentley-azure
+91,Azure T,bentley-azure-t
+91,Bentayga,bentley-bentayga
+91,Brooklands,bentley-brooklands
+91,Continental,bentley-continental
+91,Continental GT,bentley-continental-gt
+91,Flying Spur,bentley-flying-spur
+91,Mulsanne,bentley-mulsanne
+NULL,BMW,bmw
+101,1 Series,bmw-1-series
+101,2 Series,bmw-2-series
+101,3 Series,bmw-3-series
+101,4 Series,bmw-4-series
+101,5 Series,bmw-5-series
+101,6 Series,bmw-6-series
+101,7 Series,bmw-7-series
+101,8 Series,bmw-8-series
+101,Alpina B7,bmw-alpina-b7
+101,i3,bmw-i3
+101,i4,bmw-i4
+101,i7,bmw-i7
+101,i8,bmw-i8
+101,iX,bmw-ix
+101,M,bmw-m
+101,M2,bmw-m2
+101,M3,bmw-m3
+101,M4,bmw-m4
+101,M5,bmw-m5
+101,M6,bmw-m6
+101,M8,bmw-m8
+101,X1,bmw-x1
+101,X2,bmw-x2
+101,X3,bmw-x3
+101,X3 M,bmw-x3-m
+101,X4,bmw-x4
+101,X4 M,bmw-x4-m
+101,X5,bmw-x5
+101,X5 M,bmw-x5-m
+101,X6,bmw-x6
+101,X6 M,bmw-x6-m
+101,X7,bmw-x7
+101,Z3,bmw-z3
+101,Z4,bmw-z4
+101,Z4 M,bmw-z4-m
+101,Z8,bmw-z8
+NULL,Buick,buick
+138,Cascada,buick-cascada
+138,Century,buick-century
+138,Enclave,buick-enclave
+138,Encore,buick-encore
+138,Encore GX,buick-encore-gx
+138,Envision,buick-envision
+138,LaCrosse,buick-lacrosse
+138,LeSabre,buick-lesabre
+138,Lucerne,buick-lucerne
+138,Park Avenue,buick-park-avenue
+138,Rainier,buick-rainier
+138,Regal,buick-regal
+138,Regal Sportback,buick-regal-sportback
+138,Regal TourX,buick-regal-tourx
+138,Rendezvous,buick-rendezvous
+138,Riviera,buick-riviera
+138,Roadmaster,buick-roadmaster
+138,Skylark,buick-skylark
+138,Terraza,buick-terraza
+138,Verano,buick-verano
+NULL,Cadillac,cadillac
+159,Allante,cadillac-allante
+159,ATS,cadillac-ats
+159,ATS-V,cadillac-ats-v
+159,Brougham,cadillac-brougham
+159,Catera,cadillac-catera
+159,CT4,cadillac-ct4
+159,CT5,cadillac-ct5
+159,CT6,cadillac-ct6
+159,CT6-V,cadillac-ct6-v
+159,CTS,cadillac-cts
+159,CTS-V,cadillac-cts-v
+159,DeVille,cadillac-deville
+159,DTS,cadillac-dts
+159,Eldorado,cadillac-eldorado
+159,ELR,cadillac-elr
+159,Escalade,cadillac-escalade
+159,Escalade ESV,cadillac-escalade-esv
+159,Escalade EXT,cadillac-escalade-ext
+159,Fleetwood,cadillac-fleetwood
+159,LYRIQ,cadillac-lyriq
+159,Seville,cadillac-seville
+159,Sixty Special,cadillac-sixty-special
+159,SRX,cadillac-srx
+159,STS,cadillac-sts
+159,XLR,cadillac-xlr
+159,XT4,cadillac-xt4
+159,XT5,cadillac-xt5
+159,XT6,cadillac-xt6
+159,XTS,cadillac-xts
+NULL,Chevrolet,chevrolet
+189,1500 Extended Cab,chevrolet-1500-extended-cab
+189,1500 Regular Cab,chevrolet-1500-regular-cab
+189,2500 Crew Cab,chevrolet-2500-crew-cab
+189,2500 Extended Cab,chevrolet-2500-extended-cab
+189,2500 HD Extended Cab,chevrolet-2500-hd-extended-cab
+189,2500 HD Regular Cab,chevrolet-2500-hd-regular-cab
+189,2500 Regular Cab,chevrolet-2500-regular-cab
+189,3500 Crew Cab,chevrolet-3500-crew-cab
+189,3500 Extended Cab,chevrolet-3500-extended-cab
+189,3500 HD Extended Cab,chevrolet-3500-hd-extended-cab
+189,3500 HD Regular Cab,chevrolet-3500-hd-regular-cab
+189,3500 Regular Cab,chevrolet-3500-regular-cab
+189,APV Cargo,chevrolet-apv-cargo
+189,Astro Cargo,chevrolet-astro-cargo
+189,Astro Passenger,chevrolet-astro-passenger
+189,Avalanche,chevrolet-avalanche
+189,Avalanche 1500,chevrolet-avalanche-1500
+189,Avalanche 2500,chevrolet-avalanche-2500
+189,Aveo,chevrolet-aveo
+189,Beretta,chevrolet-beretta
+189,Blazer,chevrolet-blazer
+189,Blazer EV,chevrolet-blazer-ev
+189,Bolt EUV,chevrolet-bolt-euv
+189,Bolt EV,chevrolet-bolt-ev
+189,Camaro,chevrolet-camaro
+189,Caprice,chevrolet-caprice
+189,Caprice Classic,chevrolet-caprice-classic
+189,Captiva Sport,chevrolet-captiva-sport
+189,Cavalier,chevrolet-cavalier
+189,City Express,chevrolet-city-express
+189,Classic,chevrolet-classic
+189,Cobalt,chevrolet-cobalt
+189,Colorado Crew Cab,chevrolet-colorado-crew-cab
+189,Colorado Extended Cab,chevrolet-colorado-extended-cab
+189,Colorado Regular Cab,chevrolet-colorado-regular-cab
+189,Corsica,chevrolet-corsica
+189,Corvette,chevrolet-corvette
+189,Cruze,chevrolet-cruze
+189,Cruze Limited,chevrolet-cruze-limited
+189,Equinox,chevrolet-equinox
+189,Equinox EV,chevrolet-equinox-ev
+189,Express 1500 Cargo,chevrolet-express-1500-cargo
+189,Express 1500 Passenger,chevrolet-express-1500-passenger
+189,Express 2500 Cargo,chevrolet-express-2500-cargo
+189,Express 2500 Passenger,chevrolet-express-2500-passenger
+189,Express 3500 Cargo,chevrolet-express-3500-cargo
+189,Express 3500 Passenger,chevrolet-express-3500-passenger
+189,G-Series 1500,chevrolet-g-series-1500
+189,G-Series 2500,chevrolet-g-series-2500
+189,G-Series 3500,chevrolet-g-series-3500
+189,G-Series G10,chevrolet-g-series-g10
+189,G-Series G20,chevrolet-g-series-g20
+189,G-Series G30,chevrolet-g-series-g30
+189,HHR,chevrolet-hhr
+189,Impala,chevrolet-impala
+189,Impala Limited,chevrolet-impala-limited
+189,Lumina,chevrolet-lumina
+189,Lumina APV,chevrolet-lumina-apv
+189,Lumina Cargo,chevrolet-lumina-cargo
+189,Lumina Passenger,chevrolet-lumina-passenger
+189,Malibu,chevrolet-malibu
+189,Malibu Classic,chevrolet-malibu-classic
+189,Malibu Limited,chevrolet-malibu-limited
+189,Metro,chevrolet-metro
+189,Monte Carlo,chevrolet-monte-carlo
+189,Prizm,chevrolet-prizm
+189,S10 Blazer,chevrolet-s10-blazer
+189,S10 Crew Cab,chevrolet-s10-crew-cab
+189,S10 Extended Cab,chevrolet-s10-extended-cab
+189,S10 Regular Cab,chevrolet-s10-regular-cab
+189,Silverado Classic 1500 Crew Cab,chevrolet-silverado-classic-1500-crew-cab
+189,Silverado Classic 1500 Extended Cab,chevrolet-silverado-classic-1500-extended-cab
+189,Silverado Classic 1500 HD Crew Cab,chevrolet-silverado-classic-1500-hd-crew-cab
+189,Silverado Classic 1500 Regular Cab,chevrolet-silverado-classic-1500-regular-cab
+189,Silverado Classic 2500 HD Crew Cab,chevrolet-silverado-classic-2500-hd-crew-cab
+189,Silverado Classic 2500 HD Extended Cab,chevrolet-silverado-classic-2500-hd-extended-cab
+189,Silverado Classic 2500 HD Regular Cab,chevrolet-silverado-classic-2500-hd-regular-cab
+189,Silverado Classic 3500 Crew Cab,chevrolet-silverado-classic-3500-crew-cab
+189,Silverado Classic 3500 Extended Cab,chevrolet-silverado-classic-3500-extended-cab
+189,Silverado Classic 3500 Regular Cab,chevrolet-silverado-classic-3500-regular-cab
+189,Silverado 1500 Crew Cab,chevrolet-silverado-1500-crew-cab
+189,Silverado 1500 Double Cab,chevrolet-silverado-1500-double-cab
+189,Silverado 1500 Extended Cab,chevrolet-silverado-1500-extended-cab
+189,Silverado 1500 HD Crew Cab,chevrolet-silverado-1500-hd-crew-cab
+189,Silverado 1500 LD Double Cab,chevrolet-silverado-1500-ld-double-cab
+189,Silverado 1500 Limited Crew Cab,chevrolet-silverado-1500-limited-crew-cab
+189,Silverado 1500 Limited Double Cab,chevrolet-silverado-1500-limited-double-cab
+189,Silverado 1500 Limited Regular Cab,chevrolet-silverado-1500-limited-regular-cab
+189,Silverado 1500 Regular Cab,chevrolet-silverado-1500-regular-cab
+189,Silverado 2500 Crew Cab,chevrolet-silverado-2500-crew-cab
+189,Silverado 2500 Extended Cab,chevrolet-silverado-2500-extended-cab
+189,Silverado 2500 HD Crew Cab,chevrolet-silverado-2500-hd-crew-cab
+189,Silverado 2500 HD Double Cab,chevrolet-silverado-2500-hd-double-cab
+189,Silverado 2500 HD Extended Cab,chevrolet-silverado-2500-hd-extended-cab
+189,Silverado 2500 HD Regular Cab,chevrolet-silverado-2500-hd-regular-cab
+189,Silverado 2500 Regular Cab,chevrolet-silverado-2500-regular-cab
+189,Silverado 3500 Crew Cab,chevrolet-silverado-3500-crew-cab
+189,Silverado 3500 Extended Cab,chevrolet-silverado-3500-extended-cab
+189,Silverado 3500 HD Crew Cab,chevrolet-silverado-3500-hd-crew-cab
+189,Silverado 3500 HD Double Cab,chevrolet-silverado-3500-hd-double-cab
+189,Silverado 3500 HD Extended Cab,chevrolet-silverado-3500-hd-extended-cab
+189,Silverado 3500 HD Regular Cab,chevrolet-silverado-3500-hd-regular-cab
+189,Silverado 3500 Regular Cab,chevrolet-silverado-3500-regular-cab
+189,Silverado EV,chevrolet-silverado-ev
+189,Sonic,chevrolet-sonic
+189,Spark,chevrolet-spark
+189,Spark EV,chevrolet-spark-ev
+189,Sportvan G10,chevrolet-sportvan-g10
+189,Sportvan G20,chevrolet-sportvan-g20
+189,Sportvan G30,chevrolet-sportvan-g30
+189,SS,chevrolet-ss
+189,SSR,chevrolet-ssr
+189,Suburban,chevrolet-suburban
+189,Suburban 1500,chevrolet-suburban-1500
+189,Suburban 2500,chevrolet-suburban-2500
+189,Suburban 3500HD,chevrolet-suburban-3500hd
+189,Tahoe,chevrolet-tahoe
+189,Tahoe New,chevrolet-tahoe-new
+189,Tracker,chevrolet-tracker
+189,TrailBlazer,chevrolet-trailblazer
+189,Traverse,chevrolet-traverse
+189,Trax,chevrolet-trax
+189,Uplander Cargo,chevrolet-uplander-cargo
+189,Uplander Passenger,chevrolet-uplander-passenger
+189,Venture Cargo,chevrolet-venture-cargo
+189,Venture Passenger,chevrolet-venture-passenger
+189,Volt,chevrolet-volt
+NULL,Chrysler,chrysler
+317,200,chrysler-200
+317,300,chrysler-300
+317,300M,chrysler-300m
+317,Aspen,chrysler-aspen
+317,Cirrus,chrysler-cirrus
+317,Concorde,chrysler-concorde
+317,Crossfire,chrysler-crossfire
+317,Fifth Ave,chrysler-fifth-ave
+317,Grand Voyager,chrysler-grand-voyager
+317,Imperial,chrysler-imperial
+317,LeBaron,chrysler-lebaron
+317,LHS,chrysler-lhs
+317,New Yorker,chrysler-new-yorker
+317,Pacifica,chrysler-pacifica
+317,Pacifica Hybrid,chrysler-pacifica-hybrid
+317,Prowler,chrysler-prowler
+317,PT Cruiser,chrysler-pt-cruiser
+317,Sebring,chrysler-sebring
+317,Town & Country,chrysler-town-country
+317,Voyager,chrysler-voyager
+NULL,Daewoo,daewoo
+338,Lanos,daewoo-lanos
+338,Leganza,daewoo-leganza
+338,Nubira,daewoo-nubira
+NULL,Daihatsu,daihatsu
+342,Charade,daihatsu-charade
+342,Rocky,daihatsu-rocky
+NULL,Dodge,dodge
+345,Avenger,dodge-avenger
+345,Caliber,dodge-caliber
+345,Caravan Cargo,dodge-caravan-cargo
+345,Caravan Passenger,dodge-caravan-passenger
+345,Challenger,dodge-challenger
+345,Charger,dodge-charger
+345,Colt,dodge-colt
+345,D150 Club Cab,dodge-d150-club-cab
+345,D150 Regular Cab,dodge-d150-regular-cab
+345,D250 Club Cab,dodge-d250-club-cab
+345,D250 Regular Cab,dodge-d250-regular-cab
+345,D350 Club Cab,dodge-d350-club-cab
+345,D350 Regular Cab,dodge-d350-regular-cab
+345,Dakota Club Cab,dodge-dakota-club-cab
+345,Dakota Crew Cab,dodge-dakota-crew-cab
+345,Dakota Extended Cab,dodge-dakota-extended-cab
+345,Dakota Quad Cab,dodge-dakota-quad-cab
+345,Dakota Regular Cab,dodge-dakota-regular-cab
+345,Dart,dodge-dart
+345,Daytona,dodge-daytona
+345,Durango,dodge-durango
+345,Dynasty,dodge-dynasty
+345,Grand Caravan Cargo,dodge-grand-caravan-cargo
+345,Grand Caravan Passenger,dodge-grand-caravan-passenger
+345,Hornet,dodge-hornet
+345,Intrepid,dodge-intrepid
+345,Journey,dodge-journey
+345,Magnum,dodge-magnum
+345,Monaco,dodge-monaco
+345,Neon,dodge-neon
+345,Nitro,dodge-nitro
+345,Ram 1500 Club Cab,dodge-ram-1500-club-cab
+345,Ram 1500 Crew Cab,dodge-ram-1500-crew-cab
+345,Ram 1500 Mega Cab,dodge-ram-1500-mega-cab
+345,Ram 1500 Quad Cab,dodge-ram-1500-quad-cab
+345,Ram 1500 Regular Cab,dodge-ram-1500-regular-cab
+345,Ram 2500 Club Cab,dodge-ram-2500-club-cab
+345,Ram 2500 Crew Cab,dodge-ram-2500-crew-cab
+345,Ram 2500 Mega Cab,dodge-ram-2500-mega-cab
+345,Ram 2500 Quad Cab,dodge-ram-2500-quad-cab
+345,Ram 2500 Regular Cab,dodge-ram-2500-regular-cab
+345,Ram 3500 Club Cab,dodge-ram-3500-club-cab
+345,Ram 3500 Crew Cab,dodge-ram-3500-crew-cab
+345,Ram 3500 Mega Cab,dodge-ram-3500-mega-cab
+345,Ram 3500 Quad Cab,dodge-ram-3500-quad-cab
+345,Ram 3500 Regular Cab,dodge-ram-3500-regular-cab
+345,Ram 50 Regular Cab,dodge-ram-50-regular-cab
+345,Ram Van 1500,dodge-ram-van-1500
+345,Ram Van 2500,dodge-ram-van-2500
+345,Ram Van 3500,dodge-ram-van-3500
+345,Ram Van B150,dodge-ram-van-b150
+345,Ram Van B250,dodge-ram-van-b250
+345,Ram Van B350,dodge-ram-van-b350
+345,Ram Wagon 1500,dodge-ram-wagon-1500
+345,Ram Wagon 2500,dodge-ram-wagon-2500
+345,Ram Wagon 3500,dodge-ram-wagon-3500
+345,Ram Wagon B150,dodge-ram-wagon-b150
+345,Ram Wagon B250,dodge-ram-wagon-b250
+345,Ram Wagon B350,dodge-ram-wagon-b350
+345,Ramcharger,dodge-ramcharger
+345,Shadow,dodge-shadow
+345,Spirit,dodge-spirit
+345,Sprinter 2500 Cargo,dodge-sprinter-2500-cargo
+345,Sprinter 2500 Passenger,dodge-sprinter-2500-passenger
+345,Sprinter 3500 Cargo,dodge-sprinter-3500-cargo
+345,Stealth,dodge-stealth
+345,Stratus,dodge-stratus
+345,Viper,dodge-viper
+NULL,Eagle,eagle
+414,Premier,eagle-premier
+414,Summit,eagle-summit
+414,Talon,eagle-talon
+414,Vision,eagle-vision
+NULL,Ferrari,ferrari
+419,296 GTB,ferrari-296-gtb
+419,430 Scuderia,ferrari-430-scuderia
+419,458 Italia,ferrari-458-italia
+419,458 Speciale,ferrari-458-speciale
+419,458 Spider,ferrari-458-spider
+419,488 GTB,ferrari-488-gtb
+419,488 Pista,ferrari-488-pista
+419,488 Spider,ferrari-488-spider
+419,599 GTB Fiorano,ferrari-599-gtb-fiorano
+419,599 GTO,ferrari-599-gto
+419,612 Scaglietti,ferrari-612-scaglietti
+419,812 Competizione,ferrari-812-competizione
+419,812 Competizione A,ferrari-812-competizione-a
+419,812 GTS,ferrari-812-gts
+419,812 Superfast,ferrari-812-superfast
+419,California,ferrari-california
+419,F12berlinetta,ferrari-f12berlinetta
+419,F430,ferrari-f430
+419,F8,ferrari-f8
+419,FF,ferrari-ff
+419,GTC4Lusso,ferrari-gtc4lusso
+419,Portofino,ferrari-portofino
+419,Roma,ferrari-roma
+419,SF90,ferrari-sf90
+NULL,FIAT,fiat
+444,124 Spider,fiat-124-spider
+444,500,fiat-500
+444,500 Abarth,fiat-500-abarth
+444,500c,fiat-500c
+444,500c Abarth,fiat-500c-abarth
+444,500e,fiat-500e
+444,500L,fiat-500l
+444,500X,fiat-500x
+NULL,Fisker,fisker
+453,Karma,fisker-karma
+NULL,Ford,ford
+455,Aerostar Cargo,ford-aerostar-cargo
+455,Aerostar Passenger,ford-aerostar-passenger
+455,Aspire,ford-aspire
+455,Bronco,ford-bronco
+455,Bronco Sport,ford-bronco-sport
+455,C-MAX Energi,ford-c-max-energi
+455,C-MAX Hybrid,ford-c-max-hybrid
+455,Club Wagon,ford-club-wagon
+455,Contour,ford-contour
+455,Crown Victoria,ford-crown-victoria
+455,E-Transit 350 Cargo Van,ford-e-transit-350-cargo-van
+455,E150 Cargo,ford-e150-cargo
+455,E150 Passenger,ford-e150-passenger
+455,E150 Super Duty Cargo,ford-e150-super-duty-cargo
+455,E150 Super Duty Passenger,ford-e150-super-duty-passenger
+455,E250 Cargo,ford-e250-cargo
+455,E250 Super Duty Cargo,ford-e250-super-duty-cargo
+455,E350 Super Duty Cargo,ford-e350-super-duty-cargo
+455,E350 Super Duty Passenger,ford-e350-super-duty-passenger
+455,Econoline E150 Cargo,ford-econoline-e150-cargo
+455,Econoline E150 Passenger,ford-econoline-e150-passenger
+455,Econoline E250 Cargo,ford-econoline-e250-cargo
+455,Econoline E350 Cargo,ford-econoline-e350-cargo
+455,Econoline E350 Super Duty Cargo,ford-econoline-e350-super-duty-cargo
+455,Econoline E350 Super Duty Passenger,ford-econoline-e350-super-duty-passenger
+455,EcoSport,ford-ecosport
+455,Edge,ford-edge
+455,Escape,ford-escape
+455,Escape Plug-in Hybrid,ford-escape-plug-in-hybrid
+455,Escort,ford-escort
+455,Excursion,ford-excursion
+455,Expedition,ford-expedition
+455,Expedition EL,ford-expedition-el
+455,Expedition MAX,ford-expedition-max
+455,Explorer,ford-explorer
+455,Explorer Sport,ford-explorer-sport
+455,Explorer Sport Trac,ford-explorer-sport-trac
+455,F150 Heritage Regular Cab,ford-f150-heritage-regular-cab
+455,F150 Heritage Super Cab,ford-f150-heritage-super-cab
+455,F150 Lightning,ford-f150-lightning
+455,F150 Regular Cab,ford-f150-regular-cab
+455,F150 Super Cab,ford-f150-super-cab
+455,F150 SuperCrew Cab,ford-f150-supercrew-cab
+455,F250 Crew Cab,ford-f250-crew-cab
+455,F250 Regular Cab,ford-f250-regular-cab
+455,F250 Super Cab,ford-f250-super-cab
+455,F250 Super Duty Crew Cab,ford-f250-super-duty-crew-cab
+455,F250 Super Duty Regular Cab,ford-f250-super-duty-regular-cab
+455,F250 Super Duty Super Cab,ford-f250-super-duty-super-cab
+455,F350 Crew Cab,ford-f350-crew-cab
+455,F350 Regular Cab,ford-f350-regular-cab
+455,F350 Super Cab,ford-f350-super-cab
+455,F350 Super Duty Crew Cab,ford-f350-super-duty-crew-cab
+455,F350 Super Duty Regular Cab,ford-f350-super-duty-regular-cab
+455,F350 Super Duty Super Cab,ford-f350-super-duty-super-cab
+455,F450 Super Duty Crew Cab,ford-f450-super-duty-crew-cab
+455,F450 Super Duty Regular Cab,ford-f450-super-duty-regular-cab
+455,Festiva,ford-festiva
+455,Fiesta,ford-fiesta
+455,Five Hundred,ford-five-hundred
+455,Flex,ford-flex
+455,Focus,ford-focus
+455,Focus ST,ford-focus-st
+455,Freestar Cargo,ford-freestar-cargo
+455,Freestar Passenger,ford-freestar-passenger
+455,Freestyle,ford-freestyle
+455,Fusion,ford-fusion
+455,Fusion Energi,ford-fusion-energi
+455,Fusion Plug-in Hybrid,ford-fusion-plug-in-hybrid
+455,GT,ford-gt
+455,Maverick,ford-maverick
+455,Mustang,ford-mustang
+455,Mustang MACH-E,ford-mustang-mach-e
+455,Probe,ford-probe
+455,Ranger Regular Cab,ford-ranger-regular-cab
+455,Ranger Super Cab,ford-ranger-super-cab
+455,Ranger SuperCab,ford-ranger-supercab
+455,Ranger SuperCrew,ford-ranger-supercrew
+455,Taurus,ford-taurus
+455,Taurus X,ford-taurus-x
+455,Tempo,ford-tempo
+455,Thunderbird,ford-thunderbird
+455,Transit 150 Cargo Van,ford-transit-150-cargo-van
+455,Transit 150 Crew Van,ford-transit-150-crew-van
+455,Transit 150 Passenger Van,ford-transit-150-passenger-van
+455,Transit 150 Van,ford-transit-150-van
+455,Transit 150 Wagon,ford-transit-150-wagon
+455,Transit 250 Cargo Van,ford-transit-250-cargo-van
+455,Transit 250 Crew Van,ford-transit-250-crew-van
+455,Transit 250 Van,ford-transit-250-van
+455,Transit 350 Cargo Van,ford-transit-350-cargo-van
+455,Transit 350 Crew Van,ford-transit-350-crew-van
+455,Transit 350 HD Cargo Van,ford-transit-350-hd-cargo-van
+455,Transit 350 HD Crew Van,ford-transit-350-hd-crew-van
+455,Transit 350 HD Van,ford-transit-350-hd-van
+455,Transit 350 Passenger Van,ford-transit-350-passenger-van
+455,Transit 350 Van,ford-transit-350-van
+455,Transit 350 Wagon,ford-transit-350-wagon
+455,Transit Connect Cargo,ford-transit-connect-cargo
+455,Transit Connect Cargo Van,ford-transit-connect-cargo-van
+455,Transit Connect Passenger,ford-transit-connect-passenger
+455,Transit Connect Passenger Wagon,ford-transit-connect-passenger-wagon
+455,Windstar Cargo,ford-windstar-cargo
+455,Windstar Passenger,ford-windstar-passenger
+455,ZX2,ford-zx2
+NULL,Freightliner,freightliner
+561,Sprinter 1500 Cargo,freightliner-sprinter-1500-cargo
+561,Sprinter 1500 Passenger,freightliner-sprinter-1500-passenger
+561,Sprinter 2500 Cargo,freightliner-sprinter-2500-cargo
+561,Sprinter 2500 Crew,freightliner-sprinter-2500-crew
+561,Sprinter 2500 Passenger,freightliner-sprinter-2500-passenger
+561,Sprinter 3500 Cargo,freightliner-sprinter-3500-cargo
+561,Sprinter 3500 Crew,freightliner-sprinter-3500-crew
+561,Sprinter 3500 XD Crew,freightliner-sprinter-3500-xd-crew
+561,Sprinter 3500XD Cargo,freightliner-sprinter-3500xd-cargo
+561,Sprinter 4500 Cargo,freightliner-sprinter-4500-cargo
+561,Sprinter 4500 Crew,freightliner-sprinter-4500-crew
+561,Sprinter WORKER Cargo,freightliner-sprinter-worker-cargo
+561,Sprinter WORKER Passenger,freightliner-sprinter-worker-passenger
+NULL,Genesis,genesis
+575,Electrified G80,genesis-electrified-g80
+575,G70,genesis-g70
+575,G80,genesis-g80
+575,G90,genesis-g90
+575,GV60,genesis-gv60
+575,GV70,genesis-gv70
+575,GV80,genesis-gv80
+NULL,Geo,geo
+583,Metro,geo-metro
+583,Prizm,geo-prizm
+583,Storm,geo-storm
+583,Tracker,geo-tracker
+NULL,GMC,gmc
+588,1500 Club Coupe,gmc-1500-club-coupe
+588,1500 Regular Cab,gmc-1500-regular-cab
+588,2500 Club Coupe,gmc-2500-club-coupe
+588,2500 Crew Cab,gmc-2500-crew-cab
+588,2500 HD Club Coupe,gmc-2500-hd-club-coupe
+588,2500 HD Extended Cab,gmc-2500-hd-extended-cab
+588,2500 HD Regular Cab,gmc-2500-hd-regular-cab
+588,2500 Regular Cab,gmc-2500-regular-cab
+588,3500 Club Coupe,gmc-3500-club-coupe
+588,3500 Crew Cab,gmc-3500-crew-cab
+588,3500 Extended Cab,gmc-3500-extended-cab
+588,3500 Regular Cab,gmc-3500-regular-cab
+588,Acadia,gmc-acadia
+588,Acadia Limited,gmc-acadia-limited
+588,Canyon Crew Cab,gmc-canyon-crew-cab
+588,Canyon Extended Cab,gmc-canyon-extended-cab
+588,Canyon Regular Cab,gmc-canyon-regular-cab
+588,Envoy,gmc-envoy
+588,Envoy XL,gmc-envoy-xl
+588,Envoy XUV,gmc-envoy-xuv
+588,Hummer EV Pickup,gmc-hummer-ev-pickup
+588,Hummer EV SUV,gmc-hummer-ev-suv
+588,Jimmy,gmc-jimmy
+588,Rally Wagon 1500,gmc-rally-wagon-1500
+588,Rally Wagon 2500,gmc-rally-wagon-2500
+588,Rally Wagon 3500,gmc-rally-wagon-3500
+588,Rally Wagon G2500,gmc-rally-wagon-g2500
+588,Rally Wagon G3500,gmc-rally-wagon-g3500
+588,Safari Cargo,gmc-safari-cargo
+588,Safari Passenger,gmc-safari-passenger
+588,Savana 1500 Cargo,gmc-savana-1500-cargo
+588,Savana 1500 Passenger,gmc-savana-1500-passenger
+588,Savana 2500 Cargo,gmc-savana-2500-cargo
+588,Savana 2500 Passenger,gmc-savana-2500-passenger
+588,Savana 3500 Cargo,gmc-savana-3500-cargo
+588,Savana 3500 Passenger,gmc-savana-3500-passenger
+588,Sierra Classic 1500 Crew Cab,gmc-sierra-classic-1500-crew-cab
+588,Sierra Classic 1500 Extended Cab,gmc-sierra-classic-1500-extended-cab
+588,Sierra Classic 1500 HD Crew Cab,gmc-sierra-classic-1500-hd-crew-cab
+588,Sierra Classic 1500 Regular Cab,gmc-sierra-classic-1500-regular-cab
+588,Sierra Classic 2500 Crew Cab,gmc-sierra-classic-2500-crew-cab
+588,Sierra Classic 2500 HD Crew Cab,gmc-sierra-classic-2500-hd-crew-cab
+588,Sierra Classic 2500 HD Extended Cab,gmc-sierra-classic-2500-hd-extended-cab
+588,Sierra Classic 2500 HD Regular Cab,gmc-sierra-classic-2500-hd-regular-cab
+588,Sierra Classic 3500 Crew Cab,gmc-sierra-classic-3500-crew-cab
+588,Sierra Classic 3500 Extended Cab,gmc-sierra-classic-3500-extended-cab
+588,Sierra Classic 3500 Regular Cab,gmc-sierra-classic-3500-regular-cab
+588,Sierra 1500 Crew Cab,gmc-sierra-1500-crew-cab
+588,Sierra 1500 Double Cab,gmc-sierra-1500-double-cab
+588,Sierra 1500 Extended Cab,gmc-sierra-1500-extended-cab
+588,Sierra 1500 HD Crew Cab,gmc-sierra-1500-hd-crew-cab
+588,Sierra 1500 Limited Crew Cab,gmc-sierra-1500-limited-crew-cab
+588,Sierra 1500 Limited Double Cab,gmc-sierra-1500-limited-double-cab
+588,Sierra 1500 Limited Regular Cab,gmc-sierra-1500-limited-regular-cab
+588,Sierra 1500 Regular Cab,gmc-sierra-1500-regular-cab
+588,Sierra 2500 Crew Cab,gmc-sierra-2500-crew-cab
+588,Sierra 2500 Extended Cab,gmc-sierra-2500-extended-cab
+588,Sierra 2500 HD Crew Cab,gmc-sierra-2500-hd-crew-cab
+588,Sierra 2500 HD Double Cab,gmc-sierra-2500-hd-double-cab
+588,Sierra 2500 HD Extended Cab,gmc-sierra-2500-hd-extended-cab
+588,Sierra 2500 HD Regular Cab,gmc-sierra-2500-hd-regular-cab
+588,Sierra 2500 Regular Cab,gmc-sierra-2500-regular-cab
+588,Sierra 3500 Crew Cab,gmc-sierra-3500-crew-cab
+588,Sierra 3500 Extended Cab,gmc-sierra-3500-extended-cab
+588,Sierra 3500 HD Crew Cab,gmc-sierra-3500-hd-crew-cab
+588,Sierra 3500 HD Double Cab,gmc-sierra-3500-hd-double-cab
+588,Sierra 3500 HD Extended Cab,gmc-sierra-3500-hd-extended-cab
+588,Sierra 3500 HD Regular Cab,gmc-sierra-3500-hd-regular-cab
+588,Sierra 3500 Regular Cab,gmc-sierra-3500-regular-cab
+588,Sonoma Club Cab,gmc-sonoma-club-cab
+588,Sonoma Club Coupe Cab,gmc-sonoma-club-coupe-cab
+588,Sonoma Crew Cab,gmc-sonoma-crew-cab
+588,Sonoma Extended Cab,gmc-sonoma-extended-cab
+588,Sonoma Regular Cab,gmc-sonoma-regular-cab
+588,Suburban 1500,gmc-suburban-1500
+588,Suburban 2500,gmc-suburban-2500
+588,Terrain,gmc-terrain
+588,Vandura 1500,gmc-vandura-1500
+588,Vandura 2500,gmc-vandura-2500
+588,Vandura 3500,gmc-vandura-3500
+588,Vandura G1500,gmc-vandura-g1500
+588,Vandura G2500,gmc-vandura-g2500
+588,Vandura G3500,gmc-vandura-g3500
+588,Yukon,gmc-yukon
+588,Yukon Denali,gmc-yukon-denali
+588,Yukon XL,gmc-yukon-xl
+588,Yukon XL 1500,gmc-yukon-xl-1500
+588,Yukon XL 2500,gmc-yukon-xl-2500
+NULL,Honda,honda
+677,Accord,honda-accord
+677,Accord Crosstour,honda-accord-crosstour
+677,Accord Hybrid,honda-accord-hybrid
+677,Civic,honda-civic
+677,Civic Type R,honda-civic-type-r
+677,Clarity Electric,honda-clarity-electric
+677,Clarity Fuel Cell,honda-clarity-fuel-cell
+677,Clarity Plug-in Hybrid,honda-clarity-plug-in-hybrid
+677,CR-V,honda-cr-v
+677,CR-V Hybrid,honda-cr-v-hybrid
+677,CR-Z,honda-cr-z
+677,Crosstour,honda-crosstour
+677,del Sol,honda-del-sol
+677,Element,honda-element
+677,Fit,honda-fit
+677,HR-V,honda-hr-v
+677,Insight,honda-insight
+677,Odyssey,honda-odyssey
+677,Passport,honda-passport
+677,Pilot,honda-pilot
+677,Prelude,honda-prelude
+677,Prologue,honda-prologue
+677,Ridgeline,honda-ridgeline
+677,S2000,honda-s2000
+NULL,HUMMER,hummer
+702,H1,hummer-h1
+702,H2,hummer-h2
+702,H3,hummer-h3
+702,H3T,hummer-h3t
+NULL,Hyundai,hyundai
+707,Accent,hyundai-accent
+707,Azera,hyundai-azera
+707,Elantra,hyundai-elantra
+707,Elantra GT,hyundai-elantra-gt
+707,Elantra Hybrid,hyundai-elantra-hybrid
+707,Elantra N,hyundai-elantra-n
+707,Entourage,hyundai-entourage
+707,Equus,hyundai-equus
+707,Excel,hyundai-excel
+707,Genesis,hyundai-genesis
+707,Genesis Coupe,hyundai-genesis-coupe
+707,IONIQ 5,hyundai-ioniq-5
+707,IONIQ 6,hyundai-ioniq-6
+707,IONIQ 7,hyundai-ioniq-7
+707,Ioniq Electric,hyundai-ioniq-electric
+707,Ioniq Hybrid,hyundai-ioniq-hybrid
+707,Ioniq Plug-in Hybrid,hyundai-ioniq-plug-in-hybrid
+707,Kona,hyundai-kona
+707,Kona Electric,hyundai-kona-electric
+707,Kona N,hyundai-kona-n
+707,NEXO,hyundai-nexo
+707,Palisade,hyundai-palisade
+707,Santa Cruz,hyundai-santa-cruz
+707,Santa Fe,hyundai-santa-fe
+707,Santa Fe Hybrid,hyundai-santa-fe-hybrid
+707,Santa Fe Plug-in Hybrid,hyundai-santa-fe-plug-in-hybrid
+707,Santa Fe Sport,hyundai-santa-fe-sport
+707,Santa Fe XL,hyundai-santa-fe-xl
+707,Scoupe,hyundai-scoupe
+707,Sonata,hyundai-sonata
+707,Sonata Hybrid,hyundai-sonata-hybrid
+707,Sonata Plug-in Hybrid,hyundai-sonata-plug-in-hybrid
+707,Tiburon,hyundai-tiburon
+707,Tucson,hyundai-tucson
+707,Tucson Fuel Cell,hyundai-tucson-fuel-cell
+707,Tucson Hybrid,hyundai-tucson-hybrid
+707,Tucson Plug-in Hybrid,hyundai-tucson-plug-in-hybrid
+707,Veloster,hyundai-veloster
+707,Venue,hyundai-venue
+707,Veracruz,hyundai-veracruz
+707,XG300,hyundai-xg300
+707,XG350,hyundai-xg350
+NULL,INFINITI,infiniti
+750,EX,infiniti-ex
+750,FX,infiniti-fx
+750,G,infiniti-g
+750,I,infiniti-i
+750,J,infiniti-j
+750,JX,infiniti-jx
+750,M,infiniti-m
+750,Q,infiniti-q
+750,Q40,infiniti-q40
+750,Q50,infiniti-q50
+750,Q60,infiniti-q60
+750,Q70,infiniti-q70
+750,QX,infiniti-qx
+750,QX30,infiniti-qx30
+750,QX50,infiniti-qx50
+750,QX55,infiniti-qx55
+750,QX60,infiniti-qx60
+750,QX70,infiniti-qx70
+750,QX80,infiniti-qx80
+NULL,Isuzu,isuzu
+770,Amigo,isuzu-amigo
+770,Ascender,isuzu-ascender
+770,Axiom,isuzu-axiom
+770,Hombre Regular Cab,isuzu-hombre-regular-cab
+770,Hombre Spacecab,isuzu-hombre-spacecab
+770,i-280 Extended Cab,isuzu-i-280-extended-cab
+770,i-290 Extended Cab,isuzu-i-290-extended-cab
+770,i-350 Crew Cab,isuzu-i-350-crew-cab
+770,i-370 Crew Cab,isuzu-i-370-crew-cab
+770,i-370 Extended Cab,isuzu-i-370-extended-cab
+770,Impulse,isuzu-impulse
+770,Oasis,isuzu-oasis
+770,Regular Cab,isuzu-regular-cab
+770,Rodeo,isuzu-rodeo
+770,Rodeo Sport,isuzu-rodeo-sport
+770,Spacecab,isuzu-spacecab
+770,Stylus,isuzu-stylus
+770,Trooper,isuzu-trooper
+770,VehiCROSS,isuzu-vehicross
+NULL,Jaguar,jaguar
+790,E-PACE,jaguar-e-pace
+790,F-PACE,jaguar-f-pace
+790,F-TYPE,jaguar-f-type
+790,I-PACE,jaguar-i-pace
+790,S-Type,jaguar-s-type
+790,X-Type,jaguar-x-type
+790,XE,jaguar-xe
+790,XF,jaguar-xf
+790,XJ,jaguar-xj
+790,XK,jaguar-xk
+NULL,Jeep,jeep
+801,Cherokee,jeep-cherokee
+801,Comanche Regular Cab,jeep-comanche-regular-cab
+801,Commander,jeep-commander
+801,Compass,jeep-compass
+801,Gladiator,jeep-gladiator
+801,Grand Cherokee,jeep-grand-cherokee
+801,Grand Cherokee 4xe,jeep-grand-cherokee-4xe
+801,Grand Cherokee L,jeep-grand-cherokee-l
+801,Grand Wagoneer,jeep-grand-wagoneer
+801,Grand Wagoneer L,jeep-grand-wagoneer-l
+801,Liberty,jeep-liberty
+801,Patriot,jeep-patriot
+801,Recon,jeep-recon
+801,Renegade,jeep-renegade
+801,Wagoneer,jeep-wagoneer
+801,Wagoneer L,jeep-wagoneer-l
+801,Wrangler,jeep-wrangler
+801,Wrangler Unlimited,jeep-wrangler-unlimited
+801,Wrangler Unlimited 4xe,jeep-wrangler-unlimited-4xe
+NULL,Kia,kia
+821,Amanti,kia-amanti
+821,Borrego,kia-borrego
+821,Cadenza,kia-cadenza
+821,Carnival,kia-carnival
+821,EV6,kia-ev6
+821,EV9,kia-ev9
+821,Forte,kia-forte
+821,Forte Koup,kia-forte-koup
+821,Forte5,kia-forte5
+821,K5,kia-k5
+821,K900,kia-k900
+821,Niro,kia-niro
+821,Niro EV,kia-niro-ev
+821,Niro Plug-in Hybrid,kia-niro-plug-in-hybrid
+821,Optima,kia-optima
+821,Optima 2006.5,kia-optima-2006-5
+821,Optima Hybrid,kia-optima-hybrid
+821,Optima Plug-in Hybrid,kia-optima-plug-in-hybrid
+821,Rio,kia-rio
+821,Rondo,kia-rondo
+821,Sedona,kia-sedona
+821,Seltos,kia-seltos
+821,Sephia,kia-sephia
+821,Sorento,kia-sorento
+821,Sorento Hybrid,kia-sorento-hybrid
+821,Sorento Plug-in Hybrid,kia-sorento-plug-in-hybrid
+821,Soul,kia-soul
+821,Soul EV,kia-soul-ev
+821,Spectra,kia-spectra
+821,Sportage,kia-sportage
+821,Sportage Hybrid,kia-sportage-hybrid
+821,Sportage Plug-in Hybrid,kia-sportage-plug-in-hybrid
+821,Stinger,kia-stinger
+821,Telluride,kia-telluride
+NULL,Lamborghini,lamborghini
+856,Aventador,lamborghini-aventador
+856,Gallardo,lamborghini-gallardo
+856,Huracan,lamborghini-huracan
+856,Murcielago,lamborghini-murcielago
+856,Murcielago LP640,lamborghini-murcielago-lp640
+856,Urus,lamborghini-urus
+NULL,Land Rover,land-rover
+863,Defender 110,land-rover-defender-110
+863,Defender 130,land-rover-defender-130
+863,Defender 90,land-rover-defender-90
+863,Discovery,land-rover-discovery
+863,Discovery Series II,land-rover-discovery-series-ii
+863,Discovery Sport,land-rover-discovery-sport
+863,Freelander,land-rover-freelander
+863,LR2,land-rover-lr2
+863,LR3,land-rover-lr3
+863,LR4,land-rover-lr4
+863,Range Rover,land-rover-range-rover
+863,Range Rover Evoque,land-rover-range-rover-evoque
+863,Range Rover Sport,land-rover-range-rover-sport
+863,Range Rover Velar,land-rover-range-rover-velar
+NULL,Lexus,lexus
+878,CT,lexus-ct
+878,ES,lexus-es
+878,GS,lexus-gs
+878,GX,lexus-gx
+878,HS,lexus-hs
+878,IS,lexus-is
+878,IS F,lexus-is-f
+878,LC,lexus-lc
+878,LFA,lexus-lfa
+878,LS,lexus-ls
+878,LX,lexus-lx
+878,NX,lexus-nx
+878,RC,lexus-rc
+878,RX,lexus-rx
+878,RZ,lexus-rz
+878,SC,lexus-sc
+878,TX,lexus-tx
+878,UX,lexus-ux
+NULL,Lincoln,lincoln
+897,Aviator,lincoln-aviator
+897,Blackwood,lincoln-blackwood
+897,Continental,lincoln-continental
+897,Corsair,lincoln-corsair
+897,LS,lincoln-ls
+897,Mark LT,lincoln-mark-lt
+897,Mark VII,lincoln-mark-vii
+897,Mark VIII,lincoln-mark-viii
+897,MKC,lincoln-mkc
+897,MKS,lincoln-mks
+897,MKT,lincoln-mkt
+897,MKX,lincoln-mkx
+897,MKZ,lincoln-mkz
+897,Nautilus,lincoln-nautilus
+897,Navigator,lincoln-navigator
+897,Navigator L,lincoln-navigator-l
+897,Town Car,lincoln-town-car
+897,Zephyr,lincoln-zephyr
+NULL,Lotus,lotus
+916,Elise,lotus-elise
+916,Evora,lotus-evora
+916,Evora 400,lotus-evora-400
+916,Evora GT,lotus-evora-gt
+916,Exige,lotus-exige
+916,Exige S,lotus-exige-s
+NULL,Lucid,lucid
+923,Air,lucid-air
+NULL,Maserati,maserati
+925,Coupe,maserati-coupe
+925,Ghibli,maserati-ghibli
+925,GranSport,maserati-gransport
+925,GranTurismo,maserati-granturismo
+925,Grecale,maserati-grecale
+925,Levante,maserati-levante
+925,MC20,maserati-mc20
+925,Quattroporte,maserati-quattroporte
+NULL,Maybach,maybach
+934,57,maybach-57
+934,62,maybach-62
+NULL,MAZDA,mazda
+937,323,mazda-323
+937,626,mazda-626
+937,929,mazda-929
+937,B-Series Cab Plus,mazda-b-series-cab-plus
+937,B-Series Extended Cab,mazda-b-series-extended-cab
+937,B-Series Regular Cab,mazda-b-series-regular-cab
+937,CX-3,mazda-cx-3
+937,CX-30,mazda-cx-30
+937,CX-5,mazda-cx-5
+937,CX-50,mazda-cx-50
+937,CX-7,mazda-cx-7
+937,CX-70,mazda-cx-70
+937,CX-9,mazda-cx-9
+937,CX-90,mazda-cx-90
+937,MAZDA2,mazda-mazda2
+937,MAZDA3,mazda-mazda3
+937,MAZDA5,mazda-mazda5
+937,MAZDA6,mazda-mazda6
+937,Millenia,mazda-millenia
+937,MPV,mazda-mpv
+937,MX-3,mazda-mx-3
+937,MX-30,mazda-mx-30
+937,MX-5 Miata,mazda-mx-5-miata
+937,MX-5 Miata RF,mazda-mx-5-miata-rf
+937,MX-6,mazda-mx-6
+937,Navajo,mazda-navajo
+937,Protege,mazda-protege
+937,Protege5,mazda-protege5
+937,RX-7,mazda-rx-7
+937,RX-8,mazda-rx-8
+937,Tribute,mazda-tribute
+NULL,McLaren,mclaren
+969,570GT,mclaren-570gt
+969,570S,mclaren-570s
+969,600LT,mclaren-600lt
+969,650S,mclaren-650s
+969,675LT,mclaren-675lt
+969,720S,mclaren-720s
+969,MP4-12C,mclaren-mp4-12c
+NULL,Mercedes-Benz,mercedes-benz
+977,190 E,mercedes-benz-190-e
+977,300 CE,mercedes-benz-300-ce
+977,300 D,mercedes-benz-300-d
+977,300 E,mercedes-benz-300-e
+977,300 SD,mercedes-benz-300-sd
+977,300 SE,mercedes-benz-300-se
+977,300 SL,mercedes-benz-300-sl
+977,300 TE,mercedes-benz-300-te
+977,400 E,mercedes-benz-400-e
+977,400 SE,mercedes-benz-400-se
+977,400 SEL,mercedes-benz-400-sel
+977,500 E,mercedes-benz-500-e
+977,500 SEC,mercedes-benz-500-sec
+977,500 SEL,mercedes-benz-500-sel
+977,500 SL,mercedes-benz-500-sl
+977,600 SEC,mercedes-benz-600-sec
+977,600 SEL,mercedes-benz-600-sel
+977,600 SL,mercedes-benz-600-sl
+977,A-Class,mercedes-benz-a-class
+977,B-Class,mercedes-benz-b-class
+977,C-Class,mercedes-benz-c-class
+977,CL-Class,mercedes-benz-cl-class
+977,CLA,mercedes-benz-cla
+977,CLA-Class,mercedes-benz-cla-class
+977,CLK-Class,mercedes-benz-clk-class
+977,CLS,mercedes-benz-cls
+977,CLS-Class,mercedes-benz-cls-class
+977,E-Class,mercedes-benz-e-class
+977,G-Class,mercedes-benz-g-class
+977,GL-Class,mercedes-benz-gl-class
+977,GLA,mercedes-benz-gla
+977,GLA-Class,mercedes-benz-gla-class
+977,GLB,mercedes-benz-glb
+977,GLC,mercedes-benz-glc
+977,GLC Coupe,mercedes-benz-glc-coupe
+977,GLE,mercedes-benz-gle
+977,GLE Coupe,mercedes-benz-gle-coupe
+977,GLK-Class,mercedes-benz-glk-class
+977,GLS,mercedes-benz-gls
+977,M-Class,mercedes-benz-m-class
+977,Mercedes-AMG A-Class,mercedes-benz-mercedes-amg-a-class
+977,Mercedes-AMG C-Class,mercedes-benz-mercedes-amg-c-class
+977,Mercedes-AMG CLA,mercedes-benz-mercedes-amg-cla
+977,Mercedes-AMG CLS,mercedes-benz-mercedes-amg-cls
+977,Mercedes-AMG E-Class,mercedes-benz-mercedes-amg-e-class
+977,Mercedes-AMG EQS,mercedes-benz-mercedes-amg-eqs
+977,Mercedes-AMG G-Class,mercedes-benz-mercedes-amg-g-class
+977,Mercedes-AMG GLA,mercedes-benz-mercedes-amg-gla
+977,Mercedes-AMG GLB,mercedes-benz-mercedes-amg-glb
+977,Mercedes-AMG GLC,mercedes-benz-mercedes-amg-glc
+977,Mercedes-AMG GLC Coupe,mercedes-benz-mercedes-amg-glc-coupe
+977,Mercedes-AMG GLE,mercedes-benz-mercedes-amg-gle
+977,Mercedes-AMG GLE Coupe,mercedes-benz-mercedes-amg-gle-coupe
+977,Mercedes-AMG GLS,mercedes-benz-mercedes-amg-gls
+977,Mercedes-AMG GT,mercedes-benz-mercedes-amg-gt
+977,Mercedes-AMG S-Class,mercedes-benz-mercedes-amg-s-class
+977,Mercedes-AMG SL,mercedes-benz-mercedes-amg-sl
+977,Mercedes-AMG SLC,mercedes-benz-mercedes-amg-slc
+977,Mercedes-AMG SLK,mercedes-benz-mercedes-amg-slk
+977,Mercedes-EQ EQB,mercedes-benz-mercedes-eq-eqb
+977,Mercedes-EQ EQE,mercedes-benz-mercedes-eq-eqe
+977,Mercedes-EQ EQE SUV,mercedes-benz-mercedes-eq-eqe-suv
+977,Mercedes-EQ EQS,mercedes-benz-mercedes-eq-eqs
+977,Mercedes-EQ EQS SUV,mercedes-benz-mercedes-eq-eqs-suv
+977,Mercedes-Maybach GLS,mercedes-benz-mercedes-maybach-gls
+977,Mercedes-Maybach S 600,mercedes-benz-mercedes-maybach-s-600
+977,Mercedes-Maybach S-Class,mercedes-benz-mercedes-maybach-s-class
+977,Metris Cargo,mercedes-benz-metris-cargo
+977,Metris Passenger,mercedes-benz-metris-passenger
+977,Metris WORKER Cargo,mercedes-benz-metris-worker-cargo
+977,Metris WORKER Passenger,mercedes-benz-metris-worker-passenger
+977,R-Class,mercedes-benz-r-class
+977,S-Class,mercedes-benz-s-class
+977,SL,mercedes-benz-sl
+977,SL-Class,mercedes-benz-sl-class
+977,SLC,mercedes-benz-slc
+977,SLK,mercedes-benz-slk
+977,SLK-Class,mercedes-benz-slk-class
+977,SLR McLaren,mercedes-benz-slr-mclaren
+977,SLS-Class,mercedes-benz-sls-class
+977,Sprinter 1500 Cargo,mercedes-benz-sprinter-1500-cargo
+977,Sprinter 1500 Passenger,mercedes-benz-sprinter-1500-passenger
+977,Sprinter 2500 Cargo,mercedes-benz-sprinter-2500-cargo
+977,Sprinter 2500 Crew,mercedes-benz-sprinter-2500-crew
+977,Sprinter 2500 Passenger,mercedes-benz-sprinter-2500-passenger
+977,Sprinter 3500 Cargo,mercedes-benz-sprinter-3500-cargo
+977,Sprinter 3500 Crew,mercedes-benz-sprinter-3500-crew
+977,Sprinter 3500 XD Cargo,mercedes-benz-sprinter-3500-xd-cargo
+977,Sprinter 3500 XD Crew,mercedes-benz-sprinter-3500-xd-crew
+977,Sprinter 4500 Cargo,mercedes-benz-sprinter-4500-cargo
+977,Sprinter 4500 Crew,mercedes-benz-sprinter-4500-crew
+977,Sprinter WORKER Cargo,mercedes-benz-sprinter-worker-cargo
+977,Sprinter WORKER Passenger,mercedes-benz-sprinter-worker-passenger
+NULL,Mercury,mercury
+1071,Capri,mercury-capri
+1071,Cougar,mercury-cougar
+1071,Grand Marquis,mercury-grand-marquis
+1071,Marauder,mercury-marauder
+1071,Mariner,mercury-mariner
+1071,Milan,mercury-milan
+1071,Montego,mercury-montego
+1071,Monterey,mercury-monterey
+1071,Mountaineer,mercury-mountaineer
+1071,Mystique,mercury-mystique
+1071,Sable,mercury-sable
+1071,Topaz,mercury-topaz
+1071,Tracer,mercury-tracer
+1071,Villager,mercury-villager
+NULL,MINI,mini
+1086,Clubman,mini-clubman
+1086,Convertible,mini-convertible
+1086,Cooper,mini-cooper
+1086,Countryman,mini-countryman
+1086,Coupe,mini-coupe
+1086,Hardtop,mini-hardtop
+1086,Hardtop 2 Door,mini-hardtop-2-door
+1086,Hardtop 4 Door,mini-hardtop-4-door
+1086,Paceman,mini-paceman
+1086,Roadster,mini-roadster
+NULL,Mitsubishi,mitsubishi
+1097,3000GT,mitsubishi-3000gt
+1097,Diamante,mitsubishi-diamante
+1097,Eclipse,mitsubishi-eclipse
+1097,Eclipse Cross,mitsubishi-eclipse-cross
+1097,Endeavor,mitsubishi-endeavor
+1097,Expo,mitsubishi-expo
+1097,Galant,mitsubishi-galant
+1097,i-MiEV,mitsubishi-i-miev
+1097,Lancer,mitsubishi-lancer
+1097,Lancer Evolution,mitsubishi-lancer-evolution
+1097,Mighty Max Macro Cab,mitsubishi-mighty-max-macro-cab
+1097,Mighty Max Regular Cab,mitsubishi-mighty-max-regular-cab
+1097,Mirage,mitsubishi-mirage
+1097,Mirage G4,mitsubishi-mirage-g4
+1097,Montero,mitsubishi-montero
+1097,Montero Sport,mitsubishi-montero-sport
+1097,Outlander,mitsubishi-outlander
+1097,Outlander PHEV,mitsubishi-outlander-phev
+1097,Outlander Sport,mitsubishi-outlander-sport
+1097,Precis,mitsubishi-precis
+1097,Raider Double Cab,mitsubishi-raider-double-cab
+1097,Raider Extended Cab,mitsubishi-raider-extended-cab
+NULL,Nissan,nissan
+1120,200SX,nissan-200sx
+1120,240SX,nissan-240sx
+1120,300ZX,nissan-300zx
+1120,350Z,nissan-350z
+1120,370Z,nissan-370z
+1120,400Z,nissan-400z
+1120,Altima,nissan-altima
+1120,Ariya,nissan-ariya
+1120,Armada,nissan-armada
+1120,cube,nissan-cube
+1120,Frontier Crew Cab,nissan-frontier-crew-cab
+1120,Frontier King Cab,nissan-frontier-king-cab
+1120,Frontier Regular Cab,nissan-frontier-regular-cab
+1120,GT-R,nissan-gt-r
+1120,JUKE,nissan-juke
+1120,Kicks,nissan-kicks
+1120,King Cab,nissan-king-cab
+1120,LEAF,nissan-leaf
+1120,Maxima,nissan-maxima
+1120,Murano,nissan-murano
+1120,NV1500 Cargo,nissan-nv1500-cargo
+1120,NV200,nissan-nv200
+1120,NV200 Taxi,nissan-nv200-taxi
+1120,NV2500 HD Cargo,nissan-nv2500-hd-cargo
+1120,NV3500 HD Cargo,nissan-nv3500-hd-cargo
+1120,NV3500 HD Passenger,nissan-nv3500-hd-passenger
+1120,NX,nissan-nx
+1120,Pathfinder,nissan-pathfinder
+1120,Pathfinder Armada,nissan-pathfinder-armada
+1120,Quest,nissan-quest
+1120,Regular Cab,nissan-regular-cab
+1120,Rogue,nissan-rogue
+1120,Rogue Select,nissan-rogue-select
+1120,Rogue Sport,nissan-rogue-sport
+1120,Sentra,nissan-sentra
+1120,Stanza,nissan-stanza
+1120,Titan Crew Cab,nissan-titan-crew-cab
+1120,Titan King Cab,nissan-titan-king-cab
+1120,TITAN Single Cab,nissan-titan-single-cab
+1120,TITAN XD Crew Cab,nissan-titan-xd-crew-cab
+1120,TITAN XD King Cab,nissan-titan-xd-king-cab
+1120,TITAN XD Single Cab,nissan-titan-xd-single-cab
+1120,Versa,nissan-versa
+1120,Versa Note,nissan-versa-note
+1120,Xterra,nissan-xterra
+1120,Z,nissan-z
+NULL,Oldsmobile,oldsmobile
+1167,88,oldsmobile-88
+1167,98,oldsmobile-98
+1167,Achieva,oldsmobile-achieva
+1167,Alero,oldsmobile-alero
+1167,Aurora,oldsmobile-aurora
+1167,Bravada,oldsmobile-bravada
+1167,Ciera,oldsmobile-ciera
+1167,Custom Cruiser,oldsmobile-custom-cruiser
+1167,Cutlass,oldsmobile-cutlass
+1167,Cutlass Ciera,oldsmobile-cutlass-ciera
+1167,Cutlass Cruiser,oldsmobile-cutlass-cruiser
+1167,Cutlass Supreme,oldsmobile-cutlass-supreme
+1167,Intrigue,oldsmobile-intrigue
+1167,LSS,oldsmobile-lss
+1167,Regency,oldsmobile-regency
+1167,Silhouette,oldsmobile-silhouette
+1167,Toronado,oldsmobile-toronado
+NULL,Panoz,panoz
+1185,Esperante,panoz-esperante
+NULL,Plymouth,plymouth
+1187,Acclaim,plymouth-acclaim
+1187,Breeze,plymouth-breeze
+1187,Colt,plymouth-colt
+1187,Colt Vista,plymouth-colt-vista
+1187,Grand Voyager,plymouth-grand-voyager
+1187,Laser,plymouth-laser
+1187,Neon,plymouth-neon
+1187,Prowler,plymouth-prowler
+1187,Sundance,plymouth-sundance
+1187,Voyager,plymouth-voyager
+NULL,Polestar,polestar
+1198,1,polestar-1
+1198,2,polestar-2
+1198,3,polestar-3
+1198,5,polestar-5
+NULL,Pontiac,pontiac
+1203,Aztek,pontiac-aztek
+1203,Bonneville,pontiac-bonneville
+1203,Firebird,pontiac-firebird
+1203,G3,pontiac-g3
+1203,G5,pontiac-g5
+1203,G6,pontiac-g6
+1203,G6 2009.5,pontiac-g6-2009-5
+1203,G8,pontiac-g8
+1203,Grand Am,pontiac-grand-am
+1203,Grand Prix,pontiac-grand-prix
+1203,GTO,pontiac-gto
+1203,LeMans,pontiac-lemans
+1203,Montana,pontiac-montana
+1203,Montana SV6,pontiac-montana-sv6
+1203,Solstice,pontiac-solstice
+1203,Sunbird,pontiac-sunbird
+1203,Sunfire,pontiac-sunfire
+1203,Torrent,pontiac-torrent
+1203,Trans Sport,pontiac-trans-sport
+1203,Vibe,pontiac-vibe
+NULL,Porsche,porsche
+1224,718 Boxster,porsche-718-boxster
+1224,718 Cayman,porsche-718-cayman
+1224,718 Spyder,porsche-718-spyder
+1224,911,porsche-911
+1224,928,porsche-928
+1224,968,porsche-968
+1224,Boxster,porsche-boxster
+1224,Carrera GT,porsche-carrera-gt
+1224,Cayenne,porsche-cayenne
+1224,Cayenne Coupe,porsche-cayenne-coupe
+1224,Cayman,porsche-cayman
+1224,Macan,porsche-macan
+1224,Panamera,porsche-panamera
+1224,Taycan,porsche-taycan
+1224,Taycan Cross Turismo,porsche-taycan-cross-turismo
+NULL,Ram,ram
+1240,1500 Classic Crew Cab,ram-1500-classic-crew-cab
+1240,1500 Classic Quad Cab,ram-1500-classic-quad-cab
+1240,1500 Classic Regular Cab,ram-1500-classic-regular-cab
+1240,1500 Crew Cab,ram-1500-crew-cab
+1240,1500 Quad Cab,ram-1500-quad-cab
+1240,1500 Regular Cab,ram-1500-regular-cab
+1240,2500 Crew Cab,ram-2500-crew-cab
+1240,2500 Mega Cab,ram-2500-mega-cab
+1240,2500 Regular Cab,ram-2500-regular-cab
+1240,3500 Crew Cab,ram-3500-crew-cab
+1240,3500 Mega Cab,ram-3500-mega-cab
+1240,3500 Regular Cab,ram-3500-regular-cab
+1240,C/V,ram-c-v
+1240,C/V Tradesman,ram-c-v-tradesman
+1240,Dakota Crew Cab,ram-dakota-crew-cab
+1240,Dakota Extended Cab,ram-dakota-extended-cab
+1240,ProMaster 1500 Cargo,ram-promaster-1500-cargo
+1240,ProMaster 2500 Cargo,ram-promaster-2500-cargo
+1240,ProMaster 3500 Cargo,ram-promaster-3500-cargo
+1240,ProMaster Cargo Van,ram-promaster-cargo-van
+1240,ProMaster City,ram-promaster-city
+1240,ProMaster Window Van,ram-promaster-window-van
+NULL,Rivian,rivian
+1263,R1S,rivian-r1s
+1263,R1T,rivian-r1t
+NULL,Rolls-Royce,rolls-royce
+1266,Cullinan,rolls-royce-cullinan
+1266,Dawn,rolls-royce-dawn
+1266,Ghost,rolls-royce-ghost
+1266,Phantom,rolls-royce-phantom
+1266,Wraith,rolls-royce-wraith
+NULL,Saab,saab
+1272,9-2X,saab-9-2x
+1272,9-3,saab-9-3
+1272,9-4X,saab-9-4x
+1272,9-5,saab-9-5
+1272,9-7X,saab-9-7x
+1272,900,saab-900
+1272,9000,saab-9000
+NULL,Saturn,saturn
+1280,Astra,saturn-astra
+1280,Aura,saturn-aura
+1280,Ion,saturn-ion
+1280,L-Series,saturn-l-series
+1280,Outlook,saturn-outlook
+1280,Relay,saturn-relay
+1280,S-Series,saturn-s-series
+1280,SKY,saturn-sky
+1280,VUE,saturn-vue
+NULL,Scion,scion
+1290,FR-S,scion-fr-s
+1290,iA,scion-ia
+1290,iM,scion-im
+1290,iQ,scion-iq
+1290,tC,scion-tc
+1290,xA,scion-xa
+1290,xB,scion-xb
+1290,xD,scion-xd
+NULL,smart,smart
+1299,fortwo,smart-fortwo
+1299,fortwo cabrio,smart-fortwo-cabrio
+1299,fortwo electric drive,smart-fortwo-electric-drive
+1299,fortwo electric drive cabrio,smart-fortwo-electric-drive-cabrio
+1299,fortwo EQ cabrio,smart-fortwo-eq-cabrio
+1299,fortwo EQ coupe,smart-fortwo-eq-coupe
+NULL,SRT,srt
+1306,Viper,srt-viper
+NULL,Subaru,subaru
+1308,Ascent,subaru-ascent
+1308,B9 Tribeca,subaru-b9-tribeca
+1308,Baja,subaru-baja
+1308,BRZ,subaru-brz
+1308,Crosstrek,subaru-crosstrek
+1308,Forester,subaru-forester
+1308,Impreza,subaru-impreza
+1308,Justy,subaru-justy
+1308,Legacy,subaru-legacy
+1308,Loyale,subaru-loyale
+1308,Outback,subaru-outback
+1308,Solterra,subaru-solterra
+1308,SVX,subaru-svx
+1308,Tribeca,subaru-tribeca
+1308,WRX,subaru-wrx
+1308,XV Crosstrek,subaru-xv-crosstrek
+NULL,Suzuki,suzuki
+1325,Aerio,suzuki-aerio
+1325,Equator Crew Cab,suzuki-equator-crew-cab
+1325,Equator Extended Cab,suzuki-equator-extended-cab
+1325,Esteem,suzuki-esteem
+1325,Forenza,suzuki-forenza
+1325,Grand Vitara,suzuki-grand-vitara
+1325,Kizashi,suzuki-kizashi
+1325,Reno,suzuki-reno
+1325,Samurai,suzuki-samurai
+1325,Sidekick,suzuki-sidekick
+1325,Swift,suzuki-swift
+1325,SX4,suzuki-sx4
+1325,Verona,suzuki-verona
+1325,Vitara,suzuki-vitara
+1325,X-90,suzuki-x-90
+1325,XL-7,suzuki-xl-7
+1325,XL7,suzuki-xl7
+NULL,Tesla,tesla
+1343,Cybertruck,tesla-cybertruck
+1343,Model 3,tesla-model-3
+1343,Model S,tesla-model-s
+1343,Model X,tesla-model-x
+1343,Model Y,tesla-model-y
+NULL,Toyota,toyota
+1349,4Runner,toyota-4runner
+1349,86,toyota-86
+1349,Avalon,toyota-avalon
+1349,Avalon Hybrid,toyota-avalon-hybrid
+1349,bZ4X,toyota-bz4x
+1349,C-HR,toyota-c-hr
+1349,Camry,toyota-camry
+1349,Camry Hybrid,toyota-camry-hybrid
+1349,Celica,toyota-celica
+1349,Corolla,toyota-corolla
+1349,Corolla Cross,toyota-corolla-cross
+1349,Corolla Cross Hybrid,toyota-corolla-cross-hybrid
+1349,Corolla Hatchback,toyota-corolla-hatchback
+1349,Corolla Hybrid,toyota-corolla-hybrid
+1349,Corolla iM,toyota-corolla-im
+1349,Cressida,toyota-cressida
+1349,Crown,toyota-crown
+1349,Echo,toyota-echo
+1349,FJ Cruiser,toyota-fj-cruiser
+1349,GR Supra,toyota-gr-supra
+1349,GR86,toyota-gr86
+1349,Highlander,toyota-highlander
+1349,Highlander Hybrid,toyota-highlander-hybrid
+1349,Land Cruiser,toyota-land-cruiser
+1349,Matrix,toyota-matrix
+1349,Mirai,toyota-mirai
+1349,MR2,toyota-mr2
+1349,Paseo,toyota-paseo
+1349,Previa,toyota-previa
+1349,Prius,toyota-prius
+1349,Prius c,toyota-prius-c
+1349,Prius Plug-in Hybrid,toyota-prius-plug-in-hybrid
+1349,Prius Prime,toyota-prius-prime
+1349,Prius v,toyota-prius-v
+1349,RAV4,toyota-rav4
+1349,RAV4 Hybrid,toyota-rav4-hybrid
+1349,RAV4 Prime,toyota-rav4-prime
+1349,Regular Cab,toyota-regular-cab
+1349,Sequoia,toyota-sequoia
+1349,Sienna,toyota-sienna
+1349,Solara,toyota-solara
+1349,Supra,toyota-supra
+1349,T100 Regular Cab,toyota-t100-regular-cab
+1349,T100 Xtracab,toyota-t100-xtracab
+1349,Tacoma Access Cab,toyota-tacoma-access-cab
+1349,Tacoma Double Cab,toyota-tacoma-double-cab
+1349,Tacoma Regular Cab,toyota-tacoma-regular-cab
+1349,Tacoma Xtracab,toyota-tacoma-xtracab
+1349,Tercel,toyota-tercel
+1349,Tundra Access Cab,toyota-tundra-access-cab
+1349,Tundra CrewMax,toyota-tundra-crewmax
+1349,Tundra Double Cab,toyota-tundra-double-cab
+1349,Tundra Hybrid CrewMax,toyota-tundra-hybrid-crewmax
+1349,Tundra Regular Cab,toyota-tundra-regular-cab
+1349,Venza,toyota-venza
+1349,Xtra Cab,toyota-xtra-cab
+1349,Yaris,toyota-yaris
+1349,Yaris Hatchback,toyota-yaris-hatchback
+1349,Yaris iA,toyota-yaris-ia
+NULL,VinFast,vinfast
+1409,VF 8,vinfast-vf-8
+1409,VF 9,vinfast-vf-9
+NULL,Volkswagen,volkswagen
+1412,Arteon,volkswagen-arteon
+1412,Atlas,volkswagen-atlas
+1412,Atlas Cross Sport,volkswagen-atlas-cross-sport
+1412,Beetle,volkswagen-beetle
+1412,Cabrio,volkswagen-cabrio
+1412,Cabrio New,volkswagen-cabrio-new
+1412,Cabriolet,volkswagen-cabriolet
+1412,CC,volkswagen-cc
+1412,Corrado,volkswagen-corrado
+1412,e-Golf,volkswagen-e-golf
+1412,Eos,volkswagen-eos
+1412,Eurovan,volkswagen-eurovan
+1412,Fox,volkswagen-fox
+1412,GLI,volkswagen-gli
+1412,Golf,volkswagen-golf
+1412,Golf New,volkswagen-golf-new
+1412,Golf Alltrack,volkswagen-golf-alltrack
+1412,Golf GTI,volkswagen-golf-gti
+1412,Golf III,volkswagen-golf-iii
+1412,Golf R,volkswagen-golf-r
+1412,Golf SportWagen,volkswagen-golf-sportwagen
+1412,GTI,volkswagen-gti
+1412,GTI New,volkswagen-gti-new
+1412,ID.4,volkswagen-id-4
+1412,ID.Buzz,volkswagen-id-buzz
+1412,Jetta,volkswagen-jetta
+1412,Jetta New,volkswagen-jetta-new
+1412,Jetta GLI,volkswagen-jetta-gli
+1412,Jetta III,volkswagen-jetta-iii
+1412,Jetta SportWagen,volkswagen-jetta-sportwagen
+1412,New Beetle,volkswagen-new-beetle
+1412,Passat,volkswagen-passat
+1412,Passat New,volkswagen-passat-new
+1412,Phaeton,volkswagen-phaeton
+1412,R32,volkswagen-r32
+1412,Rabbit,volkswagen-rabbit
+1412,Routan,volkswagen-routan
+1412,Taos,volkswagen-taos
+1412,Tiguan,volkswagen-tiguan
+1412,Tiguan Limited,volkswagen-tiguan-limited
+1412,Touareg,volkswagen-touareg
+1412,Touareg 2,volkswagen-touareg-2
+NULL,Volvo,volvo
+1455,240,volvo-240
+1455,740,volvo-740
+1455,850,volvo-850
+1455,940,volvo-940
+1455,960,volvo-960
+1455,C30,volvo-c30
+1455,C40 Recharge,volvo-c40-recharge
+1455,C70,volvo-c70
+1455,EX90,volvo-ex90
+1455,S40,volvo-s40
+1455,S40 New,volvo-s40-new
+1455,S60,volvo-s60
+1455,S70,volvo-s70
+1455,S80,volvo-s80
+1455,S90,volvo-s90
+1455,V40,volvo-v40
+1455,V50,volvo-v50
+1455,V60,volvo-v60
+1455,V70,volvo-v70
+1455,V90,volvo-v90
+1455,XC40,volvo-xc40
+1455,XC40 Recharge,volvo-xc40-recharge
+1455,XC60,volvo-xc60
+1455,XC70,volvo-xc70
+1455,XC90,volvo-xc90

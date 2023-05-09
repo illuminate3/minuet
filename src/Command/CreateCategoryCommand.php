@@ -20,8 +20,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 )]
 final class CreateCategoryCommand extends Command
 {
-    private MakeModelRepository $dataRepository;
-    private CategoryRepository $categoryRepository;
+    private MakeModelRepository $data;
+    private CategoryRepository $category;
+    private EntityManagerInterface $em;
 
     public function __construct(
         EntityManagerInterface $entityManager,
