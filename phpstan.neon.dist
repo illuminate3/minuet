@@ -1,0 +1,19 @@
+includes:
+    - vendor/phpstan/phpstan-symfony/extension.neon
+    - vendor/phpstan/phpstan-symfony/rules.neon
+
+parameters:
+  level: 8
+  paths:
+    - src
+  excludePaths:
+    - src/DataFixtures/*
+    - src/Migrations/*
+  symfony:
+      container_xml_path: 'var/cache/dev/App_KernelDevDebugContainer.xml'
+  checkGenericClassInNonGenericObjectType: false
+  checkMissingIterableValueType: false
+  ignoreErrors:
+      - '#Call to an undefined method Symfony\\Component\\HttpFoundation\\Session\\SessionInterface::getFlashBag\(\).#'
+      - '#Property [A-z\\_]+::\$[A-z0-9_]+ is never read, only written.#'
+      - '#Property [A-z\\_]+::\$[A-z0-9_]+ is never written, only read.#'

@@ -32,7 +32,7 @@ final class LoadMakeModelCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $path = $this->params->get('kernel.project_dir');
-        $file_makes = $path.'/data/make.sql';
+        $file_makes = $path . '/data/make.sql';
 
         $sql = file_get_contents($file_makes);
         $this->em->getConnection()->exec($sql);

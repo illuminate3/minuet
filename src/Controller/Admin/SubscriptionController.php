@@ -22,7 +22,6 @@ class SubscriptionController extends BaseController
         Request $request,
         SubscriptionRepository $subscriptionRepository,
     ): Response {
-
         // Get pages
         $subscriptions = $subscriptionRepository->findAll();
 
@@ -35,7 +34,6 @@ class SubscriptionController extends BaseController
             'site' => $this->site($request),
             'subscriptions' => $subscriptions,
         ]);
-
     }
 
     #[Route('/new', name: 'admin_subscription_new', methods: ['GET', 'POST'])]
@@ -87,7 +85,6 @@ class SubscriptionController extends BaseController
             'site' => $this->site($request),
             'form' => $form,
         ]);
-
     }
 
     #[Route('/{id}', name: 'admin_subscription_delete', methods: ['POST'])]
@@ -96,12 +93,10 @@ class SubscriptionController extends BaseController
         Subscription $subscription,
         EntityManagerInterface $entityManager,
     ): Response {
-
-        if ($this->isCsrfTokenValid('delete'.$subscription->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $subscription->getId(), $request->request->get('_token'))) {
             $subscriptionService->delete($subscription);
         }
 
         return $this->redirectToRoute('admin_subscription');
     }
-
 }
