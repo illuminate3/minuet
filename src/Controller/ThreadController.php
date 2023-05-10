@@ -13,6 +13,8 @@ use App\Repository\AccountUserRepository;
 use App\Repository\ProductRepository;
 use App\Repository\ThreadRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,7 +43,7 @@ class ThreadController extends BaseController
 
         return $this->render('thread/index.html.twig', [
 //            'title' => 'title.dashboard',
-            'title' => $account_id,
+            'title' => (!empty($account->getName())) ? $account->getName() : '',
             'site' => $this->site($request),
             'products' => $products,
         ]);
@@ -101,4 +103,28 @@ class ThreadController extends BaseController
 
         return $this->redirectToRoute('app_thread_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+    #[Route('/{id}/update_pin_status', name: 'is_pin', methods: ['POST'])]
+    public function isPin(Request $request,ThreadRepository $threadRepository): JsonResponse
+    {
+        $id= $request->request->get('id');
+        $pin_value= $request->request->get('ispin');
+        
+        $threadRepository->updatePinStatus((int)$id, (bool) $pin_value);
+
+        return new JsonResponse(['status' => 'success', 'data' => (bool) $pin_value, 'id' => (int) $id]);
+    }
+
+    #[Route('/{id}/update_close_status', name: 'is_close', methods: ['POST'])]
+    public function isClose(Request $request,ThreadRepository $threadRepository): JsonResponse
+    {
+        $id= $request->request->get('id');
+        $close_value= $request->request->get('ispin');
+        
+        $threadRepository->updateCloseStatus((int)$id, (bool) $close_value);
+
+        return new JsonResponse(['status' => 'success', 'data' => (bool) $close_value, 'id' => (int) $id]);
+    }
+    
 }

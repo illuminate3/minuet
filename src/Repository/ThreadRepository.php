@@ -9,6 +9,9 @@ use App\Entity\Product;
 use App\Entity\Thread;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Exception;
+use Doctrine\DBAL\Query\QueryBuilder;
+use DoctrineDBALConnection;
+use DoctrineDBALQueryQueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -42,6 +45,30 @@ class ThreadRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function updatePinStatus(int $id, bool $pin_value)
+    {
+        $thread = $this->getEntityManager()->getRepository(Thread::class)->find($id);
+
+        if (!$thread) {
+            throw $this->createNotFoundException('Thread not found');
+        }
+
+        $thread->setIsPin($pin_value); 
+        $this->getEntityManager()->flush();
+    }
+
+    public function updateCloseStatus(int $id, bool $close_value)
+    {
+        $thread = $this->getEntityManager()->getRepository(Thread::class)->find($id);
+
+        if (!$thread) {
+            throw $this->createNotFoundException('Thread not found');
+        }
+
+        $thread->setIsClosed($close_value); 
+        $this->getEntityManager()->flush();
     }
 
 //    /**

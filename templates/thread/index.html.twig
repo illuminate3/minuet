@@ -1,5 +1,16 @@
 {% extends 'layout/dash/dash.html.twig' %}
 
+{% block stylesheets %}
+    <!-- User Thread CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.5.1/sweetalert2.min.css">
+{% endblock %}
+{% block javascripts %}
+    <!-- User Thread JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+    <script src="{{ asset('js/user-thread.js') }}"></script>
+{% endblock %}
+
 {% block subheader %}
     <!-- Title -->
     {{ include('layout/partials/_title.html.twig') }}
@@ -40,7 +51,7 @@
 
             <div class="card-body">
 
-<table class="table">
+<table class="table thread-table">
             <thead>
                 <tr>
                     <th>IsClosed</th>
@@ -56,16 +67,32 @@
             </thead>
     {% for thread in category.threads %}
     <tr>
-        <td>{{ thread.isClosed ? 'Yes' : 'No' }}</td>
-        <td>{{ thread.isPin ? 'Yes' : 'No' }}</td>
+        <td id="close-{{thread.id}}">{{ thread.isClosed ? 'Yes' : 'No' }}</td>
+        <td id="pin-{{thread.id}}">{{ thread.isPin ? 'Yes' : 'No' }}</td>
         <td>{{ thread.totalMessages }}</td>
         <td>{{ thread.id }}</td>
         <td>{{ thread.account.id }}</td>
         <td>{{ thread.product.id }}</td>
-        <td>{{ thread.user.id }}</td>
+        <td>{{ thread.user.profile.fullName }}</td>
         <td>{{ thread.createdAt ? thread.createdAt|date('Y-m-d H:i:s') : '' }}</td>
         <td>
-            <a href="{{ path('app_message_show_thread', {'id': thread.id}) }}">show</a>
+            <a href="{{ path('app_message_show_thread', {'id': thread.id}) }}" style="text-decoration: none;" title="Show"><i class="fa-solid fa-eye" style="color: #696969"></i></a>
+            <a href="javascript:void(0);" style="text-decoration: none;" id="pin-row-{{thread.id}}" class="show_confirm_pin" data-id="{{thread.id}}" data-values="{{thread.isPin == 0 ? 1 : 0}}" data-toggle="tooltip" data-msg="{{thread.isPin ? 'Are you sure you want to unpin this thread?' : 'Are you sure you want to pin this thread?' }}" title="{{thread.isPin ? 'Unpin' : 'Pin' }}">
+            {% if thread.isPin  == 1 %}
+                <i class="fa-solid fa-thumbtack" style="color: #000000;"></i>
+            {% endif %}
+            {% if thread.isPin  == 0 %}
+                <i class="fa-solid fa-thumbtack" style="color: #d3d3d3;"></i>
+            {% endif %}
+            </a>
+            <a href="javascript:void(0);" style="text-decoration: none;" id="close-row-{{thread.id}}" class="show_confirm_close" data-id="{{thread.id}}" data-values="{{thread.isClosed == 0 ? 1 : 0}}" data-toggle="tooltip" data-msg="{{thread.isClosed ? 'Are you sure you want to close this thread?' : 'Are you sure you want to open this thread?' }}" title="{{thread.isClosed ? 'Close' : 'Open' }}">
+            {% if thread.isClosed  == 1 %}
+                <i class="fa-solid fa-circle-xmark" style="color: #ff0000;"></i>
+            {% endif %}
+            {% if thread.isClosed  == 0 %}
+                <i class="fa-solid fa-circle-check" style="color: #28f000;"></i>
+            {% endif %}
+            </a>
         </td>
     </tr>
     {% endfor %}
@@ -78,8 +105,27 @@
     </div>
 </div>
 
-    {% endfor %}
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
 
+<!-- Modal content-->
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Modal Header</h4>
+  </div>
+  <div class="modal-body">
+    <p>Some text in the modal.</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  </div>
+</div>
+
+  </div>
+</div>
+    {% endfor %}
+    
 
 
 {#    <h1>Thread index</h1>#}
