@@ -58,21 +58,18 @@
                     <th>IsPin</th>
                     <th>TotalMessages</th>
                     <th>Id</th>
-                    <th>account Id</th>
-                    <th>Product Id</th>
                     <th>User Id</th>
                     <th>Created_at</th>
                     <th>actions</th>
                 </tr>
             </thead>
     {% for thread in category.threads %}
+    
     <tr>
         <td id="close-{{thread.id}}">{{ thread.isClosed ? 'Yes' : 'No' }}</td>
         <td id="pin-{{thread.id}}">{{ thread.isPin ? 'Yes' : 'No' }}</td>
-        <td>{{ thread.totalMessages }}</td>
+        <td>{{ thread.messages|length }}</td>
         <td>{{ thread.id }}</td>
-        <td>{{ thread.account.id }}</td>
-        <td>{{ thread.product.id }}</td>
         <td>{{ thread.user.profile.fullName }}</td>
         <td>{{ thread.createdAt ? thread.createdAt|date('Y-m-d H:i:s') : '' }}</td>
         <td>
