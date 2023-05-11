@@ -54,24 +54,24 @@
 <table class="table thread-table">
             <thead>
                 <tr>
+                    <th>ID</th>
+                    <th>User Name</th>
+                    <th>Total Messages</th>
+                    <th>Created At</th>
                     <th>IsClosed</th>
                     <th>IsPin</th>
-                    <th>TotalMessages</th>
-                    <th>Id</th>
-                    <th>User Id</th>
-                    <th>Created_at</th>
-                    <th>actions</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
     {% for thread in category.threads %}
     
     <tr>
-        <td id="close-{{thread.id}}">{{ thread.isClosed ? 'Yes' : 'No' }}</td>
-        <td id="pin-{{thread.id}}">{{ thread.isPin ? 'Yes' : 'No' }}</td>
-        <td>{{ thread.messages|length }}</td>
         <td>{{ thread.id }}</td>
         <td>{{ thread.user.profile.fullName }}</td>
+        <td>{{ thread.messages|length }}</td>
         <td>{{ thread.createdAt ? thread.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+        <td id="close-{{thread.id}}">{{ thread.isClosed ? 'Yes' : 'No' }}</td>
+        <td id="pin-{{thread.id}}">{{ thread.isPin ? 'Yes' : 'No' }}</td>
         <td>
             <a href="{{ path('app_message_show_thread', {'id': thread.id}) }}" style="text-decoration: none;" title="Show"><i class="fa-solid fa-eye" style="color: #696969"></i></a>
             <a href="javascript:void(0);" style="text-decoration: none;" id="pin-row-{{thread.id}}" class="show_confirm_pin" data-id="{{thread.id}}" data-values="{{thread.isPin == 0 ? 1 : 0}}" data-toggle="tooltip" data-msg="{{thread.isPin ? 'Are you sure you want to unpin this thread?' : 'Are you sure you want to pin this thread?' }}" title="{{thread.isPin ? 'Unpin' : 'Pin' }}">
