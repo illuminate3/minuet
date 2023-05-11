@@ -18,7 +18,7 @@ on:
     branches: [ "main, code_cleanup" ]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [ "main" ]
+    branches: [ "main", code_cleanup" ]
   schedule:
     - cron: '38 5 * * 1'
 
