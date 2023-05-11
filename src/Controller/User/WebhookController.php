@@ -125,7 +125,6 @@ final class WebhookController extends BaseController
                     // Unexpected event type
 
                     return new Response(Response::HTTP_BAD_REQUEST);
-                    exit;
             }
 
             return new Response(Response::HTTP_OK);
