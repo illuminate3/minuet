@@ -70,7 +70,7 @@ final class RegisterController extends BaseController implements AuthController
             'title' => 'title.register',
             'site' => $this->settings,
             'error' => null,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 

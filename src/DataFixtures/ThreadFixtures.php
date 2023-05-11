@@ -8,6 +8,7 @@ use App\Entity\Account;
 use App\Entity\Product;
 use App\Entity\Thread;
 use App\Entity\User;
+use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -34,7 +35,7 @@ class ThreadFixtures extends Fixture implements DependentFixtureInterface
             $thread->setIsPin(true);
             $thread->setIsClosed(false);
             $thread->setTotalMessages(2);
-            $thread->setCreatedAt(new \DateTimeImmutable('now'));
+            $thread->setCreatedAt(new DateTimeImmutable('now'));
 
             $manager->persist($thread);
         }

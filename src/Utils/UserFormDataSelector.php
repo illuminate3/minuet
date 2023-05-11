@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Utils;
 
+use DateTime;
 use Symfony\Component\Form\FormInterface;
 
 final class UserFormDataSelector
@@ -13,10 +14,10 @@ final class UserFormDataSelector
         return $form->get('email_verified')->getNormData();
     }
 
-    public function getEmailVerifiedAt(FormInterface $form): ?\DateTime
+    public function getEmailVerifiedAt(FormInterface $form): ?DateTime
     {
         return $this->getEmailVerified($form)
-            ? new \DateTime('now')
+            ? new DateTime('now')
             : null;
     }
 }

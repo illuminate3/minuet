@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 final class PageController extends BaseController
 {
     #[Route(path: '/', name: 'page_index', defaults: ['page' => '1'], methods: ['GET'])]
-    #[Route('/rss.xml', defaults: ['page' => '1', '_format' => 'xml'], methods: ['GET'], name: 'page_rss')]
+    #[Route('/rss.xml', name: 'page_rss', defaults: ['page' => '1', '_format' => 'xml'], methods: ['GET'])]
     public function pageIndex(
         Request $request,
         PageRepository $pageRepository
@@ -36,8 +36,8 @@ final class PageController extends BaseController
     ): Response {
         $slug = $request->attributes->get('slug');
 
-        if (null === $slug) {
-            $pages = $pageRepository->findLatest($request, $request->getLocale());
+        if ($slug === null) {
+            $pages = $pageRepository->findLatest($request);
 
             return $this->render('page/index.html.twig',
                 [

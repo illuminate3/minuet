@@ -18,15 +18,16 @@ final class RegisteredUserValidator extends ConstraintValidator
     {
         /* @var $constraint RegisteredUser */
 
-        if (null === $value || '' === $value) {
+        if ($value === null || $value === '') {
             return;
         }
 
         $existingUser = $this->userRepository->findOneBy(['email' => $value]);
 
-        if (null === $existingUser) {
+        if ($existingUser === null) {
             $this->context->buildViolation($constraint->message)
-                ->addViolation();
+                ->addViolation()
+            ;
         }
     }
 }

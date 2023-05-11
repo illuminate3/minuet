@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Service\AbstractService;
 use App\Transformer\UserTransformer;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
@@ -27,6 +28,9 @@ final class UserService extends AbstractService
         $this->transformer = $transformer;
     }
 
+    /**
+     * @throws InvalidArgumentException
+     */
     public function create(User $user): void
     {
         $user = $this->transformer->transform($user);
@@ -42,6 +46,9 @@ final class UserService extends AbstractService
         $this->addFlash('success', 'message.updated');
     }
 
+    /**
+     * @throws InvalidArgumentException
+     */
     public function remove(User $user): void
     {
         $this->em->remove($user);

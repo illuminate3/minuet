@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class PageType extends AbstractType
 {
-    // Form types are services, so you can inject other services in them if needed
+    // Form types are services, so you can inject other services if needed
     public function __construct(
         private Slugger $slugger
     ) {
@@ -92,9 +92,8 @@ final class PageType extends AbstractType
             // of the form handling process.
             // See https://symfony.com/doc/current/form/events.html
             ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event): void {
-                /** @var Page */
                 $page = $event->getData();
-                if (null !== $page->getTitle()) {
+                if ($page->getTitle() !== null) {
                     $page->setSlug($this->slugger->slugify($page->getTitle()));
                 }
             })

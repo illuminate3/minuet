@@ -60,7 +60,7 @@ final class UserController extends BaseController
             'cancel_url' => 'admin_user',
             'site' => $this->site($request),
             'page' => $user,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -91,7 +91,7 @@ final class UserController extends BaseController
             'title' => 'title.users',
             'cancel_url' => 'admin_user',
             'site' => $this->site($request),
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 

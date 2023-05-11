@@ -20,14 +20,14 @@ class Category
     use EntityIdTrait;
 
     #[ORM\Column(type: 'string', length: 100)]
-    private $name;
+    private ?string $name;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    private $categoryOrder;
+    private ?int $categoryOrder;
 
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'category')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
-    private $parent;
+    private ?Category $parent;
 
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
     private $category;

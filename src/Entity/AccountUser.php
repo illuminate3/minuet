@@ -13,12 +13,12 @@ class AccountUser
     #[ORM\Id]
     #[ORM\ManyToOne(targetEntity: Account::class, inversedBy: 'accountUser')]
     #[ORM\JoinColumn(nullable: false)]
-    private $account;
+    private ?Account $account;
 
     #[ORM\Id]
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'accountUser')]
     #[ORM\JoinColumn(nullable: false)]
-    private $user;
+    private ?User $user;
 
     public function getAccount(): ?Account
     {

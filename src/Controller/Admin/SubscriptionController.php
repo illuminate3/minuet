@@ -9,7 +9,6 @@ use App\Entity\Subscription;
 use App\Form\Type\SubscriptionType;
 use App\Repository\SubscriptionRepository;
 use App\Service\Admin\SubscriptionService;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -39,7 +38,6 @@ class SubscriptionController extends BaseController
     #[Route('/new', name: 'admin_subscription_new', methods: ['GET', 'POST'])]
     public function new(
         Request $request,
-        EntityManagerInterface $entityManager,
         SubscriptionService $subscriptionService,
     ): Response {
         $subscription = new Subscription();
@@ -58,7 +56,7 @@ class SubscriptionController extends BaseController
             'cancel_url' => 'admin_subscription',
             'site' => $this->site($request),
             'subscription' => $subscription,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -66,7 +64,6 @@ class SubscriptionController extends BaseController
     public function edit(
         Request $request,
         Subscription $subscription,
-        EntityManagerInterface $entityManager,
         SubscriptionService $subscriptionService,
     ): Response {
         $form = $this->createForm(SubscriptionType::class, $subscription);
@@ -83,7 +80,7 @@ class SubscriptionController extends BaseController
             'title' => 'title.subscription',
             'cancel_url' => 'admin_subscription',
             'site' => $this->site($request),
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -91,7 +88,7 @@ class SubscriptionController extends BaseController
     public function delete(
         Request $request,
         Subscription $subscription,
-        EntityManagerInterface $entityManager,
+        SubscriptionService $subscriptionService,
     ): Response {
         if ($this->isCsrfTokenValid('delete' . $subscription->getId(), $request->request->get('_token'))) {
             $subscriptionService->delete($subscription);

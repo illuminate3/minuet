@@ -108,7 +108,7 @@ final class SubscriptionController extends BaseController
 
         return $this->redirectToRoute('user_profile', ['user' => $this->getUser()->getId()]);
 
-        return $this->redirectToRoute('pricing');
+//        return $this->redirectToRoute('pricing');
     }
 
     #[Route('/success-url', name: 'success_url')]

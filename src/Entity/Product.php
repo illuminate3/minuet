@@ -8,17 +8,16 @@ use App\Entity\Trait\CreatedAtTrait;
 use App\Entity\Trait\SlugTrait;
 use App\Entity\Traits\EntityIdTrait;
 use App\Repository\ProductRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
-
 
 #[ORM\Table]
-//#[UniqueEntity(['title'])]
-//#[ORM\UniqueConstraint(name: 'slug_title_unique_key', columns: ['slug', 'title'])]
+// #[UniqueEntity(['title'])]
+// #[ORM\UniqueConstraint(name: 'slug_title_unique_key', columns: ['slug', 'title'])]
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
 {
@@ -38,11 +37,11 @@ class Product
 //    private $price = 0;
 
     #[ORM\Column(type: 'integer')]
-    private $price;
+    private ?int $price;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'product')]
     #[ORM\JoinColumn(nullable: false)]
-    private $category;
+    private ?Category $category;
 
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: OrderDetail::class)]
     private $orderDetail;
@@ -60,11 +59,10 @@ class Product
     public function __construct()
     {
         $this->orderDetail = new ArrayCollection();
-        $this->created_at = new \DateTimeImmutable();
+        $this->created_at = new DateTimeImmutable();
         $this->threads = new ArrayCollection();
         $this->images = new ArrayCollection();
     }
-
 
     public function getTitle(): ?string
     {
@@ -101,7 +99,6 @@ class Product
 
         return $this;
     }
-
 
     public function getCategory(): ?Category
     {

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Validator\imageRequirements;
+use Exception;
 use Gregwar\Image\Image;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -36,29 +37,32 @@ final class FileUploader
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function upload(UploadedFile $file): string
     {
-        $fileName = ByteString::fromRandom(20).'.'.$file->guessExtension();
+        $fileName = ByteString::fromRandom(20) . '.' . $file->guessExtension();
 
         // Full
-        $file->move($this->targetDirectory.'/full/', $fileName);
+        $file->move($this->targetDirectory . '/full/', $fileName);
 
         // Small
-        Image::open($this->targetDirectory.'/full/'.$fileName)
+        Image::open($this->targetDirectory . '/full/' . $fileName)
             ->zoomCrop(500, 300, 'transparent', 'center', 'center')
-            ->save($this->targetDirectory.'/small/'.$fileName);
+            ->save($this->targetDirectory . '/small/' . $fileName)
+        ;
 
         // Medium
-        Image::open($this->targetDirectory.'/full/'.$fileName)
+        Image::open($this->targetDirectory . '/full/' . $fileName)
             ->zoomCrop(700, 420, 'transparent', 'center', 'center')
-            ->save($this->targetDirectory.'/medium/'.$fileName);
+            ->save($this->targetDirectory . '/medium/' . $fileName)
+        ;
 
         // Large
-        Image::open($this->targetDirectory.'/full/'.$fileName)
+        Image::open($this->targetDirectory . '/full/' . $fileName)
             ->cropResize(1200, 800, 'transparent')
-            ->save($this->targetDirectory.'/large/'.$fileName);
+            ->save($this->targetDirectory . '/large/' . $fileName)
+        ;
 
         return $fileName;
     }
@@ -73,7 +77,7 @@ final class FileUploader
         ];
 
         foreach ($folders as $folder) {
-            $this->fileSystem->remove($this->targetDirectory.$folder.$fileName);
+            $this->fileSystem->remove($this->targetDirectory . $folder . $fileName);
         }
     }
 }

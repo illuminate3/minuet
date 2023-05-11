@@ -36,7 +36,7 @@ final class ImageController extends BaseController
 
 
     /**
-     * Deletes a Image entity.
+     * Deletes Image entity.
      */
     #[Route(path: '/product/{product_id<\d+>}/image/{id<\d+>}/delete', name: 'user_image_delete', methods: ['POST'])]
 //    #[IsGranted('ROLE_ADMIN')]

@@ -27,7 +27,8 @@ final class DevCommand extends Command
             $consoleInput->setInteractive(false);
             $this->getApplication()
                 ->find($command['command'])
-                ->run($consoleInput, $output);
+                ->run($consoleInput, $output)
+            ;
         }
 
         return Command::SUCCESS;
@@ -56,14 +57,14 @@ final class DevCommand extends Command
                 'command' => 'doctrine:fixtures:load',
                 'arguments' => [],
             ],
-//            [
-//                'command' => 'app:load-make-model',
-//                'arguments' => [],
-//            ],
-//            [
-//                'command' => 'app:load-product-account',
-//                'arguments' => [],
-//            ],
+            //            [
+            //                'command' => 'app:load-make-model',
+            //                'arguments' => [],
+            //            ],
+            //            [
+            //                'command' => 'app:load-product-account',
+            //                'arguments' => [],
+            //            ],
         ];
     }
 }

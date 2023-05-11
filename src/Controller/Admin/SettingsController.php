@@ -14,6 +14,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class SettingsController extends BaseController
 {
+    private array $settings;
+
     public function __construct(
         protected SettingsRepository $repository,
         ManagerRegistry $doctrine,
@@ -55,7 +57,7 @@ final class SettingsController extends BaseController
             'title' => 'title.settings',
             'cancel_url' => 'admin_settings',
             'site' => $this->site($request),
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 }
