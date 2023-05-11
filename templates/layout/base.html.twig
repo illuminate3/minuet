@@ -49,6 +49,8 @@
 
     <!-- CSS -->
     {{ encore_entry_link_tags('css/app') }}
+
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     {% block stylesheets %}{% endblock %}
 
 </head>
@@ -87,12 +89,12 @@
 
 </div>
 
-<footer class="row bg-light mt-auto">
+<div class=" bg-light mt-auto">
     <div class="col">
         <!-- Footer -->
         {{ include('layout/partials/_footer.html.twig') }}
     </div>
-</footer>
+</div>
 
 <!-- Scripts -->
 {{ encore_entry_script_tags('js/app') }}

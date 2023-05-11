@@ -1,96 +1,207 @@
 {% extends 'layout/base.html.twig' %}
 
 {% block subheader %}
-    <!-- Title -->
-{#    {{ include('layout/partials/_title.html.twig') }}#}
-    <!-- Search -->
-{#    {{ include('product/partials/_search_form.html.twig') }}#}
+<!-- Title -->
+{# {{ include('layout/partials/_title.html.twig') }}#}
+<!-- Search -->
+{# {{ include('product/partials/_search_form.html.twig') }}#}
 {% endblock %}
 
 {% block body %}
 
-<div class="row">
+<div class="row" id="products-section">
 
-    {% for product in products %}
+    <div class="col-md-3">
 
-        <!-- Item -->
-        <div class="col-lg-3 col-md-6 col-sm-12">
-            <div class="card full-xs">
+        <div class="row">
+            <div class="col-md-12 pb-3">
+                <label for="make">Make</label>
+                <select name="make" class="form-control" id="make">
+                    <option value="" selected disabled>--Select Make--</option>    
+                    {% for category in categories %}
+                    <option
+                    {% if app.request.query.has('make')%}
+                    {{  app.request.query.get('make')==category.id ? 'selected' : '' }}
+                    {% endif %}
+                     value="{{category.id}}">{{category.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-12 pb-3">
+                <div class="card d-none" id="models-card">                    
+                    <div class="card-body">     
+                        <h6 class="card-title" id="model-title"></h6>                   
+                    <ul class="list-group list-group-flush" id="models">
+                      <!-- <li class="list-group-item"><input type="checkbox" value="" name="model"> Models</li> -->
+                    </ul>
+                  </div>
+                  </div>
+                <!-- <label for="model">Model</label>
+                <select name="model" class="form-control" id="model">
+                    <option value="" selected disabled>--Select Model--</option>                   
+                </select> -->
+            </div>
+        </div>
 
-                <div class="product-box-img">
+    </div>
+    <div class="col-md-9">
+        <div class="row">
 
-                    <a href="{{ path('product_show', {
+
+            {% for product in products %}
+
+            <!-- Item -->
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-3">
+                <div class="card full-xs">
+
+                    <div class="product-box-img">
+
+                        <a href="{{ path('product_show', {
                         'id':  product.id,
                         'slug': product.slug}) }}">
 
-                    {% for photo in product.images | slice(0, 1) %}
+                            {% for photo in product.images | slice(0, 1) %}
 
-                        <img class="card-img-top lazyload" src="{{ asset('/images/transparent.png') }}"
-                             data-src="/uploads/images/small/{{ photo.file }}"
-                             alt="{{ product.slug }}"
-                             title="{{ product.title }}"/>
+                            <img class="card-img-top lazyload" src="{{ asset('/images/transparent.png') }}"
+                                data-src="/uploads/images/small/{{ photo.file }}" alt="{{ product.slug }}"
+                                title="{{ product.title }}" />
 
-                    {% else %}
+                            {% else %}
 
-                        <img class="card-img-top border-bottom" src="{{ asset('/images/no-photo.png') }}"
-                             alt="{{ product.slug }}"
-                             title="{{ product.title }}"/>
+                            <img class="card-img-top border-bottom" src="{{ asset('/images/no-photo.png') }}"
+                                alt="{{ product.slug }}" title="{{ product.title }}" />
 
-                    {% endfor %}
+                            {% endfor %}
 
-                    {% if product.price != '' %}
-                        <span class="price">
-                            $ {{ product.price }}
-{#                            {% if product.priceType != '' %}#}
-{#                                / {{ product.priceType }}#}
-{#                            {% endif %}#}
-                        </span>
-                    {% endif %}
+                            {% if product.price != '' %}
+                            <span class="price">
+                                $ {{ product.price }}
+                                {# {% if product.priceType != '' %}#}
+                                {# / {{ product.priceType }}#}
+                                {# {% endif %}#}
+                            </span>
+                            {% endif %}
 
-                    </a>
-
-                </div>
-
-                <div class="card-body">
-                    <h5 class="card-title">
-
-                        <a href="{{ path('product_show', {
-                            'id':  product.id,
-                            'slug': product.slug}) }}">
-                            {{ product.title }}
                         </a>
 
-                    </h5>
-                    <p class="small icon-green">
-                        <i class="fas fa-map-marker-alt"></i>
-{#                            {{ product.address }}#}
-                        {{ product.id }}
-                    </p>
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title">
+
+                            <a href="{{ path('product_show', {
+                            'id':  product.id,
+                            'slug': product.slug}) }}">
+                                {{ product.title }}
+                            </a>
+
+                        </h5>
+                        <p class="small icon-green">
+                            <i class="fas fa-map-marker-alt"></i>
+                            {# {{ product.address }}#}
+                            {{ product.id }}
+                        </p>
 
 
-{#                        <span class="attribute">{{ product.dealType.name }}</span>#}
-                    <span class="attribute">{{ product.category.name }}</span>
+                        {# <span class="attribute">{{ product.dealType.name }}</span>#}
+                        <span class="attribute">{{ product.category.name }}</span>
+
+                    </div>
 
                 </div>
 
             </div>
 
+            <!-- / Item -->
+
+            {% else %}
+
+            <div class="well text-center">
+                <img class="img-fluid w-50" src="{{ asset('images/no-data-found.png') }}" alt="No data found">               
+                <p class="fs-4 text-justify mb-0">No cars matching with your search</p>
+                <p class="fs-4 text-justify mb-0">Please modify your search</p>
+            </div>
+
+            {% endfor %}
         </div>
-
-        <!-- / Item -->
-
-    {% else %}
-
-        <div class="well">
-            {{ 'message.not_found'|trans }}
+        <div class="py-lg-4">
+            {{ knp_pagination_render(products) }}
         </div>
-
-    {% endfor %}
+    </div>
 
 </div>
 
-<div class="py-lg-4">
-    {{ knp_pagination_render(products) }}
-</div>
 
+
+{% endblock %}
+{% block javascripts %}
+<script>
+$(function() {
+    if ( parseInt("{{app.request.query.get('make')}}")>0) {
+        fetchModels();
+    }
+});
+
+
+$("#make").on("change",function(){
+ let url = "{{ path('product_index') }}"+`?make=${$(this).val()}&models=`;
+ location.href = url;
+});
+
+// $("#model").on("change",function(){
+//  let url = "{{ path('product_index') }}"+`?make=${$("#make").val()}&models[]=${$(this).val()}`;
+//  location.href = url;
+// });
+
+
+function fetchModels(){
+    let url = "";
+        let modelTitle = "";
+        if ($("#make").val()) {
+            let id = $("#make").val();            
+            modelTitle = $("#make").find('option:selected').text();            
+            url = "{{ path('sub_categories', { 'category_id': '_cate_id' }) }}";
+            url = url.replace('_cate_id',id);            
+        }
+    $.ajax({
+            type: "GET",
+            url: url,
+            success: function (resp) {                
+                if (resp.status) {
+                    let sub_categories = resp.data;
+                    $("#models").html('');
+                    $("#model-title").text(`${modelTitle} Models`);
+                    let selectedModels = "{{app.request.query.get('models')}}";                    
+                    var selectedModelsArray = selectedModels.split(",").map(num => +num);
+                    sub_categories.forEach(e => {
+                       //  $("#model").append(`<option ${selectedModel==e.id ? 'selected' : ''} value="${e.id}">${e.name}</option>`);
+                        let isChecked = $.inArray(e.id, selectedModelsArray) !== -1 ? 'checked' : '';
+                        $("#models").append(` <li class="list-group-item"><input ${isChecked} type="checkbox" value="${e.id}" class="model-checkbox" name="model"> ${e.name}</li>`);
+                    });
+                    $("#models-card").removeClass('d-none');
+                    filterProducts();
+                }
+                }, error: function (err) {
+                    console.log(err);
+             }
+            });
+}
+
+
+function filterProducts(){    
+    $(".model-checkbox").on("change",function() {    
+    var checkedBoxes = $('.model-checkbox:checked');
+    // create an array to hold the values
+    var checkedValues = [];
+    // loop through the checked checkboxes and add their values to the array
+    checkedBoxes.each(function() {
+        checkedValues.push($(this).val());
+    });
+    let url = "{{ path('product_index') }}"+`?make=${$("#make").val()}&models=${checkedValues.toString()}`;
+    location.href = url;
+});
+}
+
+
+</script>
 {% endblock %}

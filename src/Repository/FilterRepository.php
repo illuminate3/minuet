@@ -12,6 +12,14 @@ final class FilterRepository extends ProductRepository
     {
         $qb = $this->createQueryBuilder('p');
 
+
+        // sub category
+       if (isset($params['category']) && !empty($params['category'])) {
+        //   $qb->andWhere('p.category = '.(int) $params['category']);
+        $qb->where($qb->expr()->in('p.id',  $params['category']));
+       }
+
+
 //        if ($this->security->isGranted('ROLE_ADMIN')) {
 //            if (\in_array($params['state'], ['published', 'private', 'pending', 'rejected'], true)) {
 //                $qb->where("p.state = '".$params['state']."'");

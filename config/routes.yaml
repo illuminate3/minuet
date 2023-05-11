@@ -8,3 +8,11 @@ default_route:
     defaults:
       path: /en
       permanent: true
+
+
+
+
+sub_categories:
+  path: /sub_categories/{category_id}
+  controller: App\Controller\ProductController::fetchSubcategories
+  methods: ["GET"]
