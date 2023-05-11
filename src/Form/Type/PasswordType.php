@@ -41,7 +41,8 @@ final class PasswordType extends AbstractType
                     ]),
                     new ConfirmPassword(),
                 ],
-            ]);
+            ])
+        ;
     }
 
     /**

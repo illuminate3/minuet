@@ -7,6 +7,8 @@ namespace App\Entity;
 use App\Entity\Trait\CreatedAtTrait;
 use App\Entity\Traits\EntityIdTrait;
 use App\Repository\UserRepository;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -37,37 +39,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::STRING, unique: true)]
     #[Assert\NotBlank]
     #[Assert\Email]
-    private $email;
+    private ?string $email;
 
-    /**
-     * @var string
-     */
     #[ORM\Column(type: Types::STRING, length: 255)]
-    private $password;
+    private string $password;
 
     #[ORM\Column(type: Types::JSON)]
     private array $roles = [];
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
-    private $confirmation_token;
-    
-    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
-    private $stripe_customer_id;
+    private ?string $confirmation_token;
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
-    private $stripe_subscription_id;
+    private ?string $stripe_customer_id;
+
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $stripe_subscription_id;
 
     #[ORM\Column(type: Types::DATETIMETZ_MUTABLE, nullable: true)]
-    private $password_requested_at;
+    private ?DateTimeInterface $password_requested_at;
 
     #[ORM\OneToOne(mappedBy: 'user', targetEntity: Profile::class, cascade: ['persist', 'remove'])]
     private ?Profile $profile;
 
     #[ORM\Column(type: Types::DATETIMETZ_MUTABLE, nullable: true)]
-    private $emailVerifiedAt = null;
+    private ?DateTime $emailVerifiedAt;
 
     #[ORM\Column(type: Types::BOOLEAN, length: 1, nullable: true)]
-    private $isVerified = false;
+    private bool $isVerified = false;
 
     #[ORM\Column(nullable: true)]
     private ?bool $isAccount = null;
@@ -78,9 +77,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Message::class)]
     private Collection $messages;
 
+//    private ArrayCollection $properties;
+
     public function __construct()
     {
-        $this->properties = new ArrayCollection();
+//        $this->properties = new ArrayCollection();
         $this->threads = new ArrayCollection();
         $this->messages = new ArrayCollection();
     }
@@ -141,7 +142,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // See "Do you need to use a Salt?" at https://symfony.com/doc/current/cookbook/security/entity_provider.html
         // we're using bcrypt in security.yml to encode the password, so
-        // the salt value is built-in and you don't have to generate one
+        // the salt value is built-in, and you don't have to generate one
         return null;
     }
 
@@ -178,12 +179,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPasswordRequestedAt(): ?\DateTimeInterface
+    public function getPasswordRequestedAt(): ?DateTimeInterface
     {
         return $this->password_requested_at;
     }
 
-    public function setPasswordRequestedAt(?\DateTimeInterface $password_requested_at): self
+    public function setPasswordRequestedAt(?DateTimeInterface $password_requested_at): self
     {
         $this->password_requested_at = $password_requested_at;
 
@@ -195,8 +196,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function isPasswordRequestNonExpired(int $ttl): bool
     {
-        return $this->getPasswordRequestedAt() instanceof \DateTime &&
-            $this->getPasswordRequestedAt()->getTimestamp() + $ttl > time();
+        return $this->getPasswordRequestedAt() instanceof DateTime
+            && $this->getPasswordRequestedAt()->getTimestamp() + $ttl > time();
     }
 
     public function getProfile(): ?Profile
@@ -227,6 +228,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
     public function getStripeCustomerId(): ?string
     {
         return $this->stripe_customer_id;
@@ -238,6 +240,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
     public function getStrSubscriptionId(): ?string
     {
         return $this->stripe_subscription_id;
@@ -252,15 +255,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function isVerified(): bool
     {
-        return null !== $this->emailVerifiedAt;
+        return $this->emailVerifiedAt !== null;
     }
 
-    public function getEmailVerifiedAt(): ?\DateTime
+    public function getEmailVerifiedAt(): ?DateTime
     {
         return $this->emailVerifiedAt;
     }
 
-    public function setEmailVerifiedAt(?\DateTime $dateTime): self
+    public function setEmailVerifiedAt(?DateTime $dateTime): self
     {
         $this->emailVerifiedAt = $dateTime;
 

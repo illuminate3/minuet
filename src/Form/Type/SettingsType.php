@@ -113,9 +113,9 @@ final class SettingsType extends AbstractType
                 ],
             ])
             ->add('allow_register', ChoiceType::class, [
-                    'label' => 'label.site_allow_register',
-                    'choices' => self::CHOICES,
-                ]
+                'label' => 'label.site_allow_register',
+                'choices' => self::CHOICES,
+            ]
             )
         ;
     }

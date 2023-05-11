@@ -28,7 +28,7 @@ final class MenuController extends BaseController
             'action_edit_url' => 'admin_menu_edit',
             'new_url' => 'admin_menu_new',
             'site' => $this->site($request),
-//            'menu' => $repository->findItems(),
+            //            'menu' => $repository->findItems(),
             'menus' => $menus,
         ]);
     }
@@ -54,7 +54,7 @@ final class MenuController extends BaseController
             'cancel_url' => 'admin_menu',
             'site' => $this->site($request),
             'menu' => $menu,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -81,7 +81,7 @@ final class MenuController extends BaseController
             'title' => 'title.menu',
             'cancel_url' => 'admin_menu',
             'site' => $this->site($request),
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 

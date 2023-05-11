@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Command;
 
+use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -29,13 +30,16 @@ final class LoadMakeModelCommand extends Command
         $this->em = $entityManager;
     }
 
+    /**
+     * @throws Exception
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $path = $this->params->get('kernel.project_dir');
         $file_makes = $path . '/data/make.sql';
 
         $sql = file_get_contents($file_makes);
-        $this->em->getConnection()->exec($sql);
+        $this->em->getConnection()->executeQuery($sql);
         $this->em->flush();
 
         return Command::SUCCESS;

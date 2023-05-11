@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Entity\Property;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 final class URLService
@@ -41,7 +39,7 @@ final class URLService
     // Check referer host.
     public function isRefererFromCurrentHost(Request $request): bool
     {
-        if (preg_match('/'.$request->getHost().'/', $request->server->getHeaders()['REFERER'] ?? '')) {
+        if (preg_match('/' . $request->getHost() . '/', $request->server->getHeaders()['REFERER'] ?? '')) {
             return true;
         }
 

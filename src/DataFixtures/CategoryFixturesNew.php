@@ -63,7 +63,7 @@ class CategoryFixturesNew extends Fixture
         $category->setSlug($slug);
 //        $this->createCategory('mouse', $manager, $parent);
 
-        $this->addReference('category-'.$this->counter, $category);
+        $this->addReference('category-' . $this->counter, $category);
         ++$this->counter;
 
         $manager->persist($category);
@@ -74,7 +74,7 @@ class CategoryFixturesNew extends Fixture
     private function getData(): array
     {
         $path = $this->params->get('kernel.project_dir');
-        $file_category = $path.'/data/category.csv';
+        $file_category = $path . '/data/category.csv';
 
 //        $csv = str_getcsv(file_get_contents($file_category));
 

@@ -43,13 +43,13 @@ class CategoryFixtures extends Fixture implements DependentFixtureInterface
         // Change needs to be made in the ProductFixtures too
         $path = $this->params->get('kernel.project_dir');
 
-        $file_make = $path.'/data/make.sql';
+        $file_make = $path . '/data/make.sql';
 
         $sql = file_get_contents($file_make);
         $manager->getConnection()->getConfiguration()->setSQLLogger(null);
         $manager->getConnection()->exec($sql);
 
-        $file_category = $path.'/data/category.sql';
+        $file_category = $path . '/data/category.sql';
 
         $sql = file_get_contents($file_category);
         $manager->getConnection()->getConfiguration()->setSQLLogger(null);
@@ -62,7 +62,7 @@ class CategoryFixtures extends Fixture implements DependentFixtureInterface
     {
         $categories = $manager->getRepository(Category::class)->findAll();
         foreach ($categories as $category) {
-            $this->addReference('category-'.$category->getID(), $category);
+            $this->addReference('category-' . $category->getID(), $category);
         }
 
         $manager->flush();

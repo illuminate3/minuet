@@ -7,6 +7,8 @@ namespace App\Repository;
 use App\Entity\Page;
 use App\Entity\Settings;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\Pagination\PaginationInterface;
@@ -24,7 +26,7 @@ final class PageRepository extends ServiceEntityRepository
     /**
      * @var PaginatorInterface
      */
-    private $paginator;
+    private PaginatorInterface $paginator;
 
     public function __construct(
         ManagerRegistry $registry,
@@ -34,12 +36,17 @@ final class PageRepository extends ServiceEntityRepository
         $this->paginator = $paginator;
     }
 
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
     public function countAll(): int
     {
         $count = $this->createQueryBuilder('p')
             ->select('count(p.id)')
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
 
         return (int) $count;
     }
@@ -55,13 +62,13 @@ final class PageRepository extends ServiceEntityRepository
     public function findLatest(
         Request $request,
     ): PaginationInterface {
-
         $locale = 'en';
 
         $qb = $this->createQueryBuilder('p')
             ->where('p.locale = :locale')
             ->setParameter('locale', $locale)
-            ->orderBy('p.id', 'DESC');
+            ->orderBy('p.id', 'DESC')
+        ;
 
         return $this->createPaginator($qb->getQuery(), $request);
     }
@@ -69,7 +76,6 @@ final class PageRepository extends ServiceEntityRepository
     public function findPublished(
         Request $request,
     ): PaginationInterface {
-
         $locale = 'en';
         $publish = '1';
 
@@ -78,7 +84,8 @@ final class PageRepository extends ServiceEntityRepository
 //            ->andWhere('p.publish = :publish')
             ->setParameter('locale', $locale)
 //            ->setParameter('publish', $publish)
-            ->orderBy('p.id', 'DESC');
+            ->orderBy('p.id', 'DESC')
+        ;
 
         return $this->createPaginator($qb->getQuery(), $request);
     }

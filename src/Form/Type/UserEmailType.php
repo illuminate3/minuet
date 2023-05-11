@@ -28,7 +28,8 @@ final class UserEmailType extends AbstractType
                     new Length(['min' => 5]),
                     new RegisteredUser(),
                 ],
-            ]);
+            ])
+        ;
     }
 
     /**

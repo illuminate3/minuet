@@ -92,7 +92,7 @@ final class ProductController extends BaseController
             'cancel_url' => 'admin_product',
             'site' => $this->site($request),
             'product' => $product,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -152,7 +152,7 @@ final class ProductController extends BaseController
 //            'title' => 'title.products',
 //            'cancel_url' => 'admin_product',
 //            'site' => $this->site($request),
-//            'form' => $form,
+//            'form' => $form->createView(),
 //        ]);
 
         // return $this->renderForm('admin/product/edit.html.twig', compact('productForm'));
@@ -172,7 +172,7 @@ final class ProductController extends BaseController
             'title' => 'title.products',
             'cancel_url' => 'admin_product',
             'site' => $this->site($request),
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 

@@ -3,8 +3,10 @@
 declare(strict_types=1);
 
 namespace App\Entity;
+
 use App\Entity\Trait\CreatedAtTrait;
 use App\Repository\OrderRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,25 +19,25 @@ class Order
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private ?int $id;
 
     #[ORM\Column(type: 'string', length: 20, unique: true)]
-    private $reference;
+    private ?string $reference;
 
 //    #[ORM\ManyToOne(targetEntity: Coupons::class, inversedBy: 'order')]
 //    private $coupons;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'order')]
     #[ORM\JoinColumn(nullable: false)]
-    private $user;
+    private ?User $user;
 
     #[ORM\OneToMany(mappedBy: 'order', targetEntity: OrderDetail::class, orphanRemoval: true)]
-    private $orderDetail;
+    private ArrayCollection $orderDetail;
 
     public function __construct()
     {
         $this->orderDetail = new ArrayCollection();
-        $this->created_at = new \DateTimeImmutable();
+        $this->created_at = new DateTimeImmutable();
     }
 
     public function getId(): ?int

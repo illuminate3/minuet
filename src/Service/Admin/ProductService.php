@@ -8,12 +8,14 @@ use App\Entity\Product;
 use App\Service\AbstractService;
 use App\Utils\Slugger;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 final class ProductService extends AbstractService
 {
     private EntityManagerInterface $em;
+    private Slugger $slugger;
 
     public function __construct(
         CsrfTokenManagerInterface $tokenManager,
@@ -26,10 +28,13 @@ final class ProductService extends AbstractService
         $this->slugger = $slugger;
     }
 
+    /**
+     * @throws InvalidArgumentException
+     */
     public function create(Product $product): void
     {
         // Make slug
-        if (null !== $product->getSlug()) {
+        if ($product->getSlug() !== null) {
             $slug = $this->slugger->slugify($product->getTitle());
             $product->setSlug($slug);
         }
@@ -37,13 +42,12 @@ final class ProductService extends AbstractService
         // Save product
         $this->save($product);
         $this->clearCache('products_count');
-
     }
 
     public function edit(Product $product): void
     {
         // Make slug
-        if (null !== $product->getSlug()) {
+        if ($product->getSlug() !== null) {
             $slug = $this->slugger->slugify($product->getTitle());
             $product->setSlug($slug);
         }
@@ -64,6 +68,9 @@ final class ProductService extends AbstractService
         $this->em->flush();
     }
 
+    /**
+     * @throws InvalidArgumentException
+     */
     public function delete(Product $product): void
     {
         // Delete product
@@ -71,5 +78,4 @@ final class ProductService extends AbstractService
         $this->clearCache('products_count');
         $this->addFlash('success', 'message.deleted');
     }
-
 }

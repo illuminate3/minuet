@@ -56,7 +56,7 @@ final class PageController extends BaseController
             'cancel_url' => 'admin_page',
             'site' => $this->site($request),
             'page' => $page,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -83,7 +83,7 @@ final class PageController extends BaseController
             'title' => 'title.pages',
             'cancel_url' => 'admin_page',
             'site' => $this->site($request),
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 

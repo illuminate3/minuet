@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Entity\Forum;
-use App\Entity\Product;
 use App\Entity\Thread;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\DBAL\Exception;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**

@@ -15,6 +15,8 @@ use Stripe\Stripe;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Throwable;
+use UnexpectedValueException;
 
 final class WebhookController extends BaseController
 {
@@ -31,8 +33,7 @@ final class WebhookController extends BaseController
         AccountRepository $accountRepository,
         SubscriptionRepository $subscriptionRepository,
         EntityManagerInterface $em
-    )
-    {
+    ) {
         try {
             $stripeAPI = $_ENV['STRIPE_SECRET_KEY'];
             Stripe::setApiKey($stripeAPI);
@@ -47,7 +48,7 @@ final class WebhookController extends BaseController
                 $event = \Stripe\Webhook::constructEvent(
                     $payload, $sig_header, $endpoint_secret
                 );
-            } catch (\UnexpectedValueException $e) {
+            } catch (UnexpectedValueException $e) {
                 // Invalid payload
                 http_response_code(400);
                 exit;
@@ -128,7 +129,7 @@ final class WebhookController extends BaseController
             }
 
             return new Response(Response::HTTP_OK);
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             return json_encode(['error' => $th->getMessage()]);
         }
     }
