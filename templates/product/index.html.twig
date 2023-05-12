@@ -14,15 +14,14 @@
     <div class="col-md-3">
 
         <div class="row">
+            <form action="{{path('product_index')}}" method="post">
             <div class="col-md-12 pb-3">
                 <label for="make">Make</label>
                 <select name="make" class="form-control" id="make">
                     <option value="" selected disabled>--Select Make--</option>    
                     {% for category in categories %}
-                    <option
-                    {% if app.request.query.has('make')%}
-                    {{  app.request.query.get('make')==category.id ? 'selected' : '' }}
-                    {% endif %}
+                    <option                   
+                    {{ make==category.id ? 'selected' : '' }}                   
                      value="{{category.id}}">{{category.name}}</option>
                     {% endfor %}
                 </select>
@@ -30,17 +29,14 @@
             <div class="col-md-12 pb-3">
                 <div class="card d-none" id="models-card">                    
                     <div class="card-body">     
-                        <h6 class="card-title" id="model-title"></h6>                   
-                    <ul class="list-group list-group-flush" id="models">
-                      <!-- <li class="list-group-item"><input type="checkbox" value="" name="model"> Models</li> -->
-                    </ul>
-                  </div>
-                  </div>
-                <!-- <label for="model">Model</label>
-                <select name="model" class="form-control" id="model">
-                    <option value="" selected disabled>--Select Model--</option>                   
-                </select> -->
+                        <h6 class="card-title" id="model-title"></h6>                          
+                        <ul class="list-group list-group-flush" id="models">
+                            <!-- Models will append here -->
+                        </ul>
+                    </div>
+                </div>               
             </div>
+        </form>
         </div>
 
     </div>
@@ -137,22 +133,14 @@
 {% block javascripts %}
 <script>
 $(function() {
-    if ( parseInt("{{app.request.query.get('make')}}")>0) {
+    if ( parseInt("{{make}}")>0) {
         fetchModels();
     }
 });
 
-
 $("#make").on("change",function(){
- let url = "{{ path('product_index') }}"+`?make=${$(this).val()}&models=`;
- location.href = url;
+    $("form").submit();
 });
-
-// $("#model").on("change",function(){
-//  let url = "{{ path('product_index') }}"+`?make=${$("#make").val()}&models[]=${$(this).val()}`;
-//  location.href = url;
-// });
-
 
 function fetchModels(){
     let url = "";
@@ -170,13 +158,12 @@ function fetchModels(){
                 if (resp.status) {
                     let sub_categories = resp.data;
                     $("#models").html('');
-                    $("#model-title").text(`${modelTitle} Models`);
-                    let selectedModels = "{{app.request.query.get('models')}}";                    
-                    var selectedModelsArray = selectedModels.split(",").map(num => +num);
-                    sub_categories.forEach(e => {
-                       //  $("#model").append(`<option ${selectedModel==e.id ? 'selected' : ''} value="${e.id}">${e.name}</option>`);
-                        let isChecked = $.inArray(e.id, selectedModelsArray) !== -1 ? 'checked' : '';
-                        $("#models").append(` <li class="list-group-item"><input ${isChecked} type="checkbox" value="${e.id}" class="model-checkbox" name="model"> ${e.name}</li>`);
+                    $("#model-title").text(`${modelTitle} Models`);                    
+                    let selectedModelsArray = {{models}};                    
+                    sub_categories.forEach(e => {                     
+                        let isChecked = $.inArray(e.id, selectedModelsArray) !== -1 ? 'checked' : '';                        
+                        let isDisabled =parseInt("{{products|length}}")>0 ? '' : 'disabled';                        
+                        $("#models").append(` <li class="list-group-item"><input ${isDisabled} ${isChecked} type="checkbox" value="${e.id}" class="model-checkbox" name="models[]"> ${e.name}</li>`);
                     });
                     $("#models-card").removeClass('d-none');
                     filterProducts();
@@ -187,7 +174,6 @@ function fetchModels(){
             });
 }
 
-
 function filterProducts(){    
     $(".model-checkbox").on("change",function() {    
     var checkedBoxes = $('.model-checkbox:checked');
@@ -196,9 +182,8 @@ function filterProducts(){
     // loop through the checked checkboxes and add their values to the array
     checkedBoxes.each(function() {
         checkedValues.push($(this).val());
-    });
-    let url = "{{ path('product_index') }}"+`?make=${$("#make").val()}&models=${checkedValues.toString()}`;
-    location.href = url;
+    });   
+    $("form").submit();   
 });
 }
 

@@ -23,7 +23,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class ProductController extends BaseController
 {
 
-    #[Route(path: '/', name: 'product_index', defaults: ['page' => 1], methods: ['GET'])]
+    #[Route(path: '/', name: 'product_index', defaults: ['page' => 1], methods: ['GET','POST'])]
     public function search(
         Request $request,
         FilterRepository $repository,
@@ -32,12 +32,12 @@ class ProductController extends BaseController
         RequestToArrayTransformer $transformer
     ): Response {
         $searchParams = $transformer->transform($request);
-        $make = (int)$request->query->get('make');
-
-    
-        $models = $request->query->get('models'); // category_ids of product
+        $make = (int)$request->get('make');
+        $selectedModels = [];
+        $models = $request->get('models'); // category_ids of product
         if (!empty($models)) {
-            $searchParams["category"] = $models;            
+            $selectedModels = array_map('intval', $models);
+            $searchParams["category"] = $selectedModels;            
         }else{
             // check for models of the selected make
             if (!empty($make)) {
@@ -61,6 +61,8 @@ class ProductController extends BaseController
                 'title' => 'ROOT',
                 'site' => $this->site($request),
                 'products' => $products,
+                'make' => $make,
+                'models' => json_encode($selectedModels),
                 'categories' => $categories,
                 //                'searchParams' => $searchParams,
             ]

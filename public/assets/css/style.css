@@ -1,5 +1,26 @@
 #products-section #models-card #models{
     padding: 6px 12px;
-    overflow-y: scroll;
+    overflow-y: auto;
     max-height: 350px;
 }
+
+
+/* width */
+#products-section #models-card #models::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  /* Track */
+  #products-section #models-card #models::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  #products-section #models-card #models::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  #products-section #models-card #models::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
