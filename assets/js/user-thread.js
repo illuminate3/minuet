@@ -18,17 +18,17 @@ $('.thread-table a.show_confirm_pin').on("click",function(event) {
                 {
                     $('#pin-'+result.id).html('No');
                     $('#pin-row-'+result.id).data('values', '1');
-                    $('#pin-row-'+result.id).data('msg', 'Are you sure you want to pin this thread?');
-                    $('#pin-row-'+result.id).html("<i class='fa-solid fa-thumbtack' style='color: #d3d3d3;'></i>");
-                    $('#pin-row-'+result.id).attr('title', 'Pin');
+                    $('#pin-row-'+result.id).data('msg', 'Are you sure you want to unpin this thread?');
+                    $('#pin-row-'+result.id).html("<i class='fa-solid fa-thumbtack btn-light-gray'></i>");
+                    $('#pin-row-'+result.id).attr('title', 'Unpin');
                 }
                 if(result.status == 'success' && result.data == true)
                 {
                     $('#pin-'+result.id).html('Yes');
                     $('#pin-row-'+result.id).data('values', '0'); 
-                    $('#pin-row-'+result.id).data('msg', 'Are you sure you want to unpin this thread?');  
-                    $('#pin-row-'+result.id).html("<i class='fa-solid fa-thumbtack' style='color: #000000;'></i>");
-                    $('#pin-row-'+result.id).attr('title', 'Unpin');
+                    $('#pin-row-'+result.id).data('msg', 'Are you sure you want to pin this thread?');  
+                    $('#pin-row-'+result.id).html("<i class='fa-solid fa-thumbtack btn-black'></i>");
+                    $('#pin-row-'+result.id).attr('title', 'Pin');
                 }
             })
             .fail(function () {
@@ -58,17 +58,17 @@ $('.thread-table a.show_confirm_close').on("click",function(event) {
                 {
                     $('#close-'+result.id).html('No');
                     $('#close-row-'+result.id).data('values', '1');
-                    $('#close-row-'+result.id).data('msg', 'Are you sure you want to close this thread?');
-                    $('#close-row-'+result.id).html("<i class='fa-solid fa-circle-check' style='color: #28f000;'></i>");
-                    $('#close-row-'+result.id).attr('title', 'Open');
+                    $('#close-row-'+result.id).data('msg', 'Are you sure you want to open this thread?');
+                    $('#close-row-'+result.id).html("<i class='fa-solid fa-circle-xmark btn-red'></i>");
+                    $('#close-row-'+result.id).attr('title', 'Close');
                 }
                 if(result.status == 'success' && result.data == true)
                 {
                     $('#close-'+result.id).html('Yes');
                     $('#close-row-'+result.id).data('values', '0');  
-                    $('#close-row-'+result.id).data('msg', 'Are you sure you want to open this thread?');
-                    $('#close-row-'+result.id).html("<i class='fa-solid fa-circle-xmark' style='color: #ff0000;'></i>");
-                    $('#close-row-'+result.id).attr('title', 'Close');
+                    $('#close-row-'+result.id).data('msg', 'Are you sure you want to close this thread?');
+                    $('#close-row-'+result.id).html("<i class='fa-solid fa-circle-check btn-green'></i>");
+                    $('#close-row-'+result.id).attr('title', 'Open');
                 }
             })
             .fail(function () {
