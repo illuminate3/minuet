@@ -6,6 +6,7 @@ namespace App\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Exception\ExceptionInterface;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -16,6 +17,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 )]
 final class InstallCommand extends Command
 {
+    /**
+     * @throws ExceptionInterface
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         foreach ($this->getCommands() as $command) {
@@ -23,7 +27,8 @@ final class InstallCommand extends Command
             $consoleInput->setInteractive(false);
             $this->getApplication()
                 ->find($command['command'])
-                ->run($consoleInput, $output);
+                ->run($consoleInput, $output)
+            ;
         }
 
         return Command::SUCCESS;

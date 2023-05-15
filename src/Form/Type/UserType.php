@@ -37,14 +37,14 @@ final class UserType extends AbstractType
                 ]
             )
             ->add('email_verified', CheckboxType::class, [
-                    'label' => 'label.email_verified',
-                    'label_attr' => [
-                        'class' => 'custom-control-label',
-                    ],
-                    'mapped' => false,
-                    'required' => false,
-                    'data' => null !== $options['data']->getEmailVerifiedAt(),
-                ]
+                'label' => 'label.email_verified',
+                'label_attr' => [
+                    'class' => 'custom-control-label',
+                ],
+                'mapped' => false,
+                'required' => false,
+                'data' => $options['data']->getEmailVerifiedAt() !== null,
+            ]
             )
             ->add('email', TextType::class, [
                 'label' => 'label.email',

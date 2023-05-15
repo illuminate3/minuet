@@ -9,6 +9,7 @@ use App\Entity\Product;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -17,6 +18,8 @@ use Symfony\Component\Validator\ConstraintViolation;
 
 abstract class AbstractImageController extends AbstractController
 {
+    private EntityManagerInterface $em;
+
     public function __construct(
         protected ManagerRegistry $doctrine,
         EntityManagerInterface $entityManager,
@@ -24,6 +27,9 @@ abstract class AbstractImageController extends AbstractController
         $this->em = $entityManager;
     }
 
+    /**
+     * @throws Exception
+     */
     protected function uploadImage(Product $product, Request $request, FileUploader $fileUploader): JsonResponse
     {
         /** @var UploadedFile $uploadedFile */
@@ -43,7 +49,8 @@ abstract class AbstractImageController extends AbstractController
         $image = new Image();
         $image->setProduct($product)
             ->setSortOrder(0)
-            ->setFile($fileName);
+            ->setFile($fileName)
+        ;
 
         $em = $this->doctrine->getManager();
         $em->persist($image);

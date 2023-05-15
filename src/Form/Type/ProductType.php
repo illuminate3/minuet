@@ -9,14 +9,11 @@ use App\Entity\Product;
 use App\Repository\CategoryRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\All;
-use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Positive;
 
@@ -62,7 +59,8 @@ class ProductType extends AbstractType
                 'query_builder' => function (CategoryRepository $cr) {
                     return $cr->createQueryBuilder('c')
                         ->where('c.parent IS NOT NULL')
-                        ->orderBy('c.name', 'ASC');
+                        ->orderBy('c.name', 'ASC')
+                    ;
                 },
             ])
 //            ->add('images', FileType::class, [
@@ -74,7 +72,7 @@ class ProductType extends AbstractType
 //                    new All(
 //                        new Image([
 //                            'maxWidth' => 1280,
-//                            'maxWidthMessage' => 'L\'image doit faire {{ max_width }} pixels de large au maximum',
+//                            'maxWidthMessage' => 'L\'image has {{ max_width }} pixels',
 //                        ])
 //                    ),
 //                ],

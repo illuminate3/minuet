@@ -8,6 +8,7 @@ use App\Controller\AbstractImageController;
 use App\Controller\AjaxController;
 use App\Entity\Product;
 use App\Service\FileUploader;
+use Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,6 +16,9 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class ImageController extends AbstractImageController implements AjaxController
 {
+    /**
+     * @throws Exception
+     */
     #[Route(path: '/user/image/{id<\d+>}/upload', name: 'user_image_upload', methods: ['POST'])]
 //    #[IsGranted('PROPERTY_EDIT', subject: 'product', message: 'You cannot change this product.')]
     public function upload(Product $product, Request $request, FileUploader $fileUploader): JsonResponse

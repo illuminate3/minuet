@@ -6,11 +6,14 @@ namespace App\Service\User;
 
 use App\Entity\User;
 use App\Service\Admin\UserService;
+use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+
+use function count;
 
 final class PasswordService
 {
@@ -22,17 +25,17 @@ final class PasswordService
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function update(Request $request): void
     {
         $violations = $this->findViolations($request);
 
-        if (\count($violations) > 0) {
-            throw new \Exception($violations[0]->getMessage());
+        if (count($violations) > 0) {
+            throw new Exception($violations[0]->getMessage());
         }
 
-        /*** @var $user User */
+        /* @var $user User */
         $user = $this->tokenStorage->getToken()->getUser();
         $user->setPassword($request->get('password1'));
         $this->service->update($user);
@@ -48,6 +51,6 @@ final class PasswordService
             new Assert\EqualTo($request->get('password1'), null, "Passwords Don't Match"),
         ]);
 
-        return \count($password1) > 0 ? $password1 : $password2;
+        return count($password1) > 0 ? $password1 : $password2;
     }
 }

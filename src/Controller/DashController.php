@@ -5,16 +5,14 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Repository\AccountListingRepository;
 use App\Repository\AccountRepository;
 use App\Repository\AccountUserRepository;
 use App\Repository\MessageRepository;
 use App\Repository\ProductRepository;
 use App\Repository\SubscriptionRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Stripe\Customer;
-use Stripe\Stripe;
 use App\Repository\ThreadRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Stripe\Stripe;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,11 +21,11 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/user/dash')]
 class DashController extends BaseController
 {
-    #[Route('/user/dash', name: 'app_dash')]
+    #[Route('/', name: 'app_dash')]
     public function index(
         Request $request,
-        Security $security,   
-        EntityManagerInterface $entityManager,     
+        Security $security,
+        EntityManagerInterface $entityManager,
         AccountRepository $accountRepository,
         AccountUserRepository $accountUserRepository,
         SubscriptionRepository $subscriptionRepository,
@@ -78,7 +76,7 @@ class DashController extends BaseController
         // check to see if the current user is the primary user for the account
         $primaryUser = $account->getPrimaryUser();
         $is_primary = $primaryUser === $user->getId();
-
+        $user_id = $user->getId();
 
         // get all the users for the account
 
@@ -110,8 +108,9 @@ class DashController extends BaseController
             'account_users' => $account_users,
             'products' => $products,
             'productThreads' => $productThreads,
-//            'threads' => $threads,
-//            'messages' => $messages,
+            'userId' => $user_id,
+            //            'threads' => $threads,
+            //            'messages' => $messages,
         ]);
     }
 }

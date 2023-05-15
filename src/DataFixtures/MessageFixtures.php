@@ -7,13 +7,13 @@ namespace App\DataFixtures;
 use App\Entity\Message;
 use App\Entity\Thread;
 use App\Entity\User;
+use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 class MessageFixtures extends Fixture implements DependentFixtureInterface
 {
-
     public function load(ObjectManager $manager): void
     {
 //        user_id
@@ -31,7 +31,7 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
             $message->setThread($thread);
             $message->setUpdatedBy($updated_by);
             $message->setContent($content);
-            $message->setCreatedAt(new \DateTimeImmutable('now'));
+            $message->setCreatedAt(new DateTimeImmutable('now'));
 
             $manager->persist($message);
         }
@@ -51,11 +51,9 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
             // data = [$user_id, $thread_id, $updated_by, $content]
             [1, 1, null, 'Duis aute irure dolor in reprehenderit'],
             [6, 2, null, 'Duis aute irure dolor in reprehenderit'],
-            [6, 2, null, 'quis nostrud exercitation ullamco laboris nisi ut aliquip'],
-            [7, 2, null, 'Duis aute irure dolor in reprehenderit'],
-            [6, 3, null, 'Duis aute irure dolor in reprehenderit'],
-            [6, 3, null, 'quis nostrud exercitation ullamco laboris nisi ut aliquip'],
-            [7, 4, null, 'Duis aute irure dolor in reprehenderit'],
+            [7, 3, null, 'Duis aute irure dolor in reprehenderit'],
+            [6, 4, null, 'Duis aute irure dolor in reprehenderit'],
+            [7, 5, null, 'Duis aute irure dolor in reprehenderit'],
         ];
     }
 
@@ -63,7 +61,6 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             ThreadFixtures::class,
-            UserFixtures::class,
         ];
     }
 }

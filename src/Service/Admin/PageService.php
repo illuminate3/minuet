@@ -9,6 +9,7 @@ use App\Entity\Page;
 use App\Service\AbstractService;
 use App\Utils\Slugger;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
@@ -27,10 +28,13 @@ final class PageService extends AbstractService
         $this->slugger = $slugger;
     }
 
+    /**
+     * @throws InvalidArgumentException
+     */
     public function create(Page $page): void
     {
         // Make slug
-        if (null !== $page->getSlug()) {
+        if ($page->getSlug() !== null) {
             $slug = $this->slugger->slugify($page->getTitle());
             $page->setSlug($slug);
         }
@@ -40,11 +44,11 @@ final class PageService extends AbstractService
         $this->clearCache('pages_count');
 
         // Add a menu item
-        if (true === $page->getShowInMenu()) {
+        if ($page->getShowInMenu() === true) {
             $menu = new Menu();
             $menu->setTitle($page->getTitle() ?? '');
             $menu->setLocale($page->getLocale() ?? '');
-            $menu->setUrl('/info/'.($page->getSlug() ?? ''));
+            $menu->setUrl('/info/' . ($page->getSlug() ?? ''));
             $this->save($menu);
         }
     }
@@ -52,7 +56,7 @@ final class PageService extends AbstractService
     public function edit(Page $page): void
     {
         // Make slug
-        if (null !== $page->getSlug()) {
+        if ($page->getSlug() !== null) {
             $slug = $this->slugger->slugify($page->getTitle());
             $page->setSlug($slug);
         }
@@ -73,6 +77,9 @@ final class PageService extends AbstractService
         $this->em->flush();
     }
 
+    /**
+     * @throws InvalidArgumentException
+     */
     public function delete(Page $page): void
     {
         // Delete page
@@ -81,7 +88,7 @@ final class PageService extends AbstractService
         $this->addFlash('success', 'message.deleted');
 
         // Delete a menu item
-        $menu = $this->em->getRepository(Menu::class)->findOneBy(['url' => '/page/'.($page->getSlug() ?? '')]);
+        $menu = $this->em->getRepository(Menu::class)->findOneBy(['url' => '/page/' . ($page->getSlug() ?? '')]);
         if ($menu) {
             $this->remove($menu);
         }

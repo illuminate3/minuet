@@ -20,6 +20,7 @@ final class LoadProductAccountCommand extends Command
 {
     private ProductRepository $products;
     private AccountRepository $accounts;
+    private EntityManagerInterface $em;
 
     public function __construct(
         EntityManagerInterface $entityManager,

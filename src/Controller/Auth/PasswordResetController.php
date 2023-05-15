@@ -93,7 +93,6 @@ final class PasswordResetController extends BaseController implements AuthContro
     public function passwordChange(
         Request $request,
         EntityManagerInterface $entityManager,
-        ResettingRepository $repository,
         Security $security,
     ): Response {
 
@@ -121,6 +120,7 @@ final class PasswordResetController extends BaseController implements AuthContro
 
         return $this->render('user/password/password_change.html.twig', [
             'title' => 'title.change_password',
+            'action_cancel_url' => 'app_dash',
             'site' => $this->site($request),
             'form' => $form->createView(),
         ]);

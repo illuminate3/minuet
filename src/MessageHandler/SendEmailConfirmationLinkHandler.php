@@ -8,7 +8,9 @@ use App\Entity\User;
 use App\Mailer\Mailer;
 use App\Message\SendEmailConfirmationLink;
 use App\Service\Cache\UserDataCache;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -32,6 +34,10 @@ final class SendEmailConfirmationLinkHandler
         $this->verifyEmailHelper = $helper;
     }
 
+    /**
+     * @throws TransportExceptionInterface
+     * @throws InvalidArgumentException
+     */
     public function __invoke(SendEmailConfirmationLink $sendEmailConfirmationLink): void
     {
         $user = $sendEmailConfirmationLink->getUser();
@@ -44,7 +50,7 @@ final class SendEmailConfirmationLinkHandler
     {
         $host = $this->router->getContext()->getHost();
 
-        return new Address('no-reply@'.$host, $host);
+        return new Address('no-reply@' . $host, $host);
     }
 
     private function getSubject(): string
@@ -80,6 +86,7 @@ final class SendEmailConfirmationLinkHandler
             ->to($user->getEmail())
             ->subject($this->getSubject())
             ->textTemplate('auth/email/confirmation_email.html.twig')
-            ->context($this->createContext($signatureComponents));
+            ->context($this->createContext($signatureComponents))
+        ;
     }
 }

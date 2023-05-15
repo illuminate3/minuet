@@ -11,20 +11,20 @@ use Doctrine\ORM\Mapping as ORM;
 class OrderDetail
 {
     #[ORM\Column(type: 'integer')]
-    private $quantity;
+    private ?int $quantity;
 
     #[ORM\Column(type: 'integer')]
-    private $price;
+    private ?int $price;
 
     #[ORM\Id]
     #[ORM\ManyToOne(targetEntity: Order::class, inversedBy: 'orderDetail')]
     #[ORM\JoinColumn(nullable: false)]
-    private $order;
+    private ?Order $order;
 
     #[ORM\Id]
     #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: 'orderDetail')]
     #[ORM\JoinColumn(nullable: false)]
-    private $product;
+    private ?Product $product;
 
     public function getQuantity(): ?int
     {

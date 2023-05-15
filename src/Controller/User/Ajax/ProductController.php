@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+use function in_array;
+
 final class ProductController extends AbstractController implements AjaxController
 {
     #[Route(path: '/user/product/{id<\d+>}/update', name: 'user_product_update', methods: ['GET'])]
@@ -21,7 +23,7 @@ final class ProductController extends AbstractController implements AjaxControll
     {
         $state = $request->query->get('state');
 
-        if (!\in_array($state, ['published', 'private'], true)) {
+        if (!in_array($state, ['published', 'private'], true)) {
             return new JsonResponse(['status' => 'fail'], 422);
         }
 

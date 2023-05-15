@@ -6,6 +6,7 @@ namespace App\Controller\Auth;
 
 use App\Controller\BaseController;
 use App\Form\Type\LoginFormType;
+use Exception;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +21,6 @@ final class LoginController extends BaseController
         Security $security,
         AuthenticationUtils $helper,
     ): Response {
-
         // if user is already logged in, don't display the login page again
         if ($security->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute('admin_dashboard');
@@ -32,7 +32,7 @@ final class LoginController extends BaseController
 
         $error = $helper->getLastAuthenticationError();
 
-        if ($error && null !== $error->getMessage()) {
+        if ($error && $error->getMessage() !== null) {
             return $this->forward(
                 'App\Controller\Auth\MessageController::authMessages',
                 [
@@ -49,17 +49,16 @@ final class LoginController extends BaseController
             'title' => 'title.login',
             'site' => $this->site($request),
             'error' => $helper->getLastAuthenticationError(),
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     #[Route(path: '/logout', name: 'security_logout')]
     public function logout(): void
     {
-        throw new \Exception('This should never be reached!');
+        throw new Exception('This should never be reached!');
     }
-
 }

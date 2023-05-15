@@ -20,8 +20,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 )]
 final class CreateCategoryCommand extends Command
 {
-    private MakeModelRepository $dataRepository;
-    private CategoryRepository $categoryRepository;
+    private MakeModelRepository $data;
+    private CategoryRepository $category;
+    private EntityManagerInterface $em;
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -65,7 +66,7 @@ final class CreateCategoryCommand extends Command
             $child_data = new Category();
             $child_data->setName($child_name);
             $child_data->setParent($set_parent);
-            $slug = $name.'-'.$child_name;
+            $slug = $name . '-' . $child_name;
             $child_data->setSlug(Slugger::slugify($slug));
 
             $this->em->persist($child_data);

@@ -23,6 +23,6 @@ final class AppExtension extends AbstractExtension
 
     public function showPageNumber($number = 1): string
     {
-        return ($number > 1) ? ' - '.$this->translator->trans('page').' '.$number : '';
+        return ($number > 1) ? ' - ' . $this->translator->trans('page') . ' ' . $number : '';
     }
 }

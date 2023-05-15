@@ -39,9 +39,9 @@ class MessageController extends BaseController
             return $this->redirectToRoute('app_message_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('message/new.html.twig', [
+        return $this->render('message/new.html.twig', [
             'message' => $message,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -51,7 +51,6 @@ class MessageController extends BaseController
         Request $request,
         MessageRepository $messageRepository,
     ): Response {
-
         $messages = $messageRepository->findBy(['thread' => $id]);
 
         return $this->render('message/index.html.twig', [
@@ -85,16 +84,16 @@ class MessageController extends BaseController
             return $this->redirectToRoute('app_message_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('message/edit.html.twig', [
+        return $this->render('message/edit.html.twig', [
             'message' => $message,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
     #[Route('/{id}', name: 'app_message_delete', methods: ['POST'])]
     public function delete(Request $request, Message $message, MessageRepository $messageRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$message->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $message->getId(), $request->request->get('_token'))) {
             $messageRepository->remove($message, true);
         }
 
