@@ -14,6 +14,7 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 final class MenuService extends AbstractService
 {
     private EntityManagerInterface $em;
+    private Slugger $slugger;
 
     public function __construct(
         CsrfTokenManagerInterface $tokenManager,
@@ -29,12 +30,12 @@ final class MenuService extends AbstractService
     public function create(Menu $menu): void
     {
         // Make slug
-        if (null !== $menu->getUrl()) {
+        if ($menu->getUrl() !== null) {
             $slug = $this->slugger->slugify($menu->getTitle());
             $menu->setUrl($slug);
         }
 
-        // Save mwnu
+        // Save menu
         $this->save($menu);
     }
 
@@ -46,7 +47,7 @@ final class MenuService extends AbstractService
             $menu->setUrl($slug);
         }
 
-        // Save mwnu
+        // Save menu
         $this->save($menu);
     }
 
@@ -64,7 +65,7 @@ final class MenuService extends AbstractService
 
     public function delete(Menu $menu): void
     {
-        // Delete mwnu
+        // Delete menu
         $this->remove($menu);
         $this->addFlash('success', 'message.deleted');
     }

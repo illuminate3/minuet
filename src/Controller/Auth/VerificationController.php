@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Auth;
 
 use App\Repository\UserRepository;
-use App\Service\Auth\EmailVerifier;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,7 +16,7 @@ use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 final class VerificationController extends AbstractController implements AuthController
 {
-    public function __construct(private EmailVerifier $emailVerifier)
+    public function __construct()
     {
     }
 
@@ -38,7 +38,7 @@ final class VerificationController extends AbstractController implements AuthCon
                 $user->getEmail(),
             );
         } catch (VerifyEmailExceptionInterface $e) {
-            if (true === $user->getIsVerified()) {
+            if ($user->getIsVerified() === true) {
                 $this->addFlash('warning', 'message.already_verified');
 
                 return $this->redirectToRoute('security_login');
@@ -49,12 +49,11 @@ final class VerificationController extends AbstractController implements AuthCon
         }
 
         $user->setIsVerified(true);
-        $user->setEmailVerifiedAt(new \DateTime('now'));
+        $user->setEmailVerifiedAt(new DateTime('now'));
         $entityManager->flush();
 
         $this->addFlash('success', 'message.email_verified');
 
         return $this->redirectToRoute('security_login');
     }
-
 }

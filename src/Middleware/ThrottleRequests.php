@@ -17,10 +17,10 @@ final class ThrottleRequests
     public function handle(Request $request): void
     {
         $limiter = $this->authLimiter->create(
-            $request->getClientIp().$request->getPathInfo().$request->getMethod()
+            $request->getClientIp() . $request->getPathInfo() . $request->getMethod()
         );
 
-        if (false === $limiter->consume(1)->isAccepted()) {
+        if ($limiter->consume(1)->isAccepted() === false) {
             throw new TooManyRequestsHttpException();
         }
     }

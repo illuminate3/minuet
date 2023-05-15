@@ -7,19 +7,16 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Repository\FilterRepository;
 use App\Repository\ProductRepository;
-use App\Repository\SimilarRepository;
-use App\Service\URLService;
 use App\Transformer\RequestToArrayTransformer;
-use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
+
+use function count;
 
 #[Route('/product')]
 class ProductController extends BaseController
 {
-
     #[Route(path: '/', name: 'product_index', defaults: ['page' => 1], methods: ['GET'])]
     public function search(
         Request $request,
@@ -30,7 +27,6 @@ class ProductController extends BaseController
         $searchParams = $transformer->transform($request);
         $products = $repository->findByFilter($searchParams);
 //        $products = $productRepository->findAll();
-
 
         return $this->render(
             'product/index.html.twig',
@@ -50,7 +46,6 @@ class ProductController extends BaseController
 //        message: 'Properties can only be shown to their owners.'
 //    )]
     #[Route(path: '/{slug}/{id<\d+>}', name: 'product_show', methods: ['GET'])]
-
     public function productShow(
         Request $request,
 //        URLService $url,
@@ -63,20 +58,16 @@ class ProductController extends BaseController
 //            $showBackButton = true;
 //        }
 
-
-
         return $this->render(
             'product/show.html.twig',
             [
                 'title' => $product->getTitle(),
                 'site' => $this->site($request),
                 'product' => $product,
-//                'products' => $repository->findSimilarProperties($product),
-                'number_of_photos' => \count($product->getImages()),
-//                'show_back_button' => $showBackButton ?? false,
+                //                'products' => $repository->findSimilarProperties($product),
+                'number_of_photos' => count($product->getImages()),
+                //                'show_back_button' => $showBackButton ?? false,
             ]
         );
     }
-
-
 }

@@ -16,7 +16,6 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 final class SettingsRepository extends ServiceEntityRepository
 {
-
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Settings::class);
@@ -43,7 +42,8 @@ final class SettingsRepository extends ServiceEntityRepository
             ->setParameter(1, $setting_value)
             ->setParameter(2, $setting_name)
             ->getQuery()
-            ->execute();
+            ->execute()
+        ;
     }
 
     public function updateSettings(array $settings): void

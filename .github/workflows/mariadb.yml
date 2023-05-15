@@ -1,5 +1,6 @@
 name: Testing with MariaDB
-on: [push, pull_request]
+#on: [push, pull_request]
+on:
 jobs:
   symfony:
     name: Symfony (PHP ${{ matrix.php-versions }})

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service\Auth;
 
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -25,7 +26,7 @@ final class EmailVerifier
     {
         $this->verifyEmailHelper->validateEmailConfirmation($request->getUri(), (string) $user->getId(), $user->getEmail());
 
-        $user->setEmailVerifiedAt(new \DateTime('now'));
+        $user->setEmailVerifiedAt(new DateTime('now'));
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();

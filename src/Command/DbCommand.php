@@ -27,7 +27,8 @@ final class DbCommand extends Command
             $consoleInput->setInteractive(false);
             $this->getApplication()
                 ->find($command['command'])
-                ->run($consoleInput, $output);
+                ->run($consoleInput, $output)
+            ;
         }
 
         return Command::SUCCESS;

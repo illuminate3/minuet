@@ -56,7 +56,7 @@ final class ProductController extends BaseController
             'title' => 'title.products',
             'site' => $this->site($request),
             'product' => $product,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -79,7 +79,7 @@ final class ProductController extends BaseController
             'title' => 'title.products',
             'site' => $this->site($request),
             'cancel_url' => 'user_products',
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 

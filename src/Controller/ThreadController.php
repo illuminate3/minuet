@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\Product;
 use App\Entity\Thread;
-use App\Entity\User;
 use App\Form\ThreadType;
 use App\Repository\AccountRepository;
 use App\Repository\AccountUserRepository;
@@ -31,7 +29,6 @@ class ThreadController extends BaseController
         AccountRepository $accountRepository,
         AccountUserRepository $accountUserRepository,
     ): Response {
-
         // get the account information the user is registered to
         $user = $security->getUser();
         $accountUser = $accountUserRepository->findOneBy(['user' => $user->getId()]);
@@ -62,9 +59,9 @@ class ThreadController extends BaseController
             return $this->redirectToRoute('app_thread_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('thread/new.html.twig', [
+        return $this->render('thread/new.html.twig', [
             'thread' => $thread,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -88,16 +85,16 @@ class ThreadController extends BaseController
             return $this->redirectToRoute('app_thread_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('thread/edit.html.twig', [
+        return $this->render('thread/edit.html.twig', [
             'thread' => $thread,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
     #[Route('/{id}', name: 'app_thread_delete', methods: ['POST'])]
     public function delete(Request $request, Thread $thread, ThreadRepository $threadRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$thread->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $thread->getId(), $request->request->get('_token'))) {
             $threadRepository->remove($thread, true);
         }
 

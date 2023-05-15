@@ -9,6 +9,7 @@ use App\Utils\Slugger;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Exception;
 use Faker;
 
 class ProductFixtures extends Fixture implements DependentFixtureInterface
@@ -16,7 +17,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
     private int $counter = 1;
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function load(ObjectManager $manager): void
     {
@@ -29,7 +30,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
         for ($prod = 1; $prod <= 10; ++$prod) {
             $product = new Product();
 //            $product->setTitle($faker->text(15));
-            $product->setTitle('Product '.$prod);
+            $product->setTitle('Product ' . $prod);
             $product->setDescription($faker->text());
 //            $product->setSlug($this->slugger->slug($product->getName())->lower());
             $title = mb_strtolower($product->getTitle());
@@ -38,7 +39,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
 //            $product->setStock($faker->numberBetween(0, 10));
 
             // Category
-            $category = $this->getReference('category-'.random_int(1, 8));
+            $category = $this->getReference('category-' . random_int(1, 8));
             $product->setCategory($category);
 
             // Account
@@ -48,7 +49,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
                 $product->setAccount($account2);
             }
 
-            $this->setReference('product-'.$prod, $product);
+            $this->setReference('product-' . $prod, $product);
             $manager->persist($product);
             ++$this->counter;
         }

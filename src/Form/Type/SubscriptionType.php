@@ -10,7 +10,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Positive;
 
 class SubscriptionType extends AbstractType
 {
@@ -34,9 +33,9 @@ class SubscriptionType extends AbstractType
                 'currency' => 'USD',
                 'divisor' => 1,
                 'constraints' => [
-//                    new Positive([
-//                        'message' => 'validate.not.negative',
-//                    ]),
+                    //                    new Positive([
+                    //                        'message' => 'validate.not.negative',
+                    //                    ]),
                     new NotBlank([
                         'message' => 'validate.not.blank',
                     ]),
@@ -106,7 +105,6 @@ class SubscriptionType extends AbstractType
                     ]),
                 ],
             ])
-
 
         ;
     }

@@ -28,7 +28,7 @@ class AccountFixtures extends Fixture implements DependentFixtureInterface
             $account->setName($name);
             $account->setPrimaryUser($primary_user);
 
-            $this->addReference('account-'.$this->counter, $account);
+            $this->addReference('account-' . $this->counter, $account);
             ++$this->counter;
 
             $manager->persist($account);

@@ -27,7 +27,7 @@ class Profile
 
     #[ORM\OneToOne(inversedBy: 'profile', targetEntity: User::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private $user;
+    private ?User $user;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $address_street = null;
@@ -73,7 +73,7 @@ class Profile
 
     public function getFullName(): ?string
     {
-        return $this->last_name.', '.$this->first_name;
+        return $this->last_name . ', ' . $this->first_name;
     }
 
     public function getFirstName(): ?string

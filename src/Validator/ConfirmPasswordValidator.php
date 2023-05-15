@@ -13,7 +13,7 @@ final class ConfirmPasswordValidator extends ConstraintValidator
     {
         /* @var $constraint ConfirmPassword */
 
-        if (null === $value || '' === $value) {
+        if ($value === null || $value === '') {
             return;
         }
 
@@ -22,7 +22,8 @@ final class ConfirmPasswordValidator extends ConstraintValidator
         if ($password !== $value) {
             $this->context->buildViolation($constraint->message)
                 ->atPath('password_confirmation')
-                ->addViolation();
+                ->addViolation()
+            ;
         }
     }
 }

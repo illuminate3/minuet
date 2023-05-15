@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Service\Cache\ClearCache;
+use LogicException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
@@ -34,7 +35,7 @@ abstract class AbstractService
     /**
      * Adds a flash message to the current session for type.
      *
-     * @throws \LogicException
+     * @throws LogicException
      */
     protected function addFlash(string $type, string $message): void
     {

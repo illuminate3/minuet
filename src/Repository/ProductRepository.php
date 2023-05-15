@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Entity\Category;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\DBAL\Exception;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
@@ -40,17 +38,16 @@ class ProductRepository extends ServiceEntityRepository
 
     public const NUM_ITEMS = 20;
 
-
     public function findAllPublished(): array
     {
         $qb = $this->createQueryBuilder('p');
         $query = $qb->where("p.state = 'published'")
             ->orderBy('p.id', 'DESC')
-            ->getQuery();
+            ->getQuery()
+        ;
 
         return $query->execute();
     }
-
 
     /**
      * @throws NonUniqueResultException
@@ -61,7 +58,8 @@ class ProductRepository extends ServiceEntityRepository
         $count = $this->createQueryBuilder('p')
             ->select('count(p.id)')
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
 
         return (int) $count;
     }
@@ -92,22 +90,20 @@ class ProductRepository extends ServiceEntityRepository
             ->select('c', 'p')
             ->from('App\Entity\Products', 'p')
             ->join('p.categories', 'c')
-            ->where("c.slug = '$slug'")
+            ->where("c.slug = '{$slug}'")
             ->setMaxResults($limit)
-            ->setFirstResult(($page * $limit) - $limit);
+            ->setFirstResult(($page * $limit) - $limit)
+        ;
 
         $paginator = new Paginator($query);
         $data = $paginator->getQuery()->getResult();
 
-        // On vérifie qu'on a des données
         if (empty($data)) {
             return $result;
         }
 
-        // On calcule le nombre de pages
         $pages = ceil($paginator->count() / $limit);
 
-        // On remplit le tableau
         $result['data'] = $data;
         $result['pages'] = $pages;
         $result['page'] = $page;
@@ -117,6 +113,8 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param mixed $account
+     *
      * @return Product[]
      */
     public function findAllThreadsByAccount($account): array
@@ -130,7 +128,6 @@ class ProductRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
 
     // /**
     //  * @return Products[] Returns an array of Products objects

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Service\Cache;
 
 use Doctrine\Persistence\ManagerRegistry;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 trait GetCache
@@ -19,6 +20,9 @@ trait GetCache
         $this->doctrine = $doctrine;
     }
 
+    /**
+     * @throws InvalidArgumentException
+     */
     public function getCount(string $key, string $class): int
     {
         $this->persistentObjectName = $class;
@@ -32,6 +36,7 @@ trait GetCache
     {
         return (int) $this->doctrine
             ->getRepository($this->persistentObjectName)
-            ->countAll();
+            ->countAll()
+        ;
     }
 }
