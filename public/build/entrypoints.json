@@ -42,6 +42,12 @@
         "/build/js/select2.f8d4cbcb.js"
       ]
     },
+    "js/product": {
+      "js": [
+        "/build/runtime.5d189f8c.js",
+        "/build/js/product.6cf0a87d.js"
+      ]
+    },
     "css/app": {
       "js": [
         "/build/runtime.5d189f8c.js"

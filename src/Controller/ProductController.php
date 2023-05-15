@@ -16,7 +16,7 @@ use function count;
 class ProductController extends BaseController
 {
 
-    #[Route(path: '/', name: 'product_index', defaults: ['page' => 1], methods: ['GET','POST'])]
+    #[Route(path: '/{make<\w+>?}/{models?}', name: 'product_index', defaults: ['page' => 1], methods: ['GET'])]
     public function search(
         Request $request,
         FilterRepository $repository,
@@ -28,22 +28,19 @@ class ProductController extends BaseController
         $make = (int)$request->get('make');
         $selectedModels = [];
         $models = $request->get('models');
+        $subCategories = [];
+        if ($make>0) {
+            $subCategories = $cr->fetchSubCategories($make);
+        }
         if (!empty($models)) {
-            $selectedModels = array_map('intval', $models);
+            $selectedModels = array_map('intval',explode(",",$models));
             $searchParams["category"] = $selectedModels;            
         }else{            
-            if (!empty($make)) {
-                $query = $em->createQuery(
-                    "SELECT c.id
-                            FROM App\Entity\Category c 
-                            WHERE c.parent=$make"
-                );
-                $models = $query->getResult();                
-                $models = array_map(function($val){
-                    return $val['id'];
-                }, $models);
-                $searchParams["category"] = $models; 
-            }
+            $modelIds = [];
+            foreach ($subCategories as $key => $value) {
+                array_push($modelIds,$value->getId());
+            }                                           
+            $searchParams["category"] = $modelIds; 
         }
         $products = $repository->findByFilter($searchParams);        
         $categories = $cr->findBy(["parent" => null]);
@@ -56,9 +53,10 @@ class ProductController extends BaseController
                 'site' => $this->site($request),
                 'products' => $products,
                 'make' => $make,
-                'models' => json_encode($selectedModels),
+                'models' => $selectedModels,
                 'categories' => $categories,
-                //                'searchParams' => $searchParams,
+                'subCategories' => $subCategories,
+                "isDisabled"=>count($products)>0 ? '' : 'disabled'
             ]
         );
     }
@@ -82,32 +80,5 @@ class ProductController extends BaseController
                 'number_of_photos' => count($product->getImages()),                
             ]
         );
-    }
-
-    // API to fetch subcategories by category-id(parent_id)
-    public function fetchSubcategories(
-        Request $request,        
-        EntityManagerInterface $em
-    ): Response {
-        try {  
-            $categoryId = $request->attributes->get('category_id');         
-            $query = $em->createQuery(
-                "SELECT c.id, c.name, c.slug
-                         FROM App\Entity\Category c 
-                         WHERE c.parent=$categoryId"
-            );
-            $subCategories = $query->getResult();
-
-            $data = [
-                "status" => true,
-                'data' => $subCategories
-            ];
-        } catch (\Throwable $th) {
-            $data = [
-                "status" => false,
-                'message' => $th->getMessage()
-            ];
-        }
-        return $this->json($data);
     }
 }

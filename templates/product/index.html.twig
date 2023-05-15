@@ -26,16 +26,22 @@
                     {% endfor %}
                 </select>
             </div>
+            {% if subCategories|length  %}
             <div class="col-md-12 pb-3">
-                <div class="card d-none" id="models-card">                    
+                <div class="card" id="models-card">                    
                     <div class="card-body">     
-                        <h6 class="card-title" id="model-title"></h6>                          
-                        <ul class="list-group list-group-flush" id="models">
-                            <!-- Models will append here -->
+                        <h6 class="card-title" id="model-title">Models</h6>                          
+                        <ul class="list-group list-group-flush" id="models">                            
+                            {% for subCategory in  subCategories %}
+                                <li class="list-group-item"><input {{isDisabled}} {% if subCategory.id in models %}
+                                     {{'checked'}} {% endif %} type="checkbox" value="{{subCategory.id}}" class="model-checkbox" name="models[]"> {{subCategory.name}}
+                                </li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>               
             </div>
+            {% endif %}
         </form>
         </div>
 
@@ -131,62 +137,9 @@
 
 {% endblock %}
 {% block javascripts %}
+
 <script>
-$(function() {
-    if ( parseInt("{{make}}")>0) {
-        fetchModels();
-    }
-});
-
-$("#make").on("change",function(){
-    $("form").submit();
-});
-
-function fetchModels(){
-    let url = "";
-        let modelTitle = "";
-        if ($("#make").val()) {
-            let id = $("#make").val();            
-            modelTitle = $("#make").find('option:selected').text();            
-            url = "{{ path('sub_categories', { 'category_id': '_cate_id' }) }}";
-            url = url.replace('_cate_id',id);            
-        }
-    $.ajax({
-            type: "GET",
-            url: url,
-            success: function (resp) {                
-                if (resp.status) {
-                    let sub_categories = resp.data;
-                    $("#models").html('');
-                    $("#model-title").text(`${modelTitle} Models`);                    
-                    let selectedModelsArray = {{models}};                    
-                    sub_categories.forEach(e => {                     
-                        let isChecked = $.inArray(e.id, selectedModelsArray) !== -1 ? 'checked' : '';                        
-                        let isDisabled =parseInt("{{products|length}}")>0 ? '' : 'disabled';                        
-                        $("#models").append(` <li class="list-group-item"><input ${isDisabled} ${isChecked} type="checkbox" value="${e.id}" class="model-checkbox" name="models[]"> ${e.name}</li>`);
-                    });
-                    $("#models-card").removeClass('d-none');
-                    filterProducts();
-                }
-                }, error: function (err) {
-                    console.log(err);
-             }
-            });
-}
-
-function filterProducts(){    
-    $(".model-checkbox").on("change",function() {    
-    var checkedBoxes = $('.model-checkbox:checked');
-    // create an array to hold the values
-    var checkedValues = [];
-    // loop through the checked checkboxes and add their values to the array
-    checkedBoxes.each(function() {
-        checkedValues.push($(this).val());
-    });   
-    $("form").submit();   
-});
-}
-
-
+var productPath = "{{path('product_index',{'make':'_make_id','models':'_model_id'})}}";
 </script>
+{{ encore_entry_script_tags('js/product') }}
 {% endblock %}
