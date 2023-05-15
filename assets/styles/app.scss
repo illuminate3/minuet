@@ -53,7 +53,7 @@ header {
 
 .page-title {
   margin-top: 0px;
-  font-size: 1.7em;
+  font-size: 1.3em;
 }
 
 /*
@@ -162,4 +162,37 @@ footer {
   .auth-page .info {
     min-height: 70vh;
   }
+}
+
+/*
+* ==========================================================
+*     Custom Style
+* ==========================================================
+*/
+.text-deco-none {
+  text-decoration: none !important;
+}
+
+.btn-gray {
+  color: #696969;
+}
+
+.btn-black {
+  color: #000000;
+}
+
+.btn-light-gray {
+  color: #d3d3d3;
+}
+.btn-red {
+  color: #ff0000;
+}
+
+.btn-green {
+  color: #28f000;
+}
+
+.tab-width-list {
+  width: 35%;
+  max-width: 35%;
 }

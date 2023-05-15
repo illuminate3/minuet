@@ -1,16 +1,5 @@
 {% extends 'layout/dash/dash.html.twig' %}
 
-{% block stylesheets %}
-    <!-- User Thread CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.5.1/sweetalert2.min.css">
-{% endblock %}
-{% block javascripts %}
-    <!-- User Thread JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
-    <script src="{{ asset('js/user-thread.js') }}"></script>
-{% endblock %}
-
 {% block subheader %}
     <!-- Title -->
     {{ include('layout/partials/_title.html.twig') }}
@@ -41,7 +30,7 @@
 
         <div class="card">
             <div class="card-header">
-                {{ category.title }}
+                {{ category.title }} ({{category.threads|length}})
             </div>
 
 
@@ -54,46 +43,46 @@
 <table class="table thread-table">
             <thead>
                 <tr>
-                    <th>IsClosed</th>
-                    <th>IsPin</th>
-                    <th>TotalMessages</th>
-                    <th>Id</th>
-                    <th>account Id</th>
-                    <th>Product Id</th>
-                    <th>User Id</th>
-                    <th>Created_at</th>
-                    <th>actions</th>
+                    <th>Actions</th>
+                    <th>User Name</th>
+                    <th>Total Messages</th>
+                    <th class="tab-width-list">Summary</th>
+                    <th>Created At</th>
                 </tr>
             </thead>
     {% for thread in category.threads %}
     <tr>
-        <td id="close-{{thread.id}}">{{ thread.isClosed ? 'Yes' : 'No' }}</td>
-        <td id="pin-{{thread.id}}">{{ thread.isPin ? 'Yes' : 'No' }}</td>
-        <td>{{ thread.totalMessages }}</td>
-        <td>{{ thread.id }}</td>
-        <td>{{ thread.account.id }}</td>
-        <td>{{ thread.product.id }}</td>
-        <td>{{ thread.user.profile.fullName }}</td>
-        <td>{{ thread.createdAt ? thread.createdAt|date('Y-m-d H:i:s') : '' }}</td>
         <td>
-            <a href="{{ path('app_message_show_thread', {'id': thread.id}) }}" style="text-decoration: none;" title="Show"><i class="fa-solid fa-eye" style="color: #696969"></i></a>
-            <a href="javascript:void(0);" style="text-decoration: none;" id="pin-row-{{thread.id}}" class="show_confirm_pin" data-id="{{thread.id}}" data-values="{{thread.isPin == 0 ? 1 : 0}}" data-toggle="tooltip" data-msg="{{thread.isPin ? 'Are you sure you want to unpin this thread?' : 'Are you sure you want to pin this thread?' }}" title="{{thread.isPin ? 'Unpin' : 'Pin' }}">
+            <a href="{{ path('app_message_show_thread', {'id': thread.id}) }}" class="text-deco-none" title="Show"><i class="fa-solid fa-eye btn-gray"></i></a>
+            <a href="javascript:void(0);" id="pin-row-{{thread.id}}" class="show_confirm_pin text-deco-none" data-id="{{thread.id}}" data-values="{{thread.isPin == 0 ? 1 : 0}}" data-toggle="tooltip" data-msg="{{thread.isPin ? 'Are you sure you want to unpin this thread?' : 'Are you sure you want to pin this thread?' }}" title="{{thread.isPin ? 'Pin' : 'Unpin' }}">
             {% if thread.isPin  == 1 %}
-                <i class="fa-solid fa-thumbtack" style="color: #000000;"></i>
+                <i class="fa-solid fa-thumbtack btn-black"></i>
             {% endif %}
             {% if thread.isPin  == 0 %}
-                <i class="fa-solid fa-thumbtack" style="color: #d3d3d3;"></i>
+                <i class="fa-solid fa-thumbtack btn-light-gray"></i>
             {% endif %}
             </a>
-            <a href="javascript:void(0);" style="text-decoration: none;" id="close-row-{{thread.id}}" class="show_confirm_close" data-id="{{thread.id}}" data-values="{{thread.isClosed == 0 ? 1 : 0}}" data-toggle="tooltip" data-msg="{{thread.isClosed ? 'Are you sure you want to close this thread?' : 'Are you sure you want to open this thread?' }}" title="{{thread.isClosed ? 'Close' : 'Open' }}">
+            <a href="javascript:void(0);" id="close-row-{{thread.id}}" class="show_confirm_close text-deco-none" data-id="{{thread.id}}" data-values="{{thread.isClosed == 0 ? 1 : 0}}" data-toggle="tooltip" data-msg="{{thread.isClosed ? 'Are you sure you want to close this thread?' : 'Are you sure you want to open this thread?' }}" title="{{thread.isClosed ? 'Open' : 'Close' }}">
             {% if thread.isClosed  == 1 %}
-                <i class="fa-solid fa-circle-xmark" style="color: #ff0000;"></i>
+                <i class="fa-solid fa-circle-check btn-green"></i>
             {% endif %}
             {% if thread.isClosed  == 0 %}
-                <i class="fa-solid fa-circle-check" style="color: #28f000;"></i>
+                <i class="fa-solid fa-circle-xmark btn-red"></i>
             {% endif %}
             </a>
         </td>
+        <td>{{ thread.user.profile.fullName }}</td>
+        <td>{{ thread.messages|length }}</td>
+        <td>
+        {% for key, value in thread.messages %}
+            {% if key == 0 %}
+                <p>{{ value.content|length > 100 ? value.content|slice(0, 100) ~ '...' : value.content  }}</p>
+
+                
+            {% endif %}
+        {% endfor %}
+        </td>
+        <td>{{ thread.createdAt ? thread.createdAt|date('Y-m-d H:i:s') : '' }}</td>
     </tr>
     {% endfor %}
 </table>
