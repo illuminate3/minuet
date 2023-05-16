@@ -23,10 +23,6 @@ use Symfony\Bundle\SecurityBundle\Security;
  */
 class ProductRepository extends ServiceEntityRepository
 {
-//    public function __construct(ManagerRegistry $registry)
-//    {
-//        parent::__construct($registry, Product::class);
-//    }
 
     public function __construct(
         ManagerRegistry $registry,
@@ -64,19 +60,9 @@ class ProductRepository extends ServiceEntityRepository
         return (int) $count;
     }
 
-//    private function findLimit(): int
-//    {
-//        $repository = $this->getEntityManager()->getRepository(Settings::class);
-//        $limit = $repository->findOneBy(['setting_name' => 'items_per_page']);
-//
-//        return (int) $limit->getSettingValue();
-//        return (int) NUM_ITEMS;
-//
-//    }
 
     protected function createPaginator(Query $query, int $page): PaginationInterface
     {
-//        return $this->paginator->paginate($query, $page, $this->findLimit());
         return $this->paginator->paginate($query, $page, 4);
     }
 
@@ -128,33 +114,4 @@ class ProductRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
-    // /**
-    //  * @return Products[] Returns an array of Products objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Products
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

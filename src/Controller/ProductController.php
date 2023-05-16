@@ -1,6 +1,9 @@
 <?php
+
 declare(strict_types=1);
+
 namespace App\Controller;
+
 use App\Entity\Product;
 use App\Repository\CategoryRepository;
 use App\Repository\FilterRepository;
@@ -20,7 +23,7 @@ class ProductController extends BaseController
     public function search(
         Request $request,
         FilterRepository $repository,
-        CategoryRepository $cr,
+        CategoryRepository $categoryRepository,
         EntityManagerInterface $em,
         RequestToArrayTransformer $transformer
     ): Response {
@@ -29,22 +32,22 @@ class ProductController extends BaseController
         $selectedModels = [];
         $models = $request->get('models');
         $subCategories = [];
-        if ($make>0) {
-            $subCategories = $cr->fetchSubCategories($make);
+        if ($make > 0) {
+            $subCategories = $categoryRepository->fetchSubCategories($make);
         }
         if (!empty($models)) {
-            $selectedModels = array_map('intval',explode(",",$models));
-            $searchParams["category"] = $selectedModels;            
-        }else{            
+            $selectedModels = array_map('intval', explode(",", $models));
+            $searchParams["category"] = $selectedModels;
+        } else {
             $modelIds = [];
             foreach ($subCategories as $key => $value) {
-                array_push($modelIds,$value->getId());
-            }                                           
-            $searchParams["category"] = $modelIds; 
+                array_push($modelIds, $value->getId());
+            }
+            $searchParams["category"] = $modelIds;
         }
-        $products = $repository->findByFilter($searchParams);        
-        $categories = $cr->findBy(["parent" => null]);
         $products = $repository->findByFilter($searchParams);
+        $categories = $categoryRepository->findBy(["parent" => null]);
+
 
         return $this->render(
             'product/index.html.twig',
@@ -56,28 +59,25 @@ class ProductController extends BaseController
                 'models' => $selectedModels,
                 'categories' => $categories,
                 'subCategories' => $subCategories,
-                "isDisabled"=>count($products)>0 ? '' : 'disabled'
+                "isDisabled" => (count($products) == 0 && empty($models))  ? 'disabled' : ''
             ]
         );
     }
 
- 
+
     #[Route(path: '/{slug}/{id<\d+>}', name: 'product_show', methods: ['GET'])]
     public function productShow(
         Request $request,
-        //        URLService $url,
         Product $product,
-        //        SimilarRepository $repository
     ): Response {
-       
+
         return $this->render(
             'product/show.html.twig',
             [
                 'title' => $product->getTitle(),
                 'site' => $this->site($request),
                 'product' => $product,
-                'number_of_photos' => \count($product->getImages()),
-                'number_of_photos' => count($product->getImages()),                
+                'number_of_photos' => count($product->getImages()),
             ]
         );
     }
