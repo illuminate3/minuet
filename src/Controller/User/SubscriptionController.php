@@ -10,7 +10,9 @@ use App\Repository\SettingsRepository;
 use App\Repository\SubscriptionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Stripe\Customer;
 use Stripe\Stripe;
+use Stripe\StripeClient;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +33,7 @@ final class SubscriptionController extends BaseController
     {
         $subscriptions = $sr->findBy([], ['id' => 'ASC']);
 
-        return $this->render('common/pricing.html.twig', [
+        return $this->render('pricing/index.html.twig', [
             'subscriptions' => $subscriptions,
         ]);
     }
@@ -50,7 +52,7 @@ final class SubscriptionController extends BaseController
         $priceId = $request->attributes->get('priceId');
         if ('free_price' !== $priceId) {
             if (!$this->getUser()->getStripeCustomerId()) {
-                $stripeCustomerObj = \Stripe\Customer::create([
+                $stripeCustomerObj = Customer::create([
                     'description' => 'Minuet customer',
                     'email' => $this->getUser()->getEmail(),
                     'metadata' => [
@@ -78,9 +80,7 @@ final class SubscriptionController extends BaseController
             ]);
 
             if ($this->getUser()->getStrSubscriptionId()) {
-                $stripe = new \Stripe\StripeClient(
-                    $stripeAPI
-                );
+                $stripe = new StripeClient($stripeAPI);
                 $stripe->subscriptions->update(
                     $this->getUser()->getStrSubscriptionId(),
                     ['metadata' => ['customer_id' => $this->getUser()->getStripeCustomerId()]]
@@ -137,13 +137,13 @@ final class SubscriptionController extends BaseController
         if ($user->getStrSubscriptionId()) {
             $str_sub_id = $user->getStrSubscriptionId();
 
-            $stripe = new \Stripe\StripeClient($stripeAPI);
+            $stripe = new StripeClient($stripeAPI);
             $stripe->subscriptions->cancel(
                 $str_sub_id,
                 []
             );
             $user->setPaymentStatus(false);
-            $user->setStrSubscriptionId(null);
+            $user->setStrSubscriptionId($str_sub_id);
         }
         $user->setSubscription(null);
         $user->setSubscriptionValidUntil(new \DateTime());

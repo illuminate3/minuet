@@ -70,3 +70,27 @@ class StripeEventSubscriber implements EventSubscriberInterface
     }
 
 }
+
+
+//        2023-05-15 02:11:24   --> customer.created [evt_1N7vZ2HxcL7TQhSHkKwcBbt3]
+//        2023-05-15 02:11:24  <--  [500] POST http://minuet.test/stripe/webhooks [evt_1N7vZ2HxcL7TQhSHkKwcBbt3]
+//        2023-05-15 02:11:46   --> payment_method.attached [evt_1N7vZOHxcL7TQhSHpTf4bt65]
+//        2023-05-15 02:11:46   --> setup_intent.succeeded [evt_1N7vZOHxcL7TQhSHQeMTbjzf]
+//        2023-05-15 02:11:46   --> setup_intent.created [evt_1N7vZOHxcL7TQhSHSdZELtin]
+//        2023-05-15 02:11:46  <--  [204] POST http://minuet.test/stripe/webhooks [evt_1N7vZOHxcL7TQhSHSdZELtin]
+//        2023-05-15 02:11:46  <--  [204] POST http://minuet.test/stripe/webhooks [evt_1N7vZOHxcL7TQhSHpTf4bt65]
+//        2023-05-15 02:11:46  <--  [204] POST http://minuet.test/stripe/webhooks [evt_1N7vZOHxcL7TQhSHQeMTbjzf]
+//        2023-05-15 02:11:48   --> checkout.session.completed [evt_1N7vZPHxcL7TQhSHzN1sUuZE]
+//        2023-05-15 02:11:48  <--  [204] POST http://minuet.test/stripe/webhooks [evt_1N7vZPHxcL7TQhSHzN1sUuZE]
+//        2023-05-15 02:11:48   --> customer.updated [evt_1N7vZQHxcL7TQhSHNpLH9t0M]
+//        2023-05-15 02:11:48  <--  [500] POST http://minuet.test/stripe/webhooks [evt_1N7vZQHxcL7TQhSHNpLH9t0M]
+//        2023-05-15 02:11:48   --> invoice.created [evt_1N7vZQHxcL7TQhSHITrDFZWA]
+//        2023-05-15 02:11:48  <--  [204] POST http://minuet.test/stripe/webhooks [evt_1N7vZQHxcL7TQhSHITrDFZWA]
+//        2023-05-15 02:11:48   --> invoice.finalized [evt_1N7vZQHxcL7TQhSH3AeTlNsQ]
+//        2023-05-15 02:11:48  <--  [204] POST http://minuet.test/stripe/webhooks [evt_1N7vZQHxcL7TQhSH3AeTlNsQ]
+//        2023-05-15 02:11:48   --> invoice.paid [evt_1N7vZQHxcL7TQhSHWS1xSpZe]
+//        2023-05-15 02:11:48   --> invoice.payment_succeeded [evt_1N7vZQHxcL7TQhSHEHECNp6P]
+//        2023-05-15 02:11:48  <--  [204] POST http://minuet.test/stripe/webhooks [evt_1N7vZQHxcL7TQhSHWS1xSpZe]
+//        2023-05-15 02:11:49   --> customer.subscription.created [evt_1N7vZQHxcL7TQhSHgLApOB13]
+//        2023-05-15 02:11:49  <--  [500] POST http://minuet.test/stripe/webhooks [evt_1N7vZQHxcL7TQhSHgLApOB13]
+//        2023-05-15 02:11:49  <--  [204] POST http://minuet.test/stripe/webhooks [evt_1N7vZQHxcL7TQhSHEHECNp6P]
