@@ -30,7 +30,17 @@
             <div class="col-md-12 pb-3">
                 <div class="card" id="models-card">                    
                     <div class="card-body">     
-                        <h6 class="card-title" id="model-title">Models</h6>                          
+                        <!-- <h6 class="card-title" id="model-title">Models</h6>                           -->
+                        <div class="row">
+                            <div class="col-6">
+                                <h6 class="card-title float-start" id="model-title">Models</h6>
+                            </div>
+                            {% if models|length %}
+                            <div class="col-6">
+                                <a href="{{path('product_index',{'make':make})}}" class="btn btn-primary px-3 py-2 float-end bg-black border-0">Clear</a>
+                            </div>
+                            {% endif %}
+                        </div> 
                         <ul class="list-group list-group-flush" id="models">                            
                             {% for subCategory in  subCategories %}
                                 <li class="list-group-item"><input {{isDisabled}} {% if subCategory.id in models %}
