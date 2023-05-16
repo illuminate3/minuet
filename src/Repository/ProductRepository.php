@@ -120,12 +120,13 @@ class ProductRepository extends ServiceEntityRepository
     public function findAllThreadsByAccount($account): array
     {
         return $this->createQueryBuilder('P')
-            ->join('P.threads', 'T')
+            ->leftJoin('P.threads', 'T')
+            ->leftJoin('T.messages', 'M')
             ->where('P.account = :account')
             ->setParameter('account', $account)
+            ->groupBy('P.id')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
     // /**
