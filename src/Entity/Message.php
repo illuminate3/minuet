@@ -17,8 +17,12 @@ class Message
     use EntityIdTrait;
     use CreatedAtTrait;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $updatedBy = null;
+    // #[ORM\Column(nullable: true)]
+    // private ?int $updatedBy = null;
+    
+    #[ORM\ManyToOne(inversedBy: 'messages')]
+    #[ORM\JoinColumn(name: 'updated_by')]
+    private ?User $updatedBy = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $content = null;
@@ -34,12 +38,12 @@ class Message
         return $this->id;
     }
 
-    public function getUpdatedBy(): ?int
+    public function getUpdatedBy(): ?User
     {
         return $this->updatedBy;
     }
 
-    public function setUpdatedBy(?int $updatedBy): self
+    public function setUpdatedBy(?User $updatedBy): self
     {
         $this->updatedBy = $updatedBy;
 
