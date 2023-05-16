@@ -7,7 +7,6 @@ namespace App\DataFixtures;
 use App\Entity\Profile;
 use App\Entity\User;
 use App\Transformer\UserTransformer;
-use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -31,7 +30,7 @@ final class UserFixtures extends Fixture implements DependentFixtureInterface
                     ->setLastName($lastName)
                     ->setPhone($phone)
             );
-            $user->setEmailVerifiedAt(new DateTime('now'));
+            $user->setEmailVerifiedAt(new \DateTime('now'));
             $user->setIsVerified($verified);
             $user->setIsAccount($is_account);
             $user = $this->transformer->transform($user);
@@ -51,7 +50,7 @@ final class UserFixtures extends Fixture implements DependentFixtureInterface
             ['Test2', 'User2', 'test', true, true, '(456)555-1212', 'test2@test.com', ['ROLE_USER']],
             ['Test3', 'User3', 'test', true, true, '(456)555-1212', 'test3@test.com', ['ROLE_USER']],
             ['Test4', 'User4', 'test', true, true, '(456)555-1212', 'test4@test.com', ['ROLE_USER']],
-            ['Test5', 'User5', 'test', true, true, '(456)555-1212', 'test5@test.com', ['ROLE_USER']],
+            ['Test5', 'User5', 'test', true, false, '(456)555-1212', 'test5@test.com', ['ROLE_USER']],
         ];
     }
 

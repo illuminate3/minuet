@@ -30,7 +30,7 @@
 
         <div class="card">
             <div class="card-header">
-                {{ category.title }}
+                {{ category.title }} ({{category.threads|length}})
             </div>
 
 
@@ -40,33 +40,49 @@
 
             <div class="card-body">
 
-<table class="table">
+<table class="table thread-table">
             <thead>
                 <tr>
-                    <th>IsClosed</th>
-                    <th>IsPin</th>
-                    <th>TotalMessages</th>
-                    <th>Id</th>
-                    <th>account Id</th>
-                    <th>Product Id</th>
-                    <th>User Id</th>
-                    <th>Created_at</th>
-                    <th>actions</th>
+                    <th>Actions</th>
+                    <th>User Name</th>
+                    <th>Total Messages</th>
+                    <th class="tab-width-list">Summary</th>
+                    <th>Created At</th>
                 </tr>
             </thead>
     {% for thread in category.threads %}
     <tr>
-        <td>{{ thread.isClosed ? 'Yes' : 'No' }}</td>
-        <td>{{ thread.isPin ? 'Yes' : 'No' }}</td>
-        <td>{{ thread.totalMessages }}</td>
-        <td>{{ thread.id }}</td>
-        <td>{{ thread.account.id }}</td>
-        <td>{{ thread.product.id }}</td>
-        <td>{{ thread.user.id }}</td>
-        <td>{{ thread.createdAt ? thread.createdAt|date('Y-m-d H:i:s') : '' }}</td>
         <td>
-            <a href="{{ path('app_message_show_thread', {'id': thread.id}) }}">show</a>
+            <a href="{{ path('app_message_show_thread', {'id': thread.id}) }}" class="text-deco-none" title="Show"><i class="fa-solid fa-eye btn-gray"></i></a>
+            <a href="javascript:void(0);" id="pin-row-{{thread.id}}" class="show_confirm_pin text-deco-none" data-id="{{thread.id}}" data-values="{{thread.isPin == 0 ? 1 : 0}}" data-toggle="tooltip" data-msg="{{thread.isPin ? 'Are you sure you want to unpin this thread?' : 'Are you sure you want to pin this thread?' }}" title="{{thread.isPin ? 'Pin' : 'Unpin' }}">
+            {% if thread.isPin  == 1 %}
+                <i class="fa-solid fa-thumbtack btn-black"></i>
+            {% endif %}
+            {% if thread.isPin  == 0 %}
+                <i class="fa-solid fa-thumbtack btn-light-gray"></i>
+            {% endif %}
+            </a>
+            <a href="javascript:void(0);" id="close-row-{{thread.id}}" class="show_confirm_close text-deco-none" data-id="{{thread.id}}" data-values="{{thread.isClosed == 0 ? 1 : 0}}" data-toggle="tooltip" data-msg="{{thread.isClosed ? 'Are you sure you want to close this thread?' : 'Are you sure you want to open this thread?' }}" title="{{thread.isClosed ? 'Open' : 'Close' }}">
+            {% if thread.isClosed  == 1 %}
+                <i class="fa-solid fa-circle-check btn-green"></i>
+            {% endif %}
+            {% if thread.isClosed  == 0 %}
+                <i class="fa-solid fa-circle-xmark btn-red"></i>
+            {% endif %}
+            </a>
         </td>
+        <td>{{ thread.user.profile.fullName }}</td>
+        <td>{{ thread.messages|length }}</td>
+        <td>
+        {% for key, value in thread.messages %}
+            {% if key == 0 %}
+                <p>{{ value.content|length > 100 ? value.content|slice(0, 100) ~ '...' : value.content  }}</p>
+
+                
+            {% endif %}
+        {% endfor %}
+        </td>
+        <td>{{ thread.createdAt ? thread.createdAt|date('Y-m-d H:i:s') : '' }}</td>
     </tr>
     {% endfor %}
 </table>
@@ -78,8 +94,27 @@
     </div>
 </div>
 
-    {% endfor %}
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
 
+<!-- Modal content-->
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Modal Header</h4>
+  </div>
+  <div class="modal-body">
+    <p>Some text in the modal.</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  </div>
+</div>
+
+  </div>
+</div>
+    {% endfor %}
+    
 
 
 {#    <h1>Thread index</h1>#}
