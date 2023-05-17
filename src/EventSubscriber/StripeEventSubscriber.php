@@ -28,14 +28,29 @@ class StripeEventSubscriber implements EventSubscriberInterface
 //    case 'customer.updated':
         return [
             StripeEvents::CHARGE_FAILED => 'stripeChargeFailed',
-            StripeEvents::CUSTOMER_CREATED => 'stripeCustomerCreated',
-            StripeEvents::CUSTOMER_DELETED => 'stripeCustomerDeleted',
-            StripeEvents::CUSTOMER_UPDATED => 'stripeCustomerUpdated',
+//            StripeEvents::CUSTOMER_CREATED => 'stripeCustomerCreated',
+//            StripeEvents::CUSTOMER_DELETED => 'stripeCustomerDeleted',
+//            StripeEvents::CUSTOMER_UPDATED => 'stripeCustomerUpdated',
             StripeEvents::CUSTOMER_SUBSCRIPTION_CREATED => 'stripeCustomerSubscriptionCreated',
-            StripeEvents::CUSTOMER_SUBSCRIPTION_DELETED => 'stripeCustomerSubscriptionDeleted',
-            StripeEvents::CUSTOMER_SUBSCRIPTION_UPDATED => 'stripeCustomerDubscriptionUpdated',
+//            StripeEvents::CUSTOMER_SUBSCRIPTION_DELETED => 'stripeCustomerSubscriptionDeleted',
+//            StripeEvents::CUSTOMER_SUBSCRIPTION_UPDATED => 'stripeCustomerDubscriptionUpdated',
         ];
     }
+
+    public function stripeChargeFailed(StripeWebhook $webhook): void
+    {
+        $this->stripeService->stripeChargeFailed($webhook->getStripeObject());
+    }
+
+    public function stripeCustomerSubscriptionCreated(StripeWebhook $webhook): void
+    {
+        $this->stripeService->stripeCustomerSubscriptionCreated($webhook->getStripeObject());
+    }
+
+//    public function stripeCustomerCreated(StripeWebhook $webhook): void
+//    {
+//        $this->stripeService->stripeCustomerCreated($webhook->getStripeObject());
+//    }
 
 //    public function stripeCustomerSubscriptionCreated(StripeWebhook $webhook, StripeService $stripeService): void {
 //        $stripeService->customerSubscriptionCreated($webhook->getStripeObject());
@@ -43,11 +58,6 @@ class StripeEventSubscriber implements EventSubscriberInterface
 ////        $subscriptionStripe = $stripeEvent->data->object;
 ////        dd($subscriptionStripe);
 //    }
-
-    public function stripeCustomerSubscriptionCreated(StripeWebhook $webhook): void
-    {
-        $this->stripeService->customerSubscriptionCreated($webhook->getStripeObject());
-    }
 
 //    public function stripeCustomerCreated(StripeWebhook $webhook, StripeService $stripeService): void
 //    {
@@ -59,15 +69,6 @@ class StripeEventSubscriber implements EventSubscriberInterface
 //        // ... Your custom logic here.
 //    }
 
-    public function stripeCustomerCreated(StripeWebhook $webhook): void
-    {
-        $this->stripeService->chargeFailed($webhook->getStripeObject());
-    }
-
-    public function stripeChargeFailed(StripeWebhook $webhook): void
-    {
-        $this->stripeService->chargeFailed($webhook->getStripeObject());
-    }
 
 }
 

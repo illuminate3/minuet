@@ -50,7 +50,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private $confirmation_token;
-    
+
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private $stripe_customer_id;
 
@@ -238,12 +238,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-    public function getStrSubscriptionId(): ?string
+    public function getStripeSubscriptionId(): ?string
     {
         return $this->stripe_subscription_id;
     }
 
-    public function setStrSubscriptionId(string $stripe_subscription_id): self
+    public function setStripeSubscriptionId(string $stripe_subscription_id): self
     {
         $this->stripe_subscription_id = $stripe_subscription_id;
 

@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-final class WebhookControllerOLD extends BaseController
+final class WebhookController extends BaseController
 {
     private $requestStack;
 
@@ -26,7 +26,7 @@ final class WebhookControllerOLD extends BaseController
         $this->requestStack = $requestStack;
     }
 
-    #[Route('/webhookOLD', name: 'webhookOLD')]
+    #[Route('/webhook', name: 'webhook')]
     public function stripeWebhookAction(
         UserRepository $userRepository,
         AccountRepository $accountRepository,
