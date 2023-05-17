@@ -2,35 +2,36 @@
 
 {% block subheader %}
     <!-- Title -->
-    {{ include('layout/partials/_title.html.twig') }}
+    <div class="row">
+        {{ include('common/_flash_messages.html.twig') }}
+        {{ include('layout/partials/_title.html.twig') }}
+    </div>
 {% endblock %}
 
 {% block body %}
 
-    <h1>Message index</h1>
+    {#<h1>Thread Messages</h1>#}
 
     <table class="table">
         <thead>
             <tr>
-                <th>UpdatedBy</th>
-                <th>Content</th>
-                <th>Id</th>
-                <th>thread Id</th>
-                <th>user Id</th>
-                <th>Created_at</th>
+                <th>Actions</th>
+                <th>Updated By</th>
+                <th class="tab-width-message-index-list">Content</th>
+                {#<th>User Name</th>#}
+                <th>Created At</th>
             </tr>
         </thead>
         <tbody>
+        
         {% for message in messages %}
+       {#{{ dump(message.updatedBy.profile.fullName) }}#}
             <tr>
-                <td>{{ message.updatedBy }}</td>
+                <td><a href="{{ path('app_message_edit', {'thread_id': message.thread.id, 'id' : message.id}) }}" class="text-deco-none" title="Edit"><i class="fa fa-pencil btn-light-green" aria-hidden="true"></i></a></td>
+                <td>{{ message.updatedBy.profile.fullName }}</td>
                 <td>{{ message.content }}</td>
-                <td>{{ message.id }}</td>
-                <td>{{ message.thread.id }}</td>
-                <td>{{ message.user.profile.fullName }}</td>
+                {#<td>{{ message.user.profile.fullName }}</td>#}
                 <td>{{ message.createdAt ? message.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                </td>
             </tr>
         {% else %}
             <tr>
@@ -40,5 +41,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_message_new') }}">Create new</a>
+    {#<a href="{{ path('app_message_new',{'id': messages[0].thread.id}) }}">Create new</a>#}
 {% endblock %}

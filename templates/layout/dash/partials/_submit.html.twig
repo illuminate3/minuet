@@ -5,8 +5,7 @@
         <button type="submit" class="btn btn-success">
             {{ 'action.save'|trans }}
         </button>
-
-        <a class="btn btn-danger" href="{{ path(action_cancel_url) }}">
+        <a class="btn btn-danger" href="{{ path(action_cancel_url, {id: thread.id}) }}">
             {{ 'action.cancel'|trans }}
         </a>
 
