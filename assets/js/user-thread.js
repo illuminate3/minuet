@@ -77,3 +77,35 @@ $('.thread-table a.show_confirm_close').on("click",function(event) {
         }
     });
 });
+
+$('.show_confirm_delete').on("click",function(event) {
+    event.preventDefault();
+    let $form = $('.delete_form');
+    let token = $("input[name*='_token']").val()
+    var messageId = $("input[name*='message_id']").val();
+    var threadId = $("input[name*='thread_id']").val();
+    swal({
+        title: 'Are you sure you want to delete this thread message?',
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+        if (willDelete) {
+            $.ajax({
+                method: 'POST',
+                url: "/user/message/"+messageId,
+                data: { csrf_token: token, id: messageId , thread_id: threadId}
+            })
+            .done(function (result) {
+                bootbox.alert('Deleted successfully',function(){
+                    window.location.href = '/user/message/thread/'+result.data;
+                });
+                
+            })
+            .fail(function () {
+                bootbox.alert('An error has occurred');
+            });
+        }
+    });
+});

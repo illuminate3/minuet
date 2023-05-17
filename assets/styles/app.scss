@@ -192,6 +192,14 @@ footer {
   color: #28f000;
 }
 
+.btn-light-red {
+  color: #dc3545;
+}
+
+.btn-light-green {
+  color: #198754;
+}
+
 .tab-width-list {
   width: 35%;
   max-width: 35%;
@@ -224,4 +232,8 @@ footer {
 /* Handle on hover */
 #products-section #models-card #models::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+.tab-width-message-index-list {
+  width: 50%;
+  max-width: 50%;
 }
