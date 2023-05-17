@@ -64,27 +64,27 @@ final class SubscriptionController extends BaseController
     /**
      * @throws ApiErrorException
      */
-    #[Route('/subscribe/make/{customerID}', name: 'make_stripe_customer')]
-    public function make_stripe_customer(
-        Request $request,
-    ): RedirectResponse {
-//        // Create a new customer object
-//        $customer = $stripe->customers->create([
-//            'email' => $body->email,
-//        ]);
-
-//        $stripe = new \Stripe\StripeClient(
-//            'sk_test_4eC39HqLyjWDarjtT1zdp7dc'
-//        );
-//        $stripe->customers->create([
-//            'description' => 'My First Test Customer (created for API docs at https://www.stripe.com/docs/api)',
-//        ]);
-
-        $this->stripeService->stripeCustomerCreated();
-
-        return $this->redirectToRoute('success_url');
-
-    }
+//    #[Route('/subscribe/make/{customerID}', name: 'make_stripe_customer')]
+//    public function make_stripe_customer(
+//        Request $request,
+//    ): RedirectResponse {
+////        // Create a new customer object
+////        $customer = $stripe->customers->create([
+////            'email' => $body->email,
+////        ]);
+//
+////        $stripe = new \Stripe\StripeClient(
+////            'sk_test_4eC39HqLyjWDarjtT1zdp7dc'
+////        );
+////        $stripe->customers->create([
+////            'description' => 'My First Test Customer (created for API docs at https://www.stripe.com/docs/api)',
+////        ]);
+//
+//        $this->stripeService->stripeCustomerCreated();
+//
+//        return $this->redirectToRoute('success_url');
+//
+//    }
 
 
 
