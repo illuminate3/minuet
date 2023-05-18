@@ -105,3 +105,6 @@ owe Coderberg a Thank you!
 [2]: https://symfony.com/doc/current/setup.html#technical-requirements
 [5]: https://github.com/Coderberg/ResidenceCMS
 [6]: https://github.com/rappasoft/laravel-boilerplate
+
+Note:
+https://github.com/FabienPapet/stripe-bundle
