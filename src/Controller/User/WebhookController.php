@@ -82,9 +82,10 @@ final class WebhookController extends BaseController
                     $em->persist($user);
                     $em->flush();
                     http_response_code(200);
-                    exit;
-                    // break;
-
+                    echo json_encode(["status"=>true]);
+                    exit();                   
+                   // break;
+                   
                 case 'customer.subscription.deleted':
                     // \dump($event->data->object);
 
