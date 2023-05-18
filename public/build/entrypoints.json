@@ -2,96 +2,90 @@
   "entrypoints": {
     "js/app": {
       "js": [
-        "/build/runtime.5d189f8c.js",
-        "/build/js/app.1c030d07.js"
+        "http://localhost:8080/build/runtime.js",
+        "http://localhost:8080/build/js/app.js"
       ]
     },
     "js/admin": {
       "js": [
-        "/build/runtime.5d189f8c.js",
-        "/build/js/admin.791bd6ae.js"
+        "http://localhost:8080/build/runtime.js",
+        "http://localhost:8080/build/js/admin.js"
       ]
     },
     "js/menu-sorting": {
       "js": [
-        "/build/runtime.5d189f8c.js",
-        "/build/js/menu-sorting.9da71c44.js"
+        "http://localhost:8080/build/runtime.js",
+        "http://localhost:8080/build/js/menu-sorting.js"
       ]
     },
     "js/layout": {
       "js": [
-        "/build/runtime.5d189f8c.js",
-        "/build/js/layout.07474641.js"
+        "http://localhost:8080/build/runtime.js",
+        "http://localhost:8080/build/js/layout.js"
       ]
     },
     "js/image": {
       "js": [
-        "/build/runtime.5d189f8c.js",
-        "/build/js/image.deebe0c4.js"
+        "http://localhost:8080/build/runtime.js",
+        "http://localhost:8080/build/js/image.js"
       ]
     },
     "js/ekko-lightbox": {
       "js": [
-        "/build/runtime.5d189f8c.js",
-        "/build/js/ekko-lightbox.85b8990d.js"
+        "http://localhost:8080/build/runtime.js",
+        "http://localhost:8080/build/js/ekko-lightbox.js"
       ]
     },
     "js/select2": {
       "js": [
-        "/build/runtime.5d189f8c.js",
-        "/build/js/select2.9268c52b.js"
-      ]
-    },
-    "js/product": {
-      "js": [
-        "/build/runtime.5d189f8c.js",
-        "/build/js/product.6cf0a87d.js"
+        "http://localhost:8080/build/runtime.js",
+        "http://localhost:8080/build/js/select2.js"
       ]
     },
     "js/user-thread": {
       "js": [
-        "/build/runtime.5d189f8c.js",
-        "/build/js/user-thread.d7eff504.js"
+        "http://localhost:8080/build/runtime.js",
+        "http://localhost:8080/build/js/user-thread.js"
       ]
     },
     "css/app": {
       "js": [
-        "/build/runtime.5d189f8c.js"
+        "http://localhost:8080/build/runtime.js"
       ],
       "css": [
-        "/build/css/app.db8804cc.css"
+        "http://localhost:8080/build/css/app.css"
       ]
     },
     "css/detail": {
       "js": [
-        "/build/runtime.5d189f8c.js"
+        "http://localhost:8080/build/runtime.js"
       ],
       "css": [
-        "/build/css/detail.3d2d5214.css"
+        "http://localhost:8080/build/css/detail.css"
       ]
     },
     "css/image": {
       "js": [
-        "/build/runtime.5d189f8c.js"
+        "http://localhost:8080/build/runtime.js"
       ],
       "css": [
-        "/build/css/image.98d4811e.css"
+        "http://localhost:8080/build/css/image.css"
       ]
     },
     "css/ekko-lightbox": {
       "js": [
-        "/build/runtime.5d189f8c.js"
+        "http://localhost:8080/build/runtime.js"
       ],
       "css": [
-        "/build/css/ekko-lightbox.2b7a8299.css"
+        "http://localhost:8080/build/css/ekko-lightbox.css"
       ]
     },
     "css/select2": {
       "js": [
-        "/build/runtime.5d189f8c.js"
+        "http://localhost:8080/build/runtime.js"
       ],
       "css": [
-        "/build/css/select2.3f146cf8.css"
+        "http://localhost:8080/build/css/select2.css"
       ]
     }
   }

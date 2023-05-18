@@ -1,11 +1,12 @@
 name: "Lint"
 
+#on:
+#  pull_request:
+#    branches:
+#      - master
+#      - code_cleanup
+#  push:
 on:
-  pull_request:
-    branches:
-      - master
-      - code_cleanup
-  push:
 
 env:
   fail-fast: true
