@@ -73,7 +73,7 @@ class Profile
 
     public function getFullName(): ?string
     {
-        return $this->last_name.', '.$this->first_name;
+        return $this->last_name . ', ' . $this->first_name;
     }
 
     public function getFirstName(): ?string

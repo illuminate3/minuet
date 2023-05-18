@@ -7,6 +7,7 @@ namespace App\Service\Admin;
 use App\Entity\Subscription;
 use App\Service\AbstractService;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
@@ -23,6 +24,9 @@ final class SubscriptionService extends AbstractService
         $this->em = $entityManager;
     }
 
+    /**
+     * @throws InvalidArgumentException
+     */
     public function create(Subscription $subscription): void
     {
         // Save subscription
@@ -48,6 +52,9 @@ final class SubscriptionService extends AbstractService
         $this->em->flush();
     }
 
+    /**
+     * @throws InvalidArgumentException
+     */
     public function delete(Subscription $subscription): void
     {
         // Delete subscription

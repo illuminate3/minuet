@@ -6,6 +6,8 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\Pagination\PaginationInterface;
@@ -23,7 +25,7 @@ class UserRepository extends ServiceEntityRepository
     /**
      * @var PaginatorInterface
      */
-    private $paginator;
+    private PaginatorInterface $paginator;
 
     public function __construct(
         ManagerRegistry $registry,
@@ -33,12 +35,17 @@ class UserRepository extends ServiceEntityRepository
         $this->paginator = $paginator;
     }
 
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
     public function countAll(): int
     {
         $count = $this->createQueryBuilder('u')
             ->select('count(u.id)')
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
 
         return (int) $count;
     }
@@ -47,7 +54,8 @@ class UserRepository extends ServiceEntityRepository
         Request $request,
     ): PaginationInterface {
         $qb = $this->createQueryBuilder('user')
-            ->orderBy('user.id', 'DESC');
+            ->orderBy('user.id', 'DESC')
+        ;
 
         return $this->createPaginator($qb->getQuery(), $request);
     }

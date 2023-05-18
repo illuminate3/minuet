@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Entity\Category;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\DBAL\Exception;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
@@ -25,10 +23,6 @@ use Symfony\Bundle\SecurityBundle\Security;
  */
 class ProductRepository extends ServiceEntityRepository
 {
-//    public function __construct(ManagerRegistry $registry)
-//    {
-//        parent::__construct($registry, Product::class);
-//    }
 
     public function __construct(
         ManagerRegistry $registry,
@@ -40,17 +34,16 @@ class ProductRepository extends ServiceEntityRepository
 
     public const NUM_ITEMS = 20;
 
-
     public function findAllPublished(): array
     {
         $qb = $this->createQueryBuilder('p');
         $query = $qb->where("p.state = 'published'")
             ->orderBy('p.id', 'DESC')
-            ->getQuery();
+            ->getQuery()
+        ;
 
         return $query->execute();
     }
-
 
     /**
      * @throws NonUniqueResultException
@@ -61,24 +54,15 @@ class ProductRepository extends ServiceEntityRepository
         $count = $this->createQueryBuilder('p')
             ->select('count(p.id)')
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
 
         return (int) $count;
     }
 
-//    private function findLimit(): int
-//    {
-//        $repository = $this->getEntityManager()->getRepository(Settings::class);
-//        $limit = $repository->findOneBy(['setting_name' => 'items_per_page']);
-//
-//        return (int) $limit->getSettingValue();
-//        return (int) NUM_ITEMS;
-//
-//    }
 
     protected function createPaginator(Query $query, int $page): PaginationInterface
     {
-//        return $this->paginator->paginate($query, $page, $this->findLimit());
         return $this->paginator->paginate($query, $page, 4);
     }
 
@@ -92,22 +76,20 @@ class ProductRepository extends ServiceEntityRepository
             ->select('c', 'p')
             ->from('App\Entity\Products', 'p')
             ->join('p.categories', 'c')
-            ->where("c.slug = '$slug'")
+            ->where("c.slug = '{$slug}'")
             ->setMaxResults($limit)
-            ->setFirstResult(($page * $limit) - $limit);
+            ->setFirstResult(($page * $limit) - $limit)
+        ;
 
         $paginator = new Paginator($query);
         $data = $paginator->getQuery()->getResult();
 
-        // On vérifie qu'on a des données
         if (empty($data)) {
             return $result;
         }
 
-        // On calcule le nombre de pages
         $pages = ceil($paginator->count() / $limit);
 
-        // On remplit le tableau
         $result['data'] = $data;
         $result['pages'] = $pages;
         $result['page'] = $page;
@@ -117,46 +99,19 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param mixed $account
+     *
      * @return Product[]
      */
     public function findAllThreadsByAccount($account): array
     {
         return $this->createQueryBuilder('P')
-            ->join('P.threads', 'T')
+            ->leftJoin('P.threads', 'T')
+            ->leftJoin('T.messages', 'M')
             ->where('P.account = :account')
             ->setParameter('account', $account)
+            ->groupBy('P.id')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-
-
-    // /**
-    //  * @return Products[] Returns an array of Products objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Products
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

@@ -17,23 +17,19 @@ final class SitemapController extends AbstractController
     #[Route(path: '/sitemap.xml', name: 'sitemap', defaults: self::DEFAULTS)]
     public function siteMap(): Response
     {
-        return $this->render('sitemap/sitemap.xml.twig', []);
+        return $this->render('sitemap/sitemap.xml.twig');
     }
 
     #[Route(path: '/sitemap/pages.xml', name: 'pages_sitemap', defaults: self::DEFAULTS)]
     public function pages(
         Request $request,
         PageRepository $pageRepository
-    ): Response
-    {
-
-        $locale = $request->getLocale();
-        $pages = $pageRepository->findLatest($request, $locale);
+    ): Response {
+//        $locale = $request->getLocale();
+        $pages = $pageRepository->findLatest($request);
 
         return $this->render('sitemap/pages.xml.twig', [
             'pages' => $pages,
         ]);
     }
-
-
 }

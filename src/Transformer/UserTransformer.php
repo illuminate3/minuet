@@ -7,6 +7,8 @@ namespace App\Transformer;
 use App\Entity\User;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+use function in_array;
+
 final class UserTransformer
 {
     public function __construct(private UserPasswordHasherInterface $passwordHasher)
@@ -22,7 +24,7 @@ final class UserTransformer
 
     private function setRoles(User $user): User
     {
-        if (\in_array('ROLE_ADMIN', $user->getRoles(), true)) {
+        if (in_array('ROLE_ADMIN', $user->getRoles(), true)) {
             $user->setRoles(['ROLE_ADMIN', 'ROLE_USER']);
         } else {
             $user->setRoles(['ROLE_USER']);

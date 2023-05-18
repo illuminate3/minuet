@@ -48,7 +48,7 @@ final class RegisterController extends BaseController implements AuthController
             return $this->redirectToRoute('app_dash');
         }
 
-        if ('1' !== $this->settings['allow_register']) {
+        if ($this->settings['allow_register'] !== '1') {
             $this->addFlash('danger', 'message.registration_suspended');
 
             return $this->redirectToRoute('auth_no_register');
@@ -63,14 +63,14 @@ final class RegisterController extends BaseController implements AuthController
             $this->service->create($user);
             $this->messageBus->dispatch(new SendEmailConfirmationLink($user));
             $this->addFlash('success', 'message.registration_successful');
-         //   return $this->authenticate($user, $request);
+            //   return $this->authenticate($user, $request);
         }
 
         return $this->render('auth/register/register.html.twig', [
             'title' => 'title.register',
             'site' => $this->settings,
             'error' => null,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -81,7 +81,7 @@ final class RegisterController extends BaseController implements AuthController
             return $this->redirectToRoute('app_dash');
         }
 
-        if ('1' === $this->settings['allow_register']) {
+        if ($this->settings['allow_register'] === '1') {
             return $this->redirectToRoute('auth_register');
         }
 
@@ -127,7 +127,7 @@ final class RegisterController extends BaseController implements AuthController
         }
 
         $error = null;
-        if (null !== $request->getSession()->getFlashBag()) {
+        if ($request->getSession()->getFlashBag() !== null) {
             $error = $request->getSession()->getFlashBag()->get('danger');
         }
 

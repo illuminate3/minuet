@@ -5,16 +5,14 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Repository\AccountListingRepository;
 use App\Repository\AccountRepository;
 use App\Repository\AccountUserRepository;
 use App\Repository\MessageRepository;
 use App\Repository\ProductRepository;
 use App\Repository\SubscriptionRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Stripe\Customer;
-use Stripe\Stripe;
 use App\Repository\ThreadRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Stripe\Stripe;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/user/dash')]
 class DashController extends BaseController
 {
-    #[Route('/user/dash', name: 'app_dash')]
+    #[Route('/', name: 'app_dash')]
     public function index(
         Request $request,
         Security $security,
@@ -47,19 +45,19 @@ class DashController extends BaseController
         if (!$account) {
             $stripeAPIKey = $_ENV['STRIPE_SECRET_KEY'];
             Stripe::setApiKey($stripeAPIKey);
-            if (is_null($user->getStripeCustomerId())) {
+            if (is_null($user->getStripeCustomerId())) {               
                 $stripeCustomerObj =  \Stripe\Customer::create([
                     'description' => 'Minuet customer',
                     'email'=>$user->getEmail(),
                     'metadata'=>[
                         "userId"=>$user->getId()
-                    ]
-                ]);
+                    ]                  
+                ]);                 
                 $stripeCustomerId =  $stripeCustomerObj->id;
-                $user->setStripeCustomerId($stripeCustomerId);
-                $this->em->persist($user);
-                $this->em->flush();
-                }
+                $user->setStripeCustomerId($stripeCustomerId);            
+                $this->em->persist($user);   
+                $this->em->flush();  
+                }                                    
             return $this->redirectToRoute('app_pricing');
         }
 
@@ -111,8 +109,8 @@ class DashController extends BaseController
             'products' => $products,
             'productThreads' => $productThreads,
             'userId' => $user_id,
-//            'threads' => $threads,
-//            'messages' => $messages,
+            //            'threads' => $threads,
+            //            'messages' => $messages,
         ]);
     }
 }

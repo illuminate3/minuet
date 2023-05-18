@@ -1,96 +1,155 @@
 {% extends 'layout/base.html.twig' %}
 
 {% block subheader %}
-    <!-- Title -->
-{#    {{ include('layout/partials/_title.html.twig') }}#}
-    <!-- Search -->
-{#    {{ include('product/partials/_search_form.html.twig') }}#}
+<!-- Title -->
+{# {{ include('layout/partials/_title.html.twig') }}#}
+<!-- Search -->
+{# {{ include('product/partials/_search_form.html.twig') }}#}
 {% endblock %}
 
 {% block body %}
 
-<div class="row">
+<div class="row" id="products-section">
 
-    {% for product in products %}
+    <div class="col-md-3">
 
-        <!-- Item -->
-        <div class="col-lg-3 col-md-6 col-sm-12">
-            <div class="card full-xs">
+        <div class="row">
+            <form action="{{path('product_index')}}" method="post">
+            <div class="col-md-12 pb-3">
+                <label for="make">Make</label>
+                <select name="make" class="form-control" id="make">
+                    <option value="" selected disabled>--Select Make--</option>    
+                    {% for category in categories %}
+                    <option                   
+                    {{ make==category.id ? 'selected' : '' }}                   
+                     value="{{category.id}}">{{category.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% if subCategories|length  %}
+            <div class="col-md-12 pb-3">
+                <div class="card" id="models-card">                    
+                    <div class="card-body">     
+                        <!-- <h6 class="card-title" id="model-title">Models</h6>                           -->
+                        <div class="row">
+                            <div class="col-6">
+                                <h6 class="card-title float-start" id="model-title">Models</h6>
+                            </div>
+                            {% if models|length %}
+                            <div class="col-6">
+                                <a href="{{path('product_index',{'make':make})}}" class="btn btn-primary px-3 py-2 float-end bg-black border-0">Clear</a>
+                            </div>
+                            {% endif %}
+                        </div> 
+                        <ul class="list-group list-group-flush" id="models">                            
+                            {% for subCategory in  subCategories %}
+                                <li class="list-group-item"><input {{isDisabled}} {% if subCategory.id in models %}
+                                     {{'checked'}} {% endif %} type="checkbox" value="{{subCategory.id}}" class="model-checkbox" name="models[]"> {{subCategory.name}}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>               
+            </div>
+            {% endif %}
+        </form>
+        </div>
 
-                <div class="product-box-img">
+    </div>
+    <div class="col-md-9">
+        <div class="row">
 
-                    <a href="{{ path('product_show', {
+
+            {% for product in products %}
+
+            <!-- Item -->
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-3">
+                <div class="card full-xs">
+
+                    <div class="product-box-img">
+
+                        <a href="{{ path('product_show', {
                         'id':  product.id,
                         'slug': product.slug}) }}">
 
-                    {% for photo in product.images | slice(0, 1) %}
+                            {% for photo in product.images | slice(0, 1) %}
 
-                        <img class="card-img-top lazyload" src="{{ asset('/images/transparent.png') }}"
-                             data-src="/uploads/images/small/{{ photo.file }}"
-                             alt="{{ product.slug }}"
-                             title="{{ product.title }}"/>
+                            <img class="card-img-top lazyload" src="{{ asset('/images/transparent.png') }}"
+                                data-src="/uploads/images/small/{{ photo.file }}" alt="{{ product.slug }}"
+                                title="{{ product.title }}" />
 
-                    {% else %}
+                            {% else %}
 
-                        <img class="card-img-top border-bottom" src="{{ asset('/images/no-photo.png') }}"
-                             alt="{{ product.slug }}"
-                             title="{{ product.title }}"/>
+                            <img class="card-img-top border-bottom" src="{{ asset('/images/no-photo.png') }}"
+                                alt="{{ product.slug }}" title="{{ product.title }}" />
 
-                    {% endfor %}
+                            {% endfor %}
 
-                    {% if product.price != '' %}
-                        <span class="price">
-                            $ {{ product.price }}
-{#                            {% if product.priceType != '' %}#}
-{#                                / {{ product.priceType }}#}
-{#                            {% endif %}#}
-                        </span>
-                    {% endif %}
+                            {% if product.price != '' %}
+                            <span class="price">
+                                $ {{ product.price }}
+                                {# {% if product.priceType != '' %}#}
+                                {# / {{ product.priceType }}#}
+                                {# {% endif %}#}
+                            </span>
+                            {% endif %}
 
-                    </a>
-
-                </div>
-
-                <div class="card-body">
-                    <h5 class="card-title">
-
-                        <a href="{{ path('product_show', {
-                            'id':  product.id,
-                            'slug': product.slug}) }}">
-                            {{ product.title }}
                         </a>
 
-                    </h5>
-                    <p class="small icon-green">
-                        <i class="fas fa-map-marker-alt"></i>
-{#                            {{ product.address }}#}
-                        {{ product.id }}
-                    </p>
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title">
+
+                            <a href="{{ path('product_show', {
+                            'id':  product.id,
+                            'slug': product.slug}) }}">
+                                {{ product.title }}
+                            </a>
+
+                        </h5>
+                        <p class="small icon-green">
+                            <i class="fas fa-map-marker-alt"></i>
+                            {# {{ product.address }}#}
+                            {{ product.id }}
+                        </p>
 
 
-{#                        <span class="attribute">{{ product.dealType.name }}</span>#}
-                    <span class="attribute">{{ product.category.name }}</span>
+                        {# <span class="attribute">{{ product.dealType.name }}</span>#}
+                        <span class="attribute">{{ product.category.name }}</span>
+
+                    </div>
 
                 </div>
 
             </div>
 
+            <!-- / Item -->
+
+            {% else %}
+
+            <div class="well text-center">
+                <img class="img-fluid w-50" src="{{ asset('images/no-data-found.png') }}" alt="No data found">               
+                <p class="fs-4 text-justify mb-0">No cars matching with your search</p>
+                <p class="fs-4 text-justify mb-0">Please modify your search</p>
+            </div>
+
+            {% endfor %}
         </div>
-
-        <!-- / Item -->
-
-    {% else %}
-
-        <div class="well">
-            {{ 'message.not_found'|trans }}
+        <div class="py-lg-4">
+            {{ knp_pagination_render(products) }}
         </div>
-
-    {% endfor %}
+    </div>
 
 </div>
 
-<div class="py-lg-4">
-    {{ knp_pagination_render(products) }}
-</div>
 
+
+{% endblock %}
+{% block javascripts %}
+
+<script>
+var productPath = "{{path('product_index',{'make':'_make_id','models':'_model_id'})}}";
+</script>
+{{ encore_entry_script_tags('js/product') }}
 {% endblock %}

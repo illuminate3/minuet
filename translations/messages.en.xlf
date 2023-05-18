@@ -94,6 +94,10 @@
                 <source>action.cancel</source>
                 <target>Cancel</target>
             </trans-unit>
+            <trans-unit id="action.list.cancel">
+                <source>action.list.cancel</source>
+                <target>Back to list</target>
+            </trans-unit>
             <trans-unit id="action.change_password">
                 <source>action.change_password</source>
                 <target>Change Password</target>
@@ -451,6 +455,18 @@
             <trans-unit id="menu.messages">
                 <source>menu.messages</source>
                 <target>Messages</target>
+            </trans-unit>
+            <trans-unit id="title.message">
+                <source>title.message</source>
+                <target>Thread Messages</target>
+            </trans-unit>
+            <trans-unit id="title.new.message">
+                <source>title.new.message</source>
+                <target>Create New Thread Message</target>
+            </trans-unit>
+            <trans-unit id="title.edit.message">
+                <source>title.edit.message</source>
+                <target>Edit Thread Message</target>
             </trans-unit>
             <trans-unit id="menu.products">
                 <source>menu.products</source>

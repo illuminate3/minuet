@@ -15,7 +15,7 @@ class ProductVoter extends Voter
     public const EDIT = 'PRODUCT_EDIT';
     public const DELETE = 'PRODUCT_DELETE';
 
-    private $security;
+    private Security $security;
 
     public function __construct(Security $security)
     {
@@ -58,12 +58,12 @@ class ProductVoter extends Voter
         }
     }
 
-    private function canEdit()
+    private function canEdit(): bool
     {
         return $this->security->isGranted('ROLE_PRODUCT_ADMIN');
     }
 
-    private function canDelete()
+    private function canDelete(): bool
     {
         return $this->security->isGranted('ROLE_ADMIN');
     }

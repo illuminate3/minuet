@@ -7,13 +7,13 @@ namespace App\DataFixtures;
 use App\Entity\Message;
 use App\Entity\Thread;
 use App\Entity\User;
+use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 class MessageFixtures extends Fixture implements DependentFixtureInterface
 {
-
     public function load(ObjectManager $manager): void
     {
 //        user_id
@@ -31,7 +31,7 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
             $message->setThread($thread);
             $message->setUpdatedBy($updated_by);
             $message->setContent($content);
-            $message->setCreatedAt(new \DateTimeImmutable('now'));
+            $message->setCreatedAt(new DateTimeImmutable('now'));
 
             $manager->persist($message);
         }

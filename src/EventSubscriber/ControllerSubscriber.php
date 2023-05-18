@@ -12,6 +12,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
+use function is_array;
+
 final class ControllerSubscriber implements EventSubscriberInterface
 {
     public function __construct(
@@ -23,7 +25,7 @@ final class ControllerSubscriber implements EventSubscriberInterface
     public function onKernelController(ControllerEvent $event): void
     {
         $controller = $event->getController();
-        if (\is_array($controller)) {
+        if (is_array($controller)) {
             $controller = $controller[0];
         }
 

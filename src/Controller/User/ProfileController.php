@@ -60,7 +60,7 @@ final class ProfileController extends BaseController
             'action_cancel_url' => 'user_profile',
             'site' => $this->site($request),
             'error' => $error,
-            'form' => $form,
+            'form' => $form->createView(),
             'profile' => $profile,
         ]);
     }

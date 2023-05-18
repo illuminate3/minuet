@@ -50,7 +50,7 @@ final class UserFixtures extends Fixture implements DependentFixtureInterface
             ['Test2', 'User2', 'test', true, true, '(456)555-1212', 'test2@test.com', ['ROLE_USER']],
             ['Test3', 'User3', 'test', true, true, '(456)555-1212', 'test3@test.com', ['ROLE_USER']],
             ['Test4', 'User4', 'test', true, true, '(456)555-1212', 'test4@test.com', ['ROLE_USER']],
-            ['Test5', 'User5', 'test', true, true, '(456)555-1212', 'test5@test.com', ['ROLE_USER']],
+            ['Test5', 'User5', 'test', true, false, '(456)555-1212', 'test5@test.com', ['ROLE_USER']],
         ];
     }
 

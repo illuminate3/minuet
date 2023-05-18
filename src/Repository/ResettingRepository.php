@@ -6,17 +6,15 @@ namespace App\Repository;
 
 use App\Entity\User;
 use App\Transformer\UserTransformer;
+use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
 
 final class ResettingRepository extends UserRepository
 {
-    private $transformer;
+    private UserTransformer $transformer;
 
-    /**
-     * @var PaginatorInterface
-     */
-    private $paginator;
+    private PaginatorInterface $paginator;
 
     public function __construct(
         ManagerRegistry $registry,
@@ -42,7 +40,7 @@ final class ResettingRepository extends UserRepository
     public function setToken(User $user, string $token): void
     {
         $user->setConfirmationToken($token);
-        $user->setPasswordRequestedAt(new \DateTime());
+        $user->setPasswordRequestedAt(new DateTime());
         $this->save($user);
     }
 
