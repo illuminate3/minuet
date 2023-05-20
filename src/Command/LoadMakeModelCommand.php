@@ -32,6 +32,8 @@ final class LoadMakeModelCommand extends Command
 
 
     /**
+     * execute
+     *
      * @param  InputInterface   $input
      * @param  OutputInterface  $output
      *

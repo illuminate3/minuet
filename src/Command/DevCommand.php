@@ -19,6 +19,8 @@ final class DevCommand extends Command
 {
 
     /**
+     * execute
+     *
      * @param  InputInterface   $input
      * @param  OutputInterface  $output
      *

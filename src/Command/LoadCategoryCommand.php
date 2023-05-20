@@ -31,6 +31,8 @@ final class LoadCategoryCommand extends Command
     }
 
     /**
+     * execute
+     *
      * @param  InputInterface   $input
      * @param  OutputInterface  $output
      *
