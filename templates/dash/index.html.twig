@@ -14,18 +14,17 @@
             <p>subscription</p>
 
             <p>
-                {#        {{ dump(subscription) }}#}
+              
                 {{ subscription.plan }}
             </p>
-<a href="{{ path('app_pricing') }}" class="btn btn-info">  {{ 'action.change_plane'|trans }}</a>
-            {#    {% endif %}#}
-
-
+            {% if(is_primary) %}
+<a href="{{ path('app_pricing') }}" class="btn btn-info">  {{ 'action.change_plan'|trans }}</a>
+          
+{% endif %}
             <hr>
             <p>account</p>
 
-            <p>
-                {#        {{ dump(account) }}#}
+            <p>                
                 {{ account.name }}
             </p>
 

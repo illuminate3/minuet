@@ -72,13 +72,12 @@ final class WebhookController extends BaseController
                     $account->setName($object->customer_email);
                     $account->setPrimaryUser($user->getId());
                     $account->setSubscription($plan);
+                    $account->setIsSubscriptionActive(true);
                     $em->persist($account);
                     $em->flush();
 
-                    //  $user->setSubscription($plan);
-
                     $user->setStrSubscriptionId($object->subscription);
-                    //  $user->setSubscriptionValidUntil(DateTime::createFromFormat('U', $object->lines->data[0]->period->end));
+                    
                     $em->persist($user);
                     $em->flush();
                     http_response_code(200);
@@ -87,37 +86,23 @@ final class WebhookController extends BaseController
                    // break;
                    
                 case 'customer.subscription.deleted':
-                    // \dump($event->data->object);
+                    
 
                     break;
-                    // ... handle other event types
+                  
                 case 'customer.updated':
-                    dump($event->data->object);
-                    // $user = $userRepository->findOneBy(['email', $object->customer_email]);
-                    // $user->setPaymentStatus(\true);
-                    // $user->setStrCustomerId($object->customer);
-                    // $em->persist($user);
-                    // $em->flush();
+                    
 
                     break;
-                    // ... handle other event types
 
                 case 'charge.succeeded':
                     dump($event->data->object);
-                    // $user = $userRepository->findOneBy(['email', $object->customer_email]);
-                    // $user->setPaymentStatus(1);
-                    // $user->setStrCustomerId($object->customer);
-                    // $em->persist($user);
-                    // $em->flush();
+                   
 
                     break;
                 case 'checkout.session.completed':
                     dump($event->data->object);
-                    // $user = $userRepository->findOneBy(['email', $object->customer_email]);
-                    // $user->setPaymentStatus(\true);
-                    // $user->setStrCustomerId($object->customer);
-                    // $em->persist($user);
-                    // $em->flush();
+                   
 
                     break;
                     // ... handle other event types
