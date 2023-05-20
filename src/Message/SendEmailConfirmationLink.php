@@ -8,8 +8,12 @@ use App\Entity\User;
 
 final class SendEmailConfirmationLink
 {
-    public function __construct(private User $user)
+
+    private User $user;
+
+    public function __construct(User $user)
     {
+        $this->user = $user;
     }
 
     public function getUser(): User

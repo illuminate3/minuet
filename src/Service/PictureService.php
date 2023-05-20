@@ -16,6 +16,9 @@ class PictureService
         $this->params = $params;
     }
 
+    /**
+     * @throws Exception
+     */
     public function add(UploadedFile $picture, ?string $folder = '', ?int $width = 250, ?int $height = 250): string
     {
         $file = md5(uniqid(rand(), true)) . '.webp';

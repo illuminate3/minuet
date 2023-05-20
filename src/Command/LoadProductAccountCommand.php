@@ -33,6 +33,12 @@ final class LoadProductAccountCommand extends Command
         $this->products = $products;
     }
 
+    /**
+     * @param  InputInterface   $input
+     * @param  OutputInterface  $output
+     *
+     * @return int
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $account1 = $this->accounts->find(1);

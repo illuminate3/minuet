@@ -10,8 +10,12 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 final class RegisteredUserValidator extends ConstraintValidator
 {
-    public function __construct(private UserRepository $userRepository)
+
+    private UserRepository $userRepository;
+
+    public function __construct(UserRepository $userRepository)
     {
+        $this->userRepository = $userRepository;
     }
 
     public function validate($value, Constraint $constraint): void

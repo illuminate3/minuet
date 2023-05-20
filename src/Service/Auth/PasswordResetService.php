@@ -9,6 +9,7 @@ use App\Message\SendResetPasswordLink;
 use App\Repository\ResettingRepository;
 use App\Service\AbstractService;
 use App\Utils\TokenGenerator;
+use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -33,6 +34,9 @@ final class PasswordResetService extends AbstractService
         $this->generator = $generator;
     }
 
+    /**
+     * @throws Exception
+     */
     public function sendResetPasswordLink(Request $request): void
     {
         /** @var User $user */
@@ -44,6 +48,8 @@ final class PasswordResetService extends AbstractService
 
     /**
      * Generating a Confirmation Token.
+     *
+     * @throws Exception
      */
     private function generateToken(): string
     {
@@ -52,6 +58,8 @@ final class PasswordResetService extends AbstractService
 
     /**
      * Refreshing a Confirmation Token.
+     *
+     * @throws Exception
      */
     private function updateToken(User $user): void
     {

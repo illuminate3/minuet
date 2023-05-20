@@ -28,6 +28,9 @@ final class ListUsersCommand extends Command
         $this->users = $users;
     }
 
+    /**
+     * @return void
+     */
     protected function configure(): void
     {
         $this->addOption(
@@ -40,6 +43,12 @@ final class ListUsersCommand extends Command
         ;
     }
 
+    /**
+     * @param  InputInterface   $input
+     * @param  OutputInterface  $output
+     *
+     * @return int
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $limit = $input->getOption('limit');

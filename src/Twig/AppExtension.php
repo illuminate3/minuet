@@ -10,8 +10,12 @@ use Twig\TwigFilter;
 
 final class AppExtension extends AbstractExtension
 {
-    public function __construct(private TranslatorInterface $translator)
+
+    private TranslatorInterface $translator;
+
+    public function __construct(TranslatorInterface $translator)
     {
+        $this->translator = $translator;
     }
 
     public function getFilters(): array
@@ -23,6 +27,6 @@ final class AppExtension extends AbstractExtension
 
     public function showPageNumber($number = 1): string
     {
-        return ($number > 1) ? ' - ' . $this->translator->trans('page') . ' ' . $number : '';
+        return ($number > 1) ? ' - ' . $this->translator->trans('text.page') . ' ' . $number : '';
     }
 }

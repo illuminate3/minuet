@@ -15,6 +15,7 @@ use App\Repository\UserRepository;
 use App\Security\RegistrationFormAuthenticator;
 use App\Service\Admin\UserService;
 use Doctrine\Persistence\ManagerRegistry;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -26,21 +27,37 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 final class RegisterController extends BaseController implements AuthController
 {
     private array $settings;
+    private MessageBusInterface $messageBus;
+    private RegistrationFormAuthenticator $authenticator;
+    private Security $security;
+    private UserAuthenticatorInterface $userAuthenticator;
+    private UserService $service;
 
     public function __construct(
-        private MessageBusInterface $messageBus,
-        private RegistrationFormAuthenticator $authenticator,
-        private Security $security,
-        private UserAuthenticatorInterface $userAuthenticator,
-        private UserService $service,
+        MessageBusInterface $messageBus,
+        RegistrationFormAuthenticator $authenticator,
+        Security $security,
+        UserAuthenticatorInterface $userAuthenticator,
+        UserService $service,
         ManagerRegistry $doctrine,
         RequestStack $requestStack,
         SettingsRepository $settingsRepository
     ) {
         parent::__construct($settingsRepository, $doctrine);
         $this->settings = $this->site($requestStack->getCurrentRequest());
+        $this->messageBus = $messageBus;
+        $this->authenticator = $authenticator;
+        $this->security = $security;
+        $this->userAuthenticator = $userAuthenticator;
+        $this->service = $service;
     }
 
+    /**
+     * @param  Request  $request
+     *
+     * @return Response|null
+     * @throws InvalidArgumentException
+     */
     #[Route(path: '/register', name: 'auth_register')]
     public function register(Request $request): ?Response
     {
@@ -75,7 +92,7 @@ final class RegisterController extends BaseController implements AuthController
     }
 
     #[Route(path: '/closed', name: 'auth_no_register')]
-    public function noRegister(Request $request): ?Response
+    public function noRegister(): ?Response
     {
         if ($this->security->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('app_dash');
@@ -123,7 +140,7 @@ final class RegisterController extends BaseController implements AuthController
                     ]);
             }
 
-            $this->addFlash('error', 'Email inconnu.');
+            $this->addFlash('error', 'Email NEED TRANSLATION.');
         }
 
         $error = null;

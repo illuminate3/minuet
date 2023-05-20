@@ -14,6 +14,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class SettingsController extends BaseController
 {
+
+    /**
+     * @var array
+     */
     private array $settings;
 
     public function __construct(

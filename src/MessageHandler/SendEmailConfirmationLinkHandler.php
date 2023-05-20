@@ -21,17 +21,24 @@ use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 #[AsMessageHandler]
 final class SendEmailConfirmationLinkHandler
 {
+
     use UserDataCache;
 
     private VerifyEmailHelperInterface $verifyEmailHelper;
+    private Mailer $mailer;
+    private UrlGeneratorInterface $router;
+    private TranslatorInterface $translator;
 
     public function __construct(
         VerifyEmailHelperInterface $helper,
-        private Mailer $mailer,
-        private UrlGeneratorInterface $router,
-        private TranslatorInterface $translator
+        Mailer $mailer,
+        UrlGeneratorInterface $router,
+        TranslatorInterface $translator
     ) {
         $this->verifyEmailHelper = $helper;
+        $this->mailer = $mailer;
+        $this->router = $router;
+        $this->translator = $translator;
     }
 
     /**

@@ -35,6 +35,12 @@ final class CreateCategoryCommand extends Command
         $this->category = $categoryRepository;
     }
 
+    /**
+     * @param  InputInterface   $input
+     * @param  OutputInterface  $output
+     *
+     * @return int
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $makes = $this->data->findAllUniqueMake();
@@ -56,6 +62,11 @@ final class CreateCategoryCommand extends Command
         return Command::SUCCESS;
     }
 
+    /**
+     * @param $name
+     *
+     * @return void
+     */
     private function loadModels($name): void
     {
         $models = $this->data->findAllUniqueModel($name);

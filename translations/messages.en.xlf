@@ -60,6 +60,10 @@
                 <source>text.navigation</source>
                 <target>Navigation</target>
             </trans-unit>
+            <trans-unit id="text.page">
+                <source>text.page</source>
+                <target>Page</target>
+            </trans-unit>
             <trans-unit id="text.quick_links">
                 <source>text.quick_links</source>
                 <target>Quick Links</target>
