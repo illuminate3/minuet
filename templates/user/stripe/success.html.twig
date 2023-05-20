@@ -1,4 +1,4 @@
-{% extends 'layout/base.html.twig' %}
+{% extends 'layout/dash/dash.html.twig' %}
 
 {% block subheader %}
     <!-- Title -->
@@ -7,28 +7,27 @@
 
 {% block body %}
 
-<div class="row mt-4 mb-4">
-    <div class="col">
+<div class="row my-5">
+
+    <div class="col col-lg-8">
 
         <section>
-        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
 
-            <p>Thanks for your subscription!</p>
+            <h1>
+                Thanks for your subscription!
+            </h1>
 
             <p>
              We appreciate your business! If you have any questions, please email
-            <a href="mailto:swiftapps@protonmail.com">info@swift-app.ch</a>.
             </p>
+
             <a href="{{path('app_index')}}">
             Home Page
             </a>
 
-
-        </div>
         </section>
 
     </div>
 </div>
-</body>
 
 {% endblock %}
