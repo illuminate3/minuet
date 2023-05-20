@@ -13,10 +13,11 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 class CategoryFixtures extends Fixture implements DependentFixtureInterface
     // class CategoryFixtures extends Fixture
 {
-    private int $counter = 1;
+//    private int $counter = 1;
 
     public function __construct(private ParameterBagInterface $params)
     {
+        $this->params = $params;
     }
 
     public function load(ObjectManager $manager): void

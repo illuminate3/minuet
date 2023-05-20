@@ -9,6 +9,7 @@ use App\Entity\Page;
 use App\Form\Type\PageType;
 use App\Repository\PageRepository;
 use App\Service\Admin\PageService;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,6 +17,13 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class PageController extends BaseController
 {
+
+    /**
+     * @param  Request         $request
+     * @param  PageRepository  $repository
+     *
+     * @return Response
+     */
     #[Route(path: '/admin/page', name: 'admin_page', defaults: ['page' => 1], methods: ['GET'])]
     public function index(
         Request $request,
@@ -35,6 +43,13 @@ final class PageController extends BaseController
         ]);
     }
 
+    /**
+     * @param  Request      $request
+     * @param  PageService  $pageService
+     *
+     * @return Response
+     * @throws InvalidArgumentException
+     */
     #[Route(path: '/admin/page/new', name: 'admin_page_new')]
     public function new(
         Request $request,
@@ -60,8 +75,13 @@ final class PageController extends BaseController
         ]);
     }
 
+
     /**
-     * Displays a form to edit an existing Page entity.
+     * @param  Request      $request
+     * @param  Page         $page
+     * @param  PageService  $pageService
+     *
+     * @return Response
      */
     #[Route(path: '/admin/page/{id<\d+>}/edit', name: 'admin_page_edit', methods: ['GET', 'POST'])]
     public function edit(
@@ -88,7 +108,12 @@ final class PageController extends BaseController
     }
 
     /**
-     * Deletes a Page entity.
+     * @param  Request      $request
+     * @param  Page         $page
+     * @param  PageService  $pageService
+     *
+     * @return Response
+     * @throws InvalidArgumentException
      */
     #[Route(path: '/admin/page/{id<\d+>}/delete', name: 'admin_page_delete', methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN')]

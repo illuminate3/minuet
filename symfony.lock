@@ -47,6 +47,19 @@
             "migrations/.gitignore"
         ]
     },
+    "fpt/stripe-bundle": {
+        "version": "0.9",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "0.5",
+            "ref": "b08d10161bfafa6dfa58f73d5151cc021187038f"
+        },
+        "files": [
+            "config/packages/stripe.yaml",
+            "config/routes/stripe.yaml"
+        ]
+    },
     "friendsofphp/php-cs-fixer": {
         "version": "3.13",
         "recipe": {
@@ -73,6 +86,9 @@
     },
     "knplabs/knp-paginator-bundle": {
         "version": "v5.9.0"
+    },
+    "nimzero/stripe-bundle": {
+        "version": "2.1.1"
     },
     "phpunit/phpunit": {
         "version": "9.5",

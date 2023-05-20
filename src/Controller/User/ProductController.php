@@ -10,6 +10,7 @@ use App\Form\Type\ProductType;
 use App\Repository\FilterRepository;
 use App\Service\Admin\ProductService;
 use App\Transformer\RequestToArrayTransformer;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,8 +18,17 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use App\Repository\AccountRepository;
 use App\Repository\AccountUserRepository;
 use Symfony\Bundle\SecurityBundle\Security;
+
 final class ProductController extends BaseController
 {
+
+    /**
+     * @param  Request                    $request
+     * @param  FilterRepository           $repository
+     * @param  RequestToArrayTransformer  $transformer
+     *
+     * @return Response
+     */
     #[Route(path: '/user/products', name: 'user_products', defaults: ['page' => 1], methods: ['GET'])]
     public function index(
         Request $request,
@@ -48,6 +58,14 @@ final class ProductController extends BaseController
         ]);
     }
 
+
+    /**
+     * @param  Request         $request
+     * @param  ProductService  $service
+     *
+     * @return Response
+     * @throws InvalidArgumentException
+     */
     #[Route(path: '/user/product/new', name: 'user_product_new')]
     public function new(Request $request, ProductService $service): Response
     {
@@ -69,8 +87,13 @@ final class ProductController extends BaseController
         ]);
     }
 
+
     /**
-     * Displays a form to edit an existing Product entity.
+     * @param  Request         $request
+     * @param  Product         $product
+     * @param  ProductService  $service
+     *
+     * @return Response
      */
     #[Route(path: '/user/product/{id<\d+>}/edit', name: 'user_product_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Product $product, ProductService $service): Response
@@ -92,8 +115,14 @@ final class ProductController extends BaseController
         ]);
     }
 
+
     /**
-     * Deletes a Product entity.
+     * @param  Request         $request
+     * @param  Product         $product
+     * @param  ProductService  $service
+     *
+     * @return Response
+     * @throws InvalidArgumentException
      */
     #[Route(path: '/product/{id<\d+>}/delete', name: 'user_product_delete', methods: ['POST'])]
 //    #[IsGranted('ROLE_ADMIN')]

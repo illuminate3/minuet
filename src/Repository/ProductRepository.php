@@ -24,12 +24,17 @@ use Symfony\Bundle\SecurityBundle\Security;
 class ProductRepository extends ServiceEntityRepository
 {
 
+    private PaginatorInterface $paginator;
+    private Security $security;
+
     public function __construct(
         ManagerRegistry $registry,
-        private PaginatorInterface $paginator,
-        protected Security $security,
+        PaginatorInterface $paginator,
+        Security $security,
     ) {
         parent::__construct($registry, Product::class);
+        $this->paginator = $paginator;
+        $this->security = $security;
     }
 
     public const NUM_ITEMS = 20;
@@ -76,7 +81,7 @@ class ProductRepository extends ServiceEntityRepository
             ->select('c', 'p')
             ->from('App\Entity\Products', 'p')
             ->join('p.categories', 'c')
-            ->where("c.slug = '{$slug}'")
+            ->where("c.slug = '$slug'")
             ->setMaxResults($limit)
             ->setFirstResult(($page * $limit) - $limit)
         ;
@@ -99,9 +104,9 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param mixed $account
+     * @param $account
      *
-     * @return Product[]
+     * @return array
      */
     public function findAllThreadsByAccount($account): array
     {

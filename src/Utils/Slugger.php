@@ -24,8 +24,9 @@ final class Slugger implements SluggerInterface
         return (string) $slug;
     }
 
-    private static function ascii($value, $language = 'en'): string
+    private static function ascii($value): string
     {
+        $language = 'en';
         return ASCII::to_ascii((string) $value, $language);
     }
 }

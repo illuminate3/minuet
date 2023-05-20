@@ -20,7 +20,7 @@ use function is_array;
 )]
 final class LoadCSVCommand extends Command
 {
-    private EntityManagerInterface $em;
+    private EntityManagerInterface $entityManager;
     private ParameterBagInterface $params;
 
     public function __construct(
@@ -29,9 +29,17 @@ final class LoadCSVCommand extends Command
     ) {
         parent::__construct();
         $this->params = $params;
-        $this->em = $entityManager;
+        $this->entityManager = $entityManager;
     }
 
+    /**
+     * execute
+     *
+     * @param  InputInterface   $input
+     * @param  OutputInterface  $output
+     *
+     * @return int
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $path = $this->params->get('kernel.project_dir');
@@ -40,7 +48,7 @@ final class LoadCSVCommand extends Command
         $files = preg_grep('/^([^.])/', scandir($path));
 
         foreach ($files as $file) {
-            $csv = fopen($path . '/' . $file, 'r');
+            $csv = fopen($path . '/' . $file, 'rb');
 
             while (!feof($csv)) {
                 $line = fgetcsv($csv);
@@ -54,13 +62,13 @@ final class LoadCSVCommand extends Command
                     $data->setModel($line[2]);
                     $data->setBodyStyle($line[3]);
 
-                    $this->em->persist($data);
+                    $this->entityManager->persist($data);
                 }
             }
 
             fclose($csv);
 
-            $this->em->flush();
+            $this->entityManager->flush();
         }
 
         return Command::SUCCESS;

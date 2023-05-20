@@ -17,7 +17,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 )]
 final class InstallCommand extends Command
 {
+
     /**
+     * execute
+     *
+     * @param  InputInterface   $input
+     * @param  OutputInterface  $output
+     *
+     * @return int
      * @throws ExceptionInterface
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -34,6 +41,9 @@ final class InstallCommand extends Command
         return Command::SUCCESS;
     }
 
+    /**
+     * @return array[]
+     */
     private function getCommands(): array
     {
         return [

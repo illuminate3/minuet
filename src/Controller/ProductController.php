@@ -11,7 +11,6 @@ use App\Transformer\RequestToArrayTransformer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface;
 
 use function count;
 
@@ -24,7 +23,6 @@ class ProductController extends BaseController
         Request $request,
         FilterRepository $repository,
         CategoryRepository $categoryRepository,
-        EntityManagerInterface $em,
         RequestToArrayTransformer $transformer
     ): Response {
         $searchParams = $transformer->transform($request);
@@ -41,7 +39,8 @@ class ProductController extends BaseController
         } else {
             $modelIds = [];
             foreach ($subCategories as $key => $value) {
-                array_push($modelIds, $value->getId());
+//                array_push($modelIds, $value->getId());
+                $modelIds[] = $value->getId();
             }
             $searchParams["category"] = $modelIds;
         }
@@ -59,7 +58,7 @@ class ProductController extends BaseController
                 'models' => $selectedModels,
                 'categories' => $categories,
                 'subCategories' => $subCategories,
-                "isDisabled" => (count($products) == 0 && empty($models))  ? 'disabled' : ''
+                "isDisabled" => (count($products) === 0 && empty($models))  ? 'disabled' : ''
             ]
         );
     }

@@ -11,6 +11,9 @@ parameters:
 #    app.stripe.secret_api_key: '%env(resolve:STRIPE_SECRET_API_KEY)%'
     images_directory: '%kernel.project_dir%/public/uploads/images'
 #    app.jwtsecret: '%env(JWT_SECRET)%'
+    app.stripe.public_key: '%env(resolve:STRIPE_PUBLIC_KEY)%'
+    app.stripe.secret_key: '%env(resolve:STRIPE_SECRET_KEY)%'
+    app.stripe.webhook_key: '%env(resolve:STRIPE_WEBHOOK_KEY)%'
 
 services:
     # default configuration for services in *this* file

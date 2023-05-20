@@ -36,7 +36,6 @@ trait GetCache
     {
         return (int) $this->doctrine
             ->getRepository($this->persistentObjectName)
-            ->countAll()
-        ;
+            ->countAll();
     }
 }

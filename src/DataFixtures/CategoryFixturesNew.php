@@ -6,7 +6,6 @@ namespace App\DataFixtures;
 
 use App\Entity\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
@@ -17,6 +16,7 @@ class CategoryFixturesNew extends Fixture
 
     public function __construct(private ParameterBagInterface $params)
     {
+        $this->params = $params;
     }
 
 //    public function getDependencies(): array
@@ -79,7 +79,7 @@ class CategoryFixturesNew extends Fixture
 //        $csv = str_getcsv(file_get_contents($file_category));
 
         $csv = [];
-        $file = fopen($file_category, 'r');
+        $file = fopen($file_category, 'rb');
 
         while (($result = fgetcsv($file)) !== false) {
             $csv[] = $result;
