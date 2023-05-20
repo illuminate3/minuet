@@ -36,6 +36,8 @@ final class CreateCategoryCommand extends Command
     }
 
     /**
+     * execute
+     *
      * @param  InputInterface   $input
      * @param  OutputInterface  $output
      *
@@ -63,6 +65,8 @@ final class CreateCategoryCommand extends Command
     }
 
     /**
+     * loadModules
+     *
      * @param $name
      *
      * @return void

@@ -34,6 +34,8 @@ final class LoadProductAccountCommand extends Command
     }
 
     /**
+     * execute
+     *
      * @param  InputInterface   $input
      * @param  OutputInterface  $output
      *

@@ -44,6 +44,8 @@ final class ListUsersCommand extends Command
     }
 
     /**
+     * execute
+     *
      * @param  InputInterface   $input
      * @param  OutputInterface  $output
      *
