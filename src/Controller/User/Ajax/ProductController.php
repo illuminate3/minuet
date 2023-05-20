@@ -11,14 +11,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 use function in_array;
 
 final class ProductController extends AbstractController implements AjaxController
 {
+
+    /**
+     * @param  Request                $request
+     * @param  Product                $product
+     * @param  UserProductRepository  $repository
+     *
+     * @return JsonResponse
+     */
     #[Route(path: '/user/product/{id<\d+>}/update', name: 'user_product_update', methods: ['GET'])]
-//    #[IsGranted('PROPERTY_EDIT', subject: 'product', message: 'You cannot change this product.')]
     public function update(Request $request, Product $product, UserProductRepository $repository): JsonResponse
     {
         $state = $request->query->get('state');

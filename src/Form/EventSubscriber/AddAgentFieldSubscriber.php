@@ -13,8 +13,12 @@ use App\Entity\User;
 
 class AddAgentFieldSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private Security $security)
+
+    private Security $security;
+
+    public function __construct(Security $security)
     {
+        $this->security = $security;
     }
 
     /**

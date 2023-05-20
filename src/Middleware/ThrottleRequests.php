@@ -10,8 +10,12 @@ use Symfony\Component\RateLimiter\RateLimiterFactory;
 
 final class ThrottleRequests
 {
-    public function __construct(private RateLimiterFactory $authLimiter)
+
+    private RateLimiterFactory $authLimiter;
+
+    public function __construct(RateLimiterFactory $authLimiter)
     {
+        $this->authLimiter = $authLimiter;
     }
 
     public function handle(Request $request): void

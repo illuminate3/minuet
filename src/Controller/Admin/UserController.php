@@ -10,6 +10,7 @@ use App\Form\Type\UserType;
 use App\Repository\UserRepository;
 use App\Service\Admin\UserService;
 use App\Utils\UserFormDataSelector;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,6 +36,14 @@ final class UserController extends BaseController
         ]);
     }
 
+    /**
+     * @param  Request               $request
+     * @param  UserService           $service
+     * @param  UserFormDataSelector  $selector
+     *
+     * @return Response
+     * @throws InvalidArgumentException
+     */
     #[Route(path: '/admin/user/new', name: 'admin_user_new')]
     public function new(
         Request $request,
@@ -96,7 +105,12 @@ final class UserController extends BaseController
     }
 
     /**
-     * Deletes an User entity.
+     * @param  Request      $request
+     * @param  User         $user
+     * @param  UserService  $service
+     *
+     * @return Response
+     * @throws InvalidArgumentException
      */
     #[Route(path: '/user/{id<\d+>}/delete', name: 'admin_user_delete', methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN')]

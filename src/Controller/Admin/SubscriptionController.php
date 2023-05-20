@@ -9,6 +9,7 @@ use App\Entity\Subscription;
 use App\Form\Type\SubscriptionType;
 use App\Repository\SubscriptionRepository;
 use App\Service\Admin\SubscriptionService;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,6 +36,13 @@ class SubscriptionController extends BaseController
         ]);
     }
 
+    /**
+     * @param  Request              $request
+     * @param  SubscriptionService  $subscriptionService
+     *
+     * @return Response
+     * @throws InvalidArgumentException
+     */
     #[Route('/new', name: 'admin_subscription_new', methods: ['GET', 'POST'])]
     public function new(
         Request $request,
@@ -84,6 +92,14 @@ class SubscriptionController extends BaseController
         ]);
     }
 
+    /**
+     * @param  Request              $request
+     * @param  Subscription         $subscription
+     * @param  SubscriptionService  $subscriptionService
+     *
+     * @return Response
+     * @throws InvalidArgumentException
+     */
     #[Route('/{id}', name: 'admin_subscription_delete', methods: ['POST'])]
     public function delete(
         Request $request,

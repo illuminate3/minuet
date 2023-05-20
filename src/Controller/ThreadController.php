@@ -10,8 +10,6 @@ use App\Repository\AccountRepository;
 use App\Repository\AccountUserRepository;
 use App\Repository\ProductRepository;
 use App\Repository\ThreadRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -107,7 +105,7 @@ class ThreadController extends BaseController
     {
         $id= $request->request->get('id');
         $pin_value= $request->request->get('ispin');
-        
+
         $threadRepository->updatePinStatus((int)$id, (bool) $pin_value);
 
         return new JsonResponse(['status' => 'success', 'data' => (bool) $pin_value, 'id' => (int) $id]);
@@ -118,10 +116,10 @@ class ThreadController extends BaseController
     {
         $id= $request->request->get('id');
         $close_value= $request->request->get('ispin');
-        
+
         $threadRepository->updateCloseStatus((int)$id, (bool) $close_value);
 
         return new JsonResponse(['status' => 'success', 'data' => (bool) $close_value, 'id' => (int) $id]);
     }
-    
+
 }

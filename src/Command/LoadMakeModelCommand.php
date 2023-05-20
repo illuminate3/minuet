@@ -30,7 +30,12 @@ final class LoadMakeModelCommand extends Command
         $this->em = $entityManager;
     }
 
+
     /**
+     * @param  InputInterface   $input
+     * @param  OutputInterface  $output
+     *
+     * @return int
      * @throws Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output): int

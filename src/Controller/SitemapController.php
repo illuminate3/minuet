@@ -25,7 +25,7 @@ final class SitemapController extends AbstractController
         Request $request,
         PageRepository $pageRepository
     ): Response {
-//        $locale = $request->getLocale();
+// $locale = $request->getLocale();
         $pages = $pageRepository->findLatest($request);
 
         return $this->render('sitemap/pages.xml.twig', [

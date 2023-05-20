@@ -12,27 +12,32 @@ use Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class ImageController extends AbstractImageController implements AjaxController
 {
+
     /**
+     * @param  Product       $product
+     * @param  Request       $request
+     * @param  FileUploader  $fileUploader
+     *
+     * @return JsonResponse
      * @throws Exception
      */
     #[Route(path: '/user/image/{id<\d+>}/upload', name: 'user_image_upload', methods: ['POST'])]
-//    #[IsGranted('PROPERTY_EDIT', subject: 'product', message: 'You cannot change this product.')]
     public function upload(Product $product, Request $request, FileUploader $fileUploader): JsonResponse
     {
         return $this->uploadImage($product, $request, $fileUploader);
     }
 
     /**
-     * Sort images.
+     * @param  Request  $request
+     *
+     * @return JsonResponse
      */
     #[Route(path: '/user/image/{id<\d+>}/sort', name: 'user_image_sort', methods: ['POST'])]
-//    #[IsGranted('PROPERTY_EDIT', subject: 'product', message: 'You cannot change this product.')]
-    public function sort(Request $request, Product $product): JsonResponse
+    public function sort(Request $request): JsonResponse
     {
-        return $this->sortImages($request, $product);
+        return $this->sortImages($request);
     }
 }
