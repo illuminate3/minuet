@@ -5,13 +5,13 @@ minuet is a [Symfony 6][1] Bootstap / Boiler Plate / Starter Project.
 Minuet is similar to EasyAdmin but not at the same time.
 
 Minuet is intended to be a starting point for your application by giving you:
-- An Admin! hey that's unique.
-- Translations out of the box. Currently only English but the code should be 99% covered outside of some exception handling.
-- Typical user experience with logins, email verification, and passwords.
-- A user front end dashboard. This is different! Intended for more of store setup.
-- Basic admin based menus.
-- A very basic CMS. I'm not trying to win any awards here!
-- Twig and CSS is hopefully a somewhat sane system. Maybe I went overboard with the _partials! lol
+  - An Admin! hey that's unique.
+  - Translations out of the box. Currently only English but the code should be 99% covered outside of some exception handling.
+  - Typical user experience with logins, email verification, and passwords.
+  - A user front end dashboard. This is different! Intended for more of store setup.
+  - Basic admin based menus.
+  - A very basic CMS. I'm not trying to win any awards here!
+  - Twig and CSS is hopefully a somewhat sane system. Maybe I went overboard with the _partials! lol
 
 I didn't like EasyAdmin because I haven't really ever been a fan of running functionality out of the vendor directory unless it's a library.
 If you like doing that, don't mind me. I wanted a simple enough base starter app that I can start dropping Controllers on with some twig
@@ -25,14 +25,14 @@ Who sort of inspired me to do Minuet.
 
 ## Requirements
 
-- PHP 8.1;
-- MySQL >= 5.7;
-- And the [usual Symfony application requirements][2].
+  - PHP 8.1;
+  - MySQL >= 5.7;
+  - And the [usual Symfony application requirements][2].
 
 ## Installation
 
-1. Copy ```.env``` to make ```.env.local```
-2. Edit database credentials
+ 1. Copy ```.env``` to make ```.env.local```
+ 2. Edit database credentials
 
     ```
     DATABASE_URL="mysql://USER:PASSWORD@127.0.0.1:3306/minuet?serverVersion=5.7"
@@ -41,43 +41,43 @@ Who sort of inspired me to do Minuet.
     It was just a really good guess!
     Don't forget to change ```minuet``` !
 
-3. Install
+ 3. Install
 
-    a. do the composer stuff
-    ```
-    composer install
-    ```
+   a. do the composer stuff
+   ```
+   composer install
+   ```
 
-    b. then node
-    ```
-     yarn install
-    ```
-    ```
-     yarn dev-server
-    ```
+   b. then node
+   ```
+    yarn install
+   ```
+   ```
+    yarn dev-server
+   ```
 
-    c. fire up the actual app
-    ```
-    php bin/console app:dev
-    ```
-    use app:dev instead of app:install until further notice
+   c. fire up the actual app
+   ```
+   php bin/console app:dev
+   ```
+   use app:dev instead of app:install until further notice
 
-    No, I didn't use the ```$``` to show it's a terminal command.
-    It's a pain to delete that dang dollar sign.
+   No, I didn't use the ```$``` to show it's a terminal command.
+   It's a pain to delete that dang dollar sign.
 
 
-4. Log in
+ 4. Log in
 
-    minuet.test/admin
-    ```
-    login: admin@admin.com
-    password: admin
-    ```
-    minuet.test
-    ```
-    login: user@user.com
-    password: user
-    ```
+   minuet.test/admin
+   ```
+   login: admin@admin.com
+   password: admin
+   ```
+   minuet.test
+   ```
+   login: user@user.com
+   password: user
+   ```
 
 ## License
 MIT ... but most of you don't care anyways. Just don't sell it on code canyon or somewhere like that.
@@ -89,10 +89,10 @@ I don't want money. Well, I do but I'm not going to ask for some coffee from a h
 IF you really do want to throw some pocket change at me, would you mind donating to an animal shelter or other worthy service?
 
 I do want to ask you for your thoughts, ideas, and help though.
-- Fixed a bug?
-- Have an idea?
-- Can do a translation?
-- Can do a Vue conversion?
+  - Fixed a bug?
+  - Have an idea?
+  - Can do a translation?
+  - Can do a Vue conversion?
 
 Why not submit a PR? Leave a question, or leave an answer for someone eles!
 
@@ -108,3 +108,4 @@ owe Coderberg a Thank you!
 
 Note:
 https://github.com/FabienPapet/stripe-bundle
+composer require fpt/stripe-bundle
