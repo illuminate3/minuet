@@ -9,7 +9,7 @@
 /.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
 /public/build/*
-#/public/bundles/
+/public/bundles/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
