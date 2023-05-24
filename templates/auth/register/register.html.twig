@@ -1,4 +1,7 @@
 {% extends 'layout/auth.html.twig' %}
+{% block stylesheets %}
+{{ encore_entry_link_tags('css/app') }}
+{% endblock %}
 
 {% block body %}
 
@@ -36,6 +39,7 @@
                             <div class="align-items-center px-4 px-lg-5 h-100">
 
                                 <div class="row mt-lg-5">
+                                {{ include('common/_flash_messages.html.twig') }}
                                     <h2 class="row mt-lg-5">
                                         {{ title|trans }}
                                     </h2>
@@ -45,18 +49,19 @@
                                     {% form_theme form 'bootstrap_5_layout.html.twig' %}
 
                                     {{ form_start(form) }}
-                                    {{ form_row(form.email) }}
-                                    {{ form_row(form.password) }}
-                                    {{ form_row(form.agreeTerms) }}
+                                    {{ form_row(form.roles, { 'attr': {'class': 'roles-field'} }) }}
+                                    {{ form_row(form.email, { 'attr': {'class': 'email-field'},'label_attr': {'class': 'email-field'}, 'row_attr': {'class': 'mb-3 hide', 'id' : 'email-div'}, }) }}
+                                    {{ form_row(form.password, { 'attr': {'class': 'password-field'},'label_attr': {'class': 'password-field'}, 'row_attr': {'class': 'mb-3 hide', 'id' : 'password-div'}, }) }}
+                                    {{ form_row(form.agreeTerms, { 'attr': {'class': 'agree-terms-field'},'label_attr': {'class': 'agree-terms-field'}, 'row_attr': {'class': 'mb-3 hide', 'id' : 'agree-terms-div'},}) }}
 
                                     <div class="form-group row mb-0 mt-3 mb-auto">
                                         <div class="col-md-12">
 
-                                            <button type="submit" class="btn btn-success btn-lg">
+                                            <button id="btn-register" type="submit" class="btn btn-success hide">
                                                 {{ 'action.register'|trans }}
                                             </button>
 
-                                            <div class="mt-4">
+                                            <div class="mt-4 mb-4">
                                                 <a class="btn btn-info" href="{{ path('security_login') }}">
                                                     {{ 'action.sign_in'|trans }}
                                                 </a>
@@ -84,4 +89,7 @@
         </div>
     </div>
 
+{% endblock %}
+{% block javascripts %}
+{{ encore_entry_script_tags('js/common') }}
 {% endblock %}

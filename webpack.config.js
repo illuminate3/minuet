@@ -35,6 +35,7 @@ Encore
     .addEntry('js/ekko-lightbox', './assets/js/ekko-lightbox')
     .addEntry('js/select2', './assets/js/select2.js')
     .addEntry('js/user-thread', './assets/js/user-thread.js')
+    .addEntry('js/common', './assets/js/common.js')
 
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app

@@ -1,0 +1,13 @@
+{% extends 'layout/dash/dash.html.twig' %}
+
+{% block subheader %}
+    <!-- Title -->
+    {{ include('layout/partials/_title.html.twig') }}
+{% endblock %}
+
+{% block body %}
+{% if app.user.profile.fullName is empty %}
+Please fill up your profile details. <a href="{{ path('user_profile') }}">Click Here</a>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block subheader %}
+    <!-- Title -->
+    <div class="row">
+        {{ include('common/_flash_messages.html.twig') }}
+        {{ include('layout/partials/_title.html.twig') }}
+    </div>
+{% endblock %}
+
+{% block body %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Actions</th>
+                <th>User Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+        {% for user in staffUsers %}
+       {#{{ dump(user.staffUser.owner.email) }}#}
+            <tr>
+                <td>
+                <a href="{{ path('app_dealer_staff_edit', {'id': user.staffUser.owner.id}) }}" class="text-deco-none" title="Edit"><i class="fa fa-pencil btn-light-green" aria-hidden="true"></i></a>
+                </td>
+                <td>
+                {% if user.staffUser.owner.profile.fullName is defined %}
+                    {{user.staffUser.owner.profile.fullName}}</td>
+                    {%else%}
+                {% endif %}
+                </td>
+                <td>{{user.staffUser.owner.email}}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {#<a href="{{ path('app_message_new',{'id': messages[0].thread.id}) }}">Create new</a>#}
+{% endblock %}

@@ -60,6 +60,20 @@ class UserRepository extends ServiceEntityRepository
         return $this->createPaginator($qb->getQuery(), $request);
     }
 
+     /**
+     * @return User[] Returns an array of User objects
+     */
+    public function findByLoggedInDealer(User $dealer): array
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.dealer = :dealer')
+            ->setParameter('dealer', $dealer)
+            ->orderBy('u.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     private function createPaginator(
         Query $query,
         Request $request
@@ -73,5 +87,21 @@ class UserRepository extends ServiceEntityRepository
             // Items per page
             10
         );
+    }
+
+    public function remove(User $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->remove($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    private function save(User $user): void
+    {
+        $em = $this->getEntityManager();
+        $em->persist($user);
+        $em->flush();
     }
 }

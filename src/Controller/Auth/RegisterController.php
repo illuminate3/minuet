@@ -11,6 +11,7 @@ use App\Form\Type\RegistrationFormType;
 use App\Form\Type\RequestVerifyUserEmailFormType;
 use App\Message\SendEmailConfirmationLink;
 use App\Repository\SettingsRepository;
+use App\Repository\SubscriptionRepository;
 use App\Repository\UserRepository;
 use App\Security\RegistrationFormAuthenticator;
 use App\Service\Admin\UserService;
@@ -20,6 +21,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
@@ -41,8 +44,8 @@ final class RegisterController extends BaseController implements AuthController
         $this->settings = $this->site($requestStack->getCurrentRequest());
     }
 
-    #[Route(path: '/register', name: 'auth_register')]
-    public function register(Request $request): ?Response
+    #[Route(path: '/register', name: 'auth_register', methods: ['GET','POST'])]
+    public function register(Request $request, MailerInterface $mailer): ?Response
     {
         if ($this->security->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('app_dash');
@@ -57,13 +60,21 @@ final class RegisterController extends BaseController implements AuthController
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setProfile(new Profile());
             $this->service->create($user);
-            $this->messageBus->dispatch(new SendEmailConfirmationLink($user));
+            $last_inserted_id = $user->getId();
+            if(isset($form->getData()->getRoles()[0]) && $form->getData()->getRoles()[0] == 'ROLE_BUYER')
+            {
+                $this->messageBus->dispatch(new SendEmailConfirmationLink($user));
+            }
             $this->addFlash('success', 'message.registration_successful');
-            //   return $this->authenticate($user, $request);
+            if(isset($form->getData()->getRoles()[0]) && $form->getData()->getRoles()[0] == 'ROLE_DEALER')
+            {
+                return $this->redirectToRoute('dealer_choose_plan',['id' => $last_inserted_id]);
+            }
+            // return $this->authenticate($user, $request);
         }
 
         return $this->render('auth/register/register.html.twig', [
@@ -148,5 +159,21 @@ final class RegisterController extends BaseController implements AuthController
             $this->authenticator,
             $request
         );
+    }
+
+    /**
+     * After create account to redirect chooseplan page.
+     */
+    #[Route(path: '/dealer/choosePlan/{id}', name: 'dealer_choose_plan', methods: ['GET', 'POST'])]
+    public function choosePlan(Request $request, SubscriptionRepository $subscriptionRepository, $id)
+    {
+        // Get pages
+        $subscriptions = $subscriptionRepository->findAll();
+        return $this->render('plans/index.html.twig', [
+            'title' => 'title.subscription',
+            'site' => $this->site($request),
+            'subscriptions' => $subscriptions,
+            'userId' => $id
+        ]);
     }
 }
