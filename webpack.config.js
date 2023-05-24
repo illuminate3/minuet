@@ -34,6 +34,7 @@ Encore
     .addEntry('js/image', './assets/js/image.js')
     .addEntry('js/ekko-lightbox', './assets/js/ekko-lightbox')
     .addEntry('js/select2', './assets/js/select2.js')
+    .addEntry('js/product', './assets/js/product.js')
     .addEntry('js/user-thread', './assets/js/user-thread.js')
     .addEntry('js/common', './assets/js/common.js')
 

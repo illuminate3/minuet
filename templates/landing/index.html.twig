@@ -14,6 +14,12 @@
                 {{ title|trans }}
             </h1>
 
+            -- pk_test_MKePA6KSX5mf2XxBf41cZptc --
+            <br>
+            {{ get_stripe_publishable_key() }}
+            <br>
+            {% set stripeKey = get_stripe_publishable_key() %}
+            {{ stripeKey }}
         </div>
     </div>
 

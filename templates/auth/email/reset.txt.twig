@@ -49,7 +49,8 @@ width: 100% !important;
 {{
     'message.email_password_reset'|trans({
         '%username%': username,
-        '%confirmationUrl%': confirmationUrl
+        '%confirmationUrl%': confirmationUrl,
+        '%site_name%': app.request.server.get('APP_NAME')
     })
 }}
 </p>

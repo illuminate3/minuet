@@ -8,14 +8,15 @@
 # https://github.com/github/ossar-action
 name: OSSAR
 
+#on:
+#  push:
+#    branches: [ "main, code_cleanup" ]
+#  pull_request:
+#    # The branches below must be a subset of the branches above
+#    branches: [ "main" ]
+#  schedule:
+#    - cron: '40 15 * * 2'
 on:
-  push:
-    branches: [ "main, code_cleanup" ]
-  pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ "main" ]
-  schedule:
-    - cron: '40 15 * * 2'
 
 permissions:
   contents: read

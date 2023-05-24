@@ -16,9 +16,15 @@ use App\Repository\SettingsRepository;
 use App\Repository\SubscriptionRepository;
 use App\Repository\UserRepository;
 use App\Service\Auth\EmailVerifierAndResetPasswordService;
+use App\Service\StripeService;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\Types\Object_;
+use Stripe\Customer;
+use Stripe\Exception\ApiErrorException;
 use Stripe\Stripe;
+use Stripe\StripeClient;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,36 +34,87 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class SubscriptionController extends BaseController
 {
-    private $requestStack;
+    private RequestStack $requestStack;
+//    private Stripe $stripe;
 
-    public function __construct(private MessageBusInterface $messageBus, RequestStack $requestStack, ManagerRegistry $registry, SettingsRepository $sr)
-    {
-        parent::__construct($sr, $registry);
+//        $stripe_pk = $this->getParameter('app.stripe.publishable_api_key');
+//        $stripe = new StripeClient(
+//        $this->getParameter('app.stripe.secret_api_key')
+    private SettingsRepository $settingsRepository;
+    private SubscriptionRepository $subscriptionRepository;
+    private StripeService $stripeService;
+
+
+    public function __construct(
+        RequestStack $requestStack,
+        ManagerRegistry $registry,
+        SettingsRepository $settingsRepository,
+        SubscriptionRepository $subscriptionRepository,
+        StripeService $stripeService,
+        MessageBusInterface $messageBus,
+//        Stripe $stripe,
+    ) {
+        parent::__construct($settingsRepository, $registry);
         $this->requestStack = $requestStack;
+        $this->settingsRepository = $settingsRepository;
+        $this->subscriptionRepository = $subscriptionRepository;
+        $this->stripeService = $stripeService;
+//        $this->stripe = $stripe;
     }
 
-    public function getPricingDetail(SubscriptionRepository $sr)
+    public function getPricingDetail(SubscriptionRepository $subscriptionRepository)
     {
-        $subscriptions = $sr->findBy([], ['id' => 'ASC']);
+        $subscriptions = $subscriptionRepository->findBy([], ['id' => 'ASC']);
 
-        return $this->render('common/pricing.html.twig', [
+        return $this->render('pricing/index.html.twig', [
             'subscriptions' => $subscriptions,
         ]);
     }
 
-    #[Route('/subscribe/{priceId}', name: 'checkout')]
-    public function subscribe(Request $request, SubscriptionRepository $sr, EntityManagerInterface $em)
-    {
-        $stripeAPI = $_ENV['STRIPE_SECRET_KEY'];
+    /**
+     * @throws ApiErrorException
+     */
+//    #[Route('/subscribe/make/{customerID}', name: 'make_stripe_customer')]
+//    public function make_stripe_customer(
+//        Request $request,
+//    ): RedirectResponse {
+////        // Create a new customer object
+////        $customer = $stripe->customers->create([
+////            'email' => $body->email,
+////        ]);
+//
+////        $stripe = new \Stripe\StripeClient(
+////            'sk_test_4eC39HqLyjWDarjtT1zdp7dc'
+////        );
+////        $stripe->customers->create([
+////            'description' => 'My First Test Customer (created for API docs at https://www.stripe.com/docs/api)',
+////        ]);
+//
+//        $this->stripeService->stripeCustomerCreated();
+//
+//        return $this->redirectToRoute('success_url');
+//
+//    }
+
+
+
+        #[Route('/subscribe/{priceId}', name: 'checkout')]
+    public function subscribe(
+        Request $request,
+        SubscriptionRepository $subscriptionRepository,
+        EntityManagerInterface $em
+        ) {
 
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
 
-        Stripe::setApiKey($stripeAPI);
+//        $stripeAPI = $_ENV['STRIPE_SECRET_KEY'];
+        Stripe::setApiKey($this->getParameter('app.stripe.secret_key'));
 
         $session = $this->requestStack->getSession();
         $priceId = $request->attributes->get('priceId');
-        
+//        $stripe = $this->stripe;
         if ('free_price' !== $priceId) {
+            $stripeCustomerObject = null;
             if (!$this->getUser()->getStripeCustomerId()) {
                 $stripeCustomerObj = \Stripe\Customer::create([
                     'description' => 'Minuet customer',
@@ -71,29 +128,41 @@ final class SubscriptionController extends BaseController
                 $this->getUser()->setStripeCustomerId($stripeCustomerId);
                 $em->persist($this->getUser());
                 $em->flush();
+                $stripeCustomerObject = $this->stripeService->stripeCustomerCreated();
             }
 
-            $stripeSession = \Stripe\Checkout\Session::create([
-                'success_url' => $this->generateUrl('success_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
-                'cancel_url' => $this->generateUrl('cancel_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
-                'payment_method_types' => ['card'],
-                'mode' => 'subscription',
-                'customer' => $this->getUser()->getStripeCustomerId(),
+            $success_url = $this->generateUrl('success_url', [], UrlGeneratorInterface::ABSOLUTE_URL);
+            $cancel_url =  $this->generateUrl('cancel_url', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
-                'line_items' => [[
-                    'price' => $priceId,
-                    // For metered billing, do not pass quantity
-                    'quantity' => 1,
-                ]],
-            ]);
+            $stripeCustomerId = $this->getUser()->getStripeCustomerId();
 
-            if ($this->getUser()->getStrSubscriptionId()) {
-                $stripe = new \Stripe\StripeClient(
-                    $stripeAPI
-                );
+//            if ($stripeCustomerObject) {
+//                $stripeCustomerId = $stripeCustomerObject->id;
+//            } else {
+//                $stripeCustomerId = $this->getUser()->getStripeCustomerId();
+//            }
+
+            $stripeSession = $this->stripeService->stripeCreateSession($success_url,$cancel_url, $stripeCustomerId, $priceId);
+
+//            $stripeSession = \Stripe\Checkout\Session::create([
+//                'success_url' => $this->generateUrl('success_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
+//                'cancel_url' => $this->generateUrl('cancel_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
+//                'payment_method_types' => ['card'],
+//                'mode' => 'subscription',
+//                'customer' => $this->getUser()->getStripeCustomerId(),
+//
+//                'line_items' => [[
+//                    'price' => $priceId,
+//                    // For metered billing, do not pass quantity
+//                    'quantity' => 1,
+//                ]],
+//            ]);
+
+            if ($this->getUser()->getStripeSubscriptionId()) {
+                $stripe = new StripeClient($this->getParameter('app.stripe.secret_key'));
                 $stripe->subscriptions->update(
-                    $this->getUser()->getStrSubscriptionId(),
-                    ['metadata' => ['customer_id' => $this->getUser()->getStripeCustomerId()]]
+                    $this->getUser()->getStripeSubscriptionId(),
+                    ['metadata' => ['customer_id' => $stripeCustomerId]]
                 );
             }
 
@@ -104,7 +173,7 @@ final class SubscriptionController extends BaseController
 
         $user = $this->getUser();
 
-        $basicPlan = $sr->findOneBy(['price' => 0]);
+        $basicPlan = $subscriptionRepository->findOneBy(['price' => 0]);
         $freeTrialTime = explode(' ', $basicPlan->getValidUntil());
         $timeExpolode = $freeTrialTime[0];
 
@@ -237,16 +306,16 @@ final class SubscriptionController extends BaseController
     #[Route('/cancel/{user}/{plan}', name: 'cancel_plan')]
     public function cancelPlan(Request $request, User $user, $stripeAPI): Response
     {
-        if ($user->getStrSubscriptionId()) {
-            $str_sub_id = $user->getStrSubscriptionId();
+        if ($user->getStripeSubscriptionId()) {
+            $str_sub_id = $user->getStripeSubscriptionId();
 
-            $stripe = new \Stripe\StripeClient($stripeAPI);
+            $stripe = new StripeClient($stripeAPI);
             $stripe->subscriptions->cancel(
                 $str_sub_id,
                 []
             );
             $user->setPaymentStatus(false);
-            $user->setStrSubscriptionId(null);
+            $user->setStrSubscriptionId($str_sub_id);
         }
         $user->setSubscription(null);
         $user->setSubscriptionValidUntil(new \DateTime());

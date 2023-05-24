@@ -173,6 +173,10 @@ footer {
   text-decoration: none !important;
 }
 
+.bg-black{
+  background: #000000;
+}
+
 .btn-gray {
   color: #696969;
 }
@@ -205,6 +209,34 @@ footer {
   max-width: 35%;
 }
 
+
+
+#products-section #models-card #models {
+  overflow-y: auto;
+  max-height: 350px;
+}
+
+// Scrollbar css
+
+/* width */
+#products-section #models-card #models::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+#products-section #models-card #models::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+#products-section #models-card #models::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+#products-section #models-card #models::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 .tab-width-message-index-list {
   width: 50%;
   max-width: 50%;

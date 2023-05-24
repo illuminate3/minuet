@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Message;
-use App\Entity\Thread;
 use App\Form\MessageType;
 use App\Repository\MessageRepository;
 use App\Repository\ThreadRepository;
@@ -119,7 +118,7 @@ class MessageController extends BaseController
                 $this->addFlash('danger', 'message.not_found');
                 return $this->redirectToRoute('app_message_show_thread', ['id' =>  (int) $thread_id], Response::HTTP_SEE_OTHER);
             }
-            
+
             $message->setUpdatedBy($user);
             $message->setUser($user);
             $message->setContent($message->getContent());

@@ -53,38 +53,37 @@ class DashController extends BaseController
         $this->em = $entityManager;
         $user = $security->getUser();
 
-        // Commented for later use if needed
-        // if ($user->getIsAccount() === false || $user->getIsAccount() == null) {
-        //     $account = $accountRepository->findOneBy(['primaryUser' => $user->getId()]);
+        $account = $accountRepository->findOneBy(['primaryUser' => $user->getId()]);
+        // if (false === $user->getIsAccount()) {
         //     if (!$account) {
         //         $stripeAPIKey = $_ENV['STRIPE_SECRET_KEY'];
         //         Stripe::setApiKey($stripeAPIKey);
-        //         if (is_null($user->getStripeCustomerId())) {
-        //             $stripeCustomerObj = \Stripe\Customer::create([
+        //         if (is_null($user->getStripeCustomerId())) {               
+        //             $stripeCustomerObj =  \Stripe\Customer::create([
         //                 'description' => 'Minuet customer',
-        //                 'email' => $user->getEmail(),
-        //                 'metadata' => [
-        //                     'userId' => $user->getId(),
-        //                 ],
-        //             ]);
-        //             $stripeCustomerId = $stripeCustomerObj->id;
-        //             $user->setStripeCustomerId($stripeCustomerId);
-        //             $this->em->persist($user);
-        //             $this->em->flush();
-        //         }
-
+        //                 'email'=>$user->getEmail(),
+        //                 'metadata'=>[
+        //                     "userId"=>$user->getId()
+        //                 ]                  
+        //             ]);                 
+        //             $stripeCustomerId =  $stripeCustomerObj->id;
+        //             $user->setStripeCustomerId($stripeCustomerId);            
+        //             $this->em->persist($user);   
+        //             $this->em->flush();  
+        //             }                                    
         //         return $this->redirectToRoute('app_pricing');
         //     }
 
-        //     return $this->redirectToRoute('app_index');
+        //     // return $this->redirectToRoute('app_index');
         // }
 
         // get the account information the user is registered to
         $accountUser = $accountUserRepository->findOneBy(['user' => $user->getId()]);
         // get the account information
-        
-        $account = $accountRepository->findOneBy(['id' => $accountUser->getAccount()]);
-        
+        // if accountUser is null then it means this user is a primary user and we can use the main $account
+        if ($accountUser) {            
+          $account = $accountRepository->findOneBy(['id' => $accountUser->getAccount()]);
+        }
         $account_id = $account->getId();
         // check to see if the current user is the primary user for the account
         $primaryUser = $account->getPrimaryUser();

@@ -23,17 +23,18 @@ use Symfony\Bundle\SecurityBundle\Security;
  */
 class ProductRepository extends ServiceEntityRepository
 {
-//    public function __construct(ManagerRegistry $registry)
-//    {
-//        parent::__construct($registry, Product::class);
-//    }
+
+    private PaginatorInterface $paginator;
+    private Security $security;
 
     public function __construct(
         ManagerRegistry $registry,
-        private PaginatorInterface $paginator,
-        protected Security $security,
+        PaginatorInterface $paginator,
+        Security $security,
     ) {
         parent::__construct($registry, Product::class);
+        $this->paginator = $paginator;
+        $this->security = $security;
     }
 
     public const NUM_ITEMS = 20;
@@ -64,19 +65,9 @@ class ProductRepository extends ServiceEntityRepository
         return (int) $count;
     }
 
-//    private function findLimit(): int
-//    {
-//        $repository = $this->getEntityManager()->getRepository(Settings::class);
-//        $limit = $repository->findOneBy(['setting_name' => 'items_per_page']);
-//
-//        return (int) $limit->getSettingValue();
-//        return (int) NUM_ITEMS;
-//
-//    }
 
     protected function createPaginator(Query $query, int $page): PaginationInterface
     {
-//        return $this->paginator->paginate($query, $page, $this->findLimit());
         return $this->paginator->paginate($query, $page, 4);
     }
 
@@ -90,7 +81,7 @@ class ProductRepository extends ServiceEntityRepository
             ->select('c', 'p')
             ->from('App\Entity\Products', 'p')
             ->join('p.categories', 'c')
-            ->where("c.slug = '{$slug}'")
+            ->where("c.slug = '$slug'")
             ->setMaxResults($limit)
             ->setFirstResult(($page * $limit) - $limit)
         ;
@@ -113,9 +104,9 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param mixed $account
+     * @param $account
      *
-     * @return Product[]
+     * @return array
      */
     public function findAllThreadsByAccount($account): array
     {
@@ -128,33 +119,4 @@ class ProductRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
-    // /**
-    //  * @return Products[] Returns an array of Products objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Products
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

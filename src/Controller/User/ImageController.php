@@ -11,10 +11,16 @@ use App\Service\FileUploader;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class ImageController extends BaseController
 {
+
+    /**
+     * @param  Request  $request
+     * @param  Product  $product
+     *
+     * @return Response
+     */
     #[Route(path: '/user/image/{id<\d+>}/edit', name: 'user_image_edit')]
     public function edit(Request $request, Product $product): Response
     {

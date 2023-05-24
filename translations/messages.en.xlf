@@ -60,6 +60,10 @@
                 <source>text.navigation</source>
                 <target>Navigation</target>
             </trans-unit>
+            <trans-unit id="text.page">
+                <source>text.page</source>
+                <target>Page</target>
+            </trans-unit>
             <trans-unit id="text.quick_links">
                 <source>text.quick_links</source>
                 <target>Quick Links</target>
@@ -703,7 +707,7 @@
 
             <trans-unit id="email.subject.password_reset">
                 <source>email.subject.password_reset</source>
-                <target>You have been invited to Minuet</target>
+                <target>Reset Password</target>
             </trans-unit>
 
             <trans-unit id="email.subject.staff.account_setup">
@@ -802,7 +806,7 @@
                 <target>
                 <![CDATA[
                     <b>Hello %username%!</b>
-                    <p>You have been invited to join the Minuet account.</p>
+                    <p>You have been invited to join the %site_name% account.</p>
                     <p>Please click on below link and setup your account.</p>
                     <a title="Click here" href="%confirmationUrl%" target="_blank">%confirmationUrl%</a>
                 ]]>
@@ -814,7 +818,7 @@
                 <target>
                 <![CDATA[
                     <b>Hello %username%!</b>
-                    <p>Thank you for joining Minuet team,</p>
+                    <p>Thank you for joining %site_name% team,</p>
                     <p>Please click on below link to verify your email and setup your password.</p>
                     <a title="Click here" href="%confirmationUrl%" target="_blank">%confirmationUrl%</a>
                 ]]>

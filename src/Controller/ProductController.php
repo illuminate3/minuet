@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Repository\CategoryRepository;
 use App\Repository\FilterRepository;
-use App\Repository\ProductRepository;
 use App\Transformer\RequestToArrayTransformer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,16 +17,36 @@ use function count;
 #[Route('/product')]
 class ProductController extends BaseController
 {
-    #[Route(path: '/', name: 'product_index', defaults: ['page' => 1], methods: ['GET'])]
+
+    #[Route(path: '/{make<\w+>?}/{models?}', name: 'product_index', defaults: ['page' => 1], methods: ['GET'])]
     public function search(
         Request $request,
         FilterRepository $repository,
-        ProductRepository $productRepository,
+        CategoryRepository $categoryRepository,
         RequestToArrayTransformer $transformer
     ): Response {
         $searchParams = $transformer->transform($request);
+        $make = (int)$request->get('make');
+        $selectedModels = [];
+        $models = $request->get('models');
+        $subCategories = [];
+        if ($make > 0) {
+            $subCategories = $categoryRepository->fetchSubCategories($make);
+        }
+        if (!empty($models)) {
+            $selectedModels = array_map('intval', explode(",", $models));
+            $searchParams["category"] = $selectedModels;
+        } else {
+            $modelIds = [];
+            foreach ($subCategories as $key => $value) {
+//                array_push($modelIds, $value->getId());
+                $modelIds[] = $value->getId();
+            }
+            $searchParams["category"] = $modelIds;
+        }
         $products = $repository->findByFilter($searchParams);
-//        $products = $productRepository->findAll();
+        $categories = $categoryRepository->findBy(["parent" => null]);
+
 
         return $this->render(
             'product/index.html.twig',
@@ -34,29 +54,21 @@ class ProductController extends BaseController
                 'title' => 'ROOT',
                 'site' => $this->site($request),
                 'products' => $products,
-                //                'searchParams' => $searchParams,
+                'make' => $make,
+                'models' => $selectedModels,
+                'categories' => $categories,
+                'subCategories' => $subCategories,
+                "isDisabled" => (count($products) === 0 && empty($models))  ? 'disabled' : ''
             ]
         );
     }
 
-//    #[Route(path: '/{citySlug}/{slug}/{id<\d+>}', name: 'product_show', methods: ['GET'])]
-//    #[IsGranted(
-//        'PROPERTY_VIEW',
-//        subject: 'product',
-//        message: 'Properties can only be shown to their owners.'
-//    )]
+
     #[Route(path: '/{slug}/{id<\d+>}', name: 'product_show', methods: ['GET'])]
     public function productShow(
         Request $request,
-//        URLService $url,
         Product $product,
-//        SimilarRepository $repository
     ): Response {
-//        if (!$url->isCanonical($product, $request)) {
-//            return $this->redirect($url->generateCanonical($product), 301);
-//        } elseif ($url->isRefererFromCurrentHost($request)) {
-//            $showBackButton = true;
-//        }
 
         return $this->render(
             'product/show.html.twig',
@@ -64,9 +76,7 @@ class ProductController extends BaseController
                 'title' => $product->getTitle(),
                 'site' => $this->site($request),
                 'product' => $product,
-                //                'products' => $repository->findSimilarProperties($product),
                 'number_of_photos' => count($product->getImages()),
-                //                'show_back_button' => $showBackButton ?? false,
             ]
         );
     }

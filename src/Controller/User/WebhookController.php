@@ -11,6 +11,7 @@ use App\Repository\SubscriptionRepository;
 use App\Repository\UserRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Fpt\StripeBundle\Event\StripeWebhook;
 use Stripe\Stripe;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -82,14 +83,15 @@ final class WebhookController extends BaseController
                     $em->persist($user);
                     $em->flush();
                     http_response_code(200);
-                    exit;
-                    // break;
-
+                    echo json_encode(["status"=>true]);
+                    exit();                   
+                   // break;
+                   
                 case 'customer.subscription.deleted':
-                    // \dump($event->data->object);
-
+                    dump($event->data->object);
                     break;
                     // ... handle other event types
+
                 case 'customer.updated':
                     dump($event->data->object);
                     // $user = $userRepository->findOneBy(['email', $object->customer_email]);
@@ -97,7 +99,16 @@ final class WebhookController extends BaseController
                     // $user->setStrCustomerId($object->customer);
                     // $em->persist($user);
                     // $em->flush();
+                    break;
+                    // ... handle other event types
 
+                case 'customer.created':
+                    dump($event->data->object);
+                    break;
+                    // ... handle other event types
+
+                case 'customer.subscription.created':
+                    dump($event->data->object);
                     break;
                     // ... handle other event types
 
@@ -108,8 +119,8 @@ final class WebhookController extends BaseController
                     // $user->setStrCustomerId($object->customer);
                     // $em->persist($user);
                     // $em->flush();
-
                     break;
+
                 case 'checkout.session.completed':
                     dump($event->data->object);
                     // $user = $userRepository->findOneBy(['email', $object->customer_email]);
@@ -117,7 +128,6 @@ final class WebhookController extends BaseController
                     // $user->setStrCustomerId($object->customer);
                     // $em->persist($user);
                     // $em->flush();
-
                     break;
                     // ... handle other event types
 
@@ -133,3 +143,26 @@ final class WebhookController extends BaseController
         }
     }
 }
+
+//public function stripeCustomerSubscriptionCreated(): void
+//{
+//    $this->stripeService->customerSubscriptionCreated($this->webhook->getStripeObject());
+////        $stripeEvent = $webhook->getStripeObject();
+////        $subscriptionStripe = $stripeEvent->data->object;
+////        dd($subscriptionStripe);
+//}
+//
+//public function stripeCustomerCreated(StripeWebhook $webhook): void
+//{
+////        /** @var \Stripe\Event $stripeEvent */
+//    $stripeEvent = $webhook->getStripeObject();
+////        /** @var \Stripe\Subscription $subscriptionStripe */
+//    $subscriptionStripe = $stripeEvent->data->object;
+//
+//    // ... Your custom logic here.
+//}
+//
+//public function stripeChargeFailed(): void
+//{
+//    $this->stripeService->chargeFailed($this->webhook->getStripeObject());
+//}

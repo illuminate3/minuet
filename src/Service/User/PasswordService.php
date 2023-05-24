@@ -17,11 +17,19 @@ use function count;
 
 final class PasswordService
 {
+
+    private UserService $service;
+    private TokenStorageInterface $tokenStorage;
+    private ValidatorInterface $validator;
+
     public function __construct(
-        private UserService $service,
-        private TokenStorageInterface $tokenStorage,
-        private ValidatorInterface $validator
+        UserService $service,
+        TokenStorageInterface $tokenStorage,
+        ValidatorInterface $validator
     ) {
+        $this->service = $service;
+        $this->tokenStorage = $tokenStorage;
+        $this->validator = $validator;
     }
 
     /**

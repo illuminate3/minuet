@@ -51,7 +51,8 @@ width: 100% !important;
 {{
             'message.email.confirmation'|trans({
                 '%signedUrl%': signedUrl,
-                '%expiresAt%': expiresAt
+                '%expiresAt%': expiresAt,
+                '%site_name%': app.request.server.get('APP_NAME')
             }) | raw
         }}
 </p>

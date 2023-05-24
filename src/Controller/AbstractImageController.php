@@ -18,16 +18,23 @@ use Symfony\Component\Validator\ConstraintViolation;
 
 abstract class AbstractImageController extends AbstractController
 {
-    private EntityManagerInterface $em;
+
+    private EntityManagerInterface $entityManager;
 
     public function __construct(
         protected ManagerRegistry $doctrine,
         EntityManagerInterface $entityManager,
     ) {
-        $this->em = $entityManager;
+        $this->entityManager = $entityManager;
     }
 
+
     /**
+     * @param  Product       $product
+     * @param  Request       $request
+     * @param  FileUploader  $fileUploader
+     *
+     * @return JsonResponse
      * @throws Exception
      */
     protected function uploadImage(Product $product, Request $request, FileUploader $fileUploader): JsonResponse
@@ -49,16 +56,20 @@ abstract class AbstractImageController extends AbstractController
         $image = new Image();
         $image->setProduct($product)
             ->setSortOrder(0)
-            ->setFile($fileName)
-        ;
+            ->setFile($fileName);
 
-        $em = $this->doctrine->getManager();
-        $em->persist($image);
-        $em->flush();
+        $entityManager = $this->doctrine->getManager();
+        $entityManager->persist($image);
+        $entityManager->flush();
 
         return new JsonResponse(['status' => 'ok']);
     }
 
+    /**
+     * @param  Request  $request
+     *
+     * @return JsonResponse
+     */
     protected function sortImages(
         Request $request,
     ): JsonResponse {
@@ -69,11 +80,11 @@ abstract class AbstractImageController extends AbstractController
         foreach ($ids as $id) {
             $image = $imageRepository->findOneBy(['id' => $id]);
             $image->setSortOrder($i);
-            $this->em->persist($image);
+            $this->entityManager->persist($image);
             ++$i;
         }
 
-        $this->em->flush();
+        $this->entityManager->flush();
 
         return new JsonResponse(['status' => 'ok']);
     }
