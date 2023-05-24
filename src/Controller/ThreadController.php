@@ -29,16 +29,19 @@ class ThreadController extends BaseController
     ): Response {
         // get the account information the user is registered to
         $user = $security->getUser();
-        $accountUser = $accountUserRepository->findOneBy(['user' => $user->getId()]);
-        // get the account information
-        $account = $accountRepository->findOneBy(['id' => $accountUser->getAccount()]);
-        $account_id = $account->getId();
-
+        $account_id = 0;
+        $account = NULL;
+        if(!empty($user->getRoles()[0]) && $user->getRoles()[0] !== 'ROLE_BUYER') {
+            $accountUser = $accountUserRepository->findOneBy(['user' => $user->getDealer()->getId()]);
+            // get the account information
+            $account = $accountRepository->findOneBy(['id' => $accountUser->getAccount()]);
+            $account_id = $account->getId();
+        }
+        
         $products = $productRepository->findAllThreadsByAccount($account_id);
 
         return $this->render('thread/index.html.twig', [
-//            'title' => 'title.dashboard',
-            'title' => (!empty($account->getName())) ? $account->getName() : '',
+            'title' => (!empty($account)) ? $account->getName() : '',
             'site' => $this->site($request),
             'products' => $products,
         ]);
