@@ -21,18 +21,15 @@
         <tbody>
         
         {% for user in staffUsers %}
-       {#{{ dump(user.staffUser.owner.email) }}#}
+       {#{{ dump(user.user.profile.fullName) }}#}
             <tr>
                 <td>
-                <a href="{{ path('app_dealer_staff_edit', {'id': user.staffUser.owner.id}) }}" class="text-deco-none" title="Edit"><i class="fa fa-pencil btn-light-green" aria-hidden="true"></i></a>
+                <a href="{{ path('app_dealer_staff_edit', {'id': user.user.id}) }}" class="text-deco-none" title="Edit"><i class="fa fa-pencil btn-light-green" aria-hidden="true"></i></a>
                 </td>
                 <td>
-                {% if user.staffUser.owner.profile.fullName is defined %}
-                    {{user.staffUser.owner.profile.fullName}}</td>
-                    {%else%}
-                {% endif %}
+                {{user.user.profile.fullName}}
                 </td>
-                <td>{{user.staffUser.owner.email}}</td>
+                <td>{{user.user.Email}}</td>
             </tr>
         {% else %}
             <tr>

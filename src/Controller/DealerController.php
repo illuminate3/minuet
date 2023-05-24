@@ -6,27 +6,15 @@ namespace App\Controller;
 
 use App\Entity\Account;
 use App\Entity\AccountUser;
-use App\Entity\Message;
 use App\Entity\Profile;
-use App\Entity\Thread;
 use App\Entity\User;
-use App\Form\MessageType;
-use App\Form\RegistrationFormAdmin;
 use App\Form\Type\RegistrationFormAdminType;
-use App\Form\Type\UserType;
-use App\Message\SendEmailConfirmationLink;
-use App\Message\SendEmailConfirmationAndResetPassword;
-use App\Message\SendResetPasswordLink;
-use App\MessageHandler\SendEmailConfirmationAndResetPasswordLink;
+use App\Repository\AccountUserRepository;
 use App\Repository\AccountRepository;
-use App\Repository\MessageRepository;
 use App\Repository\SettingsRepository;
 use App\Repository\SubscriptionRepository;
-use App\Repository\ThreadRepository;
 use App\Repository\UserRepository;
 use App\Service\Auth\EmailVerifierAndResetPasswordService;
-use App\Service\Auth\PasswordResetService;
-use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -55,24 +43,23 @@ class DealerController extends BaseController
     #[Route('/', name: 'app_dealer_index', methods: ['GET'])]
     public function index(
         Request $request,
-        UserRepository $userRepository
+        AccountRepository $accountRepository,
+        AccountUserRepository $accountUserRepository,
     ): Response {
         
-        $staffUsers = [];
-        if ($this->getUser() && $this->isGranted('ROLE_DEALER')) {
-            $staffUsers =  $userRepository->findByLoggedInDealer($this->getUser());
-        }
-       
+        $account = $accountRepository->findOneBy(['primaryUser' => $this->getUser()->getId()]);
+        $testUsers = $accountUserRepository->findBy(['account' => $account->getId()]);
+        
         return $this->render('dealer/index.html.twig', [
             'title' => 'title.dealer',
             'new_url' => 'app_dealer_staff_new',
             'site' => $this->site($request),
-            'staffUsers' => $staffUsers
+            'staffUsers' => $testUsers
         ]);
     }
 
     #[Route('/new', name: 'app_dealer_staff_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EmailVerifierAndResetPasswordService $service, SubscriptionRepository $sr,  UserRepository $userRepositor, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManage): Response
+    public function new(Request $request, EmailVerifierAndResetPasswordService $service, SubscriptionRepository $sr,  AccountRepository $accountRepository, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManage): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormAdminType::class, $user);
@@ -81,19 +68,11 @@ class DealerController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $roles[] = 'ROLE_STAFF';
             $user->setProfile(new Profile());
-            $user->setDealer($this->getUser());
             $user->setRoles($roles);
             $entityManage->persist($user);
             $entityManage->flush();
-            
-            $subscription = $sr->findOneBy(['stripe_price_id' => 'price_1N1LrhHxcL7TQhSHcRcfL89i']);
-            $account = new Account();
-            $account->setSubscription($subscription);
-            $account->setName('Account ' . $user->getId() . ' - Primary User ' . $user->getId());
-            $account->setPrimaryUser($user->getId());
-            $entityManage->persist($account);
-            $entityManage->flush();
-
+            // $subscription = $sr->findOneBy(['stripe_price_id' => 'price_1N1LrhHxcL7TQhSHcRcfL89i']);    
+            $account = $accountRepository->findOneBy(['primaryUser' => $this->getUser()->getId()]);
             $account_user = new AccountUser();
             $account_user->setAccount($account);
             $account_user->setUser($user);

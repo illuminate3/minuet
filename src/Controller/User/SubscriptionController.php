@@ -222,12 +222,6 @@ final class SubscriptionController extends BaseController
                 $account->setName('Account ' . $userData->getId() . ' - Primary User ' .$userData->getId());
                 $account->setPrimaryUser($userData->getId());
                 $em->persist($account);
-
-                $account_user = new AccountUser();
-                $account_user->setAccount($account);
-                $account_user->setUser($userData);
-                $em->persist($account_user);
-
                 $userData->setStripeCustomerId($stripeCustomerId);
                 $em->persist($userData);
                 $em->flush();

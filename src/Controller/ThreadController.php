@@ -29,22 +29,26 @@ class ThreadController extends BaseController
     ): Response {
         // get the account information the user is registered to
         $user = $security->getUser();
-        $account_id = 0;
-        $account = NULL;
-        if(!empty($user->getRoles()[0]) && $user->getRoles()[0] !== 'ROLE_BUYER') {
-            $accountUser = $accountUserRepository->findOneBy(['user' => $user->getDealer()->getId()]);
-            // get the account information
-            $account = $accountRepository->findOneBy(['id' => $accountUser->getAccount()]);
-            $account_id = $account->getId();
-        }
-        
-        $products = $productRepository->findAllThreadsByAccount($account_id);
+        $account = $accountUserRepository->findOneBy(['user' => $user->getId()]);
+        $products = [];
+        if(!empty($account))
+        {
+            $account_id = $account->getAccount()->getId();
+            $products = $productRepository->findAllThreadsByAccount($account_id);
 
-        return $this->render('thread/index.html.twig', [
-            'title' => (!empty($account)) ? $account->getName() : '',
-            'site' => $this->site($request),
-            'products' => $products,
-        ]);
+            return $this->render('thread/index.html.twig', [
+                'title' => (!empty($account->getAccount()->getName())) ? $account->getAccount()->getName() : '',
+                'site' => $this->site($request),
+                'products' => $products,
+            ]);
+        }
+        else {
+            return $this->render('thread/index.html.twig', [
+                'title' => 'title.dashboard',
+                'site' => $this->site($request),
+                'products' => $products,
+            ]);
+        }
     }
 
     #[Route('/new', name: 'app_thread_new', methods: ['GET', 'POST'])]

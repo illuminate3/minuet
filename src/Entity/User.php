@@ -42,13 +42,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Email]
     private ?string $email;
 
-    #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'dealer')]
-    private $staffUser;
-
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'staffUsers')]
-    #[ORM\JoinColumn(name: "dealer_id", referencedColumnName: "id")]
-    private $dealer;
-
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private ?string $password = null;
 
@@ -94,28 +87,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 //        $this->properties = new ArrayCollection();
         $this->threads = new ArrayCollection();
         $this->messages = new ArrayCollection();
-        $this->staffUser = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getStaffUser()
-    {
-        return $this->staffUser;
-    }
-
-    public function getDealer(): ?self
-    {
-        return $this->dealer;
-    }
-
-    public function setDealer(?self $dealer): self
-    {
-        $this->dealer = $dealer;
-        return $this;
     }
 
     public function getUserIdentifier(): string
