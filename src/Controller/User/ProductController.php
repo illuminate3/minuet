@@ -14,6 +14,10 @@ use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use App\Repository\AccountRepository;
+use App\Repository\AccountUserRepository;
+use Symfony\Bundle\SecurityBundle\Security;
 
 final class ProductController extends BaseController
 {
@@ -29,11 +33,22 @@ final class ProductController extends BaseController
     public function index(
         Request $request,
         FilterRepository $repository,
-        RequestToArrayTransformer $transformer
+        RequestToArrayTransformer $transformer,
+        AccountRepository $accountRepository,
+        AccountUserRepository $accountUserRepository,
+        Security $security,
     ): Response {
         $searchParams = $transformer->transform($request);
         $products = $repository->findByFilter($searchParams);
-
+        
+        $resp = $this->checkStripeSubscriptionActive($security,$accountRepository,$accountUserRepository);                      
+        if ($resp==='account') {
+            $this->addFlash('error','message.stripe_in_active');  
+            return $this->redirectToRoute('app_pricing');
+        }elseif (!$resp) {
+            $this->addFlash('error','message.stripe_in_active');  
+            return $this->redirectToRoute('security_login');      
+        }        
         return $this->render('user/product/index.html.twig', [
             'title' => 'title.products',
             'site' => $this->site($request),

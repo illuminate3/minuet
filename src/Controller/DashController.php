@@ -39,29 +39,14 @@ class DashController extends BaseController
         }
         $this->em = $entityManager;
         $user = $security->getUser();
-
         $account = $accountRepository->findOneBy(['primaryUser' => $user->getId()]);
-        if (false === $user->getIsAccount()) {
-        if (!$account) {
-            $stripeAPIKey = $_ENV['STRIPE_SECRET_KEY'];
-            Stripe::setApiKey($stripeAPIKey);
-            if (is_null($user->getStripeCustomerId())) {               
-                $stripeCustomerObj =  \Stripe\Customer::create([
-                    'description' => 'Minuet customer',
-                    'email'=>$user->getEmail(),
-                    'metadata'=>[
-                        "userId"=>$user->getId()
-                    ]                  
-                ]);                 
-                $stripeCustomerId =  $stripeCustomerObj->id;
-                $user->setStripeCustomerId($stripeCustomerId);            
-                $this->em->persist($user);   
-                $this->em->flush();  
-                }                                    
+            
+        $resp = $this->checkStripeSubscriptionActive($security,$accountRepository,$accountUserRepository);
+        if ($resp==='account') {
             return $this->redirectToRoute('app_pricing');
-        }
-
-       // return $this->redirectToRoute('app_index');
+        }elseif (!$resp) {
+            $this->addFlash('error','message.stripe_in_active');     
+            return $this->redirectToRoute('security_login');   
         }
 
         // get the account information the user is registered to
@@ -77,6 +62,13 @@ class DashController extends BaseController
         $primaryUser = $account->getPrimaryUser();
         $is_primary = $primaryUser === $user->getId();
         $user_id = $user->getId();
+
+        if (!$is_primary) {
+            $account = $accountRepository->findOneBy(['primaryUser' => $primaryUser]);
+            if (!$account->getIsSubscriptionActive()) {
+                return $this->redirectToRoute('app_pricing'); 
+            }
+        }
 
         // get all the users for the account
 
