@@ -25,6 +25,7 @@ final class LoginController extends BaseController
         Security $security,
         AuthenticationUtils $helper,
     ): Response {
+        
         // if user is already logged in, don't display the login page again
         if ($security->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute('admin_dashboard');
@@ -54,7 +55,7 @@ final class LoginController extends BaseController
         }
 
         $form = $this->createForm(LoginFormType::class);
-
+        
         return $this->render('auth/login/login.html.twig', [
             'title' => 'title.login',
             'site' => $this->site($request),

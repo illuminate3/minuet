@@ -29,19 +29,26 @@ class ThreadController extends BaseController
     ): Response {
         // get the account information the user is registered to
         $user = $security->getUser();
-        $accountUser = $accountUserRepository->findOneBy(['user' => $user->getId()]);
-        // get the account information
-        $account = $accountRepository->findOneBy(['id' => $accountUser->getAccount()]);
-        $account_id = $account->getId();
+        $account = $accountUserRepository->findOneBy(['user' => $user->getId()]);
+        $products = [];
+        if(!empty($account))
+        {
+            $account_id = $account->getAccount()->getId();
+            $products = $productRepository->findAllThreadsByAccount($account_id);
 
-        $products = $productRepository->findAllThreadsByAccount($account_id);
-
-        return $this->render('thread/index.html.twig', [
-//            'title' => 'title.dashboard',
-            'title' => (!empty($account->getName())) ? $account->getName() : '',
-            'site' => $this->site($request),
-            'products' => $products,
-        ]);
+            return $this->render('thread/index.html.twig', [
+                'title' => (!empty($account->getAccount()->getName())) ? $account->getAccount()->getName() : '',
+                'site' => $this->site($request),
+                'products' => $products,
+            ]);
+        }
+        else {
+            return $this->render('thread/index.html.twig', [
+                'title' => 'title.dashboard',
+                'site' => $this->site($request),
+                'products' => $products,
+            ]);
+        }
     }
 
     #[Route('/new', name: 'app_thread_new', methods: ['GET', 'POST'])]

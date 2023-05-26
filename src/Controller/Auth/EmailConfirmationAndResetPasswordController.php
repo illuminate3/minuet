@@ -10,8 +10,8 @@ use App\Form\Type\PasswordChangeType;
 use App\Form\Type\PasswordType;
 use App\Form\Type\UserEmailType;
 use App\Repository\ResettingRepository;
+use App\Service\Auth\EmailVerifierAndResetPasswordService;
 use App\Service\Auth\PasswordResetService;
-use App\Transformer\UserTransformer;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -20,18 +20,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-final class PasswordResetController extends BaseController implements AuthController
+final class EmailConfirmationAndResetPasswordController extends BaseController implements AuthController
 {
     #[Route(path: '/password/reset', name: 'auth_password_reset', methods: ['GET|POST'])]
     public function passwordReset(
-        PasswordResetService $service,
+        EmailVerifierAndResetPasswordService $service,
         Request $request
     ): Response {
         $form = $this->createForm(UserEmailType::class, []);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $service->sendResetPasswordLink($request);
+            // $service->SendEmailConfirmationAndResetPassword($request);
 
             return $this->forward(
                 'App\Controller\Auth\MessageController::authMessages',
@@ -55,7 +55,6 @@ final class PasswordResetController extends BaseController implements AuthContro
     public function passwordResetConfirm(
         ResettingRepository $repository,
         Request $request,
-        UserTransformer $transformer,
         string $token
     ): Response {
         /** @var User $user */
@@ -120,7 +119,6 @@ final class PasswordResetController extends BaseController implements AuthContro
             $entityManager->persist($user);
             $entityManager->flush();
             $this->addFlash('success', 'message.password_has_been_reset');
-
             return $this->redirectToRoute('app_dash');
         }
 

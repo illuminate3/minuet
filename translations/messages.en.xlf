@@ -158,6 +158,10 @@
                 <source>action.save</source>
                 <target>Save</target>
             </trans-unit>
+            <trans-unit id="action.invite">
+                <source>action.invite</source>
+                <target>Invite</target>
+            </trans-unit>
             <trans-unit id="action.send_reset_link">
                 <source>action.send_reset_link</source>
                 <target>Send Password Reset Link</target>
@@ -277,6 +281,10 @@
             <trans-unit id="label.email">
                 <source>label.email</source>
                 <target>Email</target>
+            </trans-unit>
+            <trans-unit id="label.role">
+                <source>label.role</source>
+                <target>Role</target>
             </trans-unit>
             <trans-unit id="label.email_verified">
                 <source>label.email_verified</source>
@@ -460,6 +468,10 @@
                 <source>menu.messages</source>
                 <target>Messages</target>
             </trans-unit>
+            <trans-unit id="menu.dealer">
+                <source>menu.dealer</source>
+                <target>Dealer Staff</target>
+            </trans-unit>
             <trans-unit id="title.message">
                 <source>title.message</source>
                 <target>Thread Messages</target>
@@ -472,6 +484,20 @@
                 <source>title.edit.message</source>
                 <target>Edit Thread Message</target>
             </trans-unit>
+
+            <trans-unit id="title.dealer">
+                <source>title.dealer</source>
+                <target>Staff Members</target>
+            </trans-unit>
+            <trans-unit id="title.new.dealer">
+                <source>title.new.dealer</source>
+                <target>Create New Staff</target>
+            </trans-unit>
+            <trans-unit id="title.edit.dealer">
+                <source>title.edit.dealer</source>
+                <target>Edit Staff</target>
+            </trans-unit>
+
             <trans-unit id="menu.products">
                 <source>menu.products</source>
                 <target>Products</target>
@@ -684,6 +710,16 @@
                 <target>Reset Password</target>
             </trans-unit>
 
+            <trans-unit id="email.subject.staff.account_setup">
+                <source>email.subject.staff.account_setup</source>
+                <target>You have been invited to Minuet</target>
+            </trans-unit>
+
+            <trans-unit id="email.subject.dealer.account_setup">
+                <source>email.subject.dealer.account_setup</source>
+                <target>Verify you email and setup account</target>
+            </trans-unit>
+
             <trans-unit id="message.closed_register">
                 <source>message.closed_register</source>
                 <target>The Site is still open for viewing.</target>
@@ -723,7 +759,24 @@
             <trans-unit id="message.email.confirmation">
                 <source>message.email.confirmation</source>
                 <target>
-                    Hello!
+                <![CDATA[
+                    <b>Hello!</b>
+                    <p>Please confirm your email address by clicking the following link:</p>
+                    <a title="Click here" href="%signedUrl%" target="_blank">%signedUrl%</a>
+                ]]>
+                <!-- %signedUrl% -->
+                <![CDATA[
+                    <br/><br/>If you're having trouble clicking the link, copy and paste the URL into your web browser.<br/>
+                    This link will expire in
+                ]]>%expiresAt%.
+                
+                <![CDATA[
+                    <br/><p>If you did not create an account, no further action is required.<br/>
+                    Cheers!</p>
+                ]]>
+                    <!-- <![CDATA[
+                        <b>Hello!</b>
+                    ]]>
                     Please confirm your email address by clicking the following link:
                     %signedUrl%
 
@@ -732,7 +785,7 @@
                     This link will expire in %expiresAt%.
 
                     If you did not create an account, no further action is required.
-                    Cheers!
+                    Cheers! -->
                 </target>
             </trans-unit>
             <trans-unit id="message.emailed_reset_link">
@@ -742,11 +795,41 @@
             <trans-unit id="message.email_password_reset">
                 <source>message.email_password_reset</source>
                 <target>
-                    Hello %username%!
+                <![CDATA[
+                    <b>Hello %username%!</b>
+                    <p>To reset your password - please visit</p>
+                    <a title="Click here" href="%confirmationUrl%" target="_blank">%confirmationUrl%</a>
+                ]]>
+                    <!-- Hello %username%!
                     To reset your password - please visit %confirmationUrl%
-                    Regards, the Team.
+                    Regards, the Team. -->
                 </target>
             </trans-unit>
+            <trans-unit id="message.email_confirmation_password_reset">
+                <source>message.email_confirmation_password_reset</source>
+                <target>
+                <![CDATA[
+                    <b>Hello %username%!</b>
+                    <p>You have been invited to join the %site_name% account.</p>
+                    <p>Please click on below link and setup your account.</p>
+                    <a title="Click here" href="%confirmationUrl%" target="_blank">%confirmationUrl%</a>
+                ]]>
+                </target>
+            </trans-unit>
+
+            <trans-unit id="message.email_confirmation_password_reset_dealer">
+                <source>message.email_confirmation_password_reset_dealer</source>
+                <target>
+                <![CDATA[
+                    <b>Hello %username%!</b>
+                    <p>Thank you for joining %site_name% team,</p>
+                    <p>Please click on below link to verify your email and setup your password.</p>
+                    <a title="Click here" href="%confirmationUrl%" target="_blank">%confirmationUrl%</a>
+                ]]>
+                </target>
+            </trans-unit>
+
+
             <trans-unit id="message.email_verified">
                 <source>message.email_verified</source>
                 <target>Your email address has been verified.</target>
@@ -761,7 +844,8 @@
             </trans-unit>
             <trans-unit id="message.password_has_been_reset">
                 <source>message.password_has_been_reset</source>
-                <target>Password has been changed successfully. Now you can log in with new password.</target>
+                <target>
+                Password has been changed successfully. Now you can log in with new password.</target>
             </trans-unit>
             <trans-unit id="message.registration_suspended">
                 <source>message.registration_suspended</source>

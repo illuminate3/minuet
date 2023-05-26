@@ -1,0 +1,24 @@
+{% extends 'layout/dash/dash.html.twig' %}
+
+{% block subheader %}
+    <!-- Title -->
+    <div class="row">
+    {{ include('layout/partials/_title.html.twig') }}
+{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    
+    <div class="form-group row py-4">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-success">
+                {{ 'action.invite'|trans }}
+            </button>
+            <a class="btn btn-danger" href="{{ path('app_dealer_index') }}">
+                {{ 'action.cancel'|trans }}
+            </a>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
