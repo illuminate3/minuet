@@ -66,6 +66,7 @@ final class StripeService
             $account->setName($invoiceObj->customer_email);
             $account->setPrimaryUser($user->getId());
             $account->setSubscription($plan);
+            $account->setIsSubscriptionActive(true);
             $this->entityManagerInterface->persist($account);
             $this->entityManagerInterface->flush();
             $user->setStripeSubscriptionId($invoiceObj->subscription);
