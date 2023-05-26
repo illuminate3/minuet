@@ -79,6 +79,30 @@ final class StripeService
             exit();
         }
     }
+    public function stripeInvoicePaymentFailed($stripeObject)
+    {
+        try {
+            $invoiceObj = $stripeObject->data->object;
+            $user = $this->userRepository->findOneBy(['email' => $invoiceObj->customer_email]);
+            $plan = $this->subscriptionRepository->findOneBy(['stripe_price_id' => $invoiceObj->lines->data[0]->price->id]);
+            $account = $this->accountRepository->findOneBy(['primaryUser' => $user->getId()]);
+            if (!$account) {
+                $account = new Account();
+            }
+            $account->setName($invoiceObj->customer_email);
+            $account->setPrimaryUser($user->getId());
+            $account->setSubscription($plan);
+            $account->setIsSubscriptionActive(false);
+            $this->entityManagerInterface->persist($account);
+            $this->entityManagerInterface->flush();
+            http_response_code(200);
+            exit();
+        } catch (\Throwable $th) {
+            http_response_code(500);
+            echo json_encode(["status" => false, $th->getMessage()]);
+            exit();
+        }
+    }
 
     public function stripeChargeFailed($stripeObject): void
     {

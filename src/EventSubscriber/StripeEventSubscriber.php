@@ -35,6 +35,10 @@ class StripeEventSubscriber implements EventSubscriberInterface
     {
         $this->stripeService->stripeInvoicePaid($webhook->getStripeObject());
     }
+    public function stripeInvoicePaymentFailed(StripeWebhook $webhook): void
+    {
+        $this->stripeService->stripeInvoicePaymentFailed($webhook->getStripeObject());
+    }
 
     public function stripeCustomerSubscriptionCreated(StripeWebhook $webhook): void
     {
