@@ -1,13 +1,26 @@
 <!-- Submit -->
 <div class="form-group row py-4">
     <div class="col-md-12">
-
         <button type="submit" class="btn btn-success">
             {{ 'action.save'|trans }}
         </button>
-        <a class="btn btn-danger" href="{{ path(action_cancel_url, {id: thread.id}) }}">
+        
+       {% if thread is defined %}
+            {% if thread.id is empty %}
+                <a class="btn btn-danger" href="{{ path(action_cancel_url, {id: thread.id}) }}">
+                    {{ 'action.cancel'|trans }}
+                </a>
+            {% else %}
+                The variable is not empty.
+            {% endif %}
+        {% else %}
+            <a class="btn btn-danger" href="{{ path(action_cancel_url) }}">
             {{ 'action.cancel'|trans }}
         </a>
+        {% endif %}
 
+        {#<a class="btn btn-danger" href="{{ path(action_cancel_url, {id: thread.id}) }}">
+            {{ 'action.cancel'|trans }}
+        </a>#}
     </div>
 </div>

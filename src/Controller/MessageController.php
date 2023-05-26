@@ -84,7 +84,7 @@ class MessageController extends BaseController
             'title' => 'title.message',
             'new_url' => 'app_message_new',
             'site' => $this->site($request),
-            'action_cancel_main_url' => 'app_thread_index',
+            'action_cancel_url' => 'app_thread_index',
             'messages' => $messages,
             'thread' => $thread,
         ]);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Account;
 use App\Entity\User;
 use App\Repository\AccountRepository;
 use App\Repository\AccountUserRepository;
@@ -33,40 +34,51 @@ class DashController extends BaseController
         ThreadRepository $threadRepository,
         MessageRepository $messageRepository
     ): Response {
+
         // Redirect Admin Users
         if ($security->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute('admin_dashboard');
         }
+
+        if($security->isGranted('ROLE_BUYER'))
+        {
+            return $this->redirectToRoute('app_dash_buyer');
+        }
+
+        if($security->isGranted('ROLE_STAFF'))
+        {
+            return $this->redirectToRoute('app_dash_staff');
+        }
+
         $this->em = $entityManager;
         $user = $security->getUser();
 
         $account = $accountRepository->findOneBy(['primaryUser' => $user->getId()]);
-        if (false === $user->getIsAccount()) {
-        if (!$account) {
-            $stripeAPIKey = $_ENV['STRIPE_SECRET_KEY'];
-            Stripe::setApiKey($stripeAPIKey);
-            if (is_null($user->getStripeCustomerId())) {               
-                $stripeCustomerObj =  \Stripe\Customer::create([
-                    'description' => 'Minuet customer',
-                    'email'=>$user->getEmail(),
-                    'metadata'=>[
-                        "userId"=>$user->getId()
-                    ]                  
-                ]);                 
-                $stripeCustomerId =  $stripeCustomerObj->id;
-                $user->setStripeCustomerId($stripeCustomerId);            
-                $this->em->persist($user);   
-                $this->em->flush();  
-                }                                    
-            return $this->redirectToRoute('app_pricing');
-        }
+        // if (false === $user->getIsAccount()) {
+        //     if (!$account) {
+        //         $stripeAPIKey = $_ENV['STRIPE_SECRET_KEY'];
+        //         Stripe::setApiKey($stripeAPIKey);
+        //         if (is_null($user->getStripeCustomerId())) {               
+        //             $stripeCustomerObj =  \Stripe\Customer::create([
+        //                 'description' => 'Minuet customer',
+        //                 'email'=>$user->getEmail(),
+        //                 'metadata'=>[
+        //                     "userId"=>$user->getId()
+        //                 ]                  
+        //             ]);                 
+        //             $stripeCustomerId =  $stripeCustomerObj->id;
+        //             $user->setStripeCustomerId($stripeCustomerId);            
+        //             $this->em->persist($user);   
+        //             $this->em->flush();  
+        //             }                                    
+        //         return $this->redirectToRoute('app_pricing');
+        //     }
 
-       // return $this->redirectToRoute('app_index');
-        }
+        //     // return $this->redirectToRoute('app_index');
+        // }
 
         // get the account information the user is registered to
         $accountUser = $accountUserRepository->findOneBy(['user' => $user->getId()]);
-
         // get the account information
         // if accountUser is null then it means this user is a primary user and we can use the main $account
         if ($accountUser) {            
@@ -98,7 +110,7 @@ class DashController extends BaseController
         // messages
 //        $messages = $messageRepository->findAll();
 
-        return $this->render('dash/index.html.twig', [
+        return $this->render('dash/dealer.html.twig', [
             'title' => 'title.dashboard',
             'site' => $this->site($request),
             'error' => null,
@@ -111,6 +123,50 @@ class DashController extends BaseController
             'userId' => $user_id,
             //            'threads' => $threads,
             //            'messages' => $messages,
+        ]);
+    }
+
+    #[Route('/buyer', name: 'app_dash_buyer')]
+    public function buyerdash( Request $request,
+    Security $security,
+    EntityManagerInterface $entityManager,
+    AccountRepository $accountRepository,
+    AccountUserRepository $accountUserRepository,
+    SubscriptionRepository $subscriptionRepository,
+    ProductRepository $productRepository,
+    ThreadRepository $threadRepository,
+    MessageRepository $messageRepository
+): Response
+    {
+        $this->em = $entityManager;
+        $user = $security->getUser();
+        return $this->render('dash/buyer.html.twig', [
+            'title' => 'title.dashboard',
+            'site' => $this->site($request),
+            'error' => null,
+            'user' => $user
+        ]);
+    }
+
+    #[Route('/staff', name: 'app_dash_staff')]
+    public function staffdash( Request $request,
+    Security $security,
+    EntityManagerInterface $entityManager,
+    AccountRepository $accountRepository,
+    AccountUserRepository $accountUserRepository,
+    SubscriptionRepository $subscriptionRepository,
+    ProductRepository $productRepository,
+    ThreadRepository $threadRepository,
+    MessageRepository $messageRepository
+): Response
+    {
+        $this->em = $entityManager;
+        $user = $security->getUser();
+        return $this->render('dash/staff.html.twig', [
+            'title' => 'title.dashboard',
+            'site' => $this->site($request),
+            'error' => null,
+            'user' => $user
         ]);
     }
 }

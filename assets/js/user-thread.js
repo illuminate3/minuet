@@ -109,3 +109,34 @@ $('.show_confirm_delete').on("click",function(event) {
         }
     });
 });
+
+$('.show_confirm_delete_staff').on("click",function(event) {
+    event.preventDefault();
+    let $form = $('.delete_form');
+    let token = $("input[name*='_token']").val()
+    var userId = $("input[name*='user_id']").val();
+    swal({
+        title: 'Are you sure you want to delete this staff member?',
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+        if (willDelete) {
+            $.ajax({
+                method: 'POST',
+                url: "/dealer/"+userId,
+                data: { csrf_token: token, id: userId}
+            })
+            .done(function (result) {
+                bootbox.alert('Deleted successfully',function(){
+                    window.location.href = '/dealer';
+                });
+                
+            })
+            .fail(function () {
+                bootbox.alert('An error has occurred');
+            });
+        }
+    });
+});

@@ -5,17 +5,16 @@ declare(strict_types=1);
 namespace App\Service\Auth;
 
 use App\Entity\User;
-use App\Message\SendResetPasswordLink;
+use App\Message\SendEmailConfirmationAndResetPasswordDealer;
 use App\Repository\ResettingRepository;
 use App\Service\AbstractService;
 use App\Utils\TokenGenerator;
-use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-final class PasswordResetService extends AbstractService
+final class EmailVerifierAndResetPasswordDealerService extends AbstractService
 {
     private ResettingRepository $repository;
     private MessageBusInterface $messageBus;
@@ -34,22 +33,17 @@ final class PasswordResetService extends AbstractService
         $this->generator = $generator;
     }
 
-    /**
-     * @throws Exception
-     */
-    public function sendResetPasswordLink(Request $request): void
+    public function SendEmailConfirmationAndResetPasswordDealer(Request $request): void
     {
         /** @var User $user */
-        $user = $this->repository->findOneBy(['email' => $request->get('user_email')['email']]);
+        $user = $this->repository->findOneBy(['email' => base64_decode($request->get('session'))]);
         $this->updateToken($user);
-        $this->messageBus->dispatch(new SendResetPasswordLink($user));
+        $this->messageBus->dispatch(new SendEmailConfirmationAndResetPasswordDealer($user));
         //$this->addFlash('success', 'message.emailed_reset_link');
     }
 
     /**
      * Generating a Confirmation Token.
-     *
-     * @throws Exception
      */
     private function generateToken(): string
     {
@@ -58,8 +52,6 @@ final class PasswordResetService extends AbstractService
 
     /**
      * Refreshing a Confirmation Token.
-     *
-     * @throws Exception
      */
     private function updateToken(User $user): void
     {

@@ -6,7 +6,7 @@ namespace App\MessageHandler;
 
 use App\Entity\User;
 use App\Mailer\Mailer;
-use App\Message\SendResetPasswordLink;
+use App\Message\SendEmailConfirmationAndResetPasswordDealer;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
@@ -15,30 +15,18 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[AsMessageHandler]
-final class SendResetPasswordLinkHandler
+final class SendEmailConfirmationAndResetPasswordDealerLinkHandler
 {
-
-    private Mailer $mailer;
-    private TranslatorInterface $translator;
-    private UrlGeneratorInterface $router;
-
-    public function __construct(
-        Mailer $mailer,
-        TranslatorInterface $translator,
-        UrlGeneratorInterface $router,
-    ) {
-        $this->mailer = $mailer;
-        $this->translator = $translator;
-        $this->router = $router;
+    public function __construct(private Mailer $mailer, private TranslatorInterface $translator, private UrlGeneratorInterface $router)
+    {
     }
-
 
     /**
      * @throws TransportExceptionInterface
      */
-    public function __invoke(SendResetPasswordLink $sendResetPasswordLink): void
+    public function __invoke(SendEmailConfirmationAndResetPasswordDealer $SendEmailConfirmationAndResetPasswordDealer): void
     {
-        $user = $sendResetPasswordLink->getUser();
+        $user = $SendEmailConfirmationAndResetPasswordDealer->getUser();
 
         $email = $this->buildEmail($user);
 
@@ -54,7 +42,7 @@ final class SendResetPasswordLinkHandler
 
     private function getSubject(): string
     {
-        return $this->translator->trans('email.subject.password_reset');
+        return $this->translator->trans('email.subject.dealer.account_setup');
     }
 
     private function getConfirmationUrl(User $user): string
@@ -70,7 +58,7 @@ final class SendResetPasswordLinkHandler
             ->from($this->getSender())
             ->to($user->getEmail())
             ->subject($this->getSubject())
-            ->htmlTemplate('auth/email/reset.txt.twig')
+            ->htmlTemplate('auth/email/confirmation_email_and_reset_password_dealer.txt.twig')
             ->context([
                 'confirmationUrl' => $this->getConfirmationUrl($user),
                 'username' => $user->getEmail(),
