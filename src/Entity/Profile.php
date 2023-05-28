@@ -78,12 +78,9 @@ class Profile
 
     public function getFullName(): ?string
     {
-        if(!empty($this->first_name) && !empty($this->last_name))
-        {
+        if (!empty($this->first_name) && !empty($this->last_name)) {
             return $this->first_name . ', ' . $this->last_name;
-        }
-        else
-        {
+        } else {
             return "";
         }
     }

@@ -31,18 +31,16 @@ class ThreadController extends BaseController
         $user = $security->getUser();
         $account = $accountUserRepository->findOneBy(['user' => $user->getId()]);
         $products = [];
-        if(!empty($account))
-        {
-            $account_id = $account->getAccount()->getId();
-            $products = $productRepository->findAllThreadsByAccount($account_id);
+        if (!empty($account)) {
+            $accountID = $account->getAccount()->getId();
+            $products = $productRepository->findAllThreadsByAccount($accountID);
 
             return $this->render('thread/index.html.twig', [
                 'title' => (!empty($account->getAccount()->getName())) ? $account->getAccount()->getName() : '',
                 'site' => $this->site($request),
                 'products' => $products,
             ]);
-        }
-        else {
+        } else {
             return $this->render('thread/index.html.twig', [
                 'title' => 'title.dashboard',
                 'site' => $this->site($request),
@@ -108,25 +106,25 @@ class ThreadController extends BaseController
 
 
     #[Route('/{id}/update_pin_status', name: 'is_pin', methods: ['POST'])]
-    public function isPin(Request $request,ThreadRepository $threadRepository): JsonResponse
+    public function isPin(Request $request, ThreadRepository $threadRepository): JsonResponse
     {
         $id= $request->request->get('id');
-        $pin_value= $request->request->get('ispin');
+        $pinValue= $request->request->get('ispin');
 
-        $threadRepository->updatePinStatus((int)$id, (bool) $pin_value);
+        $threadRepository->updatePinStatus((int)$id, (bool) $pinValue);
 
-        return new JsonResponse(['status' => 'success', 'data' => (bool) $pin_value, 'id' => (int) $id]);
+        return new JsonResponse(['status' => 'success', 'data' => (bool) $pinValue, 'id' => (int) $id]);
     }
 
     #[Route('/{id}/update_close_status', name: 'is_close', methods: ['POST'])]
-    public function isClose(Request $request,ThreadRepository $threadRepository): JsonResponse
+    public function isClose(Request $request, ThreadRepository $threadRepository): JsonResponse
     {
         $id= $request->request->get('id');
-        $close_value= $request->request->get('ispin');
+        $closeValue= $request->request->get('ispin');
 
-        $threadRepository->updateCloseStatus((int)$id, (bool) $close_value);
+        $threadRepository->updateCloseStatus((int)$id, (bool) $closeValue);
 
-        return new JsonResponse(['status' => 'success', 'data' => (bool) $close_value, 'id' => (int) $id]);
+        return new JsonResponse(['status' => 'success', 'data' => (bool) $closeValue, 'id' => (int) $id]);
     }
 
 }
