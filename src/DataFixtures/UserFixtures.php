@@ -49,13 +49,13 @@ final class UserFixtures extends Fixture implements DependentFixtureInterface
 #       ROLE_USER, ROLE_DEALER, ROLE_BUYER, ROLE_STAFF
         return [
             // data = [$firstName, $lastName, $password, $verified, $is_account, $phone, $email, $roles]
-            ['Dealer1', 'Dealer1', 'admin', true, true, '(123)555-1111', 'dealer1test.com', ['ROLE_USER, ROLE_DEALER']],
-            ['Dealer2', 'Dealer2', 'user', true, true, '(456)555-2222', 'dealer2@test.com', ['ROLE_USER, ROLE_DEALER']],
-            ['Dealer3', 'Dealer3', 'test', true, true, '(456)555-3333', 'dealer3@test.com', ['ROLE_USER, ROLE_DEALER']],
-            ['Staff4', 'Dealer3', 'test', true, true, '(456)555-3333', 'staff4@test.com', ['ROLE_USER, ROLE_STAFF']],
-            ['Staff5', 'Dealer3', 'test', true, true, '(456)555-3333', 'staff5@test.com', ['ROLE_USER, ROLE_STAFF']],
-            ['Buyer5', 'Buyer5', 'test', true, true, '(456)555-5555', 'buyer5@test.com', ['ROLE_USER, ROLE_BUYER']],
-            ['Buyer6', 'Buyer6', 'test', true, false, '(456)555-6666', 'buyer6@test.com', ['ROLE_USER, ROLE_BUYER']],
+            ['Dealer1', 'Dealer1', 'admin', true, true, '(123)555-1111', 'dealer1test.com', ['ROLE_DEALER']],
+            ['Dealer2', 'Dealer2', 'user', true, true, '(456)555-2222', 'dealer2@test.com', ['ROLE_DEALER']],
+            ['Dealer3', 'Dealer3', 'test', true, true, '(456)555-3333', 'dealer3@test.com', ['ROLE_DEALER']],
+            ['Staff4', 'Dealer3.4', 'test', true, true, '(456)555-3333', 'staff4@test.com', ['ROLE_STAFF']],
+            ['Staff5', 'Dealer3.5', 'test', true, true, '(456)555-3333', 'staff5@test.com', ['ROLE_STAFF']],
+            ['Buyer5', 'Buyer5', 'test', true, true, '(456)555-5555', 'buyer5@test.com', ['ROLE_BUYER']],
+            ['Buyer6', 'Buyer6', 'test', true, false, '(456)555-6666', 'buyer6@test.com', ['ROLE_BUYER']],
         ];
     }
 
