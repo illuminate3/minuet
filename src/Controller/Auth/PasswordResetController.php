@@ -40,7 +40,8 @@ final class PasswordResetController extends BaseController implements AuthContro
                     'message' => 'message.emailed_reset_link',
                     'link' => null,
                     'link_title' => 'title.verify_account',
-                ]);
+                ]
+            );
         }
 
         return $this->render('auth/password/password_reset.html.twig', [
@@ -106,11 +107,6 @@ final class PasswordResetController extends BaseController implements AuthContro
         $user = $this->getUser();
         if (!$user) {
             return $this->redirectToRoute('security_login');
-        }
-
-        // Redirect Admin Users
-        if ($security->isGranted('ROLE_ADMIN')) {
-            return $this->redirectToRoute('admin_dashboard');
         }
 
         $form = $this->createForm(PasswordChangeType::class, $user);

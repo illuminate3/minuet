@@ -21,27 +21,21 @@ final class LoginController extends BaseController
         Security $security,
         AuthenticationUtils $helper,
     ): Response {
-        
-        // if user is already logged in, don't display the login page again
-        if ($security->isGranted('ROLE_ADMIN')) {
-            return $this->redirectToRoute('admin_dashboard');
-        }
 
-        if ($security->isGranted('ROLE_USER') || $security->isGranted('ROLE_DEALER')) 
-        {
+        // if user is already logged in, don't display the login page again
+
+        if ($security->isGranted('ROLE_USER') || $security->isGranted('ROLE_DEALER')) {
             return $this->redirectToRoute('app_dash');
         }
 
-        if($security->isGranted('ROLE_BUYER'))
-        {
+        if ($security->isGranted('ROLE_BUYER')) {
             return $this->redirectToRoute('app_dash_buyer');
         }
 
-        if($security->isGranted('ROLE_STAFF'))
-        {
+        if ($security->isGranted('ROLE_STAFF')) {
             return $this->redirectToRoute('app_dash_staff');
         }
-        
+
         $error = $helper->getLastAuthenticationError();
 
         if ($error && $error->getMessage() !== null) {
@@ -52,11 +46,12 @@ final class LoginController extends BaseController
                     'message' => $error->getMessage(),
                     'link' => 'auth_request_verify_email',
                     'link_title' => 'action.verify_account',
-                ]);
+                ]
+            );
         }
 
         $form = $this->createForm(LoginFormType::class);
-        
+
         return $this->render('auth/login/login.html.twig', [
             'title' => 'title.login',
             'site' => $this->site($request),

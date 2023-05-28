@@ -46,10 +46,10 @@ class DealerController extends BaseController
         AccountRepository $accountRepository,
         AccountUserRepository $accountUserRepository,
     ): Response {
-        
+
         $account = $accountRepository->findOneBy(['primaryUser' => $this->getUser()->getId()]);
         $testUsers = $accountUserRepository->findBy(['account' => $account->getId()]);
-        
+
         return $this->render('dealer/index.html.twig', [
             'title' => 'title.dealer',
             'new_url' => 'app_dealer_staff_new',
@@ -71,7 +71,7 @@ class DealerController extends BaseController
             $user->setRoles($roles);
             $entityManage->persist($user);
             $entityManage->flush();
-            // $subscription = $sr->findOneBy(['stripe_price_id' => 'price_1N1LrhHxcL7TQhSHcRcfL89i']);    
+            // $subscription = $sr->findOneBy(['stripe_price_id' => 'price_1N1LrhHxcL7TQhSHcRcfL89i']);
             $account = $accountRepository->findOneBy(['primaryUser' => $this->getUser()->getId()]);
             $account_user = new AccountUser();
             $account_user->setAccount($account);
@@ -100,12 +100,11 @@ class DealerController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
             $usersrepo = $userRepository->findOneBy(['id' => $id]);
-            if(empty($usersrepo))
-            {
+            if (empty($usersrepo)) {
                 $this->addFlash('danger', 'message.not_found');
                 return $this->redirectToRoute('app_dealer_staff_edit', ['id' =>  (int) $id], Response::HTTP_SEE_OTHER);
             }
-            
+
             $usersrepo->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
@@ -142,7 +141,7 @@ class DealerController extends BaseController
 
         $parent = $entityManage->getRepository(Profile::class)->findOneBy(['user_id' => $request->request->get('id')]);
         $entityManage->remove($parent);
-            
+
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('csrf_token'))) {
             $users = $userRepository->findOneBy(['id' => $request->request->get('id')]);
             $userRepository->remove($users, true);

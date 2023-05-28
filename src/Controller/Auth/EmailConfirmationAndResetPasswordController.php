@@ -40,7 +40,8 @@ final class EmailConfirmationAndResetPasswordController extends BaseController i
                     'message' => 'message.emailed_reset_link',
                     'link' => null,
                     'link_title' => 'title.verify_account',
-                ]);
+                ]
+            );
         }
 
         return $this->render('auth/password/password_reset.html.twig', [

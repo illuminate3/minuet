@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Service\Admin;
+namespace App\Service;
 
 use App\Entity\User;
-use App\Service\AbstractService;
 use App\Transformer\UserTransformer;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Cache\InvalidArgumentException;

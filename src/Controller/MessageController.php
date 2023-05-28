@@ -30,8 +30,9 @@ class MessageController extends BaseController
     }
 
     #[Route('/new/{id}', name: 'app_message_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, MessageRepository $messageRepository, ThreadRepository $threadRepository, $id): Response
-    {
+    public function new(
+        Request $request, MessageRepository $messageRepository, ThreadRepository $threadRepository, $id
+    ): Response {
         $message = new Message();
         $form = $this->createForm(MessageType::class, $message);
         $thread = $threadRepository->findOneBy(['id' => $id]);
@@ -42,12 +43,9 @@ class MessageController extends BaseController
             $user = $this->getUser();
             $thread = $threadRepository->findOneBy(['id' => $id]);
 
-            if(!isset($thread) && empty($thread))
-            {
+            if (!isset($thread) && empty($thread)) {
                 $this->addFlash('danger', 'message.not_found');
-            }
-            else
-            {
+            } else {
                 $message->setUpdatedBy($user);
                 $message->setUser($user);
                 $message->setContent($message->getContent());
@@ -56,6 +54,7 @@ class MessageController extends BaseController
                 $messageRepository->save($message, true);
                 $this->addFlash('success', 'message.created');
             }
+
             return $this->redirectToRoute('app_message_show_thread', ['id' =>  $id], Response::HTTP_SEE_OTHER);
         }
 
@@ -104,8 +103,9 @@ class MessageController extends BaseController
     }
 
     #[Route('/thread/{thread_id}/message/{id}/edit', name: 'app_message_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Message $message, MessageRepository $messageRepository, ThreadRepository $threadRepository, $thread_id, $id): Response
-    {
+    public function edit(
+        Request $request, Message $message, MessageRepository $messageRepository, ThreadRepository $threadRepository, $thread_id, $id
+    ): Response {
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
         $messages = $messageRepository->findBy(['id' => $id]);
@@ -113,8 +113,7 @@ class MessageController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
             $thread = $threadRepository->findOneBy(['id' => $thread_id]);
-            if(empty($thread))
-            {
+            if (empty($thread)) {
                 $this->addFlash('danger', 'message.not_found');
                 return $this->redirectToRoute('app_message_show_thread', ['id' =>  (int) $thread_id], Response::HTTP_SEE_OTHER);
             }

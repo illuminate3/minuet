@@ -30,13 +30,13 @@ final class MessageController extends BaseController
         $title,
         $message,
         $link = null,
-        $link_title = null,
+        $linkTitle = null,
     ): ?Response {
         return $this->render('auth/message.html.twig', [
             'title' => $title,
             'message' => $message,
             'link' => $link,
-            'link_title' => $link_title,
+            'link_title' => $linkTitle,
             'site' => $this->settings,
         ]);
     }
