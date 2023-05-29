@@ -11,6 +11,8 @@ use App\Form\Type\PasswordType;
 use App\Form\Type\UserEmailType;
 use App\Repository\ResettingRepository;
 use App\Service\Auth\PasswordResetService;
+use App\Transformer\UserTransformer;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -38,12 +40,14 @@ final class PasswordResetController extends BaseController implements AuthContro
                     'message' => 'message.emailed_reset_link',
                     'link' => null,
                     'link_title' => 'title.verify_account',
-                ]);
+                ]
+            );
         }
 
         return $this->render('auth/password/password_reset.html.twig', [
             'title' => 'title.forgot_password',
             'site' => $this->site($request),
+            'link' => 'auth_password_reset',
             'form' => $form->createView(),
         ]);
     }
@@ -52,6 +56,7 @@ final class PasswordResetController extends BaseController implements AuthContro
     public function passwordResetConfirm(
         ResettingRepository $repository,
         Request $request,
+        UserTransformer $transformer,
         string $token
     ): Response {
         /** @var User $user */
@@ -76,6 +81,8 @@ final class PasswordResetController extends BaseController implements AuthContro
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->setIsVerified(true);
+            $user->setEmailVerifiedAt(new DateTime('now'));
             $repository->setPassword($user, $form->getNormData()['password']);
             $this->addFlash('success', 'message.password_has_been_reset');
 
@@ -100,11 +107,6 @@ final class PasswordResetController extends BaseController implements AuthContro
         $user = $this->getUser();
         if (!$user) {
             return $this->redirectToRoute('security_login');
-        }
-
-        // Redirect Admin Users
-        if ($security->isGranted('ROLE_ADMIN')) {
-            return $this->redirectToRoute('admin_dashboard');
         }
 
         $form = $this->createForm(PasswordChangeType::class, $user);

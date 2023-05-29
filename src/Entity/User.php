@@ -23,6 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[UniqueEntity('email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+
 //    use CreatedAtTrait;
     use EntityIdTrait;
 
@@ -41,14 +42,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Email]
     private ?string $email;
 
-    #[ORM\Column(type: Types::STRING, length: 255)]
-    private string $password;
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $password = null;
 
     #[ORM\Column(type: Types::JSON)]
     private array $roles = [];
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
-    private ?string $confirmation_token;
+    private ?string $confirmation_token = null;
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private ?string $stripe_customer_id;
@@ -63,7 +64,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?Profile $profile;
 
     #[ORM\Column(type: Types::DATETIMETZ_MUTABLE, nullable: true)]
-    private ?DateTime $emailVerifiedAt;
+    private ?DateTime $emailVerifiedAt = null;
 
     #[ORM\Column(type: Types::BOOLEAN, length: 1, nullable: true)]
     private bool $isVerified = false;
@@ -76,6 +77,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Message::class)]
     private Collection $messages;
+
+    private ?string $role = '';
 
 //    private ArrayCollection $properties;
 
@@ -96,6 +99,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
+    public function getfirstName(): ?string
+    {
+        return $this->first_name;
+    }
+
+    public function setfirstName(string $email): void
+    {
+        $this->first_name = $first_name;
+    }
+
     public function getEmail(): ?string
     {
         return $this->email;
@@ -111,9 +124,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password): void
+    public function setPassword(string $password): self
     {
-        $this->password = $password;
+        // $this->password = $password;
+        if (!is_null($password)) {
+            $this->password = $password;
+        }
+        return $this;
     }
 
     /**
@@ -125,8 +142,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // guarantees that a user always has at least one role for security
         if (empty($roles)) {
             $roles[] = 'ROLE_USER';
+            $roles[] = 'ROLE_BUYER';
+            $roles[] = 'ROLE_DEALER';
+            $roles[] = 'ROLE_STAFF';
         }
-
         return array_unique($roles);
     }
 
@@ -338,6 +357,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $message->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

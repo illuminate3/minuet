@@ -11,15 +11,17 @@ use App\Form\Type\RegistrationFormType;
 use App\Form\Type\RequestVerifyUserEmailFormType;
 use App\Message\SendEmailConfirmationLink;
 use App\Repository\SettingsRepository;
+use App\Repository\SubscriptionRepository;
 use App\Repository\UserRepository;
 use App\Security\RegistrationFormAuthenticator;
-use App\Service\Admin\UserService;
+use App\Service\UserService;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
@@ -58,8 +60,8 @@ final class RegisterController extends BaseController implements AuthController
      * @return Response|null
      * @throws InvalidArgumentException
      */
-    #[Route(path: '/register', name: 'auth_register')]
-    public function register(Request $request): ?Response
+    #[Route(path: '/register', name: 'auth_register', methods: ['GET','POST'])]
+    public function register(Request $request, MailerInterface $mailer): ?Response
     {
         if ($this->security->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('app_dash');
@@ -78,9 +80,15 @@ final class RegisterController extends BaseController implements AuthController
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setProfile(new Profile());
             $this->service->create($user);
-            $this->messageBus->dispatch(new SendEmailConfirmationLink($user));
+            $lastInsertedID = $user->getId();
+            if (isset($form->getData()->getRoles()[0]) && $form->getData()->getRoles()[0] == 'ROLE_BUYER') {
+                $this->messageBus->dispatch(new SendEmailConfirmationLink($user));
+            }
             $this->addFlash('success', 'message.registration_successful');
-            //   return $this->authenticate($user, $request);
+            if (isset($form->getData()->getRoles()[0]) && $form->getData()->getRoles()[0] == 'ROLE_DEALER') {
+                return $this->redirectToRoute('dealer_choose_plan', ['id' => $lastInsertedID]);
+            }
+            // return $this->authenticate($user, $request);
         }
 
         return $this->render('auth/register/register.html.twig', [
@@ -137,7 +145,8 @@ final class RegisterController extends BaseController implements AuthController
                         'link' => 'app_index',
                         'error_message' => null,
                         'link_title' => 'action.return_to_root',
-                    ]);
+                    ]
+                );
             }
 
             $this->addFlash('error', 'Email NEED TRANSLATION.');
@@ -155,7 +164,8 @@ final class RegisterController extends BaseController implements AuthController
                 'site' => $this->settings,
                 'error' => $error,
                 'form' => $form->createView(),
-            ]);
+            ]
+        );
     }
 
     private function authenticate(User $user, Request $request): ?Response
@@ -165,5 +175,21 @@ final class RegisterController extends BaseController implements AuthController
             $this->authenticator,
             $request
         );
+    }
+
+    /**
+     * After create account to redirect chooseplan page.
+     */
+    #[Route(path: '/dealer/choosePlan/{id}', name: 'dealer_choose_plan', methods: ['GET', 'POST'])]
+    public function choosePlan(Request $request, SubscriptionRepository $subscriptionRepository, $id)
+    {
+        // Get pages
+        $subscriptions = $subscriptionRepository->findAll();
+        return $this->render('plans/index.html.twig', [
+            'title' => 'title.subscription',
+            'site' => $this->site($request),
+            'subscriptions' => $subscriptions,
+            'userId' => $id
+        ]);
     }
 }

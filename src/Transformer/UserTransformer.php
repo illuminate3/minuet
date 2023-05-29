@@ -26,6 +26,12 @@ final class UserTransformer
     {
         if (in_array('ROLE_ADMIN', $user->getRoles(), true)) {
             $user->setRoles(['ROLE_ADMIN', 'ROLE_USER']);
+        } elseif (in_array('ROLE_DEALER', $user->getRoles(), true)) {
+            $user->setRoles(['ROLE_DEALER']);
+        } elseif (in_array('ROLE_BUYER', $user->getRoles(), true)) {
+            $user->setRoles(['ROLE_BUYER']);
+        } elseif (in_array('ROLE_STAFF', $user->getRoles(), true)) {
+            $user->setRoles(['ROLE_STAFF']);
         } else {
             $user->setRoles(['ROLE_USER']);
         }
