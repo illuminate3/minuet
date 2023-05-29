@@ -20,23 +20,47 @@
                     <thead class="thead">
                     <tr>
                         <th>{{ 'table.title'|trans }}</th>
-                        <th>{{ 'table.price'|trans }}</th>
-                        <th>{{ 'table.category'|trans }}</th>
+                        <th>{{ 'table.url'|trans }}</th>
+                        <th>{{ 'table.parent'|trans }}</th>
+                        <th>{{ 'table.order'|trans }}</th>
+                        <th>{{ 'table.move'|trans }}</th>
                         <th>{{ 'table.action'|trans }}</th>
                     </tr>
                     </thead>
                     <tbody>
 
-                    {% for item in products %}
+                    {% for item in categories %}
                         <tr>
                             <td>
-                                {{ item.title }}
+                                {{ item.name }}
                             </td>
                             <td>
-                                ${{ item.price / 100 }}
+                                {{ item.slug }}
                             </td>
                             <td>
-                                {{ item.category.name }}
+                                {% if item.parent is null %}
+                                    ---
+                                {% else %}
+                                    {{ item.parent.name }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {{ item.categoryOrder }}
+                            </td>
+                            <td>
+                                {% if loop.first %}
+                                    <button class="btn btn-sm btn-light js-move js-down-one"
+                                            id="{{ item.id }}"
+                                            type="button">
+                                        <i class="fas fa-arrow-down"></i> {{ 'text.down'|trans }}
+                                    </button>
+                                {% else %}
+                                    <button class="btn btn-sm btn-light js-move js-up-one"
+                                            id="{{ item.id }}"
+                                            type="button">
+                                        <i class="fas fa-arrow-up"></i> {{ 'text.up'|trans }}
+                                    </button>
+                                {% endif %}
                             </td>
                             <td>
                                 {{ include(

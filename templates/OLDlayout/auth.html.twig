@@ -41,71 +41,21 @@
     <!-- Color the status bar on mobile devices -->
     <meta name="theme-color" content="#ffffff">
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-
     <!-- CSS -->
     {{ encore_entry_link_tags('css/app') }}
     {% block stylesheets %}{% endblock %}
 
 </head>
+<body class="d-flex flex-column h-100">
 
-<body>
-
-<div class="container-fluid overflow-hidden">
-
-    <!-- Header -->
-    <div class="row border">
-        <div class="col">
-            <!-- Navbar -->
-            {{ include('layout/partials/_header.html.twig') }}
-        </div>
-    </div>
-
-    <!-- View Port -->
-    <div class="row overflow-auto vh-101">
-
-        <!-- Sidebar -->
-        <div class="col-12 col-sm-2 d-flex sticky-top bg-dark pt-4">
-            <div class="d-flex flex-row align-items-sm-start">
-                <!-- Sidebar -->
-                {{ include('layout/partials/_sidebar.html.twig') }}
-            </div>
-
-        </div>
-
-        <!-- Main Content -->
-        <div class="col d-flex flex-column pt-4 px-lg-5">
-
-            <main class="row overflow-auto">
-                <div class="col pb-4">
-                    <!-- Subheader -->
-                    {% block subheader %}
-                    {% endblock %}
-                    <!-- Error -->
-                    {{ include('common/_flash_messages.html.twig') }}
-                    <!-- Content -->
-                    {% block body %}{% endblock %}
-                </div>
-            </main>
-
-            <footer class="row bg-light mt-auto">
-                <div class="col">
-                    <!-- Footer -->
-                    {{ include('layout/partials/_footer.html.twig') }}
-                </div>
-            </footer>
-
-        </div>
-
-    </div>
-
-</div>
+<!-- Content -->
+{% block body %}{% endblock %}
 
 <!-- Scripts -->
 {{ encore_entry_script_tags('js/app') }}
-{{ encore_entry_script_tags('js/layout') }}
 {% block javascripts %}{% endblock %}
+<!-- Analytics -->
+{{ site.analytics_code | raw }}
 
 </body>
 </html>

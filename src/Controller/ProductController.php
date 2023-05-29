@@ -5,79 +5,116 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Product;
-use App\Repository\CategoryRepository;
-use App\Repository\FilterRepository;
-use App\Transformer\RequestToArrayTransformer;
+use App\Form\Type\ProductType;
+use App\Repository\ProductRepository;
+use App\Service\Admin\ProductService;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-use function count;
-
-#[Route('/product')]
-class ProductController extends BaseController
+final class ProductController extends BaseController
 {
-
-    #[Route(path: '/{make<\w+>?}/{models?}', name: 'product_index', defaults: ['page' => 1], methods: ['GET'])]
-    public function search(
+    #[Route(path: '/admin/product', name: 'admin_product')]
+    public function index(
         Request $request,
-        FilterRepository $repository,
-        CategoryRepository $categoryRepository,
-        RequestToArrayTransformer $transformer
+        ProductRepository $repository
     ): Response {
-        $searchParams = $transformer->transform($request);
-        $make = (int)$request->get('make');
-        $selectedModels = [];
-        $models = $request->get('models');
-        $subCategories = [];
-        if ($make > 0) {
-            $subCategories = $categoryRepository->fetchSubCategories($make);
-        }
-        if (!empty($models)) {
-            $selectedModels = array_map('intval', explode(",", $models));
-            $searchParams["category"] = $selectedModels;
-        } else {
-            $modelIds = [];
-            foreach ($subCategories as $key => $value) {
-//                array_push($modelIds, $value->getId());
-                $modelIds[] = $value->getId();
-            }
-            $searchParams["category"] = $modelIds;
-        }
-        $products = $repository->findByFilter($searchParams);
-        $categories = $categoryRepository->findBy(["parent" => null]);
+        $products = $repository->findAll();
 
-
-        return $this->render(
-            'product/index.html.twig',
-            [
-                'title' => 'ROOT',
-                'site' => $this->site($request),
-                'products' => $products,
-                'make' => $make,
-                'models' => $selectedModels,
-                'categories' => $categories,
-                'subCategories' => $subCategories,
-                "isDisabled" => (count($products) === 0 && empty($models))  ? 'disabled' : ''
-            ]
-        );
+        return $this->render('product/index.html.twig', [
+            'title' => 'title.products',
+            'action_delete_url' => 'admin_product_delete',
+            'action_edit_url' => 'admin_product_edit',
+            'new_url' => 'admin_product_new',
+            'cancel_url' => 'admin_product',
+            'site' => $this->site($request),
+            'products' => $products,
+        ]);
     }
 
+    /**
+     * @param  Request         $request
+     * @param  ProductService  $productService
+     *
+     * @return Response
+     * @throws InvalidArgumentException
+     */
+    #[Route('/admin/product/new', name: 'admin_product_new')]
+    public function add(
+        Request $request,
+        ProductService $productService,
+    ): Response {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-    #[Route(path: '/{slug}/{id<\d+>}', name: 'product_show', methods: ['GET'])]
-    public function productShow(
+        $product = new Product();
+        $form = $this->createForm(ProductType::class, $product);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $productService->create($product);
+            $this->addFlash('success', 'message.created');
+
+            return $this->redirectToRoute('admin_product');
+        }
+
+        return $this->render('product/new.html.twig', [
+            'title' => 'title.products',
+            'cancel_url' => 'admin_product',
+            'site' => $this->site($request),
+            'product' => $product,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route(path: '/admin/product/{id<\d+>}/edit', name: 'admin_product_edit', methods: ['GET', 'POST'])]
+    public function edit(
+        Product $product,
+        Request $request,
+        ProductService $productService,
+    ): Response {
+        $this->denyAccessUnlessGranted('PRODUCT_EDIT', $product);
+
+        $form = $this->createForm(ProductType::class, $product);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $productService->edit($product);
+            $this->addFlash('success', 'message.updated');
+
+            return $this->redirectToRoute('admin_product');
+        }
+
+        return $this->render('product/edit.html.twig', [
+            'title' => 'title.products',
+            'cancel_url' => 'admin_product',
+            'site' => $this->site($request),
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @param  Request         $request
+     * @param  Product         $product
+     * @param  ProductService  $productService
+     *
+     * @return Response
+     * @throws InvalidArgumentException
+     */
+    #[Route(path: '/admin/product/{id<\d+>}/delete', name: 'admin_product_delete', methods: ['GET', 'POST'])]
+    public function delete(
         Request $request,
         Product $product,
+        ProductService $productService
     ): Response {
+        $this->denyAccessUnlessGranted('PRODUCT_DELETE', $product);
 
-        return $this->render(
-            'product/show.html.twig',
-            [
-                'title' => $product->getTitle(),
-                'site' => $this->site($request),
-                'product' => $product,
-                'number_of_photos' => count($product->getImages()),
-            ]
-        );
+        if (!$this->isCsrfTokenValid('delete', $request->request->get('token'))) {
+            return $this->redirectToRoute('admin_product');
+        }
+        $productService->delete($product);
+
+        return $this->redirectToRoute('admin_product');
     }
+
 }

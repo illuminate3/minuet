@@ -4,59 +4,129 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Page;
+use App\Form\Type\PageType;
 use App\Repository\PageRepository;
+use App\Service\Admin\PageService;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route('/page')]
 final class PageController extends BaseController
 {
-    #[Route(path: '/', name: 'page_index', defaults: ['page' => '1'], methods: ['GET'])]
-    #[Route('/rss.xml', name: 'page_rss', defaults: ['page' => '1', '_format' => 'xml'], methods: ['GET'])]
-    public function pageIndex(
-        Request $request,
-        PageRepository $pageRepository
-    ): Response {
-        $pages = $pageRepository->findPublished($request);
 
-        return $this->render('page/index.html.twig',
-            [
-                'title' => 'title.pages',
-                'site' => $this->site($request),
-                'pages' => $pages,
-            ]
-        );
+    /**
+     * @param  Request         $request
+     * @param  PageRepository  $repository
+     *
+     * @return Response
+     */
+    #[Route(path: '/admin/page', name: 'admin_page', defaults: ['page' => 1], methods: ['GET'])]
+    public function index(
+        Request $request,
+        PageRepository $repository,
+    ): Response {
+        // Get pages
+        $pages = $repository->findLatest($request);
+
+        return $this->render('page/index.html.twig', [
+            'title' => 'title.pages',
+            'action_delete_url' => 'admin_page_delete',
+            'action_edit_url' => 'admin_page_edit',
+            'cancel_url' => 'admin_page',
+            'new_url' => 'admin_page_new',
+            'site' => $this->site($request),
+            'pages' => $pages,
+        ]);
     }
 
-    #[Route(path: '/{slug}', name: 'page', methods: ['GET'])]
-    public function pageShow(
+    /**
+     * @param  Request      $request
+     * @param  PageService  $pageService
+     *
+     * @return Response
+     * @throws InvalidArgumentException
+     */
+    #[Route(path: '/admin/page/new', name: 'admin_page_new')]
+    public function new(
         Request $request,
-        PageRepository $pageRepository
+        PageService $pageService,
     ): Response {
-        $slug = $request->attributes->get('slug');
+        $page = new Page();
+        $form = $this->createForm(PageType::class, $page);
+        $form->handleRequest($request);
 
-        if ($slug === null) {
-            $pages = $pageRepository->findLatest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $pageService->create($page);
+            $this->addFlash('success', 'message.created');
 
-            return $this->render('page/index.html.twig',
-                [
-                    'title' => 'title.pages',
-                    'site' => $this->site($request),
-                    'pages' => $pages,
-                ]
-            );
+            return $this->redirectToRoute('admin_page');
         }
 
-        $page = $pageRepository->findOneBy(['locale' => $request->getLocale(), 'slug' => $slug])
-            ?? $pageRepository->findOneBy(['slug' => $slug]);
-
-        return $this->render('page/show.html.twig',
-            [
-                'title' => 'title.pages',
-                'site' => $this->site($request),
-                'page' => $page,
-            ]
-        );
+        return $this->render('page/new.html.twig', [
+            'title' => 'title.pages',
+            'cancel_url' => 'admin_page',
+            'site' => $this->site($request),
+            'page' => $page,
+            'form' => $form->createView(),
+        ]);
     }
+
+
+    /**
+     * @param  Request      $request
+     * @param  Page         $page
+     * @param  PageService  $pageService
+     *
+     * @return Response
+     */
+    #[Route(path: '/admin/page/{id<\d+>}/edit', name: 'admin_page_edit', methods: ['GET', 'POST'])]
+    public function edit(
+        Request $request,
+        Page $page,
+        PageService $pageService,
+    ): Response {
+        $form = $this->createForm(PageType::class, $page);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $pageService->edit($page);
+            $this->addFlash('success', 'message.updated');
+
+            return $this->redirectToRoute('admin_page');
+        }
+
+        return $this->render('page/edit.html.twig', [
+            'title' => 'title.pages',
+            'cancel_url' => 'admin_page',
+            'site' => $this->site($request),
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @param  Request      $request
+     * @param  Page         $page
+     * @param  PageService  $pageService
+     *
+     * @return Response
+     * @throws InvalidArgumentException
+     */
+    #[Route(path: '/admin/page/{id<\d+>}/delete', name: 'admin_page_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
+    public function delete(
+        Request $request,
+        Page $page,
+        PageService $pageService
+    ): Response {
+        if (!$this->isCsrfTokenValid('delete', $request->request->get('token'))) {
+            return $this->redirectToRoute('admin_page');
+        }
+        $pageService->delete($page);
+
+        return $this->redirectToRoute('admin_page');
+    }
+
 }

@@ -1,46 +1,47 @@
 <!-- Header -->
 <header>
 
-<!-- Fixed navbar -->
-<nav class="navbar navbar-expand-md navbar-light static-top bg-light">
-    <div class="container-fluid">
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md navbar-light static-top bg-light">
 
-        <a class="navbar-brand" href="{{ path('app_index') }}">
-            {{ site.site_name }}
-        </a>
+        <div class="container-fluid">
 
-        <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarCollapse"
-            aria-controls="navbarCollapse"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <a class="navbar-brand" href="{{ path('admin_dashboard') }}">
+                {{ site.site_name }}
+            </a>
 
-        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-            <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+            <div class="collapse navbar-collapse" id="navbarCollapse">
 
-                {{ include('layout/partials/_products.html.twig') }}
+                <ul class="navbar-nav ms-auto mb-2 mb-md-0">
 
-                {{ include('layout/partials/_pages.html.twig') }}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_index') }}">
+                            <i class="fa-solid fa-tree-city"></i>
+                            <span>{{ 'menu.site'|trans }}</span>
+                        </a>
+                    </li>
 
-                {{ include('layout/partials/_menu.html.twig') }}
+{#                    {{ include('layout/partials/_menu.html.twig') }}#}
 
-                {% if app.user %}
                     {{ include('layout/partials/_user.html.twig') }}
-                {% else %}
-                    {{ include('layout/partials/_signup.html.twig') }}
-                {% endif %}
 
-            </ul>
+                </ul>
+
+            </div>
 
         </div>
 
-    </div>
-</nav>
+    </nav>
 
 </header>

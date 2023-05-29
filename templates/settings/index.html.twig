@@ -1,0 +1,124 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block subheader %}
+    <!-- Title -->
+    {{ include('_partials/_action_title.html.twig') }}
+{% endblock %}
+
+{% block body %}
+
+<div class="row mt-4 mb-4">
+    <div class="col">
+
+            <div class="mb-3 row">
+                <label for="site_name" class="col-sm-3 col-form-label">
+                    {{ 'label.site_name'|trans }}
+                </label>
+                <div class="col-sm-9">
+                    <input id="site_name" type="text" readonly class="form-control-plaintext"
+                           value="{{ settings.site_name }}">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="site_title" class="col-sm-3 col-form-label">
+                    {{ 'label.site_title'|trans }}
+                </label>
+                <div class="col-sm-9">
+                    <input id="site_title" type="text" readonly class="form-control-plaintext"
+                           value="{{ settings.site_title }}">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="meta_title" class="col-sm-3 col-form-label">
+                    {{ 'label.site_meta_title'|trans }}
+                </label>
+                <div class="col-sm-9">
+                    <input id="meta_title" type="text" readonly class="form-control-plaintext"
+                           value="{{ settings.meta_title }}">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="meta_description" class="col-sm-3 col-form-label">
+                    {{ 'label.site_meta_description'|trans }}
+                </label>
+                <div class="col-sm-9">
+                    <input id="meta_description" type="text" readonly class="form-control-plaintext"
+                           value="{{ settings.meta_description }}">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="meta_keywords" class="col-sm-3 col-form-label">
+                    {{ 'label.site_meta_keywords'|trans }}
+                </label>
+                <div class="col-sm-9">
+                    <input id="meta_keywords" type="text" readonly class="form-control-plaintext"
+                           value="{{ settings.meta_keywords }}">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="meta_author" class="col-sm-3 col-form-label">
+                    {{ 'label.site_meta_author'|trans }}
+                </label>
+                <div class="col-sm-9">
+                    <input id="meta_author" type="text" readonly class="form-control-plaintext"
+                           value="{{ settings.meta_author }}">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="meta_revisit" class="col-sm-3 col-form-label">
+                    {{ 'label.site_meta_revisit'|trans }}
+                </label>
+                <div class="col-sm-9">
+                    <input id="meta_revisit" type="text" readonly class="form-control-plaintext"
+                           value="{{ settings.meta_revisit }}">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="site_branding" class="col-sm-3 col-form-label">
+                    {{ 'label.site_branding'|trans }}
+                </label>
+                <div class="col-sm-9">
+                    <input id="site_branding" type="text" readonly class="form-control-plaintext"
+                           value="{{ settings.site_branding }}">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="analytics_code" class="col-sm-3 col-form-label">
+                    {{ 'label.analytics_code'|trans }}
+                </label>
+                <div class="col-sm-9">
+                    <input id="analytics_code" type="text" readonly class="form-control-plaintext"
+                           value="{{ settings.analytics_code }}">
+                </div>
+            </div>
+
+            {% if settings.allow_register == '1' %}
+                {% set value = 'text_yes' %}
+            {% else %}
+                {% set value = 'text_no' %}
+            {% endif %}
+            <div class="mb-3 row">
+                <label for="allow_register" class="col-sm-3 col-form-label">
+                    {{ 'label.site_allow_register'|trans }}
+                </label>
+                <div class="col-sm-9">
+                    <input id="allow_register" type="text" readonly class="form-control-plaintext"
+                           value="{{ value|trans }}">
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+{% endblock %}

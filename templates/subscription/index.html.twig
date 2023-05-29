@@ -14,24 +14,36 @@
             <table class="table" style="background-color: #FFFFFF">
                 <thead class="thead">
                 <tr>
-                    <th>{{ 'table.title'|trans }}</th>
-                    <th>{{ 'table.description'|trans }}</th>
-                    <th>{{ 'table.slug'|trans }}</th>
+                    <th>{{ 'table.plan'|trans }}</th>
+                    <th>{{ 'table.price'|trans }}</th>
+                    <th>{{ 'table.valid_until'|trans }}</th>
+                    <th>{{ 'table.availability'|trans }}</th>
+                    <th>{{ 'table.support'|trans }}</th>
+                    <th>{{ 'table.stripe_price_Id'|trans }}</th>
                     <th>{{ 'table.action'|trans }}</th>
                 </tr>
                 </thead>
                 <tbody>
 
-                {% for item in pages %}
+                {% for item in subscriptions %}
                     <tr>
                         <td>
-                            {{ item.title }}
+                            {{ item.plan }}
                         </td>
                         <td>
-                            {{ item.description }}
+                            {{ item.price }}
                        </td>
                         <td>
-                            {{ item.slug }}
+                            {{ item.validUntil }}
+                        </td>
+                        <td>
+                            {{ item.availability }}
+                        </td>
+                        <td>
+                            {{ item.support }}
+                        </td>
+                        <td>
+                            {{ item.stripePriceId }}
                         </td>
                         <td>
                             {{ include(
@@ -52,10 +64,6 @@
 
                 </tbody>
             </table>
-        </div>
-
-        <div class="row mb-lg-5">
-    {{ knp_pagination_render(pages) }}
         </div>
 
     </div>

@@ -58,7 +58,7 @@
     <div class="row border">
         <div class="col">
             <!-- Navbar -->
-            {{ include('layout/partials/_header.html.twig') }}
+            {{ include('layout/dash/partials/_header.html.twig') }}
         </div>
     </div>
 
@@ -69,16 +69,16 @@
         <div class="col-12 col-sm-2 d-flex sticky-top bg-dark pt-4">
             <div class="d-flex flex-row align-items-sm-start">
                 <!-- Sidebar -->
-                {{ include('layout/partials/_sidebar.html.twig') }}
+                {{ include('layout/dash/partials/_sidebar.html.twig') }}
             </div>
 
         </div>
 
         <!-- Main Content -->
-        <div class="col d-flex flex-column pt-4 px-lg-5">
+        <div class="col d-flex flex-column py-4">
 
             <main class="row overflow-auto">
-                <div class="col pb-4">
+                <div class="col px-lg-5">
                     <!-- Subheader -->
                     {% block subheader %}
                     {% endblock %}
@@ -92,7 +92,7 @@
             <footer class="row bg-light mt-auto">
                 <div class="col">
                     <!-- Footer -->
-                    {{ include('layout/partials/_footer.html.twig') }}
+                    {{ include('layout/dash/partials/_footer.html.twig') }}
                 </div>
             </footer>
 
@@ -105,6 +105,7 @@
 <!-- Scripts -->
 {{ encore_entry_script_tags('js/app') }}
 {{ encore_entry_script_tags('js/layout') }}
+{{ encore_entry_script_tags('js/user-thread') }}
 {% block javascripts %}{% endblock %}
 
 </body>
