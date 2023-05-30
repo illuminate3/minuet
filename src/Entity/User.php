@@ -142,6 +142,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // guarantees that a user always has at least one role for security
         if (empty($roles)) {
             $roles[] = 'ROLE_USER';
+            $roles[] = 'ROLE_ADMIN';
             $roles[] = 'ROLE_BUYER';
             $roles[] = 'ROLE_DEALER';
             $roles[] = 'ROLE_STAFF';
