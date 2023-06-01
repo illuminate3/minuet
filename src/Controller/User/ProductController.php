@@ -17,6 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use App\Repository\AccountRepository;
 use App\Repository\AccountUserRepository;
+use App\Service\StripeService;
 use Symfony\Bundle\SecurityBundle\Security;
 
 final class ProductController extends BaseController
@@ -37,11 +38,12 @@ final class ProductController extends BaseController
         AccountRepository $accountRepository,
         AccountUserRepository $accountUserRepository,
         Security $security,
+        StripeService $stripeService,
     ): Response {
         $searchParams = $transformer->transform($request);
         $products = $repository->findByFilter($searchParams);
         
-        $resp = $this->checkStripeSubscriptionActive($security,$accountRepository,$accountUserRepository);                      
+        $resp = $stripeService->checkStripeSubscriptionActive($security,$accountRepository,$accountUserRepository);                      
         if ($resp==='account') {
             $this->addFlash('error','message.stripe_in_active');  
             return $this->redirectToRoute('app_pricing');

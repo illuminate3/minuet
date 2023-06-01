@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-
+use App\Service\StripeService;
 final class LoginController extends BaseController
 {
     #[Route(path: '/login', name: 'security_login')]
@@ -23,13 +23,14 @@ final class LoginController extends BaseController
         AccountRepository $accountRepository,
         AccountUserRepository $accountUserRepository,
         Security $security,
+        StripeService $stripeService,
         AuthenticationUtils $helper,
     ): Response {
 
         // if user is already logged in, don't display the login page again
 
         if ($security->isGranted('ROLE_USER')) {
-            $resp = $this->checkStripeSubscriptionActive($security,$accountRepository,$accountUserRepository);
+            $resp = $stripeService->checkStripeSubscriptionActive($security,$accountRepository,$accountUserRepository);
             if ($resp==='account') {
                 return $this->redirectToRoute('app_pricing');
             }elseif (!$resp) {

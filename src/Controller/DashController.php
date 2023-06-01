@@ -18,10 +18,11 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use App\Service\StripeService;
 #[Route('/user/dash')]
 class DashController extends BaseController
 {
+
     #[Route('/', name: 'app_dash')]
     public function index(
         Request $request,
@@ -32,7 +33,8 @@ class DashController extends BaseController
         SubscriptionRepository $subscriptionRepository,
         ProductRepository $productRepository,
         ThreadRepository $threadRepository,
-        MessageRepository $messageRepository
+        MessageRepository $messageRepository,
+        StripeService $stripeService,
     ): Response {
 
         if ($security->isGranted('ROLE_BUYER')) {
@@ -47,7 +49,7 @@ class DashController extends BaseController
         $user = $security->getUser();
         $account = $accountRepository->findOneBy(['primaryUser' => $user->getId()]);
             
-        $resp = $this->checkStripeSubscriptionActive($security,$accountRepository,$accountUserRepository);
+        $resp = $stripeService->checkStripeSubscriptionActive($security,$accountRepository,$accountUserRepository);
         if ($resp==='account') {
             return $this->redirectToRoute('app_pricing');
         }elseif (!$resp) {
