@@ -8,7 +8,7 @@ use App\Controller\BaseController;
 use App\Entity\Product;
 use App\Form\Type\ProductType;
 use App\Repository\FilterRepository;
-use App\Service\Admin\ProductService;
+use App\Service\ProductService;
 use App\Transformer\RequestToArrayTransformer;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Request;

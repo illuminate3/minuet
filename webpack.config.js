@@ -28,8 +28,6 @@ Encore
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
     .addEntry('js/app', './assets/app.js')
-    .addEntry('js/admin', './assets/js/admin/admin.js')
-    .addEntry('js/menu-sorting', './assets/js/admin/menu-sorting.js')
     .addEntry('js/layout', './assets/js/layout.js')
     .addEntry('js/image', './assets/js/image.js')
     .addEntry('js/ekko-lightbox', './assets/js/ekko-lightbox')

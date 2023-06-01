@@ -21,21 +21,30 @@ final class UserFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        foreach ($this->getUserData() as [$firstName, $lastName, $password, $verified, $is_account, $phone, $email, $roles]) {
+        foreach ($this->getUserData() as [
+            $firstName, $lastName, $password, $verified, $is_account, $phone, $email, $roles
+        ]) {
+// create a new user object
             $user = new User();
-            $user->setPassword($password);
-            $user->setEmail($email);
-            $user->setRoles($roles);
+// set profile
             $user->setProfile(
                 (new Profile())
                     ->setFirstName($firstName)
                     ->setLastName($lastName)
                     ->setPhone($phone)
             );
-            $user->setEmailVerifiedAt(new DateTime('now'));
+// set password
+            $user->setPassword($password);
+// set verified, account
             $user->setIsVerified($verified);
             $user->setIsAccount($is_account);
+// set email
+            $user->setEmail($email);
+            $user->setEmailVerifiedAt(new DateTime('now'));
+// set roles
             $user = $this->transformer->transform($user);
+            $user->setRoles($roles);
+
             $manager->persist($user);
             $this->addReference($lastName, $user);
         }
@@ -44,15 +53,16 @@ final class UserFixtures extends Fixture implements DependentFixtureInterface
 
     private function getUserData(): array
     {
+#       ROLE_ADMIN, ROLE_USER, ROLE_DEALER, ROLE_BUYER, ROLE_STAFF
         return [
             // data = [$firstName, $lastName, $password, $verified, $is_account, $phone, $email, $roles]
-            ['Magna', 'Aliqua', 'admin', true, true, '(123)555-1234', 'admin@admin.com', ['ROLE_ADMIN', 'ROLE_USER']],
-            ['Cillum', 'Dolore', 'user', true, true, '(456)555-1212', 'user@user.com', ['ROLE_USER']],
-            ['Test1', 'User1', 'test', true, true, '(456)555-1212', 'test1@test.com', ['ROLE_USER']],
-            ['Test2', 'User2', 'test', true, true, '(456)555-1212', 'test2@test.com', ['ROLE_USER']],
-            ['Test3', 'User3', 'test', true, true, '(456)555-1212', 'test3@test.com', ['ROLE_USER']],
-            ['Test4', 'User4', 'test', true, true, '(456)555-1212', 'test4@test.com', ['ROLE_USER']],
-            ['Test5', 'User5', 'test', true, false, '(456)555-1212', 'test5@test.com', ['ROLE_USER']],
+            ['Admin', 'Admin', 'admin', true, true, '(123)555-1111', 'admin@admin.com', ['ROLE_ADMIN', 'ROLE_USER']],
+            ['Dealer2', 'Dealer2', 'test', true, true, '(456)555-2222', 'dealer2@test.com', ['ROLE_USER']],
+            ['Dealer3', 'Dealer3', 'test', true, true, '(456)555-3333', 'dealer3@test.com', ['ROLE_USER']],
+            ['Staff4', 'Staff4', 'test', true, true, '(456)555-4444', 'staff4@test.com', ['ROLE_USER']],
+            ['Staff5', 'Staff5', 'test', true, true, '(456)555-5555', 'staff5@test.com', ['ROLE_USER']],
+            ['Buyer5', 'Buyer5', 'test', true, true, '(456)555-6666', 'buyer5@test.com', ['ROLE_USER']],
+            ['Buyer6', 'Buyer6', 'test', true, false, '(456)555-7777', 'buyer6@test.com', ['ROLE_USER']],
         ];
     }
 

@@ -37,18 +37,11 @@ class DashController extends BaseController
         StripeService $stripeService,
     ): Response {
 
-        // Redirect Admin Users
-        if ($security->isGranted('ROLE_ADMIN')) {
-            return $this->redirectToRoute('admin_dashboard');
-        }
-
-        if($security->isGranted('ROLE_BUYER'))
-        {
+        if ($security->isGranted('ROLE_BUYER')) {
             return $this->redirectToRoute('app_dash_buyer');
         }
 
-        if($security->isGranted('ROLE_STAFF'))
-        {
+        if ($security->isGranted('ROLE_STAFF')) {
             return $this->redirectToRoute('app_dash_staff');
         }
 
@@ -68,7 +61,7 @@ class DashController extends BaseController
         $accountUser = $accountUserRepository->findOneBy(['user' => $user->getId()]);
         // get the account information
         // if accountUser is null then it means this user is a primary user and we can use the main $account
-        if ($accountUser) {            
+        if ($accountUser) {
           $account = $accountRepository->findOneBy(['id' => $accountUser->getAccount()]);
         }
         $account_id = $account->getId();

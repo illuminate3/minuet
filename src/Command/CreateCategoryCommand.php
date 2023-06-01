@@ -47,15 +47,15 @@ final class CreateCategoryCommand extends Command
     {
         $makes = $this->data->findAllUniqueMake();
 
-        foreach ($makes as $parent_data) {
-            $name = $parent_data['make'];
+        foreach ($makes as $parentData) {
+            $name = $parentData['make'];
 
-            $parent_data = new Category();
-            $parent_data->setName($name);
-            $parent_data->setParent(null);
-            $parent_data->setSlug(Slugger::slugify($name));
+            $parentData = new Category();
+            $parentData->setName($name);
+            $parentData->setParent(null);
+            $parentData->setSlug(Slugger::slugify($name));
 
-            $this->em->persist($parent_data);
+            $this->em->persist($parentData);
             $this->em->flush();
 
             $this->loadModels($name);
@@ -74,17 +74,17 @@ final class CreateCategoryCommand extends Command
     private function loadModels($name): void
     {
         $models = $this->data->findAllUniqueModel($name);
-        foreach ($models as $child_data) {
-            $child_name = $child_data['model'];
-            $set_parent = $this->category->findOneBy(['name' => $name]);
+        foreach ($models as $childData) {
+            $childName = $childData['model'];
+            $setParent = $this->category->findOneBy(['name' => $name]);
 
-            $child_data = new Category();
-            $child_data->setName($child_name);
-            $child_data->setParent($set_parent);
-            $slug = $name . '-' . $child_name;
-            $child_data->setSlug(Slugger::slugify($slug));
+            $childData = new Category();
+            $childData->setName($childName);
+            $childData->setParent($setParent);
+            $slug = $name . '-' . $childName;
+            $childData->setSlug(Slugger::slugify($slug));
 
-            $this->em->persist($child_data);
+            $this->em->persist($childData);
         }
         $this->em->flush();
     }
