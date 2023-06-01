@@ -6,8 +6,16 @@ namespace App\Controller\User;
 
 use App\Controller\BaseController;
 use App\Entity\User;
+use App\Service\Auth\EmailVerifierAndResetPasswordDealerService;
+use App\Entity\Account;
+use App\Entity\AccountUser;
+use App\Entity\Subscription;
+use App\Message\SendEmailConfirmationLink;
+use App\Message\SendResetPasswordLink;
 use App\Repository\SettingsRepository;
 use App\Repository\SubscriptionRepository;
+use App\Repository\UserRepository;
+use App\Service\Auth\EmailVerifierAndResetPasswordService;
 use App\Service\StripeService;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -20,6 +28,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -42,6 +51,7 @@ final class SubscriptionController extends BaseController
         SettingsRepository $settingsRepository,
         SubscriptionRepository $subscriptionRepository,
         StripeService $stripeService,
+        MessageBusInterface $messageBus,
 //        Stripe $stripe,
     ) {
         parent::__construct($settingsRepository, $registry);
@@ -106,17 +116,18 @@ final class SubscriptionController extends BaseController
         if ('free_price' !== $priceId) {
             $stripeCustomerObject = null;
             if (!$this->getUser()->getStripeCustomerId()) {
-//                $stripeCustomerObj = Customer::create([
-//                    'description' => 'Minuet customer',
-//                    'email' => $this->getUser()->getEmail(),
-//                    'metadata' => [
-//                        'userId' => $this->getUser()->getId(),
-//                    ],
-//                ]);
-//                $stripeCustomerId = $stripeCustomerObj->id;
-//                $this->getUser()->setStripeCustomerId($stripeCustomerId);
-//                $em->persist($this->getUser());
-//                $em->flush();
+                $stripeCustomerObj = \Stripe\Customer::create([
+                    'description' => 'Minuet customer',
+                    'email' => $this->getUser()->getEmail(),
+                    'metadata' => [
+                        'userId' => $this->getUser()->getId(),
+                    ],
+                ]);
+                
+                $stripeCustomerId = $stripeCustomerObj->id;
+                $this->getUser()->setStripeCustomerId($stripeCustomerId);
+                $em->persist($this->getUser());
+                $em->flush();
                 $stripeCustomerObject = $this->stripeService->stripeCustomerCreated();
             }
 
@@ -179,13 +190,100 @@ final class SubscriptionController extends BaseController
 //        return $this->redirectToRoute('pricing');
     }
 
-    #[Route('/success-url', name: 'success_url')]
-    public function successUrl(Request $request): Response
+
+    #[Route('/subscribes/{priceId}/userId/{id}', name: 'checkouts')]
+    public function subscribes(Request $request, EmailVerifierAndResetPasswordDealerService $service, SubscriptionRepository $sr, EntityManagerInterface $em, UserRepository $userrepository, $id)
     {
-        return $this->render('user/stripe/success.html.twig', [
-            'title' => 'title.success',
-            'site' => $this->site($request),
-        ]);
+        $stripeAPI = $_ENV['STRIPE_SECRET_KEY'];
+
+        // $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+
+        Stripe::setApiKey($stripeAPI);
+
+        $session = $this->requestStack->getSession();
+        
+        $priceId = $request->attributes->get('priceId');
+        
+        $userData = $userrepository->findOneBy(['id' => $id]);
+        if ('free_price' !== $priceId) {
+            if (!$userData->getStripeCustomerId()) {
+                $stripeCustomerObj = \Stripe\Customer::create([
+                    'description' => 'Minuet customer',
+                    'email' => $userData->getEmail(),
+                    'metadata' => [
+                        'userId' => $userData->getId(),
+                    ],
+                ]);
+
+                $stripeCustomerId = $stripeCustomerObj->id;
+                $subscription = $sr->findOneBy(['stripe_price_id' => $priceId]);
+                $account = new Account();
+                $account->setSubscription($subscription);
+                $account->setName('Account ' . $userData->getId() . ' - Primary User ' .$userData->getId());
+                $account->setPrimaryUser($userData->getId());
+                $em->persist($account);
+                $userData->setStripeCustomerId($stripeCustomerId);
+                $em->persist($userData);
+                $em->flush();
+            }
+
+            $stripeSession = \Stripe\Checkout\Session::create([
+                'success_url' => $this->generateUrl('success_url', ['session'=>base64_encode($userData->getEmail())], UrlGeneratorInterface::ABSOLUTE_URL),
+                'cancel_url' => $this->generateUrl('cancel_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
+                'payment_method_types' => ['card'],
+                'mode' => 'subscription',
+                'customer' => $userData->getStripeCustomerId(),
+
+                'line_items' => [[
+                    'price' => $priceId,
+                    // For metered billing, do not pass quantity
+                    'quantity' => 1,
+                ]],
+            ]);
+
+            if ($userData->getStrSubscriptionId()) {
+                $stripe = new \Stripe\StripeClient(
+                    $stripeAPI
+                );
+                $stripe->subscriptions->update(
+                    $userData->getStrSubscriptionId(),
+                    ['metadata' => ['customer_id' => $userData->getStripeCustomerId()]]
+                );
+            }
+
+            $session->set('stripe-session-id', $stripeSession->id);
+            return $this->redirect($stripeSession->url, 303);
+        }
+
+        $user = $userData;
+
+        $basicPlan = $sr->findOneBy(['price' => 0]);
+        $freeTrialTime = explode(' ', $basicPlan->getValidUntil());
+        $timeExpolode = $freeTrialTime[0];
+
+        $user->setSubscription($basicPlan);
+        $user->setSubscriptionValidUntil((new \DateTime())->modify('+7 day'));
+        $user->setFreePlanUsed(true);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirectToRoute('user_profile', ['user' => $userData->getId()]);
+
+//        return $this->redirectToRoute('pricing');
+    }
+
+    #[Route('/success-url', name: 'success_url')]
+    public function successUrl(Request $request, EmailVerifierAndResetPasswordDealerService $service): Response
+    {
+        $service->SendEmailConfirmationAndResetPasswordDealer($request);
+        return $this->redirectToRoute('app_dash');
+
+        // return $this->render('user/stripe/success.html.twig', [
+        //     'title' => 'title.success',
+        //     'site' => $this->site($request),
+        // ]);
     }
 
     #[Route('/cancel-url', name: 'cancel_url')]

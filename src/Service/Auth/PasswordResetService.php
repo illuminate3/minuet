@@ -43,7 +43,7 @@ final class PasswordResetService extends AbstractService
         $user = $this->repository->findOneBy(['email' => $request->get('user_email')['email']]);
         $this->updateToken($user);
         $this->messageBus->dispatch(new SendResetPasswordLink($user));
-        $this->addFlash('success', 'message.emailed_reset_link');
+        //$this->addFlash('success', 'message.emailed_reset_link');
     }
 
     /**

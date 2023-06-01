@@ -25,16 +25,6 @@ class Account
 
     #[ORM\Column(type: Types::BOOLEAN, length: 1, nullable: true)]
     private bool $isSubscriptionActive = false;
-    
-
-
-//    #[ORM\Column(type: 'integer', length: 11)]
-//    private $primary_user_id;
-
-
-//    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'account')]
-//    #[ORM\JoinColumn(nullable: false)]
-//    private $user;
 
     #[ORM\ManyToOne(inversedBy: 'account_id')]
     #[ORM\JoinColumn(nullable: true)]

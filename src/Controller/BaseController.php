@@ -70,10 +70,10 @@ abstract class BaseController extends AbstractController
     {
         $settings = $this->settingsRepository->findAllAsArray();
         $menu = $this->menu($request);
-        $menu_pages = $this->menuPages($request);
-        $footer_pages = $this->menuFooterPages($request);
+        $menuPages = $this->menuPages($request);
+        $footerPages = $this->menuFooterPages($request);
 
-        return array_merge($settings, $menu, $menu_pages, $footer_pages);
+        return array_merge($settings, $menu, $menuPages, $footerPages);
     }
 
 

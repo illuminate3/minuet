@@ -16,9 +16,6 @@ use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 final class VerificationController extends AbstractController implements AuthController
 {
-    public function __construct()
-    {
-    }
 
     #[Route(path: '/email/verify', name: 'verify_email')]
     public function verifyUserEmail(

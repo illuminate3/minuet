@@ -3,55 +3,49 @@
     "js/app": {
       "js": [
         "/build/runtime.5d189f8c.js",
-        "/build/js/app.1c030d07.js"
-      ]
-    },
-    "js/admin": {
-      "js": [
-        "/build/runtime.5d189f8c.js",
-        "/build/js/admin.791bd6ae.js"
-      ]
-    },
-    "js/menu-sorting": {
-      "js": [
-        "/build/runtime.5d189f8c.js",
-        "/build/js/menu-sorting.9da71c44.js"
+        "/build/js/app.cd8a87bc.js"
       ]
     },
     "js/layout": {
       "js": [
         "/build/runtime.5d189f8c.js",
-        "/build/js/layout.07474641.js"
+        "/build/js/layout.342f5aad.js"
       ]
     },
     "js/image": {
       "js": [
         "/build/runtime.5d189f8c.js",
-        "/build/js/image.deebe0c4.js"
+        "/build/js/image.042018bb.js"
       ]
     },
     "js/ekko-lightbox": {
       "js": [
         "/build/runtime.5d189f8c.js",
-        "/build/js/ekko-lightbox.85b8990d.js"
+        "/build/js/ekko-lightbox.4d82eb9b.js"
       ]
     },
     "js/select2": {
       "js": [
         "/build/runtime.5d189f8c.js",
-        "/build/js/select2.9268c52b.js"
+        "/build/js/select2.f8d4cbcb.js"
       ]
     },
     "js/product": {
       "js": [
         "/build/runtime.5d189f8c.js",
-        "/build/js/product.6cf0a87d.js"
+        "/build/js/product.eeec521b.js"
       ]
     },
     "js/user-thread": {
       "js": [
         "/build/runtime.5d189f8c.js",
-        "/build/js/user-thread.0008fc27.js"
+        "/build/js/user-thread.21f2c9d3.js"
+      ]
+    },
+    "js/common": {
+      "js": [
+        "/build/runtime.5d189f8c.js",
+        "/build/js/common.913a46bf.js"
       ]
     },
     "css/app": {
@@ -59,7 +53,7 @@
         "/build/runtime.5d189f8c.js"
       ],
       "css": [
-        "/build/css/app.e1d8aaa2.css"
+        "/build/css/app.32b0a706.css"
       ]
     },
     "css/detail": {

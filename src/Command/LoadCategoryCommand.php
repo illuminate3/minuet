@@ -42,9 +42,9 @@ final class LoadCategoryCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $path = $this->params->get('kernel.project_dir');
-        $file_category = $path . '/data/category.sql';
+        $fileCategory = $path . '/data/category.sql';
 
-        $sql = file_get_contents($file_category);
+        $sql = file_get_contents($fileCategory);
         $this->em->getConnection()->executeQuery($sql);
         $this->em->flush();
 

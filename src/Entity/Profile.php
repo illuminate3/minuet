@@ -16,6 +16,11 @@ class Profile
 //    use CreatedAtTrait;
     use EntityIdTrait;
 
+
+    #[ORM\ManyToOne(inversedBy: 'user')]
+    #[ORM\JoinColumn(name: 'user_id')]
+    private ?User $user_id = null;
+
     #[ORM\Column(length: 40, nullable: true)]
     private ?string $first_name = null;
 
@@ -73,7 +78,11 @@ class Profile
 
     public function getFullName(): ?string
     {
-        return $this->last_name . ', ' . $this->first_name;
+        if (!empty($this->first_name) && !empty($this->last_name)) {
+            return $this->first_name . ', ' . $this->last_name;
+        } else {
+            return "";
+        }
     }
 
     public function getFirstName(): ?string

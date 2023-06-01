@@ -1,0 +1,5 @@
+<form class="delete_form" method="post" action="{{ path('app_dealer_staff_delete', {'id': users.staffUser.owner.id}) }}">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ users.staffUser.owner.id) }}">
+    <input type="hidden" name="user_id" value="{{users.staffUser.owner.id}}">
+    <button class="btn btn-danger show_confirm_delete_staff">Delete</button>
+</form>

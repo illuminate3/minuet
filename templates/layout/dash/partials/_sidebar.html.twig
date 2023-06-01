@@ -23,7 +23,14 @@
                 {{ 'menu.messages'|trans }}
             </a>
         </li>
-
+        {% if app.user.roles[0] == 'ROLE_DEALER' %}
+            <li class="mb-3">
+            <a href="{{ path('app_dealer_index') }}" class="link-light d-inline-flex text-decoration-none rounded">
+                <i class="fa-solid fa-users"></i>
+                {{ 'menu.dealer'|trans }}
+            </a>
+        </li>
+        {%endif%}
         <li class="mb-3">
             <a href="{{ path('security_logout') }}" class="link-light d-inline-flex text-decoration-none rounded">
                 <i class="fa-solid fa-arrow-right-from-bracket"></i>

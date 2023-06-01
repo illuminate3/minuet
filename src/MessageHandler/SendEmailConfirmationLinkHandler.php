@@ -92,7 +92,7 @@ final class SendEmailConfirmationLinkHandler
             ->from($this->getSender())
             ->to($user->getEmail())
             ->subject($this->getSubject())
-            ->textTemplate('auth/email/confirmation_email.html.twig')
+            ->htmlTemplate('auth/email/confirmation_email.html.twig')
             ->context($this->createContext($signatureComponents))
         ;
     }
