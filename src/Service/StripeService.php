@@ -6,6 +6,7 @@ namespace App\Service;
 
 use App\Entity\Account;
 use App\Repository\AccountRepository;
+use App\Repository\AccountUserRepository;
 use App\Repository\SettingsRepository;
 use App\Repository\SubscriptionRepository;
 use App\Repository\UserRepository;
@@ -15,8 +16,6 @@ use Stripe\Checkout\Session;
 use Stripe\Customer;
 use Stripe\Stripe;
 use Symfony\Bundle\SecurityBundle\Security;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class StripeService
 {
@@ -161,5 +160,59 @@ final class StripeService
         $user = $this->userRepository->findOneBy(['stripe_customer_id' => $stripeCustomer]);
         $user->setStripeSubscriptionId($subscriptionId);
         $this->userService->update($user);
+    }
+
+
+    public function checkStripeSubscriptionActive(Security $security, AccountRepository $accountRepository, AccountUserRepository $accountUserRepository)
+    {
+
+        $user = $security->getUser();
+        if ($security->isGranted('ROLE_USER') && $user->getIsAccount()) {
+            // get the account information the user is registered to
+            $accountUser = $accountUserRepository->findOneBy(['user' => $user->getId()]);
+
+            // get the account information
+            // if accountUser is null then it means this user is a primary user and we can use the main $account
+            if ($accountUser) {
+                $account = $accountRepository->findOneBy(['id' => $accountUser->getAccount()]);
+            } else {
+                $account = $accountRepository->findOneBy(['primaryUser' => $user->getId()]);
+            }
+
+            // check to see if the current user is the primary user for the account
+            $primaryUser = $account->getPrimaryUser();
+            $is_primary = $primaryUser === $user->getId();
+            if (!$is_primary) {
+                $account = $accountRepository->findOneBy(['primaryUser' => $primaryUser]);
+                if (!$account->getIsSubscriptionActive()) {
+                    $security->logout(false);
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
+                if (!$account->getIsSubscriptionActive()) {
+                    if (is_null($user->getStripeCustomerId())) {
+                        $stripeAPIKey = $_ENV['STRIPE_SECRET_KEY'];
+                        Stripe::setApiKey($stripeAPIKey);
+                        $stripeCustomerObj =  \Stripe\Customer::create([
+                            'description' => 'Minuet customer',
+                            'email' => $user->getEmail(),
+                            'metadata' => [
+                                "userId" => $user->getId()
+                            ]
+                        ]);
+                        $stripeCustomerId =  $stripeCustomerObj->id;
+                        $user->setStripeCustomerId($stripeCustomerId);                        
+                        $this->entityManagerInterface->persist($user);
+                        $this->entityManagerInterface->flush();
+                    }
+                    return "account";
+                } else {
+                    return true;
+                }
+            }
+        }
+        return true;
     }
 }
