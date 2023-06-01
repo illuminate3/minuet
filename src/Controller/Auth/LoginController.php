@@ -29,9 +29,9 @@ final class LoginController extends BaseController
 
         // if user is already logged in, don't display the login page again
 
-        if ($security->isGranted('ROLE_USER')) {
+        if ($security->isGranted('ROLE_USER')===true) {
             $resp = $stripeService->checkStripeSubscriptionActive($security,$accountRepository,$accountUserRepository);
-            if ($resp==='account') {
+            if ($resp === 'account') {
                 return $this->redirectToRoute('app_pricing');
             }elseif (!$resp) {
                 $this->addFlash('error','message.stripe_in_active');        

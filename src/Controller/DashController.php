@@ -3,9 +3,6 @@
 declare(strict_types=1);
 
 namespace App\Controller;
-
-use App\Entity\Account;
-use App\Entity\User;
 use App\Repository\AccountRepository;
 use App\Repository\AccountUserRepository;
 use App\Repository\MessageRepository;
@@ -13,7 +10,6 @@ use App\Repository\ProductRepository;
 use App\Repository\SubscriptionRepository;
 use App\Repository\ThreadRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Stripe\Stripe;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,8 +28,6 @@ class DashController extends BaseController
         AccountUserRepository $accountUserRepository,
         SubscriptionRepository $subscriptionRepository,
         ProductRepository $productRepository,
-        ThreadRepository $threadRepository,
-        MessageRepository $messageRepository,
         StripeService $stripeService,
     ): Response {
 
@@ -50,7 +44,7 @@ class DashController extends BaseController
         $account = $accountRepository->findOneBy(['primaryUser' => $user->getId()]);
             
         $resp = $stripeService->checkStripeSubscriptionActive($security,$accountRepository,$accountUserRepository);
-        if ($resp==='account') {
+        if ($resp === 'account') {
             return $this->redirectToRoute('app_pricing');
         }elseif (!$resp) {
             $this->addFlash('error','message.stripe_in_active');     

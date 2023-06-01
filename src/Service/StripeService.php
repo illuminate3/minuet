@@ -72,11 +72,10 @@ final class StripeService
             $this->entityManagerInterface->persist($user);
             $this->entityManagerInterface->flush();
             http_response_code(200);
-            exit();
+            return;
         } catch (\Throwable $th) {
-            http_response_code(500);
-            echo json_encode(["status" => false, $th->getMessage()]);
-            exit();
+            http_response_code(500);        
+            return json_encode(["status" => false, $th->getMessage()]);
         }
     }
     public function stripeInvoicePaymentFailed($stripeObject)
@@ -96,11 +95,10 @@ final class StripeService
             $this->entityManagerInterface->persist($account);
             $this->entityManagerInterface->flush();
             http_response_code(200);
-            exit();
+            return;
         } catch (\Throwable $th) {
             http_response_code(500);
-            echo json_encode(["status" => false, $th->getMessage()]);
-            exit();
+            return json_encode(["status" => false, $th->getMessage()]);            
         }
     }
 
@@ -162,12 +160,24 @@ final class StripeService
         $this->userService->update($user);
     }
 
+    public function stripeAddSubscriptionToCustomer($stripeCustomerId): void
+    {
+         $stripe = new \Stripe\StripeClient(
+                    $this->getParameter('app.stripe.secret_key')
+                );
+        $stripe->subscriptions->update(
+            $userData->getStrSubscriptionId(),
+            ['metadata' => ['customer_id' => $stripeCustomerId]]
+        );
+
+    }
+
 
     public function checkStripeSubscriptionActive(Security $security, AccountRepository $accountRepository, AccountUserRepository $accountUserRepository)
     {
 
         $user = $security->getUser();
-        if ($security->isGranted('ROLE_USER') && $user->getIsAccount()) {
+        if ($security->isGranted('ROLE_USER')===true && $user->getIsAccount()) {
             // get the account information the user is registered to
             $accountUser = $accountUserRepository->findOneBy(['user' => $user->getId()]);
 
@@ -193,15 +203,7 @@ final class StripeService
             } else {
                 if (!$account->getIsSubscriptionActive()) {
                     if (is_null($user->getStripeCustomerId())) {
-                        $stripeAPIKey = $_ENV['STRIPE_SECRET_KEY'];
-                        Stripe::setApiKey($stripeAPIKey);
-                        $stripeCustomerObj =  \Stripe\Customer::create([
-                            'description' => 'Minuet customer',
-                            'email' => $user->getEmail(),
-                            'metadata' => [
-                                "userId" => $user->getId()
-                            ]
-                        ]);
+                        $stripeCustomerObj = $this->stripeCustomerCreated();
                         $stripeCustomerId =  $stripeCustomerObj->id;
                         $user->setStripeCustomerId($stripeCustomerId);                        
                         $this->entityManagerInterface->persist($user);

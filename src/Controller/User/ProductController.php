@@ -44,7 +44,7 @@ final class ProductController extends BaseController
         $products = $repository->findByFilter($searchParams);
         
         $resp = $stripeService->checkStripeSubscriptionActive($security,$accountRepository,$accountUserRepository);                      
-        if ($resp==='account') {
+        if ($resp === 'account') {
             $this->addFlash('error','message.stripe_in_active');  
             return $this->redirectToRoute('app_pricing');
         }elseif (!$resp) {
