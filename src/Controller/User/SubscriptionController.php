@@ -91,7 +91,7 @@ final class SubscriptionController extends BaseController
             $stripeCustomerId = $this->getUser()->getStripeCustomerId();
             $stripeSession = $this->stripeService->stripeCreateSession($success_url,$cancel_url, $stripeCustomerId, $priceId);
             if ($this->getUser()->getStripeSubscriptionId()) {
-                $this->stripeService->stripeAddSubscriptionToCustomer($stripeCustomerId);                
+                $this->stripeService->stripeAddSubscriptionToCustomer($stripeCustomerId,$this->getUser());                
             }
             $session->set('stripe-session-id', $stripeSession->id);
             return $this->redirect($stripeSession->url, 303);
@@ -142,7 +142,7 @@ final class SubscriptionController extends BaseController
             $stripeSession = $this->stripeService->stripeCreateSession($success_url,$cancel_url, $stripeCustomerId, $priceId);
 
             if ($userData->getStrSubscriptionId()) {               
-                $this->stripeService->stripeAddSubscriptionToCustomer($stripeCustomerId);                
+                $this->stripeService->stripeAddSubscriptionToCustomer($stripeCustomerId,$userData);                
             }
 
             $session->set('stripe-session-id', $stripeSession->id);

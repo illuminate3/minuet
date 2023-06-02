@@ -16,6 +16,7 @@ use Stripe\Checkout\Session;
 use Stripe\Customer;
 use Stripe\Stripe;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 final class StripeService
 {
@@ -32,6 +33,7 @@ final class StripeService
     private SubscriptionRepository $subscriptionRepository;
     private AccountRepository $accountRepository;
     private EntityManagerInterface $entityManagerInterface;
+    private $parameters;
 
     public function __construct(
         UserRepository $userRepository,
@@ -41,6 +43,7 @@ final class StripeService
         SettingsRepository $settingsRepository,
         EntityManagerInterface $entityManagerInterface,
         Security $security,
+        ParameterBagInterface $parameters
     ) {
         $this->userRepository = $userRepository;
         $this->userService = $userService;
@@ -49,6 +52,7 @@ final class StripeService
         $this->accountRepository = $accountRepository;
         $this->security = $security;
         $this->entityManagerInterface = $entityManagerInterface;
+        $this->parameters = $parameters;
     }
 
 
@@ -110,18 +114,18 @@ final class StripeService
 
     public function stripeCustomerCreated(): Customer
     {
-
-        Stripe::setApiKey($this->getParameter('app.stripe.secret_key'));
+        Stripe::setApiKey($this->parameters->get('app.stripe.secret_key'));
+        $user = $this->security->getUser();
         $stripeCustomerObject = Customer::create([
             'description'    => $this->settingsRepository->findOneBy(['setting_name' => 'site_name'])->getSettingValue(),
-            'email'          => $this->getUser()->getEmail(),
+            'email'          => $user->getEmail(),
             'metadata'       =>
             [
-                'userId' => $this->getUser()->getId(),
+                'userId' => $user->getId(),
             ],
         ]);
         $stripeCustomerId = $stripeCustomerObject->id;
-        $user = $this->security->getUser();
+       
         $user->setStripeCustomerId($stripeCustomerId);
         $this->userService->update($user);
         return $stripeCustomerObject;
@@ -129,7 +133,7 @@ final class StripeService
 
     public function stripeCreateSession($success_url, $cancel_url, $stripeCustomerId, $priceId): Session
     {
-
+        Stripe::setApiKey($this->parameters->get('app.stripe.secret_key'));        
         $stripeSession = Session::create(
             [
                 'success_url'          => $success_url,
@@ -160,13 +164,13 @@ final class StripeService
         $this->userService->update($user);
     }
 
-    public function stripeAddSubscriptionToCustomer($stripeCustomerId): void
+    public function stripeAddSubscriptionToCustomer($stripeCustomerId,$user): void
     {
          $stripe = new \Stripe\StripeClient(
-                    $this->getParameter('app.stripe.secret_key')
+            $this->parameters->get('app.stripe.secret_key')
                 );
         $stripe->subscriptions->update(
-            $userData->getStrSubscriptionId(),
+            $user->getStrSubscriptionId(),
             ['metadata' => ['customer_id' => $stripeCustomerId]]
         );
 
