@@ -83,10 +83,14 @@ security:
 #        - { path: '^/(%app_locales%)/admin', roles: ROLE_ADMIN }
 #        - { path: '^/(%app_locales%)/user', roles: ROLE_USER }
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/user, roles: ROLE_USER }
+        - { path: ^/user, roles: [ROLE_DEALER, ROLE_STAFF, ROLE_BUYER, ROLE_USER, ] }
 
     role_hierarchy:
+        ROLE_SUPER: ROLE_ADMIN
         ROLE_ADMIN: ROLE_USER
+        ROLE_DEALER: ROLE_USER
+        ROLE_STAFF: ROLE_USER
+        ROLE_BUYER: ROLE_USER
 
 when@test:
     # this configuration simplifies testing URLs protected by the security mechanism

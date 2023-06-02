@@ -29,19 +29,24 @@ class ThreadController extends BaseController
     ): Response {
         // get the account information the user is registered to
         $user = $security->getUser();
-        $accountUser = $accountUserRepository->findOneBy(['user' => $user->getId()]);
-        // get the account information
-        $account = $accountRepository->findOneBy(['id' => $accountUser->getAccount()]);
-        $account_id = $account->getId();
+        $account = $accountUserRepository->findOneBy(['user' => $user->getId()]);
+        $products = [];
+        if (!empty($account)) {
+            $accountID = $account->getAccount()->getId();
+            $products = $productRepository->findAllThreadsByAccount($accountID);
 
-        $products = $productRepository->findAllThreadsByAccount($account_id);
-
-        return $this->render('thread/index.html.twig', [
-//            'title' => 'title.dashboard',
-            'title' => (!empty($account->getName())) ? $account->getName() : '',
-            'site' => $this->site($request),
-            'products' => $products,
-        ]);
+            return $this->render('thread/index.html.twig', [
+                'title' => (!empty($account->getAccount()->getName())) ? $account->getAccount()->getName() : '',
+                'site' => $this->site($request),
+                'products' => $products,
+            ]);
+        } else {
+            return $this->render('thread/index.html.twig', [
+                'title' => 'title.dashboard',
+                'site' => $this->site($request),
+                'products' => $products,
+            ]);
+        }
     }
 
     #[Route('/new', name: 'app_thread_new', methods: ['GET', 'POST'])]
@@ -101,25 +106,25 @@ class ThreadController extends BaseController
 
 
     #[Route('/{id}/update_pin_status', name: 'is_pin', methods: ['POST'])]
-    public function isPin(Request $request,ThreadRepository $threadRepository): JsonResponse
+    public function isPin(Request $request, ThreadRepository $threadRepository): JsonResponse
     {
         $id= $request->request->get('id');
-        $pin_value= $request->request->get('ispin');
+        $pinValue= $request->request->get('ispin');
 
-        $threadRepository->updatePinStatus((int)$id, (bool) $pin_value);
+        $threadRepository->updatePinStatus((int)$id, (bool) $pinValue);
 
-        return new JsonResponse(['status' => 'success', 'data' => (bool) $pin_value, 'id' => (int) $id]);
+        return new JsonResponse(['status' => 'success', 'data' => (bool) $pinValue, 'id' => (int) $id]);
     }
 
     #[Route('/{id}/update_close_status', name: 'is_close', methods: ['POST'])]
-    public function isClose(Request $request,ThreadRepository $threadRepository): JsonResponse
+    public function isClose(Request $request, ThreadRepository $threadRepository): JsonResponse
     {
         $id= $request->request->get('id');
-        $close_value= $request->request->get('ispin');
+        $closeValue= $request->request->get('ispin');
 
-        $threadRepository->updateCloseStatus((int)$id, (bool) $close_value);
+        $threadRepository->updateCloseStatus((int)$id, (bool) $closeValue);
 
-        return new JsonResponse(['status' => 'success', 'data' => (bool) $close_value, 'id' => (int) $id]);
+        return new JsonResponse(['status' => 'success', 'data' => (bool) $closeValue, 'id' => (int) $id]);
     }
 
 }

@@ -70,7 +70,7 @@ final class SendResetPasswordLinkHandler
             ->from($this->getSender())
             ->to($user->getEmail())
             ->subject($this->getSubject())
-            ->textTemplate('auth/email/reset.txt.twig')
+            ->htmlTemplate('auth/email/reset.txt.twig')
             ->context([
                 'confirmationUrl' => $this->getConfirmationUrl($user),
                 'username' => $user->getEmail(),
