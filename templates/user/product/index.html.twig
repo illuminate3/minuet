@@ -15,7 +15,20 @@
     <div class="col-lg-3 col-md-6 col-sm-12">
         <div class="card full-xs">
 
-            <a href="{{ path('product_show', {
+            {% for image in product.images | slice(0, 1) %}
+                <img class="card-img-top" src="/uploads/images/small/{{ image.file }}"
+                        alt="{{ product.title }}"
+                        title="{{ product.title }}"/>
+
+            {% else %}
+
+                <img class="card-img-top border-bottom" src="{{ asset('/images/no-image.png') }}"
+                        alt="{{ product.title }}"
+                        title="{{ product.title }}"/>
+
+            {% endfor %}
+
+            {#<a href="{{ path('product_show', {
                 'id':  product.id,
                 'slug': product.slug }) }}">
 
@@ -33,17 +46,17 @@
 
                 {% endfor %}
 
-            </a>
+            </a>#}
 
             <div class="card-body">
 
                 <h5 class="card-title">
 
-                    <a href="{{ path('product_show', {
+                    {#<a href="{{ path('product_show', {
                             'id':  product.id,
                             'slug': product.slug }) }}">
                         {{ product.title }}
-                    </a>
+                    </a>#}
 
                 </h5>
 

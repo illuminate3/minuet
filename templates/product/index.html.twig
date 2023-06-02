@@ -72,7 +72,7 @@
                         'id':  product.id,
                         'slug': product.slug}) }}">
 
-                            {% for photo in product.images | slice(0, 1) %}
+                          {#  {% for photo in product.images | slice(0, 1) %}
 
                             <img class="card-img-top lazyload" src="{{ asset('/images/transparent.png') }}"
                                 data-src="/uploads/images/small/{{ photo.file }}" alt="{{ product.slug }}"
@@ -83,7 +83,7 @@
                             <img class="card-img-top border-bottom" src="{{ asset('/images/no-photo.png') }}"
                                 alt="{{ product.slug }}" title="{{ product.title }}" />
 
-                            {% endfor %}
+                            {% endfor %}#}
 
                             {% if product.price != '' %}
                             <span class="price">

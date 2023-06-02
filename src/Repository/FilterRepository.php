@@ -10,7 +10,7 @@ final class FilterRepository extends ProductRepository
 {
     public function findByFilter(array $params): PaginationInterface
     {
-        $queryBuilder = $this->createQueryBuilder('p');
+        $queryBuilder = $this->createQueryBuilder('p')->orderBy('p.id', 'DESC');
         if (isset($params['category']) && !empty($params['category'])) {
             $queryBuilder->where($queryBuilder->expr()->in('p.category',  $params['category']));
         }
