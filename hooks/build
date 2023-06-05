@@ -1,2 +1,2 @@
 #!/bin/bash
-#docker build --build-arg DATABASE_URL=${DATABASE_URL} -t $IMAGE_NAME .
+docker build --build-arg DATABASE_URL=${DATABASE_URL} -t $IMAGE_NAME .
