@@ -10,8 +10,6 @@ RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* /var/www/html
     yarn install --ignore-engines --force; \
     yarn build; \
     chown www-data.www-data /var/www/html/* -R; \
-#    php bin/console d:m:m -n --allow-no-migration
-#    php bin/console app:dev
     php bin/console doctrine:database:drop; \
     php bin/console doctrine:database:create; \
     php bin/console doctrine:schema:create; \
