@@ -10,10 +10,7 @@ RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* /var/www/html
     yarn install --ignore-engines --force; \
     yarn build; \
     chown www-data.www-data /var/www/html/* -R; \
-    php bin/console doctrine:database:drop; \
-    php bin/console doctrine:database:create; \
-    php bin/console doctrine:schema:create; \
-    php bin/console doctrine:fixtures:load;
+    php bin/console d:m:m -n --allow-no-migration
 
 EXPOSE 80
 ENTRYPOINT ["apache2-foreground"]
