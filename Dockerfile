@@ -9,8 +9,7 @@ COPY --chown=www-data:www-data . /var/www/html/
 RUN php bin/composer.phar install \
     && yarn install --ignore-engines --force \
     && yarn build \
-    && chown www-data.www-data /var/www/html/* -R \
-    && php bin/console d:m:m -n --allow-no-migration
+    && chown www-data.www-data /var/www/html/* -R
 
 EXPOSE 80
 ENTRYPOINT ["apache2-foreground"]
