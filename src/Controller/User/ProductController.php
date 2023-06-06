@@ -10,6 +10,7 @@ use App\Entity\MakeModel;
 use App\Entity\Product;
 use App\Entity\ProductTrims;
 use App\Controller\AbstractImageController;
+use App\Entity\ProductDetails;
 use App\Service\FileUploader;
 use App\Form\Type\ProductCustomType;
 use App\Utils\GeneralUtil;
@@ -19,12 +20,16 @@ use App\Repository\FilterRepository;
 use App\Repository\MakeModelRepository;
 use App\Service\Admin\ProductService;
 use App\Transformer\RequestToArrayTransformer;
+use App\Utils\Slugger;
 use DateTimeImmutable;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Contracts\Cache\CacheInterface;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 final class ProductController extends BaseController
 {
@@ -43,7 +48,6 @@ final class ProductController extends BaseController
         FilterRepository $repository,
         RequestToArrayTransformer $transformer
     ): Response {
-
         $searchParams = $transformer->transform($request);
         $products = $repository->findByFilter($searchParams);
         return $this->render('user/product/index.html.twig', [
@@ -64,21 +68,26 @@ final class ProductController extends BaseController
      * @throws InvalidArgumentException
      */
     #[Route(path: '/user/product/new', name: 'user_product_new')]
-    public function new(Request $request, ProductService $service,AccountRepository $accountRepository, MakeModelRepository $makeModelRepository, FileUploader $fileUploader): Response
+    public function new(Request $request, ProductService $service,AccountRepository $accountRepository, MakeModelRepository $makeModelRepository, FileUploader $fileUploader, EntityManagerInterface $entityManage, HttpClientInterface $carApiClient, CacheInterface $cache): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
-        
-        $pageNo = $request->request->get('page_no');
-        if($pageNo == 2)
+
+        $pageNo = $request->request->get('page_type');
+        if($pageNo == 'description_page')
         {
-            $form = $this->createForm(ProductCustomType::class, $product);
+            $productDetails = new ProductDetails();
+            $productArray = $entityManage->getRepository(Product::class)->findOneBy(['id' => (int)$request->get('product_id')]);
+            $productDetails->setProduct($productArray);
+            $productDetails->setCreatedAt(new DateTimeImmutable('now'));
+            $productDetails->setModifiedAt(new DateTimeImmutable('now'));
+            $form = $this->createForm(ProductCustomType::class, $productDetails);
         }
         
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if($pageNo == 2)
+            if($pageNo == 'description_page')
             {
                 $year = $request->request->get('year');
                 $make = $request->request->get('make');
@@ -94,23 +103,43 @@ final class ProductController extends BaseController
                     $makeModel->setBodyStyle('');
                     $makeModelRepository->save($makeModel, true);
                     $lastInsertedId = $makeModel->getId();
-                    $product->setYear($lastInsertedId);
-                    $product->setMake($lastInsertedId);
-                    $product->setModel($lastInsertedId);
+                    $productDetails->setYear($lastInsertedId);
+                    $productDetails->setMake($lastInsertedId);
+                    $productDetails->setModel($lastInsertedId);
                 }
                 else
                 {
                     $newId = $exists[0]->getId();
-                    $product->setYear($newId);
-                    $product->setMake($newId);
-                    $product->setModel($newId);
+                    $productDetails->setYear($newId);
+                    $productDetails->setMake($newId);
+                    $productDetails->setModel($newId);
                 }
+                $service->save($productDetails);
+        
+                $arrResponseData = json_decode(base64_decode($request->request->get('responseData')),true);
+        
+                foreach($requestTrim as $key => $value)
+                {
+                    $founKey = array_search($value, array_column($arrResponseData['trims'], 'name'));
+                    if($founKey !== false)
+                    { 
+                        $arrResponseData['trims'][$founKey]['created_at'] = new DateTimeImmutable('now');
+                        $arrResponseData['trims'][$founKey]['modified_at'] = new DateTimeImmutable('now');
+                        $arrResponseData['trims'][$founKey]['product_id'] = (int)$request->request->get('product_id');
+                        $productTrims = new ProductTrims($arrResponseData['trims'][$founKey]);
+                        $service->save($productTrims);
+                    }
+                }
+                return $this->redirectToRoute('user_products');
+            }
+            else
+            {
                 $user = $this->getUser();
-
                 $account = $accountRepository->findOneBy(['primaryUser' => $user->getId()]);
                 $product->setAccount($account);
-                $product->setTrim(implode(", ", $requestTrim));
-                $product->setVinResposne(base64_decode($request->request->get('responseData')));
+                $product->setSlug(Slugger::slugify($request->get('product')['title']));
+                $product->setCreatedAt(new DateTimeImmutable('now'));
+                $product->setModifiedAt(new DateTimeImmutable('now'));
                 $service->save($product);
                 $lastInsertedId = $product->getId();
                 $productImageFile = $form->get('images')->getData();
@@ -126,56 +155,40 @@ final class ProductController extends BaseController
                 $entityManager = $this->doctrine->getManager();
                 $entityManager->persist($image);
                 $entityManager->flush();
-            
-                $arrResponseData = json_decode(base64_decode($request->request->get('responseData')),true);
-                foreach($requestTrim as $key => $value)
+                
+                $vinNumber = 'vin/'.$product->getvin();
+
+                $token = GeneralUtil::getBearerToken($cache, $carApiClient);
+                $responseData = $carApiClient->request('GET', $_ENV['CAR_API_URL'] . $vinNumber, [
+                    'headers' => [
+                        'Authorization' => 'Bearer ' . $token,
+                    ],
+                ]);
+                if(!empty($responseData))
                 {
-                    $founKey = array_search($value, array_column($arrResponseData['trims'], 'name'));
-                    if($founKey !== false)
-                    { 
-                        $arrResponseData['trims'][$founKey]['product_id'] = $lastInsertedId;
-                        $productTrims = new ProductTrims($arrResponseData['trims'][$founKey]);
-                        $service->save($productTrims);
-                    }
+                    $arrResponseData = $responseData->toArray();
+                    $productDetails = new ProductDetails();
+                    $formData = $this->createForm(ProductCustomType::class, $productDetails);
+                    $formData->handleRequest($request);
+                    $makes = $makeModelRepository->findAllUniqueMake();
+                    $years = $makeModelRepository->findAllUniqueYear();
+                    $models = $makeModelRepository->findAllUniqueModel($arrResponseData['make']);
+                    $trim = explode(", ", $arrResponseData['trim']);
+                    return $this->render('user/product/new.html.twig', [
+                        'title' => 'title.products',
+                        'site' => $this->site($request),
+                        'product_response' => $arrResponseData,
+                        'product_response_data' => base64_encode(json_encode($responseData->toArray())),
+                        'vehical_identification_number' => $product->getvin(),
+                        'form' => $formData,
+                        'makes' => $makes,
+                        'models' => $models,
+                        'years' => $years,
+                        'trim' => $trim,
+                        'page_type' => 'description_page',
+                        'product_id' => $lastInsertedId,
+                    ]); 
                 }
-                return $this->redirectToRoute('user_products');
-            }
-            
-            $vinNumber = 'vin/'.$product->getvin();
-            $endPoint = 'auth/login';
-
-            $sessionCart = $request->getSession();
-            $sessionExists = $sessionCart->get('carApiToken');
-            $jwtResponse = $this->is_jwt_valid($sessionExists);
-            if($jwtResponse == false)
-            {
-                $validateRequest = GeneralUtil::CurlCallLoginApi($endPoint, $request, $data = array(), 'POST');    
-            }
-
-            $responseData = GeneralUtil::CURLCallCARAPI($vinNumber, $request, $data = array(), 'GET');
-            if(!empty($responseData))
-            {
-                $arrResponseData = json_decode(json_encode($responseData), true);
-                $products = new Product();
-                $formData = $this->createForm(ProductCustomType::class, $products);
-                $formData->handleRequest($request);
-                $makes = $makeModelRepository->findAllUniqueMake();
-                $years = $makeModelRepository->findAllUniqueYear();
-                $models = $makeModelRepository->findAllUniqueModel($arrResponseData['make']);
-                $trim = explode(", ", $arrResponseData['trim']);
-                return $this->render('user/product/new.html.twig', [
-                    'title' => 'title.products',
-                    'site' => $this->site($request),
-                    'product_response' => json_decode(json_encode($responseData), true),
-                    'product_response_data' => base64_encode(json_encode($responseData)),
-                    'vehical_identification_number' => $product->getvin(),
-                    'form' => $formData,
-                    'makes' => $makes,
-                    'models' => $models,
-                    'years' => $years,
-                    'trim' => $trim,
-                    'page_no' => 2
-                ]); 
             }
         }
         else
@@ -189,7 +202,7 @@ final class ProductController extends BaseController
                 'product_response' => array(),
                 'product_response_data' => '',
                 'models' => array(),
-                'page_no' => 1
+                'page_type' => 'summary_page'
             ]);
         }
     }

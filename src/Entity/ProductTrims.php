@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Entity\Trait\CreatedAtTrait;
+use App\Entity\Trait\ModifiedAtTrait;
 use App\Entity\Traits\EntityIdTrait;
 use App\Repository\ProductTrimsRepository;
 use DateTimeInterface;
@@ -20,6 +21,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class ProductTrims
 {
     use EntityIdTrait;
+    use CreatedAtTrait;
+    use ModifiedAtTrait;
 
     #[ORM\Column(type: Types::INTEGER, nullable: true)]
     private ?int $trim_id;
@@ -45,12 +48,6 @@ class ProductTrims
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?int $invoice;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, options: ['default' => 'CURRENT_TIMESTAMP'])]
-    private ?DateTimeInterface $created_at;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, options: ['default' => 'CURRENT_TIMESTAMP'])]
-    private ?DateTimeInterface $modified_at;
-
     /** Many features have one product. This is the owning side. */
     // #[ManyToOne(targetEntity: Product::class, inversedBy: 'product_trims')]
     // #[JoinColumn(name: 'product_id', referencedColumnName: 'id')]
@@ -66,8 +63,8 @@ class ProductTrims
         $this->description = $arraData['description'];
         $this->msrp = $arraData['msrp'];
         $this->invoice = $arraData['invoice'];
-        $this->created_at = new \DateTimeImmutable();
-        $this->modified_at = new \DateTimeImmutable();
+        $this->created_at = $arraData['created_at'];
+        $this->modified_at = $arraData['created_at'];
     }
 
 

@@ -21,40 +21,37 @@
         
         {{ form_start(form) }}
          {#{{ form_errors(form) }}#}
+            <div class="row">
+                <div class="col-md-6  mb-3">
+                    {{ form_row(form.vin, {
+                        'label': 'Vehicle Identification Number',
+                        'attr': {'required':'false', 'placeholder' : 'Enter Vehicle Identification Number', 'class': 'form-control'}, 
+                        'value' : vehical_identification_number ? vehical_identification_number : '' }) 
+                    }}
+                </div>
 
-            <div class="col-md-6  mb-3">
-                {{ form_row(form.vin, {
-                    'label': 'Vehicle Identification Number',
-                    'attr': {'required':'false', 'placeholder' : 'Enter Vehicle Identification Number', 'class': 'form-control'}, 
-                    'value' : vehical_identification_number ? vehical_identification_number : '' }) 
-                }}
-            </div>
-
-            {% if product_response is defined  %}
-                {% if product_response is empty  %}
-                {% else %}
-                <div class="row">
-                <div class="col-md-6 mb-3">
+                {% if page_type == 'summary_page'  %}
+                    <div class="col-md-6 mb-3">
                         {{ form_row(form.title, {
                             'label': 'label.title',
                             'attr': {'placeholder' : 'label.title', 'class': 'form-control'}, 
                             'value' : ''}) 
                         }}
-                </div>
-                <div class="col-md-6 mb-3">
+                    </div>
+                    <div class="col-md-6 mb-3">
                         {{ form_row(form.description, {
                             'label': 'label.description',
                             'attr': {'placeholder' : 'label.description', 'class': 'form-control'}, 
                             'value' : ''}) 
                         }}
-                </div>
-                <div class="col-md-6 mb-3">
+                    </div>
+                    <div class="col-md-6 mb-3">
                         {{ form_row(form.price, {
                             'label': 'label.price',
                             'attr': {'placeholder' : 'label.price', 'class': 'form-control'}, 
                             'value' : ''}) 
                         }}
-                </div>
+                    </div>
                     <div class="col-sm-6 mb-3">
                         {{ form_row(form.category, {
                             'label': 'label.category',
@@ -62,14 +59,23 @@
                             }) 
                         }}
                     </div>
-
                     <div class="col-md-6 mb-3">
-                            {{ form_row(form.images, {
-                                'label': 'label.images',
-                                'attr': {'placeholder' : 'label.images', 'class': 'form-control'}, 
-                                }) 
-                            }}
+                        {{ form_row(form.images, {
+                            'label': 'Image',
+                            'attr': {'placeholder' : 'label.images', 'class': 'form-control'}, 
+                            }) 
+                        }}
                     </div>
+                </div>
+                {%endif%}
+            
+            
+
+            {% if product_response is defined  %}
+                {% if product_response is empty  %}
+                {% else %}
+                <div class="row">
+                
 
                     {#{{ form_row(form.images) }}#}
 
@@ -643,11 +649,10 @@
                 
             {% endif %}
 
-            
-
-            
-
-                <input type="hidden" name="page_no" value="{{ page_no ? page_no : 1 }}"/>
+                {% if page_type == 'description_page' %}
+                    <input type="hidden" name="product_id" value="{{ product_id ? product_id : '' }}"/>
+                {%endif%}
+                <input type="hidden" name="page_type" value="{{ page_type ? page_type : 'summary_page' }}"/>
                 <input type="hidden" name="responseData" value="{{ product_response_data }}"/>
             
             <!-- Submit -->
