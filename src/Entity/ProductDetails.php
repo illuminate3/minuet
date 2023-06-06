@@ -450,7 +450,7 @@ class ProductDetails
     private ?string $vin_response = '';
 
     #[ORM\OneToOne(inversedBy: 'product_details', targetEntity: Product::class, cascade: ['persist', 'remove'])]
-    #[JoinColumn(name: 'product_id', referencedColumnName: 'id')]
+    // #[JoinColumn(name: 'product_id', referencedColumnName: 'id')]
     #[ORM\JoinColumn(nullable: false)]
     private Product $product;
 

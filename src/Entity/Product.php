@@ -22,9 +22,9 @@ use Doctrine\ORM\Mapping\OneToMany;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Table]
-#[UniqueEntity(['title'])]
-#[ORM\UniqueConstraint(name: 'slug_title_unique_key', columns: ['slug', 'title'])]
-// #[ORM\UniqueConstraint(name: 'slug_title_unique_key', columns: ['slug'])]
+// #[UniqueEntity(['title'])]
+// #[ORM\UniqueConstraint(name: 'slug_title_unique_key', columns: ['slug', 'title'])]
+#[ORM\UniqueConstraint(name: 'slug_title_unique_key', columns: ['slug'])]
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
 {
@@ -70,7 +70,7 @@ class Product
     {
         $this->threads = new ArrayCollection();
         $this->images = new ArrayCollection();
-        $this->productTrims = new ArrayCollection();
+        // $this->productTrims = new ArrayCollection();
     }
 
     public function getTitle()

@@ -148,9 +148,7 @@ final class ProductController extends BaseController
                 $image = new Image();
                 $image->setProduct($product)
                     ->setSortOrder(1)
-                    ->setFile($fileName)
-                    ->setCreatedAt(new DateTimeImmutable('now'))
-                    ->setModifiedAt(new DateTimeImmutable('now'));
+                    ->setFile($fileName);
 
                 $entityManager = $this->doctrine->getManager();
                 $entityManager->persist($image);
