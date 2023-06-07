@@ -27,9 +27,597 @@
 
             <div class="row">
 
-{#                <div class="col-md-6 col-lg-4 mb-3">#}
-{#                    {{ form_row(form.city) }}#}
-{#                </div>#}
+            <div class="col-md-6  mb-3">
+                {{ form_row(form.vin, {
+                    'label': 'Vehicle Identification Number',
+                    'attr': {'required':'false', 'placeholder' : 'Enter Vehicle Identification Number', 'class': 'form-control'}, 
+                    'value' : product.vin ? product.vin : '' }) 
+                }}
+            </div>
+            <div class="col-md-6 mb-3">
+                        {{ form_row(form.title, {
+                            'label': 'label.title',
+                            'attr': {'required':'true', 'placeholder' : 'label.title', 'class': 'form-control'}, 
+                            'value' : product.title ? product.title : '' }) 
+                        }}
+                </div>
+                <div class="col-md-6 mb-3">
+                        {{ form_row(form.description, {
+                            'label': 'label.description',
+                            'attr': {'required':'true', 'placeholder' : 'label.description', 'class': 'form-control'}, 
+                            'value' : product.description ? product.description : '' }) 
+                        }}
+                </div>
+                <div class="col-md-6 mb-3">
+                        {{ form_row(form.price, {
+                            'label': 'label.price',
+                            'attr': {'required':'true', 'placeholder' : 'label.price', 'class': 'form-control'}, 
+                            'value' : product.price ? product.price : ''}) 
+                        }}
+                </div>
+                    <div class="col-sm-6 mb-3">
+                        {{ form_row(form.category, {
+                            'label': 'label.category',
+                            'attr': {'required':'true', 'placeholder' : 'Select Category', 'class': 'form-control'}, 
+                            }) 
+                        }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                            {{ form_row(form.images, {
+                                'label': '',
+                                'attr': {'required':'true', 'placeholder' : '', 'class': 'form-control'}, 
+                                }) 
+                            }}
+                    </div>
+                    
+                    <div class="col-sm-6 mb-3">
+                        <label for="trims">Trims</label>
+                            <select id="trim" name="trim[]" class="form-control" multiple required>
+                            <option value="">Select Trims</option>
+                            {% for label, value in alltrims %}
+                                <option value="{{ value.name }}"
+                                {% for label, value1 in selectedtrims %}
+                                    {{ (value1.name == value.name) ? 'selected' : '' }}
+                                {% endfor %}
+                                >{{ value.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-sm-6 mb-3">
+                        <label for="year">Year</label>
+                        <select id="year" name="year" class="form-control">
+                            <option value="">Select Year</option>
+                            {% for label, value in years %}
+                                <option value="{{ value.year }}" {{ (selectedyear == value.year) ? 'selected' : ''}}>{{ value.year }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-sm-6 mb-3">
+                            <label for="make">Make</label>
+                            <select id="make" name="make" class="form-control">
+                            <option value="">Select Make</option>
+                            {% for label, value in makes %}
+                                <option value="{{ value.make }}" {{ (selectedmake == value.make or selectedmake == value.make|upper) ? 'selected' : ''}}>{{ value.make }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-sm-6 mb-3">
+                            <label for="model">Model</label>
+                            <select id="model" name="model" class="form-control">
+                            <option value="">Select Model</option>
+                            {% for label, value in models %}
+                                <option value="{{ value.model }}" {{ (selectedmodel == value.model) ? 'selected' : ''}}>{{ value.model }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                            {{ form_row(form.suggested_vin, {
+                                'label': 'label.suggested_vin',
+                                'attr': {'placeholder' : 'label.suggested_vin', 'class': 'form-control'}, 
+                                'value' : product.getSuggestedVin() ? product.getSuggestedVin() : '' }) 
+                            }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                            {{ form_row(form.possible_values, {
+                                'label': 'label.possible_values',
+                                'attr': {'placeholder' : 'label.possible_values', 'class': 'form-control'}, 
+                                'value' : product.getPossibleValues() ? product.getPossibleValues() : '' }) 
+                            }}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                            {{ form_row(form.vehicle_descriptor, {
+                                'label': 'label.vehicle_descriptor',
+                                'attr': {'placeholder' : 'label.vehicle_descriptor', 'class': 'form-control'}, 
+                                'value' : product.getVehicleDescriptor() ? product.getVehicleDescriptor() : '' }) 
+                            }}
+                    </div>
+
+                    <div class="col-md-6  mb-3">
+                            {{ form_row(form.destination_market, {
+                                'label': 'label.destination_market',
+                                'attr': {'placeholder' : 'label.destination_market', 'class': 'form-control'}, 
+                                'value' : product.getDestinationMarket() ? product.getDestinationMarket() : '' }) 
+                            }}
+                    </div>
+
+                    <div class="col-md-6  mb-3">
+                            {{ form_row(form.manufacturer_name, {
+                                'label': 'label.manufacturer_name',
+                                'attr': {'placeholder' : 'label.manufacturer_name', 'class': 'form-control'}, 
+                                'value' : product.getManufacturerName() ? product.getManufacturerName() : '' }) 
+                            }}
+                    </div>
+
+                    <div class="col-md-6  mb-3">
+                            {{ form_row(form.plant_city, {
+                                'label': 'label.plant_city',
+                                'attr': {'placeholder' : 'label.plant_city', 'class': 'form-control'}, 
+                                'value' : product.getPlantCity() ? product.getPlantCity() : '' }) 
+                            }}
+                    </div>
+
+                    <div class="col-md-6  mb-3">
+                            {{ form_row(form.series, {
+                                'label': 'label.series',
+                                'attr': {'placeholder' : 'label.series', 'class': 'form-control'}, 
+                                'value' : product.getSeries() ? product.getSeries() : '' }) 
+                            }}
+                    </div>
+
+                    <div class="col-md-6  mb-3">
+                            {{ form_row(form.vehicle_type, {
+                                'label': 'label.vehicle_type',
+                                'attr': {'placeholder' : 'label.vehicle_type', 'class': 'form-control'}, 
+                                'value' : product.getVehicleType() ? product.getVehicleType() : '' }) 
+                            }}
+                    </div>
+
+                    <div class="col-md-6  mb-3">
+                            {{ form_row(form.plant_country, {
+                                'label': 'label.plant_country',
+                                'attr': {'placeholder' : 'label.plant_country', 'class': 'form-control'}, 
+                                'value' : product.getPlantCountry() ? product.getPlantCountry() : '' }) 
+                            }}
+                    </div>
+
+                    <div class="col-md-6  mb-3">
+                            {{ form_row(form.plant_company_name, {
+                                'label': 'label.plant_company_name',
+                                'attr': {'placeholder' : 'label.plant_company_name', 'class': 'form-control'}, 
+                                'value' : product.getPlantCompanyName() ? product.getPlantCompanyName() : '' }) 
+                            }}
+                    </div>
+
+                    <div class="col-md-6  mb-3">
+                            {{ form_row(form.plant_state, {
+                                'label': 'label.plant_state',
+                                'attr': {'placeholder' : 'label.plant_state', 'class': 'form-control'}, 
+                                'value' : product.getPlantState() ? product.getPlantState() : '' }) 
+                            }}
+                    </div>
+
+                    <div class="col-md-6  mb-3">
+                            {{ form_row(form.trim2, {
+                                'label': 'label.trim2',
+                                'attr': {'placeholder' : 'label.trim2', 'class': 'form-control'}, 
+                                'value' : product.getTrim2() ? product.getTrim2() : '' }) 
+                            }}
+                    </div>
+
+                    <div class="col-md-6  mb-3">
+                            {{ form_row(form.series2, {
+                                'label': 'label.series2',
+                                'attr': {'placeholder' : 'label.series2', 'class': 'form-control'}, 
+                                'value' : product.getSeries2() ? product.getSeries2() : '' }) 
+                            }}
+                    </div>
+
+                    <div class="col-md-6  mb-3">
+                            {{ form_row(form.note, {
+                                'label': 'label.note',
+                                'attr': {'placeholder' : 'label.note', 'class': 'form-control'}, 
+                                'value' : product.getNote() ? product.getNote() : '' }) 
+                            }}
+                    </div>
+
+                    <div class="col-md-6  mb-3">
+                            {{ form_row(form.base_price, {
+                                'label': 'label.base_price',
+                                'attr': {'placeholder' : 'label.base_price', 'class': 'form-control'}, 
+                                'value' : product.getBasePrice() ? product.getBasePrice() : '' }) 
+                            }}
+                    </div>
+
+                    <div class="col-md-6  mb-3">
+                            {{ form_row(form.non_land_use, {
+                                'label': 'label.non_land_use',
+                                'attr': {'placeholder' : 'label.non_land_use', 'class': 'form-control'}, 
+                                'value' : product.getNonLandUse() ? product.getNonLandUse() : '' }) 
+                            }}
+                    </div>
+
+                    <div class="col-md-6  mb-3">
+                            {{ form_row(form.body_class, {
+                                'label': 'label.body_class',
+                                'attr': {'placeholder' : 'label.body_class', 'class': 'form-control'}, 
+                                'value' : product.getBodyClass() ? product.getBodyClass() : '' }) 
+                            }}
+                    </div>
+
+                    <div class="col-md-6  mb-3">
+                            {{ form_row(form.doors, {
+                                'label': 'label.doors',
+                                'attr': {'placeholder' : 'label.doors', 'class': 'form-control'}, 
+                                'value' : product.getDoors() ? product.getDoors() : '' }) 
+                            }}
+                    </div>
+
+                    <div class="col-md-6  mb-3">
+                            {{ form_row(form.windows, {
+                                'label': 'label.windows',
+                                'attr': {'placeholder' : 'label.windows', 'class': 'form-control'}, 
+                                'value' : product.getWindows() ? product.getWindows() : '' }) 
+                            }}
+                    </div>
+
+                    <div class="col-md-6  mb-3">
+                        {{ form_row(form.wheel_base_type, {
+                            'label': 'label.wheel_base_type',
+                            'attr': {'placeholder' : 'label.wheel_base_type', 
+                            'class': 'form-control'},
+                            'value' : product.getWheelBaseType() ? product.getWheelBaseType() : '' })}}
+                    </div>
+
+
+                    <div class="col-md-6  mb-3">
+                        {{ form_row(form.track_width_inches, {'label': 'label.track_width_inches','attr': {'placeholder' : 'label.track_width_inches', 'class': 'form-control'},'value' : product.getTrackWidthInches() ? product.getTrackWidthInches() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.gross_vehicle_weight_rating_from, {'label': 'label.gross_vehicle_weight_rating_from','attr': {'placeholder' : 'label.gross_vehicle_weight_rating_from', 'class': 'form-control'},'value' : product.getGrossVehicleWeightRatingFrom() ? product.getGrossVehicleWeightRatingFrom() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.bed_length_inches, {'label': 'label.bed_length_inches','attr': {'placeholder' : 'label.bed_length_inches', 'class': 'form-control'},'value' : product.getBedLengthInches() ? product.getBedLengthInches() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.curb_weight_pounds, {'label': 'label.curb_weight_pounds','attr': {'placeholder' : 'label.curb_weight_pounds', 'class': 'form-control'},'value' : product.getCurbWeightPounds() ? product.getCurbWeightPounds() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.wheel_base_inches_from, {'label': 'label.wheel_base_inches_from','attr': {'placeholder' : 'label.wheel_base_inches_from', 'class': 'form-control'},'value' : product.getWheelBaseInchesFrom() ? product.getWheelBaseInchesFrom() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.wheel_base_inches_to, {'label': 'label.wheel_base_inches_to','attr': {'placeholder' : 'label.wheel_base_inches_to', 'class': 'form-control'},'value' : product.getWheelBaseInchesTo() ? product.getWheelBaseInchesTo() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.gross_combination_weight_rating_from, {'label': 'label.gross_combination_weight_rating_from','attr': {'placeholder' : 'label.gross_combination_weight_rating_from', 'class': 'form-control'},'value' : product.getGrossCombinationWeightRatingFrom() ?product.getGrossCombinationWeightRatingFrom() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.gross_combination_weight_rating_to, {'label': 'label.gross_combination_weight_rating_to','attr': {'placeholder' : 'label.gross_combination_weight_rating_to', 'class': 'form-control'},'value' : product.getGrossCombinationWeightRatingTo() ? product.getGrossCombinationWeightRatingTo() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.gross_vehicle_weight_rating_to, {'label': 'label.gross_vehicle_weight_rating_to','attr': {'placeholder' : 'label.gross_vehicle_weight_rating_to', 'class': 'form-control'},'value' : product.getGrossVehicleWeightRatingTo() ? product.getGrossVehicleWeightRatingTo() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.bed_type, {'label': 'label.bed_type','attr': {'placeholder' : 'label.bed_type', 'class': 'form-control'},'value' : product.getBedType() ? product.getBedType() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.cab_type, {'label': 'label.cab_type','attr': {'placeholder' : 'label.cab_type', 'class': 'form-control'},'value' : product.getCabType() ? product.getCabType() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.trailer_type_connection, {'label': 'label.trailer_type_connection','attr': {'placeholder' : 'label.trailer_type_connection', 'class': 'form-control'},'value' : product.getTrailerTypeConnection() ? product.getTrailerTypeConnection() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.trailer_body_type, {'label': 'label.trailer_body_type','attr': {'placeholder' : 'label.trailer_body_type', 'class': 'form-control'},'value' : product.getTrailerBodyType() ? product.getTrailerBodyType() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.trailer_length_feet, {'label': 'label.trailer_length_feet','attr': {'placeholder' : 'label.trailer_length_feet', 'class': 'form-control'},'value' : product.getTrailerLengthFeet() ? product.getTrailerLengthFeet() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.other_trailer_info, {'label': 'label.other_trailer_info','attr': {'placeholder' : 'label.other_trailer_info', 'class': 'form-control'},'value' : product.getOtherTrailerInfo() ? product.getOtherTrailerInfo() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.number_of_wheels, {'label': 'label.number_of_wheels','attr': {'placeholder' : 'label.number_of_wheels', 'class': 'form-control'},'value' : product.getNumberOfWheels() ? product.getNumberOfWheels() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.wheel_size_front_inches, {'label': 'label.wheel_size_front_inches','attr': {'placeholder' : 'label.wheel_size_front_inches', 'class': 'form-control'},'value' : product.getWheelSizeFrontInches() ? product.getWheelSizeFrontInches() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.wheel_size_rear_inches, {'label': 'label.wheel_size_rear_inches','attr': {'placeholder' : 'label.wheel_size_rear_inches', 'class': 'form-control'},'value' : product.getWheelSizeRearInches() ? product.getWheelSizeRearInches() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.entertainment_system, {'label': 'label.entertainment_system','attr': {'placeholder' : 'label.entertainment_system', 'class': 'form-control'},'value' : product.getEntertainmentSystem() ? product.getEntertainmentSystem() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.steering_location, {'label': 'label.steering_location','attr': {'placeholder' : 'label.steering_location', 'class': 'form-control'},'value' : product.getSteeringLocation() ? product.getSteeringLocation() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.number_of_seats, {'label': 'label.number_of_seats','attr': {'placeholder' : 'label.number_of_seats', 'class': 'form-control'},'value' : product.getNumberOfSeats() ? product.getNumberOfSeats() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.number_of_seat_rows, {'label': 'label.number_of_seat_rows','attr': {'placeholder' : 'label.number_of_seat_rows', 'class': 'form-control'},'value' :product.getNumberOfSeatRows() ? product.getNumberOfSeatRows() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.transmission_style, {'label': 'label.transmission_style','attr': {'placeholder' : 'label.transmission_style', 'class': 'form-control'},'value' : product.getTransmissionStyle() ? product.getTransmissionStyle() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.transmission_speeds, {'label': 'label.transmission_speeds','attr': {'placeholder' : 'label.transmission_speeds', 'class': 'form-control'},'value' : product.getTransmissionSpeeds() ? product.getTransmissionSpeeds() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.drive_type, {'label': 'label.drive_type','attr': {'placeholder' : 'label.drive_type', 'class': 'form-control'},'value' : product.getDriveType() ? product.getDriveType() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.axles, {'label': 'Axles','attr': {'placeholder' : 'Axles', 'class': 'form-control'},'value' : product.getAxles() ? product.getAxles() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.axle_configuration, {'label': 'Axle Configuration','attr': {'placeholder' : 'Axle Configuration', 'class': 'form-control'},'value' : product.getAxleConfiguration() ? product.getAxleConfiguration() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.brake_system_type, {'label': 'Brake System Type','attr': {'placeholder' : 'Brake System Type', 'class': 'form-control'},'value' : product.getBrakeSystemType() ? product.getBrakeSystemType() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.brake_system_description, {'label': 'Brake System Description','attr': {'placeholder' : 'Brake System Description', 'class': 'form-control'},'value' : product.getBrakeSystemDescription() ? product.getBrakeSystemDescription() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.other_battery_info, {'label': 'Other Battery Info','attr': {'placeholder' : 'Other Battery Info', 'class': 'form-control'},'value' : product.getOtherBatteryInfo() ? product.getOtherBatteryInfo() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.battery_type, {'label': 'Battery Type','attr': {'placeholder' : 'Battery Type', 'class': 'form-control'},'value' : product.getBatteryType() ? product.getBatteryType() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.number_of_battery_cells_per_module, {'label': 'Number Of Battery Cells Per Module','attr': {'placeholder' : 'Number Of Battery Cells Per Module', 'class': 'form-control'},'value' : product.getNumberOfBatteryCellsPerModule() ? product.getNumberOfBatteryCellsPerModule() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.battery_current_amps_from, {'label': 'Battery Current Amps From','attr': {'placeholder' : 'Battery Current Amps From', 'class': 'form-control'},'value' : product.getBatteryCurrentAmpsFrom() ? product.getBatteryCurrentAmpsFrom() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.battery_voltage_volts_from, {'label': 'Battery Voltage Volts From','attr': {'placeholder' : 'Battery Voltage Volts From', 'class': 'form-control'},'value' : product.getBatteryVoltageVoltsFrom() ? product.getBatteryVoltageVoltsFrom() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.battery_energy_kwh_from, {'label': 'Battery Energy Kwh From','attr': {'placeholder' : 'Battery Energy Kwh From', 'class': 'form-control'},'value' : product.getBatteryEnergyKwhFrom() ? product.getBatteryEnergyKwhFrom() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.ev_drive_unit, {'label': 'Ev Drive Unit','attr': {'placeholder' : 'Ev Drive Unit', 'class': 'form-control'},'value' : product.getEvDriveUnit() ? product.getEvDriveUnit() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.battery_current_amps_to, {'label': 'Battery Current Amps To','attr': {'placeholder' : 'Battery Current Amps To', 'class': 'form-control'},'value' : product.getBatteryCurrentAmpsTo() ? product.getBatteryCurrentAmpsTo() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{ form_row(form.battery_voltage_volts_to, {'label': 'Battery Voltage Volts To','attr': {'placeholder' : 'Battery Voltage Volts To', 'class': 'form-control'},'value' : product.getBatteryVoltageVoltsTo() ? product.getBatteryVoltageVoltsTo() : '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+    
+
+                    {{form_row(form.battery_energy_kwh_to, 
+                                {'label': 'Battery Energy Kwh To',
+                                'attr': {'placeholder' : 'Battery Energy Kwh To', 'class': 'form-control'},
+                                'value' :product.getBatteryEnergyKwhTo() ? product.getBatteryEnergyKwhTo(): '' 
+                            })}}
+                    </div>
+                   
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.number_of_battery_modules_per_pack, {'label': 'Number Of Battery Modules Per Pack','attr': {'placeholder' : 'Number Of Battery Modules Per Pack', 'class': 'form-control'},'value' :product.getNumberOfBatteryModulesPerPack() ? product.getNumberOfBatteryModulesPerPack(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.number_of_battery_packs_per_vehicle, {'label': 'Number Of Battery Packs Per Vehicle','attr': {'placeholder' : 'Number Of Battery Packs Per Vehicle', 'class': 'form-control'},'value' :product.getNumberOfBatteryPacksPerVehicle() ? product.getNumberOfBatteryPacksPerVehicle(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.charger_level, {'label': 'Charger Level','attr': {'placeholder' : 'Charger Level', 'class': 'form-control'},'value' :product.getChargerLevel() ? product.getChargerLevel(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.charger_power_kw, {'label': 'Charger Power Kw','attr': {'placeholder' : 'Charger Power Kw', 'class': 'form-control'},'value' :product.getChargerPowerKw() ? product.getChargerPowerKw(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.engine_number_of_cylinders, {'label': 'Engine Number Of Cylinders','attr': {'placeholder' : 'Engine Number Of Cylinders', 'class': 'form-control'},'value' :product.getEngineNumberOfCylinders() ? product.getEngineNumberOfCylinders(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.displacement_cc, {'label': 'Displacement Cc','attr': {'placeholder' : 'Displacement Cc', 'class': 'form-control'},'value' :product.getDisplacementCc() ? product.getDisplacementCc(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.displacement_ci, {'label': 'Displacement Ci','attr': {'placeholder' : 'Displacement Ci', 'class': 'form-control'},'value' :product.getDisplacementCi() ? product.getDisplacementCi(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.displacement_l, {'label': 'Displacement L','attr': {'placeholder' : 'Displacement L', 'class': 'form-control'},'value' :product.getDisplacementL() ? product.getDisplacementL(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.engine_stroke_cycles, {'label': 'Engine Stroke Cycles','attr': {'placeholder' : 'Engine Stroke Cycles', 'class': 'form-control'},'value' :product.getEngineStrokeCycles() ? product.getEngineStrokeCycles(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.engine_model, {'label': 'Engine Model','attr': {'placeholder' : 'Engine Model', 'class': 'form-control'},'value' :product.getEngineModel() ? product.getEngineModel(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.engine_power_kw, {'label': 'Engine Power Kw','attr': {'placeholder' : 'Engine Power Kw', 'class': 'form-control'},'value' :product.getEnginePowerKw() ? product.getEnginePowerKw(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.fuel_type_primary, {'label': 'Fuel Type Primary','attr': {'placeholder' : 'Fuel Type Primary', 'class': 'form-control'},'value' :product.getFuelTypePrimary() ? product.getFuelTypePrimary(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.valve_train_design, {'label': 'Valve Train Design','attr': {'placeholder' : 'Valve Train Design', 'class': 'form-control'},'value' :product.getValveTrainDesign() ? product.getValveTrainDesign(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.engine_configuration, {'label': 'Engine Configuration','attr': {'placeholder' : 'Engine Configuration', 'class': 'form-control'},'value' :product.getEngineConfiguration() ? product.getEngineConfiguration(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.fuel_type_secondary, {'label': 'Fuel Type Secondary','attr': {'placeholder' : 'Fuel Type Secondary', 'class': 'form-control'},'value' :product.getFuelTypeSecondary() ? product.getFuelTypeSecondary(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.fuel_delivery_fuel_injection_type, {'label': 'Fuel Delivery Fuel Injection Type','attr': {'placeholder' : 'Fuel Delivery Fuel Injection Type', 'class': 'form-control'},'value' :product.getFuelDeliveryFuelInjectionType() ? product.getFuelDeliveryFuelInjectionType(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.engine_brake_hp_from, {'label': 'Engine Brake Hp From','attr': {'placeholder' : 'Engine Brake Hp From', 'class': 'form-control'},'value' :product.getEngineBrakeHpFrom() ? product.getEngineBrakeHpFrom(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.cooling_type, {'label': 'Cooling Type','attr': {'placeholder' : 'Cooling Type', 'class': 'form-control'},'value' :product.getCoolingType() ? product.getCoolingType(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.engine_brake_hp_to, {'label': 'Engine Brake Hp To','attr': {'placeholder' : 'Engine Brake Hp To', 'class': 'form-control'},'value' :product.getEngineBrakeHpTo() ? product.getEngineBrakeHpTo(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.electrification_level, {'label': 'Electrification Level','attr': {'placeholder' : 'Electrification Level', 'class': 'form-control'},'value' :product.getElectrificationLevel() ? product.getElectrificationLevel(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.other_engine_info, {'label': 'Other Engine Info','attr': {'placeholder' : 'Other Engine Info', 'class': 'form-control'},'value' :product.getOtherEngineInfo() ? product.getOtherEngineInfo(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.turbo, {'label': 'Turbo','attr': {'placeholder' : 'Turbo', 'class': 'form-control'},'value' :product.getTurbo() ? product.getTurbo(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.top_speed_mph, {'label': 'Top Speed Mph','attr': {'placeholder' : 'Top Speed Mph', 'class': 'form-control'},'value' :product.getTopSpeedMph() ? product.getTopSpeedMph(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.engine_manufacturer, {'label': 'Engine Manufacturer','attr': {'placeholder' : 'Engine Manufacturer', 'class': 'form-control'},'value' :product.getEngineManufacturer() ? product.getEngineManufacturer(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.pretensioner, {'label': 'Pretensioner','attr': {'placeholder' : 'Pretensioner', 'class': 'form-control'},'value' :product.getPretensioner() ? product.getPretensioner(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.seat_belt_type, {'label': 'Seat Belt Type','attr': {'placeholder' : 'Seat Belt Type', 'class': 'form-control'},'value' :product.getSeatBeltType() ? product.getSeatBeltType(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.other_restraint_system_info, {'label': 'Other Restraint System Info','attr': {'placeholder' : 'Other Restraint System Info', 'class': 'form-control'},'value' :product.getOtherRestraintSystemInfo() ? product.getOtherRestraintSystemInfo(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.curtain_air_bag_locations, {'label': 'Curtain Air Bag Locations','attr': {'placeholder' : 'Curtain Air Bag Locations', 'class': 'form-control'},'value' :product.getCurtainAirBagLocations() ? product.getCurtainAirBagLocations(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.seat_cushion_air_bag_locations, {'label': 'Seat Cushion Air Bag Locations','attr': {'placeholder' : 'Seat Cushion Air Bag Locations', 'class': 'form-control'},'value' :product.getSeatCushionAirBagLocations() ? product.getSeatCushionAirBagLocations(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.front_air_bag_locations, {'label': 'Front Air Bag Locations','attr': {'placeholder' : 'Front Air Bag Locations', 'class': 'form-control'},'value' :product.getFrontAirBagLocations() ? product.getFrontAirBagLocations(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.knee_air_bag_locations, {'label': 'Knee Air Bag Locations','attr': {'placeholder' : 'Knee Air Bag Locations', 'class': 'form-control'},'value' :product.getKneeAirBagLocations() ? product.getKneeAirBagLocations(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.side_air_bag_locations, {'label': 'Side Air Bag Locations','attr': {'placeholder' : 'Side Air Bag Locations', 'class': 'form-control'},'value' :product.getSideAirBagLocations() ? product.getSideAirBagLocations(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.anti_lock_braking_system_abs, {'label': 'Anti Lock Braking System Abs','attr': {'placeholder' : 'Anti Lock Braking System Abs', 'class': 'form-control'},'value' :product.getAntiLockBrakingSystemAbs() ? product.getAntiLockBrakingSystemAbs(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.electronic_stability_control_esc, {'label': 'Electronic Stability Control Esc','attr': {'placeholder' : 'Electronic Stability Control Esc', 'class': 'form-control'},'value' :product.getElectronicStabilityControlEsc() ? product.getElectronicStabilityControlEsc(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.traction_control, {'label': 'Traction Control','attr': {'placeholder' : 'Traction Control', 'class': 'form-control'},'value' :product.getTractionControl() ? product.getTractionControl(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.tire_pressure_monitoring_system_tpms_type, {'label': 'Tire Pressure Monitoring System Tpms Type','attr': {'placeholder' : 'Tire Pressure Monitoring System Tpms Type', 'class': 'form-control'},'value' :product.getTirePressureMonitoringSystemTpmsType() ? product.getTirePressureMonitoringSystemTpmsType(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.active_safety_system_note, {'label': 'Active Safety System Note','attr': {'placeholder' : 'Active Safety System Note', 'class': 'form-control'},'value' :product.getActiveSafetySystemNote() ? product.getActiveSafetySystemNote(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.auto_reverse_system_for_windows_and_sunroofs, {'label': 'Auto Reverse System For Windows And Sunroofs','attr': {'placeholder' : 'Auto Reverse System For Windows And Sunroofs', 'class': 'form-control'},'value' :product.getAutoReverseSystemForWindowsAndSunroofs() ? product.getAutoReverseSystemForWindowsAndSunroofs(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.automatic_pedestrian_alerting_sound_for_hybrid_and_ev_only, {'label': 'Automatic Pedestrian Alerting Sound For Hybrid And Ev Only','attr': {'placeholder' : 'Automatic Pedestrian Alerting Sound For Hybrid And Ev Only', 'class': 'form-control'},'value' :product.getAutomaticPedestrianAlertingSoundForHybridAndEvOnly() ? product.getAutomaticPedestrianAlertingSoundForHybridAndEvOnly(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.event_data_recorder_edr, {'label': 'Event Data Recorder Edr','attr': {'placeholder' : 'Event Data Recorder Edr', 'class': 'form-control'},'value' :product.getEventDataRecorderEdr() ? product.getEventDataRecorderEdr(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.keyless_ignition, {'label': 'Keyless Ignition','attr': {'placeholder' : 'Keyless Ignition', 'class': 'form-control'},'value' :product.getKeylessIgnition() ? product.getKeylessIgnition(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.sae_automation_level_from, {'label': 'Sae Automation Level From','attr': {'placeholder' : 'Sae Automation Level From', 'class': 'form-control'},'value' :product.getSaeAutomationLevelFrom() ? product.getSaeAutomationLevelFrom(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.sae_automation_level_to, {'label': 'Sae Automation Level To','attr': {'placeholder' : 'Sae Automation Level To', 'class': 'form-control'},'value' :product.getSaeAutomationLevelTo() ? product.getSaeAutomationLevelTo(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.ncsa_body_type, {'label': 'Ncsa Body Type','attr': {'placeholder' : 'Ncsa Body Type', 'class': 'form-control'},'value' :product.getNcsaBodyType() ? product.getNcsaBodyType(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.ncsa_make, {'label': 'Ncsa Make','attr': {'placeholder' : 'Ncsa Make', 'class': 'form-control'},'value' :product.getNcsaMake() ? product.getNcsaMake(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.ncsa_model, {'label': 'Ncsa Model','attr': {'placeholder' : 'Ncsa Model', 'class': 'form-control'},'value' :product.getNcsaModel() ? product.getNcsaModel(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.ncsa_note, {'label': 'Ncsa Note','attr': {'placeholder' : 'Ncsa Note', 'class': 'form-control'},'value' :product.getNcsaNote() ? product.getNcsaNote(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.adaptive_cruise_control_acc, {'label': 'Adaptive Cruise Control Acc','attr': {'placeholder' : 'Adaptive Cruise Control Acc', 'class': 'form-control'},'value' :product.getAdaptiveCruiseControlAcc() ? product.getAdaptiveCruiseControlAcc(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.crash_imminent_braking_cib, {'label': 'Crash Imminent Braking Cib','attr': {'placeholder' : 'Crash Imminent Braking Cib', 'class': 'form-control'},'value' :product.getCrashImminentBrakingCib() ? product.getCrashImminentBrakingCib(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.blind_spot_warning_bsw, {'label': 'Blind Spot Warning Bsw','attr': {'placeholder' : 'Blind Spot Warning Bsw', 'class': 'form-control'},'value' :product.getBlindSpotWarningBsw() ? product.getBlindSpotWarningBsw(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.forward_collision_warning_fcw, {'label': 'Forward Collision Warning Fcw','attr': {'placeholder' : 'Forward Collision Warning Fcw', 'class': 'form-control'},'value' :product.getForwardCollisionWarningFcw() ? product.getForwardCollisionWarningFcw(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.lane_departure_warning_ldw, {'label': 'Lane Departure Warning Ldw','attr': {'placeholder' : 'Lane Departure Warning Ldw', 'class': 'form-control'},'value' :product.getLaneDepartureWarningLdw() ? product.getLaneDepartureWarningLdw(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.lane_keeping_assistance_lka, {'label': 'Lane Keeping Assistance Lka','attr': {'placeholder' : 'Lane Keeping Assistance Lka', 'class': 'form-control'},'value' :product.getLaneKeepingAssistanceLka() ? product.getLaneKeepingAssistanceLka(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.backup_camera, {'label': 'Backup Camera','attr': {'placeholder' : 'Backup Camera', 'class': 'form-control'},'value' :product.getBackupCamera() ? product.getBackupCamera(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.parking_assist, {'label': 'Parking Assist','attr': {'placeholder' : 'Parking Assist', 'class': 'form-control'},'value' :product.getParkingAssist() ? product.getParkingAssist(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.bus_length_feet, {'label': 'Bus Length Feet','attr': {'placeholder' : 'Bus Length Feet', 'class': 'form-control'},'value' :product.getBusLengthFeet() ? product.getBusLengthFeet(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.bus_floor_configuration_type, {'label': 'Bus Floor Configuration Type','attr': {'placeholder' : 'Bus Floor Configuration Type', 'class': 'form-control'},'value' :product.getBusFloorConfigurationType() ? product.getBusFloorConfigurationType(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.bus_type, {'label': 'Bus Type','attr': {'placeholder' : 'Bus Type', 'class': 'form-control'},'value' :product.getBusType() ? product.getBusType(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.other_bus_info, {'label': 'Other Bus Info','attr': {'placeholder' : 'Other Bus Info', 'class': 'form-control'},'value' :product.getOtherBusInfo() ? product.getOtherBusInfo(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.custom_motorcycle_type, {'label': 'Custom Motorcycle Type','attr': {'placeholder' : 'Custom Motorcycle Type', 'class': 'form-control'},'value' :product.getCustomMotorcycleType() ? product.getCustomMotorcycleType(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.motorcycle_suspension_type, {'label': 'Motorcycle Suspension Type','attr': {'placeholder' : 'Motorcycle Suspension Type', 'class': 'form-control'},'value' :product.getMotorcycleSuspensionType() ? product.getMotorcycleSuspensionType(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.motorcycle_chassis_type, {'label': 'Motorcycle Chassis Type','attr': {'placeholder' : 'Motorcycle Chassis Type', 'class': 'form-control'},'value' :product.getMotorcycleChassisType() ? product.getMotorcycleChassisType(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.other_motorcycle_info, {'label': 'Other Motorcycle Info','attr': {'placeholder' : 'Other Motorcycle Info', 'class': 'form-control'},'value' :product.getOtherMotorcycleInfo() ? product.getOtherMotorcycleInfo(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.dynamic_brake_support_dbs, {'label': 'Dynamic Brake Support Dbs','attr': {'placeholder' : 'Dynamic Brake Support Dbs', 'class': 'form-control'},'value' :product.getDynamicBrakeSupportDbs() ? product.getDynamicBrakeSupportDbs(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.pedestrian_automatic_emergency_braking_paeb, {'label': 'Pedestrian Automatic Emergency Braking Paeb','attr': {'placeholder' : 'Pedestrian Automatic Emergency Braking Paeb', 'class': 'form-control'},'value' :product.getPedestrianAutomaticEmergencyBrakingPaeb() ? product.getPedestrianAutomaticEmergencyBrakingPaeb(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.automatic_and_advanced_crash_notification_aacn, {'label': 'Automatic Crash Notification Acn Advanced Automatic Crash Notification Aacn','attr': {'placeholder' : 'Automatic Crash Notification Acn Advanced Automatic Crash Notification Aacn', 'class': 'form-control'},'value' :product.getAutomaticAndAdvancedCrashNotificationAacn() ? product.getAutomaticAndAdvancedCrashNotificationAacn(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.daytime_running_light_drl, {'label': 'Daytime Running Light Drl','attr': {'placeholder' : 'Daytime Running Light Drl', 'class': 'form-control'},'value' :product.getDaytimeRunningLightDrl() ? product.getDaytimeRunningLightDrl(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.headlamp_light_source, {'label': 'Headlamp Light Source','attr': {'placeholder' : 'Headlamp Light Source', 'class': 'form-control'},'value' :product.getHeadlampLightSource() ? product.getHeadlampLightSource(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.semiautomatic_headlamp_beam_switching, {'label': 'Semiautomatic Headlamp Beam Switching','attr': {'placeholder' : 'Semiautomatic Headlamp Beam Switching', 'class': 'form-control'},'value' :product.getSemiautomaticHeadlampBeamSwitching() ? product.getSemiautomaticHeadlampBeamSwitching(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.adaptive_driving_beam_adb, {'label': 'Adaptive Driving Beam Adb','attr': {'placeholder' : 'Adaptive Driving Beam Adb', 'class': 'form-control'},'value' :product.getAdaptiveDrivingBeamAdb() ? product.getAdaptiveDrivingBeamAdb(): '' })}}
+                    </div>
+                    <div class="col-md-6  mb-3">
+                    {{form_row(form.rear_cross_traffic_alert, {'label': 'Rear Cross Traffic Alert','attr': {'placeholder' : 'Rear Cross Traffic Alert', 'class': 'form-control'},'value' :product.getRearCrossTrafficAlert() ? product.getRearCrossTrafficAlert(): '' })}}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                    {{form_row(form.rear_automatic_emergency_braking, {'label': 'Rear Automatic Emergency Braking','attr': {'placeholder' : 'Rear Automatic Emergency Braking', 'class': 'form-control'},'value' :product.getRearAutomaticEmergencyBraking() ? product.getRearAutomaticEmergencyBraking(): '' })}}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                    {{form_row(form.blind_spot_intervention_bsi, {'label': 'Blind Spot Intervention Bsi','attr': {'placeholder' : 'Blind Spot Intervention Bsi', 'class': 'form-control'},'value' :product.getBlindSpotInterventionBsi() ? product.getBlindSpotInterventionBsi(): '' })}}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                    {{form_row(form.lane_centering_assistance, {'label': 'Lane Centering Assistance','attr': {'placeholder' : 'Lane Centering Assistance', 'class': 'form-control'},'value' :product.getLaneCenteringAssistance() ? product.getLaneCenteringAssistance(): '' })}}
+                    </div>
 
 {#                <div class="col-md-6 col-lg-4 mb-3">#}
 {#                    {{ form_row(form.district) }}#}
@@ -52,7 +640,7 @@
 {#                </div>#}
 
                 <div class="col-md-6 col-lg-4 mb-3">
-                    {{ form_row(form.category) }}
+                   {# {{ form_row(form.category) }}#}
                 </div>
             </div>
 

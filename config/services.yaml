@@ -14,6 +14,8 @@ parameters:
     app.stripe.public_key: '%env(resolve:STRIPE_PUBLIC_KEY)%'
     app.stripe.secret_key: '%env(resolve:STRIPE_SECRET_KEY)%'
     app.stripe.webhook_key: '%env(resolve:STRIPE_WEBHOOK_KEY)%'
+    app.carapi.api_token: '%env(resolve:CAR_API_TOKEN)%'
+    app.carapi.api_secret: '%env(resolve:CAR_API_SECRET)%'
 
 services:
     # default configuration for services in *this* file

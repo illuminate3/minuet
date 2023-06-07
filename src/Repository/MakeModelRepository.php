@@ -58,6 +58,54 @@ class MakeModelRepository extends ServiceEntityRepository
     /**
      * @return MakeModel[] Returns an array of MakeModel objects
      */
+    public function findAllUniqueYear(): array
+    {
+        return $this->createQueryBuilder('m')
+            ->select('m.year')
+            ->orderBy('m.year', 'ASC')
+            ->groupBy('m.year')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @return MakeModel[] Returns an array of MakeModel objects
+     */
+    public function findAllMakeUsingYear($year): array
+    {
+        return $this->createQueryBuilder('m')
+            ->select('m.make')
+            ->andWhere('m.year = :val')
+            ->setParameter('val', $year)
+            ->orderBy('m.make', 'ASC')
+            ->groupBy('m.make')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @return MakeModel[] Returns an array of MakeModel objects
+     */
+    public function findAllModelUsingYearAndMake($year, $make): array
+    {
+        return $this->createQueryBuilder('m')
+            ->select('m.model')
+            ->andWhere('m.year = :val1')
+            ->andWhere('m.make = :val2')
+            ->setParameter('val1', $year)
+            ->setParameter('val2', $make)
+            ->orderBy('m.make', 'ASC')
+            ->groupBy('m.make')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @return MakeModel[] Returns an array of MakeModel objects
+     */
     public function findAllUniqueModel($make): array
     {
         return $this->createQueryBuilder('m')
@@ -70,6 +118,40 @@ class MakeModelRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    /**
+     * @return MakeModel[] Returns an array of MakeModel objects
+     */
+    public function findAllMakeModelYear($id): array
+    {
+        return $this->createQueryBuilder('m')
+            // ->select('m.model')
+            ->andWhere('m.id = :val')
+            ->setParameter('val', $id)
+            // ->orderBy('m.model', 'ASC')
+            // ->groupBy('m.model')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @return MakeModel[] Returns an array of MakeModel objects
+     */
+    // public function findId($year, $make, $model): array
+    // {
+    //     return $this->createQueryBuilder('m')
+    //         ->select('m.model')
+    //         ->andWhere('m.year = :val1')
+    //         ->andWhere('m.make = :val2')
+    //         ->andWhere('m.model = :val3')
+    //         ->setParameter('val1', $year)
+    //         ->setParameter('val2', $make)
+    //         ->setParameter('val3', $model)
+    //         ->getQuery()
+    //         ->getOneOrNullResult()
+    //     ;
+    // }
 
 //    public function findOneBySomeField($value): ?MakeModel
 //    {
