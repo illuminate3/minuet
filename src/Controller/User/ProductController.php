@@ -30,6 +30,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use App\Repository\AccountRepository;
+use App\Repository\AccountUserRepository;
+use App\Service\StripeService;
+use Symfony\Bundle\SecurityBundle\Security;
 
 final class ProductController extends BaseController
 {
@@ -46,11 +51,25 @@ final class ProductController extends BaseController
     public function index(
         Request $request,
         FilterRepository $repository,
-        RequestToArrayTransformer $transformer
+        RequestToArrayTransformer $transformer,
+        AccountRepository $accountRepository,
+        AccountUserRepository $accountUserRepository,
+        Security $security,
+        StripeService $stripeService,
     ): Response {
         $searchParams = $transformer->transform($request);
         $products = $repository->findByFilter($searchParams);
-        return $this->render('user/product/index.html.twig', [
+
+      $resp = $stripeService->checkStripeSubscriptionActive($security,$accountRepository,$accountUserRepository);                      
+        if ($resp === 'account') {
+            $this->addFlash('error','message.stripe_in_active');  
+            return $this->redirectToRoute('app_pricing');
+        }elseif (!$resp) {
+            $this->addFlash('error','message.stripe_in_active');  
+            return $this->redirectToRoute('security_login');      
+        }        
+
+      return $this->render('user/product/index.html.twig', [
             'title' => 'title.products',
             'site' => $this->site($request),
             'new_url' => 'user_product_new',

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Entity;
-
+use Doctrine\DBAL\Types\Types;
 use App\Entity\Trait\CreatedAtTrait;
 use App\Entity\Traits\EntityIdTrait;
 use App\Repository\AccountRepository;
@@ -22,6 +22,18 @@ class Account
 
     #[ORM\Column(length: 10, unique: true)]
     private ?int $primaryUser = null;
+
+    #[ORM\Column(type: Types::BOOLEAN, length: 1, nullable: true)]
+    private bool $isSubscriptionActive = false;
+
+
+//    #[ORM\Column(type: 'integer', length: 11)]
+//    private $primary_user_id;
+
+
+//    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'account')]
+//    #[ORM\JoinColumn(nullable: false)]
+//    private $user;
 
     #[ORM\ManyToOne(inversedBy: 'account_id')]
     #[ORM\JoinColumn(nullable: true)]
@@ -144,6 +156,18 @@ class Account
         }
 
         return $this;
+    }
+
+    public function setIsSubscriptionActive(bool $isActive): self
+    {
+        $this->isSubscriptionActive = $isActive;
+
+        return $this;
+    }
+
+    public function getIsSubscriptionActive(): ?bool
+    {
+        return $this->isSubscriptionActive ? true : false;
     }
 
 }

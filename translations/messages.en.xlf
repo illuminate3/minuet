@@ -106,8 +106,8 @@
                 <source>action.change_password</source>
                 <target>Change Password</target>
             </trans-unit>
-            <trans-unit id="action.change_plane">
-                <source>action.change_plane</source>
+            <trans-unit id="action.change_plan">
+                <source>action.change_plan</source>
                 <target>Change Plan</target>
             </trans-unit>
             <trans-unit id="action.continue">
@@ -1235,6 +1235,10 @@
             <trans-unit id="message.closed_register">
                 <source>message.closed_register</source>
                 <target>The Site is still open for viewing.</target>
+            </trans-unit>
+            <trans-unit id="message.stripe_in_active">
+                <source>message.stripe_in_active</source>
+                <target>Your subscription is not active or has been expired, please subscribe again.</target>
             </trans-unit>
             <trans-unit id="message.created">
                 <source>message.created</source>

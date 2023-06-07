@@ -3,9 +3,6 @@
 declare(strict_types=1);
 
 namespace App\Controller;
-
-use App\Entity\Account;
-use App\Entity\User;
 use App\Repository\AccountRepository;
 use App\Repository\AccountUserRepository;
 use App\Repository\MessageRepository;
@@ -13,15 +10,15 @@ use App\Repository\ProductRepository;
 use App\Repository\SubscriptionRepository;
 use App\Repository\ThreadRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Stripe\Stripe;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use App\Service\StripeService;
 #[Route('/user/dash')]
 class DashController extends BaseController
 {
+
     #[Route('/', name: 'app_dash')]
     public function index(
         Request $request,
@@ -31,8 +28,7 @@ class DashController extends BaseController
         AccountUserRepository $accountUserRepository,
         SubscriptionRepository $subscriptionRepository,
         ProductRepository $productRepository,
-        ThreadRepository $threadRepository,
-        MessageRepository $messageRepository
+        StripeService $stripeService,
     ): Response {
 
         if ($security->isGranted('ROLE_BUYER')) {
@@ -45,30 +41,15 @@ class DashController extends BaseController
 
         $this->em = $entityManager;
         $user = $security->getUser();
-
         $account = $accountRepository->findOneBy(['primaryUser' => $user->getId()]);
-        // if (false === $user->getIsAccount()) {
-        //     if (!$account) {
-        //         $stripeAPIKey = $_ENV['STRIPE_SECRET_KEY'];
-        //         Stripe::setApiKey($stripeAPIKey);
-        //         if (is_null($user->getStripeCustomerId())) {
-        //             $stripeCustomerObj =  \Stripe\Customer::create([
-        //                 'description' => 'Minuet customer',
-        //                 'email'=>$user->getEmail(),
-        //                 'metadata'=>[
-        //                     "userId"=>$user->getId()
-        //                 ]
-        //             ]);
-        //             $stripeCustomerId =  $stripeCustomerObj->id;
-        //             $user->setStripeCustomerId($stripeCustomerId);
-        //             $this->em->persist($user);
-        //             $this->em->flush();
-        //             }
-        //         return $this->redirectToRoute('app_pricing');
-        //     }
-
-        //     // return $this->redirectToRoute('app_index');
-        // }
+            
+        $resp = $stripeService->checkStripeSubscriptionActive($security,$accountRepository,$accountUserRepository);
+        if ($resp === 'account') {
+            return $this->redirectToRoute('app_pricing');
+        }elseif (!$resp) {
+            $this->addFlash('error','message.stripe_in_active');     
+            return $this->redirectToRoute('security_login');   
+        }
 
         // get the account information the user is registered to
         $accountUser = $accountUserRepository->findOneBy(['user' => $user->getId()]);
@@ -82,6 +63,13 @@ class DashController extends BaseController
         $primaryUser = $account->getPrimaryUser();
         $is_primary = $primaryUser === $user->getId();
         $user_id = $user->getId();
+
+        if (!$is_primary) {
+            $account = $accountRepository->findOneBy(['primaryUser' => $primaryUser]);
+            if (!$account->getIsSubscriptionActive()) {
+                return $this->redirectToRoute('app_pricing'); 
+            }
+        }
 
         // get all the users for the account
 

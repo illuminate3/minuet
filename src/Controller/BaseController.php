@@ -15,7 +15,7 @@ abstract class BaseController extends AbstractController
 {
     public function __construct(
         private readonly SettingsRepository $settingsRepository,
-        protected ManagerRegistry $doctrine,
+        protected ManagerRegistry $doctrine
     ) {
     }
 
@@ -71,4 +71,7 @@ abstract class BaseController extends AbstractController
 
         return array_merge($settings, $menu, $menuPages, $footerPages);
     }
+
+
+  
 }
