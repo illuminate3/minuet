@@ -31,7 +31,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
-use App\Repository\AccountRepository;
 use App\Repository\AccountUserRepository;
 use App\Service\StripeService;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -60,14 +59,14 @@ final class ProductController extends BaseController
         $searchParams = $transformer->transform($request);
         $products = $repository->findByFilter($searchParams);
 
-      $resp = $stripeService->checkStripeSubscriptionActive($security,$accountRepository,$accountUserRepository);                      
+      $resp = $stripeService->checkStripeSubscriptionActive($security,$accountRepository,$accountUserRepository);
         if ($resp === 'account') {
-            $this->addFlash('error','message.stripe_in_active');  
+            $this->addFlash('error','message.stripe_in_active');
             return $this->redirectToRoute('app_pricing');
         }elseif (!$resp) {
-            $this->addFlash('error','message.stripe_in_active');  
-            return $this->redirectToRoute('security_login');      
-        }        
+            $this->addFlash('error','message.stripe_in_active');
+            return $this->redirectToRoute('security_login');
+        }
 
       return $this->render('user/product/index.html.twig', [
             'title' => 'title.products',
@@ -102,7 +101,7 @@ final class ProductController extends BaseController
             $productDetails->setModifiedAt(new DateTimeImmutable('now'));
             $form = $this->createForm(ProductCustomType::class, $productDetails);
         }
-        
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -134,14 +133,14 @@ final class ProductController extends BaseController
                     $productDetails->setModel($newId);
                 }
                 $service->save($productDetails);
-        
+
                 $arrResponseData = json_decode(base64_decode($request->request->get('responseData')),true);
-        
+
                 foreach($requestTrim as $key => $value)
                 {
                     $founKey = array_search($value, array_column($arrResponseData['trims'], 'name'));
                     if($founKey !== false)
-                    { 
+                    {
                         $arrResponseData['trims'][$founKey]['created_at'] = new DateTimeImmutable('now');
                         $arrResponseData['trims'][$founKey]['modified_at'] = new DateTimeImmutable('now');
                         $arrResponseData['trims'][$founKey]['product_id'] = (int)$request->request->get('product_id');
@@ -172,7 +171,7 @@ final class ProductController extends BaseController
                 $entityManager = $this->doctrine->getManager();
                 $entityManager->persist($image);
                 $entityManager->flush();
-                
+
                 $vinNumber = 'vin/'.$product->getvin();
 
                 $token = GeneralUtil::getBearerToken($cache, $carApiClient);
@@ -204,7 +203,7 @@ final class ProductController extends BaseController
                         'trim' => $trim,
                         'page_type' => 'description_page',
                         'product_id' => $lastInsertedId,
-                    ]); 
+                    ]);
                 }
             }
         }
@@ -306,7 +305,7 @@ final class ProductController extends BaseController
         {
             $options .= '<option value="'.$value["make"].'">'.$value["make"].'</option>';
         }
-    
+
         return new JsonResponse(['status' => 'success', 'data' => $options]);
     }
 
@@ -336,10 +335,10 @@ final class ProductController extends BaseController
         $base64_url_payload = $this->base64url_encode($payload);
         $signature = hash_hmac('SHA256', $base64_url_header . "." . $base64_url_payload, $secret, true);
         $base64_url_signature = $this->base64url_encode($signature);
-    
+
         // verify it matches the signature provided in the jwt
         $is_signature_valid = ($base64_url_signature === $signature_provided);
-        
+
         if ($is_token_expired || !$is_signature_valid) {
             return FALSE;
         } else {
