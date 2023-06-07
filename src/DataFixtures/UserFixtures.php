@@ -56,6 +56,7 @@ final class UserFixtures extends Fixture implements DependentFixtureInterface
 #       ROLE_ADMIN, ROLE_USER, ROLE_DEALER, ROLE_BUYER, ROLE_STAFF
         return [
             // data = [$firstName, $lastName, $password, $verified, $is_account, $phone, $email, $roles]
+            ['Admin', 'Super', 'secret', true, true, '(123)555-1234', 'superadmin@minuet.com', ['ROLE_SUPER','ROLE_ADMIN','ROLE_USER']],
             ['Admin', 'Admin', 'admin', true, true, '(123)555-1111', 'admin@admin.com', ['ROLE_ADMIN', 'ROLE_USER']],
             ['Dealer2', 'Dealer2', 'test', true, true, '(456)555-2222', 'dealer2@test.com', ['ROLE_DEALER']],
             ['Dealer3', 'Dealer3', 'test', true, true, '(456)555-3333', 'dealer3@test.com', ['ROLE_DEALER']],
