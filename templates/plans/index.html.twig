@@ -43,11 +43,11 @@
                         </ul>
                         {% if app.user %}
                             <a href="{{ path('checkout',{'priceId':item.stripePriceId}) }}" class="w-100 btn btn-lg btn-outline-primary">
-                                {{ 'action.change_plane'|trans }}
+                                {{ 'action.change_plan'|trans }}
                             </a>
                         {% else %}
                             <a href="{{ path('checkouts',{'priceId':item.stripePriceId, 'id': userId}) }}" class="w-100 btn btn-lg btn-outline-primary">
-                                {{ 'action.change_plane'|trans }}
+                                {{ 'action.change_plan'|trans }}
                             </a>
                         {% endif %}
 

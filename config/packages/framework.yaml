@@ -22,6 +22,30 @@ framework:
 
     ide: null
 
+#            example_api:
+#                base_uri: 'https://api.github.com/repos/symfony/symfony-docs'
+#                # HTTP Basic authentication
+#                auth_basic: 'the-username:the-password'
+#                # HTTP Bearer authentication (also called token authentication)
+#                auth_bearer: the-bearer-token
+
+    http_client:
+        default_options:
+            max_redirects: 7
+        scoped_clients:
+            githubContentClient:
+                base_uri: 'https://raw.githubusercontent.com'
+#                # HTTP Basic authentication
+#                auth_basic: 'the-username:the-password'
+#                # HTTP Bearer authentication (also called token authentication)
+#                auth_bearer: the-bearer-token
+            carApiClient:
+                base_uri: 'https://carapi.app'
+#                # HTTP Basic authentication
+#                auth_basic: 'a1265bb98e84f6e3af509dc667449744'
+#                # HTTP Bearer authentication (also called token authentication)
+#                auth_bearer: bd01f477-bd7c-4412-ad6f-dd1b22420e4c
+
 when@test:
     framework:
         test: true

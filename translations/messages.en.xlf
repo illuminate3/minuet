@@ -106,8 +106,8 @@
                 <source>action.change_password</source>
                 <target>Change Password</target>
             </trans-unit>
-            <trans-unit id="action.change_plane">
-                <source>action.change_plane</source>
+            <trans-unit id="action.change_plan">
+                <source>action.change_plan</source>
                 <target>Change Plan</target>
             </trans-unit>
             <trans-unit id="action.continue">
@@ -374,6 +374,546 @@
                <source>label.title</source>
                <target>Title</target>
             </trans-unit>
+            <trans-unit id="label.vehicle_identification_number">
+               <source>label.vehicle_identification_number</source>
+               <target>Vehicle Identification Number</target>
+            </trans-unit>
+            <trans-unit id='label.suggested_vin'>
+            <source>label.suggested_vin</source>
+            <target>Suggested Vin</target>
+            </trans-unit>
+            <trans-unit id='label.possible_values'>
+            <source>label.possible_values</source>
+            <target>Possible Values</target>
+            </trans-unit>
+            <trans-unit id='label.vehicle_descriptor'>
+            <source>label.vehicle_descriptor</source>
+            <target>Vehicle Descriptor</target>
+            </trans-unit>
+            <trans-unit id='label.destination_market'>
+            <source>label.destination_market</source>
+            <target>Destination Market</target>
+            </trans-unit>
+            <trans-unit id='label.manufacturer_name'>
+            <source>label.manufacturer_name</source>
+            <target>Manufacturer Name</target>
+            </trans-unit>
+            <trans-unit id='label.plant_city'>
+            <source>label.plant_city</source>
+            <target>Plant City</target>
+            </trans-unit>
+            <trans-unit id='label.series'>
+            <source>label.series</source>
+            <target>Series</target>
+            </trans-unit>
+            <trans-unit id='label.vehicle_type'>
+            <source>label.vehicle_type</source>
+            <target>Vehicle Type</target>
+            </trans-unit>
+            <trans-unit id='label.plant_country'>
+            <source>label.plant_country</source>
+            <target>Plant Country</target>
+            </trans-unit>
+            <trans-unit id='label.plant_company_name'>
+            <source>label.plant_company_name</source>
+            <target>Plant Company Name</target>
+            </trans-unit>
+            <trans-unit id='label.plant_state'>
+            <source>label.plant_state</source>
+            <target>Plant State</target>
+            </trans-unit>
+            <trans-unit id='label.trim2'>
+            <source>label.trim2</source>
+            <target>Trim2</target>
+            </trans-unit>
+            <trans-unit id='label.series2'>
+            <source>label.series2</source>
+            <target>Series2</target>
+            </trans-unit>
+            <trans-unit id='label.note'>
+            <source>label.note</source>
+            <target>Note</target>
+            </trans-unit>
+            <trans-unit id='label.base_price'>
+            <source>label.base_price</source>
+            <target>Base Price</target>
+            </trans-unit>
+            <trans-unit id='label.non_land_use'>
+            <source>label.non_land_use</source>
+            <target>Non Land Use</target>
+            </trans-unit>
+            <trans-unit id='label.body_class'>
+            <source>label.body_class</source>
+            <target>Body Class</target>
+            </trans-unit>
+            <trans-unit id='label.doors'>
+            <source>label.doors</source>
+            <target>Doors</target>
+            </trans-unit>
+            <trans-unit id='label.windows'>
+            <source>label.windows</source>
+            <target>Windows</target>
+            </trans-unit>
+            <trans-unit id='label.wheel_base_type'>
+            <source>label.wheel_base_type</source>
+            <target>Wheel Base Type</target>
+            </trans-unit>
+            <trans-unit id='label.track_width_inches'>
+            <source>label.track_width_inches</source>
+            <target>Track Width Inches</target>
+            </trans-unit>
+            <trans-unit id='label.gross_vehicle_weight_rating_from'>
+            <source>label.gross_vehicle_weight_rating_from</source>
+            <target>Gross Vehicle Weight Rating From</target>
+            </trans-unit>
+            <trans-unit id='label.bed_length_inches'>
+            <source>label.bed_length_inches</source>
+            <target>Bed Length Inches</target>
+            </trans-unit>
+            <trans-unit id='label.curb_weight_pounds'>
+            <source>label.curb_weight_pounds</source>
+            <target>Curb Weight Pounds</target>
+            </trans-unit>
+            <trans-unit id='label.wheel_base_inches_from'>
+            <source>label.wheel_base_inches_from</source>
+            <target>Wheel Base Inches From</target>
+            </trans-unit>
+            <trans-unit id='label.wheel_base_inches_to'>
+            <source>label.wheel_base_inches_to</source>
+            <target>Wheel Base Inches To</target>
+            </trans-unit>
+            <trans-unit id='label.gross_combination_weight_rating_from'>
+            <source>label.gross_combination_weight_rating_from</source>
+            <target>Gross Combination Weight Rating From</target>
+            </trans-unit>
+            <trans-unit id='label.gross_combination_weight_rating_to'>
+            <source>label.gross_combination_weight_rating_to</source>
+            <target>Gross Combination Weight Rating To</target>
+            </trans-unit>
+            <trans-unit id='label.gross_vehicle_weight_rating_to'>
+            <source>label.gross_vehicle_weight_rating_to</source>
+            <target>Gross Vehicle Weight Rating To</target>
+            </trans-unit>
+            <trans-unit id='label.bed_type'>
+            <source>label.bed_type</source>
+            <target>Bed Type</target>
+            </trans-unit>
+            <trans-unit id='label.cab_type'>
+            <source>label.cab_type</source>
+            <target>Cab Type</target>
+            </trans-unit>
+            <trans-unit id='label.trailer_type_connection'>
+            <source>label.trailer_type_connection</source>
+            <target>Trailer Type Connection</target>
+            </trans-unit>
+            <trans-unit id='label.trailer_body_type'>
+            <source>label.trailer_body_type</source>
+            <target>Trailer Body Type</target>
+            </trans-unit>
+            <trans-unit id='label.trailer_length_feet'>
+            <source>label.trailer_length_feet</source>
+            <target>Trailer Length Feet</target>
+            </trans-unit>
+            <trans-unit id='label.other_trailer_info'>
+            <source>label.other_trailer_info</source>
+            <target>Other Trailer Info</target>
+            </trans-unit>
+            <trans-unit id='label.number_of_wheels'>
+            <source>label.number_of_wheels</source>
+            <target>Number Of Wheels</target>
+            </trans-unit>
+            <trans-unit id='label.wheel_size_front_inches'>
+            <source>label.wheel_size_front_inches</source>
+            <target>Wheel Size Front Inches</target>
+            </trans-unit>
+            <trans-unit id='label.wheel_size_rear_inches'>
+            <source>label.wheel_size_rear_inches</source>
+            <target>Wheel Size Rear Inches</target>
+            </trans-unit>
+            <trans-unit id='label.entertainment_system'>
+            <source>label.entertainment_system</source>
+            <target>Entertainment System</target>
+            </trans-unit>
+            <trans-unit id='label.steering_location'>
+            <source>label.steering_location</source>
+            <target>Steering Location</target>
+            </trans-unit>
+            <trans-unit id='label.number_of_seats'>
+            <source>label.number_of_seats</source>
+            <target>Number Of Seats</target>
+            </trans-unit>
+            <trans-unit id='label.number_of_seat_rows'>
+            <source>label.number_of_seat_rows</source>
+            <target>Number Of Seat Rows</target>
+            </trans-unit>
+            <trans-unit id='label.transmission_style'>
+            <source>label.transmission_style</source>
+            <target>Transmission Style</target>
+            </trans-unit>
+            <trans-unit id='label.transmission_speeds'>
+            <source>label.transmission_speeds</source>
+            <target>Transmission Speeds</target>
+            </trans-unit>
+            <trans-unit id='label.drive_type'>
+            <source>label.drive_type</source>
+            <target>Drive Type</target>
+            </trans-unit>
+            <trans-unit id='label.axles'>
+            <source>label.axles</source>
+            <target>Axles</target>
+            </trans-unit>
+            <trans-unit id='label.axle_configuration'>
+            <source>label.axle_configuration</source>
+            <target>Axle Configuration</target>
+            </trans-unit>
+            <trans-unit id='label.brake_system_type'>
+            <source>label.brake_system_type</source>
+            <target>Brake System Type</target>
+            </trans-unit>
+            <trans-unit id='label.brake_system_description'>
+            <source>label.brake_system_description</source>
+            <target>Brake System Description</target>
+            </trans-unit>
+            <trans-unit id='label.other_battery_info'>
+            <source>label.other_battery_info</source>
+            <target>Other Battery Info</target>
+            </trans-unit>
+            <trans-unit id='label.battery_type'>
+            <source>label.battery_type</source>
+            <target>Battery Type</target>
+            </trans-unit>
+            <trans-unit id='label.number_of_battery_cells_per_module'>
+            <source>label.number_of_battery_cells_per_module</source>
+            <target>Number Of Battery Cells Per Module</target>
+            </trans-unit>
+            <trans-unit id='label.battery_current_amps_from'>
+            <source>label.battery_current_amps_from</source>
+            <target>Battery Current Amps From</target>
+            </trans-unit>
+            <trans-unit id='label.battery_voltage_volts_from'>
+            <source>label.battery_voltage_volts_from</source>
+            <target>Battery Voltage Volts From</target>
+            </trans-unit>
+            <trans-unit id='label.battery_energy_kwh_from'>
+            <source>label.battery_energy_kwh_from</source>
+            <target>Battery Energy Kwh From</target>
+            </trans-unit>
+            <trans-unit id='label.ev_drive_unit'>
+            <source>label.ev_drive_unit</source>
+            <target>Ev Drive Unit</target>
+            </trans-unit>
+            <trans-unit id='label.battery_current_amps_to'>
+            <source>label.battery_current_amps_to</source>
+            <target>Battery Current Amps To</target>
+            </trans-unit>
+            <trans-unit id='label.battery_voltage_volts_to'>
+            <source>label.battery_voltage_volts_to</source>
+            <target>Battery Voltage Volts To</target>
+            </trans-unit>
+            <trans-unit id='label.battery_energy_kwh_to'>
+            <source>label.battery_energy_kwh_to</source>
+            <target>Battery Energy Kwh To</target>
+            </trans-unit>
+            <trans-unit id='label.number_of_battery_modules_per_pack'>
+            <source>label.number_of_battery_modules_per_pack</source>
+            <target>Number Of Battery Modules Per Pack</target>
+            </trans-unit>
+            <trans-unit id='label.number_of_battery_packs_per_vehicle'>
+            <source>label.number_of_battery_packs_per_vehicle</source>
+            <target>Number Of Battery Packs Per Vehicle</target>
+            </trans-unit>
+            <trans-unit id='label.charger_level'>
+            <source>label.charger_level</source>
+            <target>Charger Level</target>
+            </trans-unit>
+            <trans-unit id='label.charger_power_kw'>
+            <source>label.charger_power_kw</source>
+            <target>Charger Power Kw</target>
+            </trans-unit>
+            <trans-unit id='label.engine_number_of_cylinders'>
+            <source>label.engine_number_of_cylinders</source>
+            <target>Engine Number Of Cylinders</target>
+            </trans-unit>
+            <trans-unit id='label.displacement_cc'>
+            <source>label.displacement_cc</source>
+            <target>Displacement Cc</target>
+            </trans-unit>
+            <trans-unit id='label.displacement_ci'>
+            <source>label.displacement_ci</source>
+            <target>Displacement Ci</target>
+            </trans-unit>
+            <trans-unit id='label.displacement_l'>
+            <source>label.displacement_l</source>
+            <target>Displacement L</target>
+            </trans-unit>
+            <trans-unit id='label.engine_stroke_cycles'>
+            <source>label.engine_stroke_cycles</source>
+            <target>Engine Stroke Cycles</target>
+            </trans-unit>
+            <trans-unit id='label.engine_model'>
+            <source>label.engine_model</source>
+            <target>Engine Model</target>
+            </trans-unit>
+            <trans-unit id='label.engine_power_kw'>
+            <source>label.engine_power_kw</source>
+            <target>Engine Power Kw</target>
+            </trans-unit>
+            <trans-unit id='label.fuel_type_primary'>
+            <source>label.fuel_type_primary</source>
+            <target>Fuel Type Primary</target>
+            </trans-unit>
+            <trans-unit id='label.valve_train_design'>
+            <source>label.valve_train_design</source>
+            <target>Valve Train Design</target>
+            </trans-unit>
+            <trans-unit id='label.engine_configuration'>
+            <source>label.engine_configuration</source>
+            <target>Engine Configuration</target>
+            </trans-unit>
+            <trans-unit id='label.fuel_type_secondary'>
+            <source>label.fuel_type_secondary</source>
+            <target>Fuel Type Secondary</target>
+            </trans-unit>
+            <trans-unit id='label.fuel_delivery_fuel_injection_type'>
+            <source>label.fuel_delivery_fuel_injection_type</source>
+            <target>Fuel Delivery Fuel Injection Type</target>
+            </trans-unit>
+            <trans-unit id='label.engine_brake_hp_from'>
+            <source>label.engine_brake_hp_from</source>
+            <target>Engine Brake Hp From</target>
+            </trans-unit>
+            <trans-unit id='label.cooling_type'>
+            <source>label.cooling_type</source>
+            <target>Cooling Type</target>
+            </trans-unit>
+            <trans-unit id='label.engine_brake_hp_to'>
+            <source>label.engine_brake_hp_to</source>
+            <target>Engine Brake Hp To</target>
+            </trans-unit>
+            <trans-unit id='label.electrification_level'>
+            <source>label.electrification_level</source>
+            <target>Electrification Level</target>
+            </trans-unit>
+            <trans-unit id='label.other_engine_info'>
+            <source>label.other_engine_info</source>
+            <target>Other Engine Info</target>
+            </trans-unit>
+            <trans-unit id='label.turbo'>
+            <source>label.turbo</source>
+            <target>Turbo</target>
+            </trans-unit>
+            <trans-unit id='label.top_speed_mph'>
+            <source>label.top_speed_mph</source>
+            <target>Top Speed Mph</target>
+            </trans-unit>
+            <trans-unit id='label.engine_manufacturer'>
+            <source>label.engine_manufacturer</source>
+            <target>Engine Manufacturer</target>
+            </trans-unit>
+            <trans-unit id='label.pretensioner'>
+            <source>label.pretensioner</source>
+            <target>Pretensioner</target>
+            </trans-unit>
+            <trans-unit id='label.seat_belt_type'>
+            <source>label.seat_belt_type</source>
+            <target>Seat Belt Type</target>
+            </trans-unit>
+            <trans-unit id='label.other_restraint_system_info'>
+            <source>label.other_restraint_system_info</source>
+            <target>Other Restraint System Info</target>
+            </trans-unit>
+            <trans-unit id='label.curtain_air_bag_locations'>
+            <source>label.curtain_air_bag_locations</source>
+            <target>Curtain Air Bag Locations</target>
+            </trans-unit>
+            <trans-unit id='label.seat_cushion_air_bag_locations'>
+            <source>label.seat_cushion_air_bag_locations</source>
+            <target>Seat Cushion Air Bag Locations</target>
+            </trans-unit>
+            <trans-unit id='label.front_air_bag_locations'>
+            <source>label.front_air_bag_locations</source>
+            <target>Front Air Bag Locations</target>
+            </trans-unit>
+            <trans-unit id='label.knee_air_bag_locations'>
+            <source>label.knee_air_bag_locations</source>
+            <target>Knee Air Bag Locations</target>
+            </trans-unit>
+            <trans-unit id='label.side_air_bag_locations'>
+            <source>label.side_air_bag_locations</source>
+            <target>Side Air Bag Locations</target>
+            </trans-unit>
+            <trans-unit id='label.anti_lock_braking_system_abs'>
+            <source>label.anti_lock_braking_system_abs</source>
+            <target>Anti Lock Braking System Abs</target>
+            </trans-unit>
+            <trans-unit id='label.electronic_stability_control_esc'>
+            <source>label.electronic_stability_control_esc</source>
+            <target>Electronic Stability Control Esc</target>
+            </trans-unit>
+            <trans-unit id='label.traction_control'>
+            <source>label.traction_control</source>
+            <target>Traction Control</target>
+            </trans-unit>
+            <trans-unit id='label.tire_pressure_monitoring_system_tpms_type'>
+            <source>label.tire_pressure_monitoring_system_tpms_type</source>
+            <target>Tire Pressure Monitoring System Tpms Type</target>
+            </trans-unit>
+            <trans-unit id='label.active_safety_system_note'>
+            <source>label.active_safety_system_note</source>
+            <target>Active Safety System Note</target>
+            </trans-unit>
+            <trans-unit id='label.auto_reverse_system_for_windows_and_sunroofs'>
+            <source>label.auto_reverse_system_for_windows_and_sunroofs</source>
+            <target>Auto Reverse System For Windows And Sunroofs</target>
+            </trans-unit>
+            <trans-unit id='label.automatic_pedestrian_alerting_sound_for_hybrid_and_ev_only'>
+            <source>label.automatic_pedestrian_alerting_sound_for_hybrid_and_ev_only</source>
+            <target>Automatic Pedestrian Alerting Sound For Hybrid And Ev Only</target>
+            </trans-unit>
+            <trans-unit id='label.event_data_recorder_edr'>
+            <source>label.event_data_recorder_edr</source>
+            <target>Event Data Recorder Edr</target>
+            </trans-unit>
+            <trans-unit id='label.keyless_ignition'>
+            <source>label.keyless_ignition</source>
+            <target>Keyless Ignition</target>
+            </trans-unit>
+            <trans-unit id='label.sae_automation_level_from'>
+            <source>label.sae_automation_level_from</source>
+            <target>Sae Automation Level From</target>
+            </trans-unit>
+            <trans-unit id='label.sae_automation_level_to'>
+            <source>label.sae_automation_level_to</source>
+            <target>Sae Automation Level To</target>
+            </trans-unit>
+            <trans-unit id='label.ncsa_body_type'>
+            <source>label.ncsa_body_type</source>
+            <target>Ncsa Body Type</target>
+            </trans-unit>
+            <trans-unit id='label.ncsa_make'>
+            <source>label.ncsa_make</source>
+            <target>Ncsa Make</target>
+            </trans-unit>
+            <trans-unit id='label.ncsa_model'>
+            <source>label.ncsa_model</source>
+            <target>Ncsa Model</target>
+            </trans-unit>
+            <trans-unit id='label.ncsa_note'>
+            <source>label.ncsa_note</source>
+            <target>Ncsa Note</target>
+            </trans-unit>
+            <trans-unit id='label.adaptive_cruise_control_acc'>
+            <source>label.adaptive_cruise_control_acc</source>
+            <target>Adaptive Cruise Control Acc</target>
+            </trans-unit>
+            <trans-unit id='label.crash_imminent_braking_cib'>
+            <source>label.crash_imminent_braking_cib</source>
+            <target>Crash Imminent Braking Cib</target>
+            </trans-unit>
+            <trans-unit id='label.blind_spot_warning_bsw'>
+            <source>label.blind_spot_warning_bsw</source>
+            <target>Blind Spot Warning Bsw</target>
+            </trans-unit>
+            <trans-unit id='label.forward_collision_warning_fcw'>
+            <source>label.forward_collision_warning_fcw</source>
+            <target>Forward Collision Warning Fcw</target>
+            </trans-unit>
+            <trans-unit id='label.lane_departure_warning_ldw'>
+            <source>label.lane_departure_warning_ldw</source>
+            <target>Lane Departure Warning Ldw</target>
+            </trans-unit>
+            <trans-unit id='label.lane_keeping_assistance_lka'>
+            <source>label.lane_keeping_assistance_lka</source>
+            <target>Lane Keeping Assistance Lka</target>
+            </trans-unit>
+            <trans-unit id='label.backup_camera'>
+            <source>label.backup_camera</source>
+            <target>Backup Camera</target>
+            </trans-unit>
+            <trans-unit id='label.parking_assist'>
+            <source>label.parking_assist</source>
+            <target>Parking Assist</target>
+            </trans-unit>
+            <trans-unit id='label.bus_length_feet'>
+            <source>label.bus_length_feet</source>
+            <target>Bus Length Feet</target>
+            </trans-unit>
+            <trans-unit id='label.bus_floor_configuration_type'>
+            <source>label.bus_floor_configuration_type</source>
+            <target>Bus Floor Configuration Type</target>
+            </trans-unit>
+            <trans-unit id='label.bus_type'>
+            <source>label.bus_type</source>
+            <target>Bus Type</target>
+            </trans-unit>
+            <trans-unit id='label.other_bus_info'>
+            <source>label.other_bus_info</source>
+            <target>Other Bus Info</target>
+            </trans-unit>
+            <trans-unit id='label.custom_motorcycle_type'>
+            <source>label.custom_motorcycle_type</source>
+            <target>Custom Motorcycle Type</target>
+            </trans-unit>
+            <trans-unit id='label.motorcycle_suspension_type'>
+            <source>label.motorcycle_suspension_type</source>
+            <target>Motorcycle Suspension Type</target>
+            </trans-unit>
+            <trans-unit id='label.motorcycle_chassis_type'>
+            <source>label.motorcycle_chassis_type</source>
+            <target>Motorcycle Chassis Type</target>
+            </trans-unit>
+            <trans-unit id='label.other_motorcycle_info'>
+            <source>label.other_motorcycle_info</source>
+            <target>Other Motorcycle Info</target>
+            </trans-unit>
+            <trans-unit id='label.dynamic_brake_support_dbs'>
+            <source>label.dynamic_brake_support_dbs</source>
+            <target>Dynamic Brake Support Dbs</target>
+            </trans-unit>
+            <trans-unit id='label.pedestrian_automatic_emergency_braking_paeb'>
+            <source>label.pedestrian_automatic_emergency_braking_paeb</source>
+            <target>Pedestrian Automatic Emergency Braking Paeb</target>
+            </trans-unit>
+            <trans-unit id='label.automatic_crash_notification_acn_advanced_automatic_crash_notification_aacn'>
+            <source>label.automatic_crash_notification_acn_advanced_automatic_crash_notification_aacn</source>
+            <target>Automatic Crash Notification Acn Advanced Automatic Crash Notification Aacn</target>
+            </trans-unit>
+            <trans-unit id='label.daytime_running_light_drl'>
+            <source>label.daytime_running_light_drl</source>
+            <target>Daytime Running Light Drl</target>
+            </trans-unit>
+            <trans-unit id='label.headlamp_light_source'>
+            <source>label.headlamp_light_source</source>
+            <target>Headlamp Light Source</target>
+            </trans-unit>
+            <trans-unit id='label.semiautomatic_headlamp_beam_switching'>
+            <source>label.semiautomatic_headlamp_beam_switching</source>
+            <target>Semiautomatic Headlamp Beam Switching</target>
+            </trans-unit>
+            <trans-unit id='label.adaptive_driving_beam_adb'>
+            <source>label.adaptive_driving_beam_adb</source>
+            <target>Adaptive Driving Beam Adb</target>
+            </trans-unit>
+            <trans-unit id='label.rear_cross_traffic_alert'>
+            <source>label.rear_cross_traffic_alert</source>
+            <target>Rear Cross Traffic Alert</target>
+            </trans-unit>
+            <trans-unit id='label.rear_automatic_emergency_braking'>
+            <source>label.rear_automatic_emergency_braking</source>
+            <target>Rear Automatic Emergency Braking</target>
+            </trans-unit>
+            <trans-unit id='label.blind_spot_intervention_bsi'>
+            <source>label.blind_spot_intervention_bsi</source>
+            <target>Blind Spot Intervention Bsi</target>
+            </trans-unit>
+            <trans-unit id='label.lane_centering_assistance'>
+            <source>label.lane_centering_assistance</source>
+            <target>Lane Centering Assistance</target>
+            </trans-unit>
+            <trans-unit id="label.make">
+               <source>label.make</source>
+               <target>Make</target>
+            </trans-unit>
             <trans-unit id="label.url">
                 <source>label.url</source>
                 <target>URL</target>
@@ -468,10 +1008,6 @@
                 <source>menu.messages</source>
                 <target>Messages</target>
             </trans-unit>
-            <trans-unit id="menu.dealer">
-                <source>menu.dealer</source>
-                <target>Dealer Staff</target>
-            </trans-unit>
             <trans-unit id="title.message">
                 <source>title.message</source>
                 <target>Thread Messages</target>
@@ -484,20 +1020,6 @@
                 <source>title.edit.message</source>
                 <target>Edit Thread Message</target>
             </trans-unit>
-
-            <trans-unit id="title.dealer">
-                <source>title.dealer</source>
-                <target>Staff Members</target>
-            </trans-unit>
-            <trans-unit id="title.new.dealer">
-                <source>title.new.dealer</source>
-                <target>Create New Staff</target>
-            </trans-unit>
-            <trans-unit id="title.edit.dealer">
-                <source>title.edit.dealer</source>
-                <target>Edit Staff</target>
-            </trans-unit>
-
             <trans-unit id="menu.products">
                 <source>menu.products</source>
                 <target>Products</target>
@@ -710,19 +1232,13 @@
                 <target>Reset Password</target>
             </trans-unit>
 
-            <trans-unit id="email.subject.staff.account_setup">
-                <source>email.subject.staff.account_setup</source>
-                <target>You have been invited to Minuet</target>
-            </trans-unit>
-
-            <trans-unit id="email.subject.dealer.account_setup">
-                <source>email.subject.dealer.account_setup</source>
-                <target>Verify you email and setup account</target>
-            </trans-unit>
-
             <trans-unit id="message.closed_register">
                 <source>message.closed_register</source>
                 <target>The Site is still open for viewing.</target>
+            </trans-unit>
+            <trans-unit id="message.stripe_in_active">
+                <source>message.stripe_in_active</source>
+                <target>Your subscription is not active or has been expired, please subscribe again.</target>
             </trans-unit>
             <trans-unit id="message.created">
                 <source>message.created</source>
@@ -755,24 +1271,7 @@
             <trans-unit id="message.email.confirmation">
                 <source>message.email.confirmation</source>
                 <target>
-                <![CDATA[
-                    <b>Hello!</b>
-                    <p>Please confirm your email address by clicking the following link:</p>
-                    <a title="Click here" href="%signedUrl%" target="_blank">%signedUrl%</a>
-                ]]>
-                <!-- %signedUrl% -->
-                <![CDATA[
-                    <br/><br/>If you're having trouble clicking the link, copy and paste the URL into your web browser.<br/>
-                    This link will expire in
-                ]]>%expiresAt%.
-                
-                <![CDATA[
-                    <br/><p>If you did not create an account, no further action is required.<br/>
-                    Cheers!</p>
-                ]]>
-                    <!-- <![CDATA[
-                        <b>Hello!</b>
-                    ]]>
+                    Hello!
                     Please confirm your email address by clicking the following link:
                     %signedUrl%
 
@@ -781,7 +1280,7 @@
                     This link will expire in %expiresAt%.
 
                     If you did not create an account, no further action is required.
-                    Cheers! -->
+                    Cheers!
                 </target>
             </trans-unit>
             <trans-unit id="message.emailed_reset_link">
@@ -791,41 +1290,11 @@
             <trans-unit id="message.email_password_reset">
                 <source>message.email_password_reset</source>
                 <target>
-                <![CDATA[
-                    <b>Hello %username%!</b>
-                    <p>To reset your password - please visit</p>
-                    <a title="Click here" href="%confirmationUrl%" target="_blank">%confirmationUrl%</a>
-                ]]>
-                    <!-- Hello %username%!
+                    Hello %username%!
                     To reset your password - please visit %confirmationUrl%
-                    Regards, the Team. -->
+                    Regards, the Team.
                 </target>
             </trans-unit>
-            <trans-unit id="message.email_confirmation_password_reset">
-                <source>message.email_confirmation_password_reset</source>
-                <target>
-                <![CDATA[
-                    <b>Hello %username%!</b>
-                    <p>You have been invited to join the %site_name% account.</p>
-                    <p>Please click on below link and setup your account.</p>
-                    <a title="Click here" href="%confirmationUrl%" target="_blank">%confirmationUrl%</a>
-                ]]>
-                </target>
-            </trans-unit>
-
-            <trans-unit id="message.email_confirmation_password_reset_dealer">
-                <source>message.email_confirmation_password_reset_dealer</source>
-                <target>
-                <![CDATA[
-                    <b>Hello %username%!</b>
-                    <p>Thank you for joining %site_name% team,</p>
-                    <p>Please click on below link to verify your email and setup your password.</p>
-                    <a title="Click here" href="%confirmationUrl%" target="_blank">%confirmationUrl%</a>
-                ]]>
-                </target>
-            </trans-unit>
-
-
             <trans-unit id="message.email_verified">
                 <source>message.email_verified</source>
                 <target>Your email address has been verified.</target>
@@ -840,8 +1309,7 @@
             </trans-unit>
             <trans-unit id="message.password_has_been_reset">
                 <source>message.password_has_been_reset</source>
-                <target>
-                Password has been changed successfully. Now you can log in with new password.</target>
+                <target>Password has been changed successfully. Now you can log in with new password.</target>
             </trans-unit>
             <trans-unit id="message.registration_suspended">
                 <source>message.registration_suspended</source>

@@ -33,3 +33,10 @@
         </div>
     {% endif %}
 {% endif %}
+
+
+{% for flashMessage in app.flashes('error') %}
+    <div class="alert alert-danger">
+        {{ flashMessage }}
+    </div>
+{% endfor %}
