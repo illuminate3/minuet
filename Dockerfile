@@ -13,7 +13,7 @@ RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* /var/www/html
     chown www-data.www-data /var/www/html/* -R; \
     php bin/console d:m:m -n --allow-no-migration;
 
-RUN php bin/console app:dev;
+#RUN php bin/console app:dev;
 
 EXPOSE 80
 ENTRYPOINT ["apache2-foreground"]
