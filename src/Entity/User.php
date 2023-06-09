@@ -78,6 +78,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Message::class)]
     private Collection $messages;
 
+    #[ORM\Column(type: Types::STRING, length:10, nullable:false,options:['default'=>'active'])]
+    private ?string $status;
+
     private ?string $role = '';
 
 //    private ArrayCollection $properties;
@@ -288,6 +291,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->emailVerifiedAt = $dateTime;
 
         return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): string
+    {
+      return  $this->status = $status;
     }
 
     public function getIsAccount(): ?bool
