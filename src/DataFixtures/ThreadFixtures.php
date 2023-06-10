@@ -35,7 +35,7 @@ class ThreadFixtures extends Fixture implements DependentFixtureInterface
             $thread->setIsPin(true);
             $thread->setIsClosed(false);
             $thread->setTotalMessages(2);
-            $thread->setCreatedAt(new DateTimeImmutable('now'));
+//            $thread->setCreatedAt(new DateTimeImmutable('now'));
 
             $manager->persist($thread);
         }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Entity\Trait\CreatedAtTrait;
+use App\Entity\Trait\ModifiedAtTrait;
 use App\Entity\Traits\EntityIdTrait;
 use App\Repository\UserRepository;
 use DateTime;
@@ -24,8 +25,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
 
-//    use CreatedAtTrait;
     use EntityIdTrait;
+    use CreatedAtTrait;
+    use ModifiedAtTrait;
 
     /**
      * Requests older than this many seconds will be considered expired.
@@ -57,14 +59,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private ?string $stripe_subscription_id;
 
-    #[ORM\Column(type: Types::DATETIMETZ_MUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
     private ?DateTimeInterface $password_requested_at;
 
     #[ORM\OneToOne(mappedBy: 'user', targetEntity: Profile::class, cascade: ['persist', 'remove'])]
     private ?Profile $profile;
 
-    #[ORM\Column(type: Types::DATETIMETZ_MUTABLE, nullable: true)]
-    private ?DateTime $emailVerifiedAt = null;
+    #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
+    private ?DateTimeInterface $emailVerifiedAt = null;
 
     #[ORM\Column(type: Types::BOOLEAN, length: 1, nullable: false, options: ['default' => 0])]
     private bool $isVerified = false;
@@ -282,12 +284,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->emailVerifiedAt !== null;
     }
 
-    public function getEmailVerifiedAt(): ?DateTime
+    public function getEmailVerifiedAt(): ?DateTimeInterface
     {
         return $this->emailVerifiedAt;
     }
 
-    public function setEmailVerifiedAt(?DateTime $dateTime): self
+    public function setEmailVerifiedAt(?DateTimeInterface $dateTime): self
     {
         $this->emailVerifiedAt = $dateTime;
 
@@ -296,7 +298,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getIsAccount(): ?bool
     {
-        return $this->isAccount ? true : false;
+        return (bool) $this->isAccount;
     }
 
     public function setIsAccount(?bool $isAccount): self

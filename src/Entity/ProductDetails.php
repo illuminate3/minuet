@@ -7,6 +7,7 @@ namespace App\Entity;
 use App\Entity\Trait\CreatedAtTrait;
 use App\Entity\Trait\ModifiedAtTrait;
 use App\Entity\Traits\EntityIdTrait;
+use App\Repository\ProductRepository;
 use App\Repository\ProductTrimsRepository;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -22,7 +23,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 #[ORM\Table]
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: ProductRepository::class)]
 class ProductDetails
 {
     use EntityIdTrait;
@@ -40,13 +41,13 @@ class ProductDetails
 
     #[ORM\Column(type: Types::INTEGER, nullable: true)]
     private ?int $make = null;
-    
+
     #[ORM\Column(type: Types::INTEGER, nullable: true)]
     private ?int $model = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $suggested_vin = '';
-    
+
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $possible_values = null;
 
@@ -112,7 +113,7 @@ class ProductDetails
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $gross_vehicle_weight_rating_from = '';
-    
+
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $bed_length_inches = '';
 
@@ -160,7 +161,7 @@ class ProductDetails
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $wheel_size_rear_inches = '';
-    
+
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $entertainment_system = '';
 
@@ -340,7 +341,7 @@ class ProductDetails
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $automatic_pedestrian_alerting_sound_for_hybrid_and_ev_only = '';
-    
+
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $event_data_recorder_edr = '';
 
@@ -1659,7 +1660,7 @@ class ProductDetails
 
         return $this;
     }
-    
+
      public function getNote()
     {
         return $this->note;

@@ -28,10 +28,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
 {
-    use CreatedAtTrait;
-    use ModifiedAtTrait;
-    use SlugTrait;
     use EntityIdTrait;
+//    use CreatedAtTrait;
+//    use ModifiedAtTrait;
+    use SlugTrait;
 
     #[ORM\Column(type: Types::TEXT, length: 255)]
     private ?string $title = '';

@@ -17,7 +17,7 @@ class Thread
 {
 
     use EntityIdTrait;
-    use CreatedAtTrait;
+//    use CreatedAtTrait;
 
     #[ORM\Column(nullable: true, options: ['default' => 0])]
     private ?bool $isClosed = null;

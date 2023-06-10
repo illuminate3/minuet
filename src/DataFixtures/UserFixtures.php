@@ -8,6 +8,7 @@ use App\Entity\Profile;
 use App\Entity\User;
 use App\Transformer\UserTransformer;
 use DateTime;
+use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -39,9 +40,10 @@ final class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setIsVerified($verified);
             $user->setIsAccount($is_account);
             $user->setIsSubscriptionActive($is_subscription_active);
+            $user->setCreatedAt(new DateTimeImmutable('now'));
 // set email
             $user->setEmail($email);
-            $user->setEmailVerifiedAt(new DateTime('now'));
+            $user->setEmailVerifiedAt(new DateTimeImmutable('now'));
 // set roles
             $user = $this->transformer->transform($user);
             $user->setRoles($roles);

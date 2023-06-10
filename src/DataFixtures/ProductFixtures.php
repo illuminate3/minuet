@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\DataFixtures;
 
 use App\Entity\Product;
+use App\Entity\ProductDetails;
 use App\Utils\Slugger;
+use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -37,10 +39,17 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             $product->setSlug(Slugger::slugify($title));
             $product->setPrice($faker->numberBetween(900, 150000));
 //            $product->setStock($faker->numberBetween(0, 10));
+//            $product->setCreatedAt(new DateTimeImmutable('now'));
+
+
+//            // ProductDetails
+//            $productDetail = new ProductDetails($product);
+
 
             // Category
             $category = $this->getReference('category-' . random_int(1, 8));
             $product->setCategory($category);
+
 
             // Account
             if ($this->counter <= 7) {
@@ -48,6 +57,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             } else {
                 $product->setAccount($account2);
             }
+
 
             $this->setReference('product-' . $prod, $product);
             $manager->persist($product);

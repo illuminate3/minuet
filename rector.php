@@ -17,10 +17,10 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
 
     $rectorConfig->sets([
-        DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
+//        DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
         SymfonySetList::ANNOTATIONS_TO_ATTRIBUTES,
         SensiolabsSetList::FRAMEWORK_EXTRA_61,
-        LevelSetList::UP_TO_PHP_81,
+//        LevelSetList::UP_TO_PHP_82,
         SetList::CODE_QUALITY,
         SetList::DEAD_CODE,
         SymfonySetList::SYMFONY_62,
