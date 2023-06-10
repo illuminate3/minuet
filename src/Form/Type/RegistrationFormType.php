@@ -41,21 +41,11 @@ final class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
-                        'label' => 'label.agree',
-                        'mapped' => false,
+                'label' => 'label.agree',
+                'mapped' => false,
 
-                    ])
-            ->get('roles')
-            ->addModelTransformer(new CallbackTransformer(
-                function ($rolesArray) {
-                    // transform the array to a string
-                    return count($rolesArray)? $rolesArray[0]: null;
-                },
-                function ($rolesString) {
-                    // transform the string back to an array
-                    return [$rolesString];
-                }
-        ));
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

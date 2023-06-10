@@ -48,10 +48,10 @@
                                     {% form_theme form 'bootstrap_5_layout.html.twig' %}
 
                                     {{ form_start(form) }}
-                                    {{ form_row(form.roles, { 'attr': {'class': 'roles-field'} }) }}
-                                    {{ form_row(form.email, { 'attr': {'class': 'email-field'},'label_attr': {'class': 'email-field'}, 'row_attr': {'class': 'mb-3 hide', 'id' : 'email-div'}, }) }}
-                                    {{ form_row(form.password, { 'attr': {'class': 'password-field'},'label_attr': {'class': 'password-field'}, 'row_attr': {'class': 'mb-3 hide', 'id' : 'password-div'}, }) }}
-                                    {{ form_row(form.agreeTerms, { 'attr': {'class': 'agree-terms-field'},'label_attr': {'class': 'agree-terms-field'}, 'row_attr': {'class': 'mb-3 hide', 'id' : 'agree-terms-div'},}) }}
+
+                                    {{ form_row(form.email) }}
+                                    {{ form_row(form.password) }}
+                                    {{ form_row(form.agreeTerms) }}
 
                                     <div class="form-group row mb-0 mt-3 mb-auto">
                                         <div class="col-md-12">
