@@ -22,7 +22,7 @@ final class UserFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         foreach ($this->getUserData() as [
-            $firstName, $lastName, $password, $verified, $is_account, $phone, $email, $roles
+            $firstName, $lastName, $password, $verified, $is_account, $is_subscription_active, $phone, $email, $roles
         ]) {
 // create a new user object
             $user = new User();
@@ -35,9 +35,10 @@ final class UserFixtures extends Fixture implements DependentFixtureInterface
             );
 // set password
             $user->setPassword($password);
-// set verified, account
+// set verified, account, subscription_active(stripe)
             $user->setIsVerified($verified);
             $user->setIsAccount($is_account);
+            $user->setIsSubscriptionActive($is_subscription_active);
 // set email
             $user->setEmail($email);
             $user->setEmailVerifiedAt(new DateTime('now'));
@@ -53,19 +54,19 @@ final class UserFixtures extends Fixture implements DependentFixtureInterface
 
     private function getUserData(): array
     {
-#       ROLE_ADMIN, ROLE_USER, ROLE_DEALER, ROLE_BUYER, ROLE_STAFF
+#       ROLE_SUPER, ROLE_ADMIN, ROLE_USER, ROLE_DEALER, ROLE_STAFF
         return [
-            // data = [$firstName, $lastName, $password, $verified, $is_account, $phone, $email, $roles]
-            ['Admin', 'Admin', 'admin', true, true, '(123)555-1111', 'admin@admin.com', ['ROLE_ADMIN']],
-            ['Dealer2', 'Dealer2', 'test', true, true, '(456)555-2222', 'dealer2@test.com', ['ROLE_DEALER']],
-            ['Dealer3', 'Dealer3', 'test', true, true, '(456)555-3333', 'dealer3@test.com', ['ROLE_DEALER']],
-            ['Staff4', 'Staff4', 'test', true, true, '(456)555-4444', 'staff4@test.com', ['ROLE_STAFF']],
-            ['Staff5', 'Staff5', 'test', true, true, '(456)555-5555', 'staff5@test.com', ['ROLE_STAFF']],
-            ['Buyer5', 'Buyer5', 'test', true, true, '(456)555-6666', 'buyer5@test.com', ['ROLE_BUYER']],
-            ['Buyer6', 'Buyer6', 'test', true, false, '(456)555-7777', 'buyer6@test.com', ['ROLE_BUYER']],
-            ['Admin', 'Super', 'admin', true, true, '(123)555-1111', 'super@admin.com', ['ROLE_SUPER']],
-            ['User1', 'User1', 'test', true, true, '(456)555-6666', 'user1@test.com', ['ROLE_USER']],
-            ['User2', 'User2', 'test', true, false, '(456)555-7777', 'user2@test.com', ['ROLE_USER']],
+            // data = [$firstName, $lastName, $password, $verified, $is_account, $is_subscription_active, $phone, $email, $roles]
+            ['Admin', 'Admin', 'admin', true, false, false, '(123)555-1111', 'admin@admin.com', ['ROLE_ADMIN']],
+            ['Dealer2', 'Dealer2', 'test', true, true, false, '(456)555-2222', 'dealer2@test.com', ['ROLE_DEALER']],
+            ['Dealer3', 'Dealer3', 'test', true, true, false, '(456)555-3333', 'dealer3@test.com', ['ROLE_DEALER']],
+            ['Staff4', 'Staff4', 'test', true, true, false, '(456)555-4444', 'staff4@test.com', ['ROLE_STAFF']],
+            ['Staff5', 'Staff5', 'test', true, true, false, '(456)555-5555', 'staff5@test.com', ['ROLE_STAFF']],
+            ['Seller5', 'Seller5', 'test', true, true, false, '(456)555-6666', 'seller5@test.com', ['ROLE_USER']], // ROLE_SELLER - ROLE_BUYER
+            ['Seller6', 'Seller6', 'test', true, false, false, '(456)555-7777', 'seller6@test.com', ['ROLE_USER']], // ROLE_SELLER - ROLE_BUYER
+            ['Admin', 'Super', 'admin', true, false, false, '(123)555-1111', 'super@admin.com', ['ROLE_SUPER']],
+            ['User1', 'User1', 'test', true, false, false, '(456)555-6666', 'user1@test.com', ['ROLE_USER']],
+            ['User2', 'User2', 'test', true, false, false, '(456)555-7777', 'user2@test.com', ['ROLE_USER']],
         ];
     }
 

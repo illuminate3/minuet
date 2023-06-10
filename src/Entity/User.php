@@ -66,7 +66,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIMETZ_MUTABLE, nullable: true)]
     private ?DateTime $emailVerifiedAt = null;
 
-    #[ORM\Column(type: Types::BOOLEAN, length: 1, nullable: true)]
+    #[ORM\Column(type: Types::BOOLEAN, length: 1, nullable: false, options: ['default' => 0])]
     private bool $isVerified = false;
 
     #[ORM\Column(nullable: true)]
@@ -79,6 +79,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $messages;
 
     private ?string $role = '';
+
+    #[ORM\Column(type: Types::BOOLEAN, length: 1, nullable: false, options: ['default' => 0])]
+    private ?bool $isSubscriptionActive = null;
 
 //    private ArrayCollection $properties;
 
@@ -141,11 +144,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $roles = $this->roles;
         // guarantees that a user always has at least one role for security
         if (empty($roles)) {
-            $roles[] = 'ROLE_USER';
             $roles[] = 'ROLE_ADMIN';
             $roles[] = 'ROLE_BUYER';
+            $roles[] = 'ROLE_SELLER';
             $roles[] = 'ROLE_DEALER';
             $roles[] = 'ROLE_STAFF';
+            $roles[] = 'ROLE_USER';
         }
         return array_unique($roles);
     }
@@ -370,6 +374,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function isIsSubscriptionActive(): ?bool
+    {
+        return $this->isSubscriptionActive;
+    }
+
+    public function setIsSubscriptionActive(bool $isSubscriptionActive): self
+    {
+        $this->isSubscriptionActive = $isSubscriptionActive;
 
         return $this;
     }

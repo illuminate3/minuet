@@ -13,40 +13,30 @@
             {{ 'menu.user'|trans }}
         {% endif %}
     </a>
-    
+
     <div class="dropdown-menu" aria-labelledby="userDropdown">
-        {% if app.user.roles[0] == 'ROLE_BUYER' %}
-            <a class="dropdown-item" href="{{ path('app_dash_buyer') }}">
-                {{ 'menu.dash'|trans }}
-            </a>
-        {% elseif app.user.roles[0] == 'ROLE_DEALER' %}
-            <a class="dropdown-item" href="{{ path('app_dash') }}">
-                {{ 'menu.dash'|trans }}
-            </a>
-        {% elseif app.user.roles[0] == 'ROLE_STAFF' %}
-            <a class="dropdown-item" href="{{ path('app_dash_staff') }}">
-                {{ 'menu.dash'|trans }}
-            </a>
-        {% else %}
-            <a class="dropdown-item" href="{{ path('app_dash') }}">
-                {{ 'menu.dash'|trans }}
-            </a>
-        {% endif %}
-        <a class="dropdown-item" href="{{ path('user_products') }}">
-            {{ 'menu.products'|trans }}
+
+        <a class="dropdown-item" href="{{ path('app_dash') }}">
+            {{ 'menu.dash'|trans }}
         </a>
+
         <a class="dropdown-item" href="{{ path('app_thread_index') }}">
             {{ 'menu.messages'|trans }}
         </a>
+
         <a class="dropdown-item" href="{{ path('user_profile') }}">
             {{ 'menu.profile'|trans }}
         </a>
+
         <a class="dropdown-item" href="{{ path('user_password_change') }}">
             {{ 'menu.password_change'|trans }}
         </a>
+
         <div class="dropdown-divider"></div>
+
         <a class="dropdown-item" href="{{ path('security_logout') }}">
             {{ 'menu.logout'|trans }}
         </a>
+
     </div>
 </li>

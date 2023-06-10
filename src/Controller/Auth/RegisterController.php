@@ -73,6 +73,15 @@ final class RegisterController extends BaseController implements AuthController
             return $this->redirectToRoute('auth_no_register');
         }
 
+//            $lastInsertedID = $user->getId();
+//            if (isset($form->getData()->getRoles()[0]) && $form->getData()->getRoles()[0] == 'ROLE_BUYER') {
+//                $this->messageBus->dispatch(new SendEmailConfirmationLink($user));
+//            }
+//            $this->addFlash('success', 'message.registration_successful');
+//            if (isset($form->getData()->getRoles()[0]) && $form->getData()->getRoles()[0] == 'ROLE_DEALER') {
+//                return $this->redirectToRoute('dealer_choose_plan', ['id' => $lastInsertedID]);
+//            }
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -80,15 +89,8 @@ final class RegisterController extends BaseController implements AuthController
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setProfile(new Profile());
             $this->service->create($user);
-            $lastInsertedID = $user->getId();
-            if (isset($form->getData()->getRoles()[0]) && $form->getData()->getRoles()[0] == 'ROLE_BUYER') {
-                $this->messageBus->dispatch(new SendEmailConfirmationLink($user));
-            }
+            $this->messageBus->dispatch(new SendEmailConfirmationLink($user));
             $this->addFlash('success', 'message.registration_successful');
-            if (isset($form->getData()->getRoles()[0]) && $form->getData()->getRoles()[0] == 'ROLE_DEALER') {
-                return $this->redirectToRoute('dealer_choose_plan', ['id' => $lastInsertedID]);
-            }
-            // return $this->authenticate($user, $request);
         }
 
         return $this->render('auth/register/register.html.twig', [
