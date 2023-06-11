@@ -7,13 +7,11 @@ namespace App\DataFixtures;
 use App\Entity\Profile;
 use App\Entity\User;
 use App\Transformer\UserTransformer;
-use DateTime;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-final class UserFixtures extends Fixture implements DependentFixtureInterface
+final class UserFixtures extends Fixture
 {
     public function __construct(UserTransformer $transformer)
     {
@@ -36,7 +34,7 @@ final class UserFixtures extends Fixture implements DependentFixtureInterface
             );
 // set password
             $user->setPassword($password);
-// set verified, account, subscription_active(stripe)
+// set verified, account, subscription_active(stripe), createdAt
             $user->setIsVerified($verified);
             $user->setIsAccount($is_account);
             $user->setIsSubscriptionActive($is_subscription_active);
@@ -72,12 +70,4 @@ final class UserFixtures extends Fixture implements DependentFixtureInterface
         ];
     }
 
-    public function getDependencies(): array
-    {
-        return [
-            SettingsFixtures::class,
-            PageFixtures::class,
-            MenuFixtures::class,
-        ];
-    }
 }

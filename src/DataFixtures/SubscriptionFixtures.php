@@ -6,10 +6,9 @@ namespace App\DataFixtures;
 
 use App\Entity\Subscription;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class SubscriptionFixtures extends Fixture implements DependentFixtureInterface
+class SubscriptionFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
@@ -38,13 +37,6 @@ class SubscriptionFixtures extends Fixture implements DependentFixtureInterface
             ['basic', 0, 'price_1N1LrhHxcL7TQhSHcRcfL89i', '7 days', 'limited', 'limited support'],
             ['premium', 24.99, 'price_1N1LtDHxcL7TQhSHA7lHKgjk', '1 month', 'lifetime', '24/7 Support'],
             ['cinematic', 39.99, 'price_1N1LtuHxcL7TQhSHhp6oIzuQ', '2 months', 'lifetime', '24/7 Support'],
-        ];
-    }
-
-    public function getDependencies(): array
-    {
-        return [
-            UserFixtures::class,
         ];
     }
 }

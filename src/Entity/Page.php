@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Entity\Trait\CreatedAtTrait;
+use App\Entity\Trait\ModifiedAtTrait;
 use App\Entity\Traits\EntityIdTrait;
 use App\Repository\PageRepository;
 use Doctrine\DBAL\Types\Types;
@@ -18,8 +19,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Page
 {
 
-//    use CreatedAtTrait;
     use EntityIdTrait;
+    use CreatedAtTrait;
+    use ModifiedAtTrait;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $title;

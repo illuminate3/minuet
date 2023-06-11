@@ -21,8 +21,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class ProductTrims
 {
     use EntityIdTrait;
-    use CreatedAtTrait;
-    use ModifiedAtTrait;
 
     #[ORM\Column(type: Types::INTEGER, nullable: true)]
     private ?int $trim_id;
@@ -35,7 +33,7 @@ class ProductTrims
 
     #[ORM\Column(type: Types::INTEGER, nullable: true)]
     private ?int $year;
-    
+
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $name;
 
@@ -79,5 +77,5 @@ class ProductTrims
 
         return $this;
     }
-    
+
 }

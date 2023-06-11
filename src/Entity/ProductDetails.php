@@ -27,8 +27,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class ProductDetails
 {
     use EntityIdTrait;
-    use CreatedAtTrait;
-    use ModifiedAtTrait;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $vin = '';

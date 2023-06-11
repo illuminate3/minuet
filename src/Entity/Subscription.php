@@ -17,7 +17,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[UniqueEntity('plan')]
 class Subscription
 {
-//    use CreatedAtTrait;
     use EntityIdTrait;
 
     #[ORM\Column(type: Types::STRING, length: 255)]

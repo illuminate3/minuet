@@ -39,7 +39,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             $product->setSlug(Slugger::slugify($title));
             $product->setPrice($faker->numberBetween(900, 150000));
 //            $product->setStock($faker->numberBetween(0, 10));
-//            $product->setCreatedAt(new DateTimeImmutable('now'));
+            $product->setCreatedAt(new DateTimeImmutable('now'));
 
 
 //            // ProductDetails
@@ -57,7 +57,6 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             } else {
                 $product->setAccount($account2);
             }
-
 
             $this->setReference('product-' . $prod, $product);
             $manager->persist($product);

@@ -13,9 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ProfileRepository::class)]
 class Profile
 {
-//    use CreatedAtTrait;
-    use EntityIdTrait;
 
+    use EntityIdTrait;
 
     #[ORM\ManyToOne(inversedBy: 'user')]
     #[ORM\JoinColumn(name: 'user_id')]

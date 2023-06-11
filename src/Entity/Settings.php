@@ -16,7 +16,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[UniqueEntity('setting_name')]
 class Settings
 {
-//    use CreatedAtTrait;
+
     use EntityIdTrait;
 
     #[ORM\Column(type: Types::STRING, length: 191, unique: true)]

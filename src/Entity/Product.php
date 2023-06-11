@@ -28,9 +28,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
 {
+
     use EntityIdTrait;
-//    use CreatedAtTrait;
-//    use ModifiedAtTrait;
+    use CreatedAtTrait;
+    use ModifiedAtTrait;
     use SlugTrait;
 
     #[ORM\Column(type: Types::TEXT, length: 255)]
