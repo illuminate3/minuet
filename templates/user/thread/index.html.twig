@@ -1,4 +1,4 @@
-{% extends 'layout/dash/dash.html.twig' %}
+{% extends '../../layout/dash/dash.html.twig' %}
 
 {% block subheader %}
     <!-- Title -->
@@ -78,7 +78,7 @@
             {% if key == 0 %}
                 <p>{{ value.content|length > 100 ? value.content|slice(0, 100) ~ '...' : value.content  }}</p>
 
-                
+
             {% endif %}
         {% endfor %}
         </td>
@@ -114,7 +114,7 @@
   </div>
 </div>
     {% endfor %}
-    
+
 
 
 {#    <h1>Thread index</h1>#}

@@ -179,7 +179,7 @@ final class RegisterController extends BaseController implements AuthController
     {
         // Get pages
         $subscriptions = $subscriptionRepository->findAll();
-        return $this->render('plans/index.html.twig', [
+        return $this->render('pricing/index.html.twig', [
             'title' => 'title.subscription',
             'site' => $this->site($request),
             'subscriptions' => $subscriptions,
