@@ -6,24 +6,19 @@ namespace App\Controller\Auth;
 
 use App\Controller\BaseController;
 use App\Form\Type\LoginFormType;
-use App\Repository\AccountRepository;
-use App\Repository\AccountUserRepository;
 use Exception;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use App\Service\StripeService;
+
 final class LoginController extends BaseController
 {
     #[Route(path: '/login', name: 'security_login')]
     public function login(
         Request $request,
-        AccountRepository $accountRepository,
-        AccountUserRepository $accountUserRepository,
         Security $security,
-        StripeService $stripeService,
         AuthenticationUtils $helper,
     ): Response {
 

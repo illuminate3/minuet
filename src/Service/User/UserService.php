@@ -46,6 +46,17 @@ final class UserService extends AbstractService
         $this->addFlash('success', 'message.updated');
     }
 
+    /**
+     * @throws InvalidArgumentException
+     */
+    public function remove(User $user): void
+    {
+        $this->em->remove($user);
+        $this->em->flush();
+        $this->clearCache('users_count');
+        $this->addFlash('success', 'message.deleted');
+    }
+
     private function save(User $user): void
     {
         $this->em->persist($user);

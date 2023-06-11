@@ -37,6 +37,10 @@
                         <div class="col-lg-6 bg-white">
                             <div class="align-items-center px-4 px-lg-5 h-100">
 
+                                {% for flash_error in app.flashes('verify_email_error') %}
+                                    <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+                                {% endfor %}
+
                                 <div class="row mt-lg-5">
                                 {{ include('common/_flash_messages.html.twig') }}
                                     <h2 class="row mt-lg-5">
@@ -62,7 +66,7 @@
 
                                             <div class="mt-4 mb-4">
                                                 <a class="btn btn-info" href="{{ path('security_login') }}">
-                                                    {{ 'action.sign_in'|trans }}
+                                                    {{ 'action.register'|trans }}
                                                 </a>
                                                 <a class="btn btn-info" href="{{ path('auth_password_reset') }}">
                                                     {{ 'action.forgot_password'|trans }}

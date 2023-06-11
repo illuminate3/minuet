@@ -2,16 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\User;
 
+use App\Controller\BaseController;
 use App\Entity\Thread;
-use App\Form\ThreadType;
+use App\Form\Type\ThreadType;
 use App\Repository\AccountRepository;
 use App\Repository\AccountUserRepository;
 use App\Repository\ProductRepository;
 use App\Repository\ThreadRepository;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

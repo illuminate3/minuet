@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType as SymfonyPasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 
 final class RegistrationFormType extends AbstractType
@@ -24,6 +25,7 @@ final class RegistrationFormType extends AbstractType
                 'label' => 'label.email',
                 'required' => true,
                 'attr' => [
+                    'autofocus' => true,
                     'placeholder' => 'label.email',
                 ],
             ])
@@ -42,8 +44,13 @@ final class RegistrationFormType extends AbstractType
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'label' => 'label.agree',
+                'required' => true,
                 'mapped' => false,
-
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'agree_terms',
+                    ]),
+                ],
             ])
         ;
     }

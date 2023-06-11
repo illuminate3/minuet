@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Entity\Trait\CreatedAtTrait;
+use App\Entity\Trait\EntityIdTrait;
 use App\Entity\Trait\ModifiedAtTrait;
-use App\Entity\Traits\EntityIdTrait;
 use App\Repository\UserRepository;
 use DateTime;
 use DateTimeInterface;

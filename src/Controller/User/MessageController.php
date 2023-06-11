@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\User;
 
+use App\Controller\BaseController;
 use App\Entity\Message;
-use App\Form\MessageType;
+use App\Form\Type\MessageType;
 use App\Repository\MessageRepository;
 use App\Repository\ThreadRepository;
 use DateTimeImmutable;

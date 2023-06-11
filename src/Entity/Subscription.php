@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Entity\Traits\EntityIdTrait;
+use App\Entity\Trait\EntityIdTrait;
 use App\Repository\SubscriptionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Entity\Trait\CreatedAtTrait;
-use App\Entity\Traits\EntityIdTrait;
+use App\Entity\Trait\EntityIdTrait;
 use App\Repository\SettingsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;

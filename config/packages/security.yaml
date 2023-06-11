@@ -82,8 +82,8 @@ security:
     # additional security lives in the controllers
 #        - { path: '^/(%app_locales%)/admin', roles: ROLE_ADMIN }
 #        - { path: '^/(%app_locales%)/user', roles: ROLE_USER }
-#        - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/user, roles: [ROLE_DEALER, ROLE_STAFF, ROLE_BUYER, ROLE_SELLER, ROLE_USER, ] }
+        - { path: ^/admin, roles: [ROLE_SUPER, ROLE_ADMIN] }
+        - { path: ^/user, roles: [ROLE_USER] }
 
     role_hierarchy:
         ROLE_SUPER: ROLE_ADMIN
