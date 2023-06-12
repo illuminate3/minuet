@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace App\Entity\Trait;
 
 use DateTimeImmutable;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 trait CreatedAtTrait
 {
-    #[ORM\Column(type: 'datetime_immutable', options: ['default' => 'CURRENT_TIMESTAMP'])]
+
+    #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: false, options: ['default' => 'CURRENT_TIMESTAMP'])]
     private ?DateTimeImmutable $created_at;
 
     public function getCreatedAt(): ?DateTimeImmutable

@@ -1,15 +1,16 @@
 .DS_Store
-/drivers/
 /.idea/
-/public/uploads/images/*/*.*
 
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
 /.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
-/public/build/*
+/public/build/
+/public/build/entrypoints.json
+/public/build/manifest.json
 /public/bundles/
+/public/uploads/images/*/*.*
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
@@ -29,8 +30,3 @@ yarn-error.log
 ###> friendsofphp/php-cs-fixer ###
 /.php-cs-fixer.php
 ###< friendsofphp/php-cs-fixer ###
-
-###> phpunit/phpunit ###
-/phpunit.xml
-.phpunit.result.cache
-###< phpunit/phpunit ###

@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Entity\Trait\CreatedAtTrait;
-use App\Entity\Traits\EntityIdTrait;
+use App\Entity\Trait\EntityIdTrait;
+use App\Entity\Trait\ModifiedAtTrait;
 use App\Repository\ThreadRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -18,6 +19,7 @@ class Thread
 
     use EntityIdTrait;
     use CreatedAtTrait;
+    use ModifiedAtTrait;
 
     #[ORM\Column(nullable: true, options: ['default' => 0])]
     private ?bool $isClosed = null;

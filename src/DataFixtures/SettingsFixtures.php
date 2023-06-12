@@ -26,6 +26,7 @@ final class SettingsFixtures extends Fixture
         return [
             // data = [$setting_name, $setting_value]
             ['site_name', 'Minuet'],
+            ['contact_email', 'admin@test.com'],
             ['site_title', 'Page Title'],
             ['meta_title', 'Meta Title'],
             ['meta_description', 'Meta Description'],

@@ -1,0 +1,11 @@
+{% extends '../../layout/dash/dash.html.twig' %}
+
+{% block subheader %}
+    <!-- Title -->
+    <div class="row">
+    {{ include('layout/partials/_title.html.twig') }}
+{% endblock %}
+
+{% block body %}
+    {{ include('message/_form.html.twig') }}
+{% endblock %}

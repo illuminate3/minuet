@@ -6,49 +6,26 @@ namespace App\Controller\Auth;
 
 use App\Controller\BaseController;
 use App\Form\Type\LoginFormType;
-use App\Repository\AccountRepository;
-use App\Repository\AccountUserRepository;
 use Exception;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use App\Service\StripeService;
+
 final class LoginController extends BaseController
 {
     #[Route(path: '/login', name: 'security_login')]
     public function login(
         Request $request,
-        AccountRepository $accountRepository,
-        AccountUserRepository $accountUserRepository,
         Security $security,
-        StripeService $stripeService,
         AuthenticationUtils $helper,
     ): Response {
 
         // if user is already logged in, don't display the login page again
 
-        if ($security->isGranted('ROLE_USER')===true) {
-            $resp = $stripeService->checkStripeSubscriptionActive($security,$accountRepository,$accountUserRepository);
-            if ($resp === 'account') {
-                return $this->redirectToRoute('app_pricing');
-            }elseif (!$resp) {
-                $this->addFlash('error','message.stripe_in_active');        
-            }else{
-                return $this->redirectToRoute('app_dash');
-            }
-        }     
-        if ($security->isGranted('ROLE_USER') || $security->isGranted('ROLE_DEALER')) {
+        if ($security->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('app_dash');
-        }
-
-        if ($security->isGranted('ROLE_BUYER')) {
-            return $this->redirectToRoute('app_dash_buyer');
-        }
-
-        if ($security->isGranted('ROLE_STAFF')) {
-            return $this->redirectToRoute('app_dash_staff');
         }
 
         $error = $helper->getLastAuthenticationError();

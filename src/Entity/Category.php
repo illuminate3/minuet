@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Entity\Trait\CreatedAtTrait;
+use App\Entity\Trait\EntityIdTrait;
 use App\Entity\Trait\SlugTrait;
-use App\Entity\Traits\EntityIdTrait;
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -15,9 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
 {
-    use SlugTrait;
-//    use CreatedAtTrait;
     use EntityIdTrait;
+    use SlugTrait;
 
     #[ORM\Column(type: 'string', length: 100)]
     private ?string $name;

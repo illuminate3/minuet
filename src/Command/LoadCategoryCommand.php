@@ -48,6 +48,13 @@ final class LoadCategoryCommand extends Command
         $this->em->getConnection()->executeQuery($sql);
         $this->em->flush();
 
+        $path = $this->params->get('kernel.project_dir');
+        $fileCategory = $path . '/data/make.sql';
+
+        $sql = file_get_contents($fileCategory);
+        $this->em->getConnection()->executeQuery($sql);
+        $this->em->flush();
+
         return Command::SUCCESS;
     }
 }
