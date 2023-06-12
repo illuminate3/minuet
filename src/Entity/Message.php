@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Entity\Trait\CreatedAtTrait;
-use App\Entity\Traits\EntityIdTrait;
+use App\Entity\Trait\EntityIdTrait;
+use App\Entity\Trait\ModifiedAtTrait;
 use App\Repository\MessageRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,10 +17,11 @@ class Message
 
     use EntityIdTrait;
     use CreatedAtTrait;
+    use ModifiedAtTrait;
 
     // #[ORM\Column(nullable: true)]
     // private ?int $updatedBy = null;
-    
+
     #[ORM\ManyToOne(inversedBy: 'messages')]
     #[ORM\JoinColumn(name: 'updated_by')]
     private ?User $updatedBy = null;

@@ -13,31 +13,19 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType as SymfonyPasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 
 final class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder 
-            ->add(
-                'roles', ChoiceType::class, [
-                    'attr' => [
-                        'name' => 'test',
-                    ],
-                    'choices' => array(
-                        'Dealer' => 'ROLE_DEALER',
-                        'Buyer' => 'ROLE_BUYER'
-                    ),
-                    'required' => true,
-                    'expanded' => true,
-                    'label' => 'label.role',
-                ]
-            )
+        $builder
             ->add('email', EmailType::class, [
                 'label' => 'label.email',
                 'required' => true,
                 'attr' => [
+                    'autofocus' => true,
                     'placeholder' => 'label.email',
                 ],
             ])
@@ -55,21 +43,16 @@ final class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
-                        'label' => 'label.agree',
-                        'mapped' => false,
-                        
-                    ])
-            ->get('roles')
-            ->addModelTransformer(new CallbackTransformer(
-                function ($rolesArray) {
-                    // transform the array to a string
-                    return count($rolesArray)? $rolesArray[0]: null;
-                },
-                function ($rolesString) {
-                    // transform the string back to an array
-                    return [$rolesString];
-                }
-        ));
+                'label' => 'label.agree',
+                'required' => true,
+                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'agree_terms',
+                    ]),
+                ],
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -14,7 +14,7 @@ use App\Repository\SettingsRepository;
 use App\Repository\SubscriptionRepository;
 use App\Repository\UserRepository;
 use App\Security\RegistrationFormAuthenticator;
-use App\Service\UserService;
+use App\Service\User\UserService;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -63,13 +63,13 @@ final class RegisterController extends BaseController implements AuthController
     #[Route(path: '/register', name: 'auth_register', methods: ['GET','POST'])]
     public function register(Request $request, MailerInterface $mailer): ?Response
     {
+
         if ($this->security->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('app_dash');
         }
 
         if ($this->settings['allow_register'] !== '1') {
             $this->addFlash('danger', 'message.registration_suspended');
-
             return $this->redirectToRoute('auth_no_register');
         }
 
@@ -78,17 +78,11 @@ final class RegisterController extends BaseController implements AuthController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = new User();
             $user->setProfile(new Profile());
             $this->service->create($user);
-            $lastInsertedID = $user->getId();
-            if (isset($form->getData()->getRoles()[0]) && $form->getData()->getRoles()[0] == 'ROLE_BUYER') {
-                $this->messageBus->dispatch(new SendEmailConfirmationLink($user));
-            }
+            $this->messageBus->dispatch(new SendEmailConfirmationLink($user));
             $this->addFlash('success', 'message.registration_successful');
-            if (isset($form->getData()->getRoles()[0]) && $form->getData()->getRoles()[0] == 'ROLE_DEALER') {
-                return $this->redirectToRoute('dealer_choose_plan', ['id' => $lastInsertedID]);
-            }
-            // return $this->authenticate($user, $request);
         }
 
         return $this->render('auth/register/register.html.twig', [
@@ -185,7 +179,7 @@ final class RegisterController extends BaseController implements AuthController
     {
         // Get pages
         $subscriptions = $subscriptionRepository->findAll();
-        return $this->render('plans/index.html.twig', [
+        return $this->render('pricing/index.html.twig', [
             'title' => 'title.subscription',
             'site' => $this->site($request),
             'subscriptions' => $subscriptions,

@@ -13,9 +13,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+#[Route('/user/dash')]
 final class ProfileController extends BaseController
 {
-    #[Route(path: '/user/profile', name: 'user_profile')]
+    #[Route(path: '/', name: 'user_profile')]
     public function index(
         Request $request,
     ): Response {
@@ -32,7 +33,7 @@ final class ProfileController extends BaseController
         ]);
     }
 
-    #[Route(path: '/user/profile/edit', name: 'user_profile_edit', methods: ['GET', 'POST'])]
+    #[Route(path: '/edit', name: 'user_profile_edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request,
         EntityManagerInterface $entityManager,

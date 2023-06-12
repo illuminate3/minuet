@@ -6,6 +6,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Page;
 use App\Utils\Slugger;
+use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -24,6 +25,7 @@ final class PageFixtures extends Fixture
         $page->setContent($this->getAContent());
         $page->setShowInMenu(true);
         $page->setPublish(true);
+        $page->setCreatedAt(new DateTimeImmutable('now'));
         $manager->persist($page);
 
         $page = new Page();
@@ -34,6 +36,7 @@ final class PageFixtures extends Fixture
         $page->setContent($this->getBContent());
         $page->setShowInMenu(true);
         $page->setPublish(true);
+        $page->setCreatedAt(new DateTimeImmutable('now'));
         $manager->persist($page);
 
         $manager->flush();

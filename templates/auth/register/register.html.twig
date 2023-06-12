@@ -37,6 +37,10 @@
                         <div class="col-lg-6 bg-white">
                             <div class="align-items-center px-4 px-lg-5 h-100">
 
+                                {% for flash_error in app.flashes('verify_email_error') %}
+                                    <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+                                {% endfor %}
+
                                 <div class="row mt-lg-5">
                                 {{ include('common/_flash_messages.html.twig') }}
                                     <h2 class="row mt-lg-5">
@@ -48,10 +52,10 @@
                                     {% form_theme form 'bootstrap_5_layout.html.twig' %}
 
                                     {{ form_start(form) }}
-                                    {{ form_row(form.roles, { 'attr': {'class': 'roles-field'} }) }}
-                                    {{ form_row(form.email, { 'attr': {'class': 'email-field'},'label_attr': {'class': 'email-field'}, 'row_attr': {'class': 'mb-3 hide', 'id' : 'email-div'}, }) }}
-                                    {{ form_row(form.password, { 'attr': {'class': 'password-field'},'label_attr': {'class': 'password-field'}, 'row_attr': {'class': 'mb-3 hide', 'id' : 'password-div'}, }) }}
-                                    {{ form_row(form.agreeTerms, { 'attr': {'class': 'agree-terms-field'},'label_attr': {'class': 'agree-terms-field'}, 'row_attr': {'class': 'mb-3 hide', 'id' : 'agree-terms-div'},}) }}
+
+                                    {{ form_row(form.email) }}
+                                    {{ form_row(form.password) }}
+                                    {{ form_row(form.agreeTerms) }}
 
                                     <div class="form-group row mb-0 mt-3 mb-auto">
                                         <div class="col-md-12">
@@ -62,7 +66,7 @@
 
                                             <div class="mt-4 mb-4">
                                                 <a class="btn btn-info" href="{{ path('security_login') }}">
-                                                    {{ 'action.sign_in'|trans }}
+                                                    {{ 'action.register'|trans }}
                                                 </a>
                                                 <a class="btn btn-info" href="{{ path('auth_password_reset') }}">
                                                     {{ 'action.forgot_password'|trans }}

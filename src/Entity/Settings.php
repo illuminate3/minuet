@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Entity\Trait\CreatedAtTrait;
-use App\Entity\Traits\EntityIdTrait;
+use App\Entity\Trait\EntityIdTrait;
 use App\Repository\SettingsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,7 +15,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[UniqueEntity('setting_name')]
 class Settings
 {
-//    use CreatedAtTrait;
+
     use EntityIdTrait;
 
     #[ORM\Column(type: Types::STRING, length: 191, unique: true)]

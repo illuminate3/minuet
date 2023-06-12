@@ -4,30 +4,18 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Entity\Trait\CreatedAtTrait;
-use App\Entity\Trait\ModifiedAtTrait;
-use App\Entity\Traits\EntityIdTrait;
-use App\Repository\ProductTrimsRepository;
-use DateTimeInterface;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Trait\EntityIdTrait;
+use App\Repository\ProductRepository;
 use Doctrine\DBAL\Types\DecimalType;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\ManyToOne;
-use Doctrine\ORM\Mapping\OneToMany;
-use Doctrine\ORM\Mapping\OneToOne;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 #[ORM\Table]
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: ProductRepository::class)]
 class ProductDetails
 {
     use EntityIdTrait;
-    use CreatedAtTrait;
-    use ModifiedAtTrait;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $vin = '';
@@ -40,13 +28,13 @@ class ProductDetails
 
     #[ORM\Column(type: Types::INTEGER, nullable: true)]
     private ?int $make = null;
-    
+
     #[ORM\Column(type: Types::INTEGER, nullable: true)]
     private ?int $model = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $suggested_vin = '';
-    
+
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $possible_values = null;
 
@@ -112,7 +100,7 @@ class ProductDetails
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $gross_vehicle_weight_rating_from = '';
-    
+
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $bed_length_inches = '';
 
@@ -160,7 +148,7 @@ class ProductDetails
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $wheel_size_rear_inches = '';
-    
+
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $entertainment_system = '';
 
@@ -340,7 +328,7 @@ class ProductDetails
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $automatic_pedestrian_alerting_sound_for_hybrid_and_ev_only = '';
-    
+
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $event_data_recorder_edr = '';
 
@@ -1659,7 +1647,7 @@ class ProductDetails
 
         return $this;
     }
-    
+
      public function getNote()
     {
         return $this->note;

@@ -63,6 +63,10 @@ final class DevCommand extends Command
                 'command' => 'doctrine:schema:create',
                 'arguments' => [],
             ],
+//            [
+//                'command' => 'app:load-categories',
+//                'arguments' => [],
+//            ],
             [
                 'command' => 'doctrine:fixtures:load',
                 'arguments' => [],

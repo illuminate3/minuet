@@ -3,12 +3,11 @@
 declare(strict_types=1);
 
 namespace App\Entity;
-use Doctrine\DBAL\Types\Types;
-use App\Entity\Trait\CreatedAtTrait;
-use App\Entity\Traits\EntityIdTrait;
+use App\Entity\Trait\EntityIdTrait;
 use App\Repository\AccountRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AccountRepository::class)]
