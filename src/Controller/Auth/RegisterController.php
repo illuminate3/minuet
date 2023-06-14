@@ -15,12 +15,14 @@ use App\Repository\SubscriptionRepository;
 use App\Repository\UserRepository;
 use App\Security\RegistrationFormAuthenticator;
 use App\Service\User\UserService;
+use DateTimeImmutable;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -61,36 +63,54 @@ final class RegisterController extends BaseController implements AuthController
      * @throws InvalidArgumentException
      */
     #[Route(path: '/register', name: 'auth_register', methods: ['GET','POST'])]
-    public function register(Request $request, MailerInterface $mailer): ?Response
+    public function register(Request $request, MailerInterface $mailer,SessionInterface $session): ?Response
     {
 
-        if ($this->security->isGranted('ROLE_USER')) {
-            return $this->redirectToRoute('app_dash');
-        }
-
-        if ($this->settings['allow_register'] !== '1') {
-            $this->addFlash('danger', 'message.registration_suspended');
-            return $this->redirectToRoute('auth_no_register');
-        }
-
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        try {
+            if ($this->security->isGranted('ROLE_USER')) {
+                return $this->redirectToRoute('app_dash');
+            }
+    
+            if ($this->settings['allow_register'] !== '1') {
+                $this->addFlash('danger', 'message.registration_suspended');
+                return $this->redirectToRoute('auth_no_register');
+            }
+    
             $user = new User();
-            $user->setProfile(new Profile());
-            $this->service->create($user);
-            $this->messageBus->dispatch(new SendEmailConfirmationLink($user));
-            $this->addFlash('success', 'message.registration_successful');
+            $form = $this->createForm(RegistrationFormType::class, $user);
+            $form->handleRequest($request);
+    
+            if ($form->isSubmitted() && $form->isValid()) {  
+                $user = new User();        
+                $user->setProfile(new Profile());
+                $user->setEmail($form->get('email')->getData());
+                $user->setCreatedAt(new DateTimeImmutable());
+                $user->setModifiedAt(new DateTimeImmutable());
+                $this->service->create($user);
+                $session->getFlashBag()->clear();
+                $this->messageBus->dispatch(new SendEmailConfirmationLink($user));
+                $this->addFlash('success', 'message.registration_successful');
+                return $this->redirectToRoute('app_index');
+            }
+    
+            return $this->render('auth/register/register.html.twig', [
+                'title' => 'title.register',
+                'site' => $this->settings,
+                'error' => null,
+                'form' => $form->createView(),
+            ]);
+        } catch (\Throwable $th) {
+            return $this->render('auth/register/register.html.twig', [
+                'title' => 'title.register',
+                'site' => $this->settings,
+                'error' => $th->getMessage(),
+                'error_message' => [$th->getMessage()],
+                'form' => $form->createView(),
+            ]);
         }
+   
 
-        return $this->render('auth/register/register.html.twig', [
-            'title' => 'title.register',
-            'site' => $this->settings,
-            'error' => null,
-            'form' => $form->createView(),
-        ]);
+       
     }
 
     #[Route(path: '/closed', name: 'auth_no_register')]

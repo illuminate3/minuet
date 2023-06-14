@@ -83,7 +83,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $role = '';
 
     #[ORM\Column(type: Types::BOOLEAN, length: 1, nullable: false, options: ['default' => 0])]
-    private ?bool $isSubscriptionActive = null;
+    private ?bool $isSubscriptionActive = false;
 
 //    private ArrayCollection $properties;
 
