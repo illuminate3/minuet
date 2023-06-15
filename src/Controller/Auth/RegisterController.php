@@ -80,12 +80,8 @@ final class RegisterController extends BaseController implements AuthController
             $form = $this->createForm(RegistrationFormType::class, $user);
             $form->handleRequest($request);
     
-            if ($form->isSubmitted() && $form->isValid()) {  
-                $user = new User();        
-                $user->setProfile(new Profile());
-                $user->setEmail($form->get('email')->getData());
-                $user->setCreatedAt(new DateTimeImmutable());
-                $user->setModifiedAt(new DateTimeImmutable());
+            if ($form->isSubmitted() && $form->isValid()) {                   
+                $user->setProfile(new Profile());                
                 $this->service->create($user);
                 $session->getFlashBag()->clear();
                 $this->messageBus->dispatch(new SendEmailConfirmationLink($user));

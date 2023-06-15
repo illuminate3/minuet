@@ -4,14 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use DateTime;
-use DateTimeInterface;
-use Psr\Cache\InvalidArgumentException;
+use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Cache\CacheInterface;
@@ -22,14 +17,11 @@ use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Psr\Cache\CacheItemInterface;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 class MainController extends AbstractController
 {
 
     public function __construct(
-//        private HttpClientInterface $githubContentClient,
         private HttpClientInterface $carApiClient,
         private CacheInterface $cache,
         ParameterBagInterface $params,
@@ -91,6 +83,7 @@ class MainController extends AbstractController
      * @throws RedirectionExceptionInterface
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
+     * @throws \Exception
      */
     public function getBearerToken($cache): string
     {
@@ -108,12 +101,12 @@ class MainController extends AbstractController
             $expiration = $jwtPayloadValues['exp']; // 1685321850
 //            $issuedTime = $jwtPayloadValues['iat']; // 1684717050
 
-            $date = new DateTime();
+            $date = new DateTimeImmutable();
             $date->setTimestamp($expiration);
             $expirationDate = $date->format('Y-m-d');
 
 //            $item->expiresAfter(3600);
-            $item->expiresAt(new \DateTime($expirationDate));
+            $item->expiresAt(new DateTimeImmutable($expirationDate));
 
 //            echo 'here';
 //            die;
