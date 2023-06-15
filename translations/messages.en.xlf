@@ -1198,6 +1198,10 @@
                 <source>title.register</source>
                 <target>Register</target>
             </trans-unit>
+            <trans-unit id="title.register_success">
+                <source>title.register_success</source>
+                <target>Registration Success</target>
+            </trans-unit>
             <trans-unit id="title.request_new_verification_email">
                 <source>title.request_new_verification_email</source>
                 <target>Request New Verification Email</target>

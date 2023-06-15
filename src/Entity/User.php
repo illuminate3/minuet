@@ -77,9 +77,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     private ?string $role = '';
 
-    #[ORM\Column(type: Types::BOOLEAN, length: 1, nullable: false, options: ['default' => 0])]
-    private ?bool $isSubscriptionActive = false;
-
 //    private ArrayCollection $properties;
     #[ORM\OneToOne(mappedBy: 'user', targetEntity: Profile::class, cascade: ['persist', 'remove'])]
     private ?Profile $profile;
