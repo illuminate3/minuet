@@ -77,11 +77,7 @@ final class RegisterController extends BaseController implements AuthController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
-//        var_dump($form->getErrors());die;
-
-
         if ($form->isSubmitted() && $form->isValid()) {
-            $user = new User();
             $user->setProfile(new Profile());
             $this->service->create($user);
             $this->messageBus->dispatch(new SendEmailConfirmationLink($user));

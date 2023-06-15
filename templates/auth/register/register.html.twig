@@ -1,4 +1,7 @@
 {% extends 'layout/auth.html.twig' %}
+{% block stylesheets %}
+{{ encore_entry_link_tags('css/app') }}
+{% endblock %}
 
 {% block body %}
 
@@ -46,19 +49,13 @@
                                 </div>
 
                                 <div class="row mt-lg-5">
-
-                                    {% for flash_error in app.flashes('verify_email_error') %}
-                                        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-                                    {% endfor %}
-
-
                                     {% form_theme form 'bootstrap_5_layout.html.twig' %}
 
                                     {{ form_start(form) }}
 
                                     {{ form_row(form.email) }}
                                     {{ form_row(form.password) }}
-{#                                    {{ form_row(form.agreeTerms) }}#}
+                                    {{ form_row(form.agreeTerms) }}
 
                                     <div class="form-group row mb-0 mt-3 mb-auto">
                                         <div class="col-md-12">
@@ -95,4 +92,7 @@
         </div>
     </div>
 
+{% endblock %}
+{% block javascripts %}
+{{ encore_entry_script_tags('js/common') }}
 {% endblock %}

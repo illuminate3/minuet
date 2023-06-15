@@ -8,7 +8,7 @@ use App\Entity\Trait\CreatedAtTrait;
 use App\Entity\Trait\EntityIdTrait;
 use App\Entity\Trait\ModifiedAtTrait;
 use App\Repository\UserRepository;
-use DateTime;
+use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -42,7 +42,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::STRING, unique: true)]
     #[Assert\NotBlank]
     #[Assert\Email]
-    private ?string $email;
+    private string $email;
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private ?string $password = null;
@@ -53,19 +53,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private ?string $confirmation_token = null;
 
-    #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?DateTimeInterface $password_requested_at;
 
-    #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?DateTimeInterface $emailVerifiedAt = null;
 
-    #[ORM\Column(type: Types::BOOLEAN, length: 1, nullable: false, options: ['default' => 0])]
+    #[ORM\Column(type: Types::BOOLEAN, length: 1, nullable: true, options: ['default' => 0])]
     private bool $isVerified = false;
 
     #[ORM\Column(nullable: true)]
     private ?bool $isAccount = null;
 
-    #[ORM\Column(type: Types::STRING, length:10, nullable:false, options:['default'=>'active'])]
+    #[ORM\Column(type: Types::STRING, length:10, nullable:true, options:['default'=>'active'])]
     private ?string $status;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Thread::class)]
@@ -209,7 +209,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function isPasswordRequestNonExpired(int $ttl): bool
     {
-        return $this->getPasswordRequestedAt() instanceof DateTime
+        return $this->getPasswordRequestedAt() instanceof DateTimeImmutable
             && $this->getPasswordRequestedAt()->getTimestamp() + $ttl > time();
     }
 
