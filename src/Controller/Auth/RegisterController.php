@@ -86,7 +86,12 @@ final class RegisterController extends BaseController implements AuthController
                 $session->getFlashBag()->clear();
                 $this->messageBus->dispatch(new SendEmailConfirmationLink($user));
                 $this->addFlash('success', 'message.registration_successful');
-                return $this->redirectToRoute('app_index');
+             //   return $this->redirectToRoute('app_index');
+                return $this->render('auth/register/register-success.html.twig', [
+                    'title' => 'title.register_success',
+                    'site' => $this->settings,
+                    'error' => null,                    
+                ]);
             }
     
             return $this->render('auth/register/register.html.twig', [
@@ -96,17 +101,9 @@ final class RegisterController extends BaseController implements AuthController
                 'form' => $form->createView(),
             ]);
         } catch (\Throwable $th) {
-            return $this->render('auth/register/register.html.twig', [
-                'title' => 'title.register',
-                'site' => $this->settings,
-                'error' => $th->getMessage(),
-                'error_message' => [$th->getMessage()],
-                'form' => $form->createView(),
-            ]);
-        }
-   
-
-       
+            $this->addFlash('danger',$th->getMessage());
+            return $this->redirectToRoute('auth_register');
+        }          
     }
 
     #[Route(path: '/closed', name: 'auth_no_register')]
