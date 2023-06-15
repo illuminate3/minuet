@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Service\Cache;
 
 use App\Entity\User;
-use DateTime;
+use DateTimeImmutable;
 use DateTimeInterface;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
@@ -20,7 +20,7 @@ trait UserDataCache
         $key = $this->getKey($user);
         $cache = new FilesystemAdapter();
         $sentAt = $cache->getItem($key);
-        $sentAt->set(new DateTime('now'));
+        $sentAt->set(new DateTimeImmutable('now'));
         $sentAt->expiresAfter(3600);
         $cache->save($sentAt);
     }

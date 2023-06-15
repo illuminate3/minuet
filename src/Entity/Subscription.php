@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Entity\Trait\EntityIdTrait;
+use App\Entity\Trait\SlugTrait;
 use App\Repository\SubscriptionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -18,6 +19,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Subscription
 {
     use EntityIdTrait;
+    use SlugTrait;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
     private string $plan;
@@ -25,17 +27,20 @@ class Subscription
     #[ORM\Column]
     private ?float $price = null;
 
+    #[ORM\Column(length: 45, nullable: true)]
+    private ?string $frequency = null;
+
     #[ORM\Column(type: Types::STRING, length: 20)]
     private string $valid_until;
 
     #[ORM\Column(type: Types::STRING, length: 20, nullable: true)]
-    private string $availability;
+    private ?string $availability = null;
 
-    #[ORM\Column(type: Types::STRING, length: 20, nullable: true)]
-    private string $support;
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $support = null;
 
     #[ORM\Column(type: Types::STRING, length: 45, nullable: true)]
-    private string $stripe_price_id;
+    private ?string $stripe_price_id = null;
 
     #[ORM\OneToMany(mappedBy: 'subscription', targetEntity: Account::class)]
     private Collection $account_id;
@@ -171,6 +176,18 @@ class Subscription
                 $accountId->setSubscription(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFrequency(): ?string
+    {
+        return $this->frequency;
+    }
+
+    public function setFrequency(string $frequency): static
+    {
+        $this->frequency = $frequency;
 
         return $this;
     }

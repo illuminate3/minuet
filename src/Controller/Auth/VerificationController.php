@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Auth;
 
 use App\Repository\UserRepository;
-use DateTime;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,7 +46,7 @@ final class VerificationController extends AbstractController implements AuthCon
         }
 
         $user->setIsVerified(true);
-        $user->setEmailVerifiedAt(new DateTime('now'));
+        $user->setEmailVerifiedAt(new DateTimeImmutable('now'));
         $entityManager->flush();
 
         $this->addFlash('success', 'message.email_verified');

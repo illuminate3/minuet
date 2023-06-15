@@ -46,11 +46,6 @@ final class RegistrationFormType extends AbstractType
                 'label' => 'label.agree',
                 'required' => true,
                 'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'agree_terms',
-                    ]),
-                ],
             ])
         ;
     }

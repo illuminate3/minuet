@@ -12,7 +12,7 @@ use App\Form\Type\UserEmailType;
 use App\Repository\ResettingRepository;
 use App\Service\Auth\EmailVerifierAndResetPasswordService;
 use App\Service\Auth\PasswordResetService;
-use DateTime;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -81,7 +81,7 @@ final class EmailConfirmationAndResetPasswordController extends BaseController i
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setIsVerified(true);
-            $user->setEmailVerifiedAt(new DateTime('now'));
+            $user->setEmailVerifiedAt(new DateTimeImmutable('now'));
             $repository->setPassword($user, $form->getNormData()['password']);
             $this->addFlash('success', 'message.password_has_been_reset');
 

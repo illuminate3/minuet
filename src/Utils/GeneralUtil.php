@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Utils;
 
-use DateTime;
+use DateTimeImmutable;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Contracts\Cache\ItemInterface;
@@ -28,6 +28,7 @@ final class GeneralUtil implements GeneralUtilInterface
      * @throws RedirectionExceptionInterface
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
+     * @throws \Exception
      */
     public static function getBearerToken($cache, $carApiClient)
     {
@@ -37,10 +38,10 @@ final class GeneralUtil implements GeneralUtilInterface
             $tokenPayload = base64_decode($tokenParts[1]);
             $jwtPayloadValues = json_decode($tokenPayload, true);
             $expiration = $jwtPayloadValues['exp']; // 1685321850
-            $date = new DateTime();
+            $date = new DateTimeImmutable();
             $date->setTimestamp($expiration);
             $expirationDate = $date->format('Y-m-d');
-            $item->expiresAt(new \DateTime($expirationDate));
+            $item->expiresAt(new \DateTimeImmutable($expirationDate));
             return $tokenValue;
         });
 
