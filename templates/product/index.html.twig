@@ -18,18 +18,18 @@
             <div class="col-md-12 pb-3">
                 <label for="make">Make</label>
                 <select name="make" class="form-control" id="make">
-                    <option value="" selected disabled>--Select Make--</option>    
+                    <option value="" selected disabled>--Select Make--</option>
                     {% for category in categories %}
-                    <option                   
-                    {{ make==category.id ? 'selected' : '' }}                   
+                    <option
+                    {{ make==category.id ? 'selected' : '' }}
                      value="{{category.id}}">{{category.name}}</option>
                     {% endfor %}
                 </select>
             </div>
             {% if subCategories|length  %}
             <div class="col-md-12 pb-3">
-                <div class="card" id="models-card">                    
-                    <div class="card-body">     
+                <div class="card" id="models-card">
+                    <div class="card-body">
                         <!-- <h6 class="card-title" id="model-title">Models</h6>                           -->
                         <div class="row">
                             <div class="col-6">
@@ -40,8 +40,8 @@
                                 <a href="{{path('product_index',{'make':make})}}" class="btn btn-primary px-3 py-2 float-end bg-black border-0">Clear</a>
                             </div>
                             {% endif %}
-                        </div> 
-                        <ul class="list-group list-group-flush" id="models">                            
+                        </div>
+                        <ul class="list-group list-group-flush" id="models">
                             {% for subCategory in  subCategories %}
                                 <li class="list-group-item"><input {{isDisabled}} {% if subCategory.id in models %}
                                      {{'checked'}} {% endif %} type="checkbox" value="{{subCategory.id}}" class="model-checkbox" name="models[]"> {{subCategory.name}}
@@ -49,7 +49,7 @@
                             {% endfor %}
                         </ul>
                     </div>
-                </div>               
+                </div>
             </div>
             {% endif %}
         </form>
@@ -72,7 +72,7 @@
                         'id':  product.id,
                         'slug': product.slug}) }}">
 
-                          {#  {% for photo in product.images | slice(0, 1) %}
+                          {% for photo in product.images | slice(0, 1) %}
 
                             <img class="card-img-top lazyload" src="{{ asset('/images/transparent.png') }}"
                                 data-src="/uploads/images/small/{{ photo.file }}" alt="{{ product.slug }}"
@@ -83,7 +83,7 @@
                             <img class="card-img-top border-bottom" src="{{ asset('/images/no-photo.png') }}"
                                 alt="{{ product.slug }}" title="{{ product.title }}" />
 
-                            {% endfor %}#}
+                            {% endfor %}
 
                             {% if product.price != '' %}
                             <span class="price">
@@ -129,7 +129,7 @@
             {% else %}
 
             <div class="well text-center">
-                <img class="img-fluid w-50" src="{{ asset('images/no-data-found.png') }}" alt="No data found">               
+                <img class="img-fluid w-50" src="{{ asset('images/no-data-found.png') }}" alt="No data found">
                 <p class="fs-4 text-justify mb-0">No cars matching with your search</p>
                 <p class="fs-4 text-justify mb-0">Please modify your search</p>
             </div>

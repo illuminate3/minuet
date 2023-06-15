@@ -10,14 +10,16 @@
 {% endfor %}
 
 {% if error %}
-    {% for message in error_message %}
+{#    {% for message in error_message %}#}
 
         <div class="alert alert-danger alert-dismissible fade show mt-lg-4" role="alert">
-            {{ message }}
+{#            {{ message }}#}
+            {{ error.messageKey|trans(error.messageData, 'security') }}
+
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
 
-    {% endfor %}
+{#    {% endfor %}#}
 {% endif %}
 
 {% if app.user %}

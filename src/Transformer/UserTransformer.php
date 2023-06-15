@@ -22,7 +22,7 @@ final class UserTransformer
         return $this->setEncodedPassword($user);
     }
 
-    private function setRoles(User $user): User
+    private function setRolesNew(User $user): User
     {
         if (in_array('ROLE_ADMIN', $user->getRoles(), true)) {
             $user->setRoles(['ROLE_ADMIN', 'ROLE_USER']);
@@ -38,6 +38,20 @@ final class UserTransformer
 
         return $user;
     }
+    private function setRoles(User $user): User
+    {
+//        if (\in_array('ROLE_ADMIN', $user->getRoles(), true)) {
+//            $user->setRoles(['ROLE_ADMIN', 'ROLE_USER']);
+//        } else {
+//            $user->setRoles(['ROLE_USER']);
+//        }
+
+        $user->setRoles(['ROLE_USER']);
+
+        return $user;
+    }
+
+
 
     private function setEncodedPassword(User $user): User
     {

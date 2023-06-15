@@ -8,6 +8,8 @@
 {% block body %}
 {% if app.user.profile.fullName is empty %}
 Please fill up your profile details. <a href="{{ path('user_profile') }}">Click Here</a>
+{% else %}
+    {{ app.user.profile.fullName }}
 {% endif %}
 
 {% endblock %}

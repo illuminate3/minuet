@@ -28,19 +28,19 @@ final class LoginController extends BaseController
             return $this->redirectToRoute('app_dash');
         }
 
-        $error = $helper->getLastAuthenticationError();
+//        $error = $helper->getLastAuthenticationError();
 
-        if ($error && $error->getMessage() !== null) {
-            return $this->forward(
-                'App\Controller\Auth\MessageController::authMessages',
-                [
-                    'title' => 'title.verify_account',
-                    'message' => $error->getMessage(),
-                    'link' => 'auth_request_verify_email',
-                    'link_title' => 'action.verify_account',
-                ]
-            );
-        }
+//        if ($error && $error->getMessage() !== null) {
+//            return $this->forward(
+//                'App\Controller\Auth\MessageController::authMessages',
+//                [
+//                    'title' => 'title.verify_account',
+//                    'message' => $error->getMessage(),
+//                    'link' => 'auth_request_verify_email',
+//                    'link_title' => 'action.verify_account',
+//                ]
+//            );
+//        }
 
         $form = $this->createForm(LoginFormType::class);
 
