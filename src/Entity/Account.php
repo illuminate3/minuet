@@ -3,7 +3,9 @@
 declare(strict_types=1);
 
 namespace App\Entity;
+use App\Entity\Trait\CreatedAtTrait;
 use App\Entity\Trait\EntityIdTrait;
+use App\Entity\Trait\ModifiedAtTrait;
 use App\Repository\AccountRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -13,8 +15,10 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: AccountRepository::class)]
 class Account
 {
-//    use CreatedAtTrait;
+
     use EntityIdTrait;
+    use CreatedAtTrait;
+    use ModifiedAtTrait;
 
     #[ORM\Column(type: 'string', length: 100, unique: true)]
     private $name;
@@ -22,17 +26,8 @@ class Account
     #[ORM\Column(length: 10, unique: true)]
     private ?int $primaryUser = null;
 
-    #[ORM\Column(type: Types::BOOLEAN, length: 1, nullable: true)]
-    private bool $isSubscriptionActive = false;
-
-
-//    #[ORM\Column(type: 'integer', length: 11)]
-//    private $primary_user_id;
-
-
-//    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'account')]
-//    #[ORM\JoinColumn(nullable: false)]
-//    private $user;
+    #[ORM\Column(length: 32, unique: true)]
+    private ?string $stripeCustomerId = null;
 
     #[ORM\ManyToOne(inversedBy: 'account_id')]
     #[ORM\JoinColumn(nullable: true)]
@@ -45,16 +40,21 @@ class Account
     #[ORM\OneToMany(mappedBy: 'account', targetEntity: Thread::class)]
     private Collection $threads;
 
+    #[ORM\Column(type: Types::BOOLEAN, length: 1, options: ['default' => '0'])]
+    private bool $isSubscriptionActive = false;
+
+    #[ORM\Column(type: Types::BOOLEAN, length: 1, options: ['default' => '0'])]
+    private ?bool $isExpiring = false;
+
+    #[ORM\Column(type: Types::BOOLEAN, length: 1, options: ['default' => '0'])]
+    private ?bool $isPastDue = false;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
         $this->threads = new ArrayCollection();
     }
 
-//    public function __construct()
-//    {
-//        $this->created_at = new \DateTimeImmutable();
-//    }
 
     public function getId(): ?int
     {
@@ -167,6 +167,42 @@ class Account
     public function getIsSubscriptionActive(): ?bool
     {
         return $this->isSubscriptionActive ? true : false;
+    }
+
+    public function isIsExpiring(): ?bool
+    {
+        return $this->isExpiring;
+    }
+
+    public function setIsExpiring(bool $isExpiring): static
+    {
+        $this->isExpiring = $isExpiring;
+
+        return $this;
+    }
+
+    public function isIsPastDue(): ?bool
+    {
+        return $this->isPastDue;
+    }
+
+    public function setIsPastDue(bool $isPastDue): static
+    {
+        $this->isPastDue = $isPastDue;
+
+        return $this;
+    }
+
+    public function getStripeCustomerId(): ?string
+    {
+        return $this->stripeCustomerId;
+    }
+
+    public function setStripeCustomerId(string $stripeCustomerId): static
+    {
+        $this->stripeCustomerId = $stripeCustomerId;
+
+        return $this;
     }
 
 }

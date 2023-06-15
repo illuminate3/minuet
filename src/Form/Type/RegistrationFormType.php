@@ -23,7 +23,6 @@ final class RegistrationFormType extends AbstractType
         $builder
             ->add('email', EmailType::class, [
                 'label' => 'label.email',
-                'required' => true,
                 'attr' => [
                     'autofocus' => true,
                     'placeholder' => 'label.email',
@@ -42,16 +41,15 @@ final class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'label' => 'label.agree',
-                'required' => true,
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'agree_terms',
-                    ]),
-                ],
-            ])
+//            ->add('agreeTerms', CheckboxType::class, [
+//                'label' => 'label.agree',
+//                'mapped' => false,
+//                'constraints' => [
+//                    new IsTrue([
+//                        'message' => 'agree_terms',
+//                    ]),
+//                ],
+//            ])
         ;
     }
 

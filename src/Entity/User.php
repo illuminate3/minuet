@@ -53,17 +53,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private ?string $confirmation_token = null;
 
-    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
-    private ?string $stripe_customer_id;
-
-    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
-    private ?string $stripe_subscription_id;
-
     #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
     private ?DateTimeInterface $password_requested_at;
-
-    #[ORM\OneToOne(mappedBy: 'user', targetEntity: Profile::class, cascade: ['persist', 'remove'])]
-    private ?Profile $profile;
 
     #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
     private ?DateTimeInterface $emailVerifiedAt = null;
@@ -74,25 +65,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?bool $isAccount = null;
 
+    #[ORM\Column(type: Types::STRING, length:10, nullable:false, options:['default'=>'active'])]
+    private ?string $status;
+
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Thread::class)]
     private Collection $threads;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Message::class)]
     private Collection $messages;
 
-    #[ORM\Column(type: Types::STRING, length:10, nullable:false,options:['default'=>'active'])]
-    private ?string $status;
-
-    private ?string $role = '';
-
-    #[ORM\Column(type: Types::BOOLEAN, length: 1, nullable: false, options: ['default' => 0])]
-    private ?bool $isSubscriptionActive = null;
-
-//    private ArrayCollection $properties;
+    #[ORM\OneToOne(mappedBy: 'user', targetEntity: Profile::class, cascade: ['persist', 'remove'])]
+    private ?Profile $profile;
 
     public function __construct()
     {
-//        $this->properties = new ArrayCollection();
         $this->threads = new ArrayCollection();
         $this->messages = new ArrayCollection();
     }
@@ -105,16 +91,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         return $this->email;
-    }
-
-    public function getfirstName(): ?string
-    {
-        return $this->first_name;
-    }
-
-    public function setfirstName(string $email): void
-    {
-        $this->first_name = $first_name;
     }
 
     public function getEmail(): ?string
@@ -132,19 +108,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): void
     {
-        // $this->password = $password;
-        if (!is_null($password)) {
-            $this->password = $password;
-        }
-        return $this;
+        $this->password = $password;
     }
 
     /**
      * Returns the roles or permissions granted to the user for security.
      */
-    public function getRoles(): array
+    public function getRolesNew(): array
     {
         $roles = $this->roles;
         // guarantees that a user always has at least one role for security
@@ -158,6 +130,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
         return array_unique($roles);
     }
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantees that a user always has at least one role for security
+        if (empty($roles)) {
+            $roles[] = 'ROLE_USER';
+        }
+
+        return array_unique($roles);
+    }
+
+
 
     public function setRoles(array $roles): void
     {
@@ -254,30 +238,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
-
-        return $this;
-    }
-
-    public function getStripeCustomerId(): ?string
-    {
-        return $this->stripe_customer_id;
-    }
-
-    public function setStripeCustomerId(string $stripe_customer_id): self
-    {
-        $this->stripe_customer_id = $stripe_customer_id;
-
-        return $this;
-    }
-
-    public function getStripeSubscriptionId(): ?string
-    {
-        return $this->stripe_subscription_id;
-    }
-
-    public function setStripeSubscriptionId(string $stripe_subscription_id): self
-    {
-        $this->stripe_subscription_id = $stripe_subscription_id;
 
         return $this;
     }
@@ -381,27 +341,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    public function isIsSubscriptionActive(): ?bool
-    {
-        return $this->isSubscriptionActive;
-    }
-
-    public function setIsSubscriptionActive(bool $isSubscriptionActive): self
-    {
-        $this->isSubscriptionActive = $isSubscriptionActive;
-
-        return $this;
-    }
 }
