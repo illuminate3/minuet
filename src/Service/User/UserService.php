@@ -37,6 +37,8 @@ final class UserService extends AbstractService
         $user = $this->transformer->transform($user);
         $user->setCreatedAt(new DateTimeImmutable('now'));
         $user->setModifiedAt(new DateTimeImmutable('now'));
+        $user->setIsAccount(false);
+        $user->setStatus('active');
         $this->save($user);
         $this->clearCache('users_count');
         $this->addFlash('success', 'message.created');
