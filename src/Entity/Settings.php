@@ -24,11 +24,19 @@ class Settings
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $setting_value;
 
+    /**
+     * @return string|null
+     */
     public function getSettingName(): ?string
     {
         return $this->setting_name;
     }
 
+    /**
+     * @param  string  $setting_name
+     *
+     * @return $this
+     */
     public function setSettingName(string $setting_name): self
     {
         $this->setting_name = $setting_name;
@@ -36,15 +44,24 @@ class Settings
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getSettingValue(): ?string
     {
         return $this->setting_value;
     }
 
+    /**
+     * @param  string|null  $setting_value
+     *
+     * @return $this
+     */
     public function setSettingValue(?string $setting_value): self
     {
         $this->setting_value = $setting_value;
 
         return $this;
     }
+
 }

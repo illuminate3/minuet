@@ -86,38 +86,60 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->messages = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string
+     */
     public function getUserIdentifier(): string
     {
         return $this->email;
     }
 
+    /**
+     * @return string|null
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * @param  string  $email
+     *
+     * @return void
+     */
     public function setEmail(string $email): void
     {
         $this->email = $email;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPassword(): ?string
     {
         return $this->password;
     }
 
+    /**
+     * @param  string  $password
+     *
+     * @return void
+     */
     public function setPassword(string $password): void
     {
         $this->password = $password;
     }
 
     /**
-     * Returns the roles or permissions granted to the user for security.
+     * @return array
      */
     public function getRolesNew(): array
     {
@@ -133,6 +155,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
         return array_unique($roles);
     }
+
+    /**
+     * @return array|string[]
+     */
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -144,8 +170,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return array_unique($roles);
     }
 
-
-
+    /**
+     * @param  array  $roles
+     *
+     * @return void
+     */
     public function setRoles(array $roles): void
     {
         $this->roles = $roles;
@@ -153,6 +182,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Returns the salt that was originally used to encode the password.
+     *
+     * @return string|null
      */
     public function getSalt(): ?string
     {
@@ -164,6 +195,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Removes sensitive data from the user.
+     *
+     * @return void
      */
     public function eraseCredentials(): void
     {
@@ -171,23 +204,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
+    /**
+     * @return array
+     */
     public function __serialize(): array
     {
         // add $this->salt too if you don't use Bcrypt or Argon2i
         return [$this->id, $this->email, $this->password];
     }
 
+    /**
+     * @param  array  $data
+     *
+     * @return void
+     */
     public function __unserialize(array $data): void
     {
         // add $this->salt too if you don't use Bcrypt or Argon2i
         [$this->id, $this->email, $this->password] = $data;
     }
 
+    /**
+     * @return string|null
+     */
     public function getConfirmationToken(): ?string
     {
         return $this->confirmation_token;
     }
 
+    /**
+     * @param  string|null  $confirmation_token
+     *
+     * @return $this
+     */
     public function setConfirmationToken(?string $confirmation_token): self
     {
         $this->confirmation_token = $confirmation_token;
@@ -195,11 +244,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @return DateTimeInterface|null
+     */
     public function getPasswordRequestedAt(): ?DateTimeInterface
     {
         return $this->password_requested_at;
     }
 
+    /**
+     * @param  DateTimeInterface|null  $password_requested_at
+     *
+     * @return $this
+     */
     public function setPasswordRequestedAt(?DateTimeInterface $password_requested_at): self
     {
         $this->password_requested_at = $password_requested_at;
@@ -209,6 +266,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Checks whether the password reset request has expired.
+     *
+     * @param  int  $ttl
+     *
+     * @return bool
      */
     public function isPasswordRequestNonExpired(int $ttl): bool
     {
@@ -216,11 +277,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             && $this->getPasswordRequestedAt()->getTimestamp() + $ttl > time();
     }
 
+    /**
+     * @return Profile|null
+     */
     public function getProfile(): ?Profile
     {
         return $this->profile;
     }
 
+    /**
+     * @param  Profile  $profile
+     *
+     * @return $this
+     */
     public function setProfile(Profile $profile): self
     {
         // set the owning side of the relation if necessary
@@ -233,11 +302,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getIsVerified(): ?bool
     {
         return $this->isVerified;
     }
 
+    /**
+     * @param  bool  $isVerified
+     *
+     * @return $this
+     */
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
@@ -245,16 +322,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     public function isVerified(): bool
     {
         return $this->emailVerifiedAt !== null;
     }
 
+    /**
+     * @return DateTimeInterface|null
+     */
     public function getEmailVerifiedAt(): ?DateTimeInterface
     {
         return $this->emailVerifiedAt;
     }
 
+    /**
+     * @param  DateTimeInterface|null  $dateTime
+     *
+     * @return $this
+     */
     public function setEmailVerifiedAt(?DateTimeInterface $dateTime): self
     {
         $this->emailVerifiedAt = $dateTime;
@@ -262,21 +350,37 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getStatus(): ?string
     {
         return $this->status;
     }
 
+    /**
+     * @param  string  $status
+     *
+     * @return string
+     */
     public function setStatus(string $status): string
     {
       return  $this->status = $status;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getIsAccount(): ?bool
     {
         return (bool) $this->isAccount;
     }
 
+    /**
+     * @param  bool|null  $isAccount
+     *
+     * @return $this
+     */
     public function setIsAccount(?bool $isAccount): self
     {
         $this->isAccount = $isAccount;
@@ -285,13 +389,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Thread>
+     * @return Collection
      */
     public function getThreads(): Collection
     {
         return $this->threads;
     }
 
+    /**
+     * @param  Thread  $thread
+     *
+     * @return $this
+     */
     public function addThread(Thread $thread): self
     {
         if (!$this->threads->contains($thread)) {
@@ -302,6 +411,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @param  Thread  $thread
+     *
+     * @return $this
+     */
     public function removeThread(Thread $thread): self
     {
         if ($this->threads->removeElement($thread)) {
@@ -315,13 +429,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Message>
+     * @return Collection
      */
     public function getMessages(): Collection
     {
         return $this->messages;
     }
 
+    /**
+     * @param  Message  $message
+     *
+     * @return $this
+     */
     public function addMessage(Message $message): self
     {
         if (!$this->messages->contains($message)) {
@@ -332,6 +451,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @param  Message  $message
+     *
+     * @return $this
+     */
     public function removeMessage(Message $message): self
     {
         if ($this->messages->removeElement($message)) {

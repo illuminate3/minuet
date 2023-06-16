@@ -35,16 +35,27 @@ class Message
     #[ORM\ManyToOne(inversedBy: 'messages')]
     private ?Thread $thread = null;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return User|null
+     */
     public function getUpdatedBy(): ?User
     {
         return $this->updatedBy;
     }
 
+    /**
+     * @param  User|null  $updatedBy
+     *
+     * @return $this
+     */
     public function setUpdatedBy(?User $updatedBy): self
     {
         $this->updatedBy = $updatedBy;
@@ -52,11 +63,19 @@ class Message
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getContent(): ?string
     {
         return $this->content;
     }
 
+    /**
+     * @param  string|null  $content
+     *
+     * @return $this
+     */
     public function setContent(?string $content): self
     {
         $this->content = $content;
@@ -64,11 +83,19 @@ class Message
         return $this;
     }
 
+    /**
+     * @return User|null
+     */
     public function getUser(): ?User
     {
         return $this->user;
     }
 
+    /**
+     * @param  User|null  $user
+     *
+     * @return $this
+     */
     public function setUser(?User $user): self
     {
         $this->user = $user;
@@ -76,15 +103,24 @@ class Message
         return $this;
     }
 
+    /**
+     * @return Thread|null
+     */
     public function getThread(): ?Thread
     {
         return $this->thread;
     }
 
+    /**
+     * @param  Thread|null  $thread
+     *
+     * @return $this
+     */
     public function setThread(?Thread $thread): self
     {
         $this->thread = $thread;
 
         return $this;
     }
+
 }

@@ -26,11 +26,19 @@ class OrderDetail
     #[ORM\JoinColumn(nullable: false)]
     private ?Product $product;
 
+    /**
+     * @return int|null
+     */
     public function getQuantity(): ?int
     {
         return $this->quantity;
     }
 
+    /**
+     * @param  int  $quantity
+     *
+     * @return $this
+     */
     public function setQuantity(int $quantity): self
     {
         $this->quantity = $quantity;
@@ -38,11 +46,19 @@ class OrderDetail
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getPrice(): ?int
     {
         return $this->price;
     }
 
+    /**
+     * @param  int  $price
+     *
+     * @return $this
+     */
     public function setPrice(int $price): self
     {
         $this->price = $price;
@@ -50,11 +66,19 @@ class OrderDetail
         return $this;
     }
 
+    /**
+     * @return Order|null
+     */
     public function getOrder(): ?Order
     {
         return $this->order;
     }
 
+    /**
+     * @param  Order|null  $order
+     *
+     * @return $this
+     */
     public function setOrder(?Order $order): self
     {
         $this->order = $order;
@@ -62,15 +86,24 @@ class OrderDetail
         return $this;
     }
 
+    /**
+     * @return Product|null
+     */
     public function getProduct(): ?Product
     {
         return $this->product;
     }
 
+    /**
+     * @param  Product|null  $product
+     *
+     * @return $this
+     */
     public function setProduct(?Product $product): self
     {
         $this->product = $product;
 
         return $this;
     }
+
 }

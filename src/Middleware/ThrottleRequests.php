@@ -28,4 +28,5 @@ final class ThrottleRequests
             throw new TooManyRequestsHttpException();
         }
     }
+
 }

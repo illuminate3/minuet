@@ -47,16 +47,27 @@ class Thread
         $this->messages = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return bool|null
+     */
     public function isIsClosed(): ?bool
     {
         return $this->isClosed;
     }
 
+    /**
+     * @param  bool|null  $isClosed
+     *
+     * @return $this
+     */
     public function setIsClosed(?bool $isClosed): self
     {
         $this->isClosed = $isClosed;
@@ -64,11 +75,19 @@ class Thread
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function isIsPin(): ?bool
     {
         return $this->isPin;
     }
 
+    /**
+     * @param  bool|null  $isPin
+     *
+     * @return $this
+     */
     public function setIsPin(?bool $isPin): self
     {
         $this->isPin = $isPin;
@@ -76,11 +95,19 @@ class Thread
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getTotalMessages(): ?int
     {
         return $this->totalMessages;
     }
 
+    /**
+     * @param  int|null  $totalMessages
+     *
+     * @return $this
+     */
     public function setTotalMessages(?int $totalMessages): self
     {
         $this->totalMessages = $totalMessages;
@@ -88,11 +115,19 @@ class Thread
         return $this;
     }
 
+    /**
+     * @return Product|null
+     */
     public function getProduct(): ?Product
     {
         return $this->product;
     }
 
+    /**
+     * @param  Product|null  $product
+     *
+     * @return $this
+     */
     public function setProduct(?Product $product): self
     {
         $this->product = $product;
@@ -100,11 +135,19 @@ class Thread
         return $this;
     }
 
+    /**
+     * @return User|null
+     */
     public function getUser(): ?User
     {
         return $this->user;
     }
 
+    /**
+     * @param  User|null  $user
+     *
+     * @return $this
+     */
     public function setUser(?User $user): self
     {
         $this->user = $user;
@@ -113,13 +156,18 @@ class Thread
     }
 
     /**
-     * @return Collection<int, Message>
+     * @return Collection
      */
     public function getMessages(): Collection
     {
         return $this->messages;
     }
 
+    /**
+     * @param  Message  $message
+     *
+     * @return $this
+     */
     public function addMessage(Message $message): self
     {
         if (!$this->messages->contains($message)) {
@@ -130,6 +178,11 @@ class Thread
         return $this;
     }
 
+    /**
+     * @param  Message  $message
+     *
+     * @return $this
+     */
     public function removeMessage(Message $message): self
     {
         if ($this->messages->removeElement($message)) {
@@ -142,15 +195,24 @@ class Thread
         return $this;
     }
 
+    /**
+     * @return Account|null
+     */
     public function getAccount(): ?Account
     {
         return $this->account;
     }
 
+    /**
+     * @param  Account|null  $account
+     *
+     * @return $this
+     */
     public function setAccount(?Account $account): self
     {
         $this->account = $account;
 
         return $this;
     }
+
 }

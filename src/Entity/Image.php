@@ -26,16 +26,27 @@ class Image
     #[ORM\ManyToOne(inversedBy: 'images')]
     private ?Product $product = null;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return int|null
+     */
     public function getSortOrder(): ?int
     {
         return $this->sortOrder;
     }
 
+    /**
+     * @param  int|null  $sortOrder
+     *
+     * @return $this
+     */
     public function setSortOrder(?int $sortOrder): self
     {
         $this->sortOrder = $sortOrder;
@@ -43,11 +54,19 @@ class Image
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getFile(): ?string
     {
         return $this->file;
     }
 
+    /**
+     * @param  string|null  $file
+     *
+     * @return $this
+     */
     public function setFile(?string $file): self
     {
         $this->file = $file;
@@ -55,15 +74,24 @@ class Image
         return $this;
     }
 
+    /**
+     * @return Product|null
+     */
     public function getProduct(): ?Product
     {
         return $this->product;
     }
 
+    /**
+     * @param  Product|null  $product
+     *
+     * @return $this
+     */
     public function setProduct(?Product $product): self
     {
         $this->product = $product;
 
         return $this;
     }
+
 }

@@ -60,11 +60,19 @@ class ProductTrims
     }
 
 
+    /**
+     * @return mixed|string|null
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * @param $name
+     *
+     * @return $this
+     */
     public function setName( $name): self
     {
         $this->name = $name;

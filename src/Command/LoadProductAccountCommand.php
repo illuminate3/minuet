@@ -61,4 +61,5 @@ final class LoadProductAccountCommand extends Command
 
         return Command::SUCCESS;
     }
+
 }

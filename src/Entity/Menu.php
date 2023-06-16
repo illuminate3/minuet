@@ -22,7 +22,6 @@ class Menu
 //    use CreatedAtTrait;
     use EntityIdTrait;
 
-
     #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $title;
 
@@ -44,11 +43,19 @@ class Menu
     #[ORM\Column(type: Types::BOOLEAN, nullable: true)]
     private ?bool $new_tab;
 
+    /**
+     * @return string|null
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * @param  string  $title
+     *
+     * @return $this
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -56,11 +63,19 @@ class Menu
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getSortOrder(): ?int
     {
         return $this->sort_order;
     }
 
+    /**
+     * @param  int|null  $sort_order
+     *
+     * @return $this
+     */
     public function setSortOrder(?int $sort_order): self
     {
         $this->sort_order = $sort_order;
@@ -68,11 +83,19 @@ class Menu
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getUrl(): ?string
     {
         return $this->url;
     }
 
+    /**
+     * @param  string  $url
+     *
+     * @return $this
+     */
     public function setUrl(string $url): self
     {
         $this->url = $url;
@@ -80,11 +103,19 @@ class Menu
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getIsSlug(): ?bool
     {
         return $this->isSlug;
     }
 
+    /**
+     * @param  bool|null  $isSlug
+     *
+     * @return $this
+     */
     public function setIsSlug(?bool $isSlug): self
     {
         $this->isSlug = $isSlug;
@@ -92,11 +123,19 @@ class Menu
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getNofollow(): ?bool
     {
         return $this->nofollow;
     }
 
+    /**
+     * @param  bool|null  $nofollow
+     *
+     * @return $this
+     */
     public function setNofollow(?bool $nofollow): self
     {
         $this->nofollow = $nofollow;
@@ -104,11 +143,19 @@ class Menu
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getNewTab(): ?bool
     {
         return $this->new_tab;
     }
 
+    /**
+     * @param  bool|null  $new_tab
+     *
+     * @return $this
+     */
     public function setNewTab(?bool $new_tab): self
     {
         $this->new_tab = $new_tab;
@@ -116,15 +163,24 @@ class Menu
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getLocale(): string
     {
         return $this->locale;
     }
 
+    /**
+     * @param  string  $locale
+     *
+     * @return $this
+     */
     public function setLocale(string $locale): self
     {
         $this->locale = $locale;
 
         return $this;
     }
+
 }

@@ -65,4 +65,5 @@ final class SendEmailConfirmationAndResetPasswordDealerLinkHandler
             ])
         ;
     }
+
 }

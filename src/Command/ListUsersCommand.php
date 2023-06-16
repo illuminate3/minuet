@@ -78,4 +78,5 @@ final class ListUsersCommand extends Command
 
         return Command::SUCCESS;
     }
+
 }

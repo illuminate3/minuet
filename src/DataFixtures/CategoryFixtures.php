@@ -37,18 +37,14 @@ class CategoryFixtures extends Fixture
         $connection = $manager->getConnection();
 
         foreach ($finder as $file) {
-            echo "      Importing: {$file->getBasename()} " . PHP_EOL;
-
             $sql = $file->getContents();
-
             try {
                 $connection->beginTransaction();
-                $connection->executeQuery($sql);  // Execute native SQL
+                $connection->executeQuery($sql);
                 $manager->flush();
             } catch (Throwable $e) {
                 $connection->rollBack();
             }
-
         }
 
         $this->setCategoryReference($manager);
