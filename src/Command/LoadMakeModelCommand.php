@@ -51,4 +51,5 @@ final class LoadMakeModelCommand extends Command
 
         return Command::SUCCESS;
     }
+
 }

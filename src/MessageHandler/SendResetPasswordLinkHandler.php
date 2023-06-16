@@ -77,4 +77,5 @@ final class SendResetPasswordLinkHandler
             ])
         ;
     }
+
 }

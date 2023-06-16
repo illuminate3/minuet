@@ -50,11 +50,19 @@ class Subscription
         $this->account_id = new ArrayCollection();
     }
 
+    /**
+     * @return string|null
+     */
     public function getPlan(): ?string
     {
         return $this->plan;
     }
 
+    /**
+     * @param  string  $plan
+     *
+     * @return $this
+     */
     public function setPlan(string $plan): self
     {
         $this->plan = $plan;
@@ -85,11 +93,19 @@ class Subscription
 //    }
 
 
+    /**
+     * @return string|null
+     */
     public function getValidUntil(): ?string
     {
         return $this->valid_until;
     }
 
+    /**
+     * @param  string  $valid_until
+     *
+     * @return $this
+     */
     public function setValidUntil(string $valid_until): self
     {
         $this->valid_until = $valid_until;
@@ -97,11 +113,19 @@ class Subscription
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getAvailability(): ?string
     {
         return $this->availability;
     }
 
+    /**
+     * @param  string|null  $availability
+     *
+     * @return $this
+     */
     public function setAvailability(?string $availability): self
     {
         $this->availability = $availability;
@@ -109,11 +133,19 @@ class Subscription
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getSupport(): ?string
     {
         return $this->support;
     }
 
+    /**
+     * @param  string|null  $support
+     *
+     * @return $this
+     */
     public function setSupport(?string $support): self
     {
         $this->support = $support;
@@ -121,11 +153,19 @@ class Subscription
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getStripePriceId(): ?string
     {
         return $this->stripe_price_id;
     }
 
+    /**
+     * @param  string|null  $stripe_price_id
+     *
+     * @return $this
+     */
     public function setStripePriceId(?string $stripe_price_id): self
     {
         $this->stripe_price_id = $stripe_price_id;
@@ -133,16 +173,27 @@ class Subscription
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->plan;
     }
 
+    /**
+     * @return float|null
+     */
     public function getPrice(): ?float
     {
         return $this->price;
     }
 
+    /**
+     * @param  float  $price
+     *
+     * @return $this
+     */
     public function setPrice(float $price): self
     {
         $this->price = $price;
@@ -151,13 +202,18 @@ class Subscription
     }
 
     /**
-     * @return Collection<int, Account>
+     * @return Collection
      */
     public function getAccountId(): Collection
     {
         return $this->account_id;
     }
 
+    /**
+     * @param  Account  $accountId
+     *
+     * @return $this
+     */
     public function addAccountId(Account $accountId): self
     {
         if (!$this->account_id->contains($accountId)) {
@@ -168,6 +224,11 @@ class Subscription
         return $this;
     }
 
+    /**
+     * @param  Account  $accountId
+     *
+     * @return $this
+     */
     public function removeAccountId(Account $accountId): self
     {
         if ($this->account_id->removeElement($accountId)) {
@@ -180,15 +241,24 @@ class Subscription
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getFrequency(): ?string
     {
         return $this->frequency;
     }
 
+    /**
+     * @param  string  $frequency
+     *
+     * @return $this
+     */
     public function setFrequency(string $frequency): static
     {
         $this->frequency = $frequency;
 
         return $this;
     }
+
 }
