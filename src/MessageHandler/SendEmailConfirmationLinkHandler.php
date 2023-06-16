@@ -7,6 +7,7 @@ namespace App\MessageHandler;
 use App\Entity\User;
 use App\Mailer\Mailer;
 use App\Message\SendEmailConfirmationLink;
+use App\Repository\SettingsRepository;
 use App\Service\Cache\UserDataCache;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -28,17 +29,19 @@ final class SendEmailConfirmationLinkHandler
     private Mailer $mailer;
     private UrlGeneratorInterface $router;
     private TranslatorInterface $translator;
-
+    private $settings;
     public function __construct(
         VerifyEmailHelperInterface $helper,
         Mailer $mailer,
         UrlGeneratorInterface $router,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        SettingsRepository $settingsRepository,
     ) {
         $this->verifyEmailHelper = $helper;
         $this->mailer = $mailer;
         $this->router = $router;
         $this->translator = $translator;
+        $this->settings = $settingsRepository->findAllAsArray();
     }
 
     /**
@@ -81,6 +84,7 @@ final class SendEmailConfirmationLinkHandler
             'signedUrl' => $signatureComponents->getSignedUrl(),
             'expiresAtMessageKey' => $signatureComponents->getExpirationMessageKey(),
             'expiresAtMessageData' => $signatureComponents->getExpirationMessageData(),
+            'siteName' => $this->settings["site_name"]
         ];
     }
 
