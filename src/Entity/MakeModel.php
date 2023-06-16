@@ -25,16 +25,27 @@ class MakeModel
     #[ORM\Column(length: 255)]
     private ?string $body_style = null;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getYear(): ?string
     {
         return $this->year;
     }
 
+    /**
+     * @param  string  $year
+     *
+     * @return $this
+     */
     public function setYear(string $year): self
     {
         $this->year = $year;
@@ -42,11 +53,19 @@ class MakeModel
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getMake(): ?string
     {
         return $this->make;
     }
 
+    /**
+     * @param  string  $make
+     *
+     * @return $this
+     */
     public function setMake(string $make): self
     {
         $this->make = $make;
@@ -54,11 +73,19 @@ class MakeModel
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getModel(): ?string
     {
         return $this->model;
     }
 
+    /**
+     * @param  string  $model
+     *
+     * @return $this
+     */
     public function setModel(string $model): self
     {
         $this->model = $model;
@@ -66,15 +93,24 @@ class MakeModel
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getBodyStyle(): ?string
     {
         return $this->body_style;
     }
 
+    /**
+     * @param  string  $body_style
+     *
+     * @return $this
+     */
     public function setBodyStyle(string $body_style): self
     {
         $this->body_style = $body_style;
 
         return $this;
     }
+
 }

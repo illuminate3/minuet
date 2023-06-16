@@ -20,11 +20,19 @@ class AccountUser
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user;
 
+    /**
+     * @return Account|null
+     */
     public function getAccount(): ?Account
     {
         return $this->account;
     }
 
+    /**
+     * @param  Account|null  $account
+     *
+     * @return $this
+     */
     public function setAccount(?Account $account): self
     {
         $this->account = $account;
@@ -32,11 +40,19 @@ class AccountUser
         return $this;
     }
 
+    /**
+     * @return User|null
+     */
     public function getUser(): ?User
     {
         return $this->user;
     }
 
+    /**
+     * @param  User|null  $user
+     *
+     * @return $this
+     */
     public function setUser(?User $user): self
     {
         $this->user = $user;

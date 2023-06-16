@@ -16,4 +16,5 @@ final class SendEmailConfirmationAndResetPasswordDealer
     {
         return $this->user;
     }
+
 }

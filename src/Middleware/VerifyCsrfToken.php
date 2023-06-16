@@ -36,4 +36,5 @@ final class VerifyCsrfToken
         return $request->query->get('csrf_token')
             ?? $request->get('csrf_token');
     }
+
 }

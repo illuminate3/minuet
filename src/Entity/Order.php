@@ -40,16 +40,27 @@ class Order
         $this->created_at = new DateTimeImmutable();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getReference(): ?string
     {
         return $this->reference;
     }
 
+    /**
+     * @param  string  $reference
+     *
+     * @return $this
+     */
     public function setReference(string $reference): self
     {
         $this->reference = $reference;
@@ -57,11 +68,19 @@ class Order
         return $this;
     }
 
+    /**
+     * @return User|null
+     */
     public function getUser(): ?User
     {
         return $this->user;
     }
 
+    /**
+     * @param  User|null  $user
+     *
+     * @return $this
+     */
     public function setUser(?User $user): self
     {
         $this->user = $user;
@@ -70,13 +89,18 @@ class Order
     }
 
     /**
-     * @return Collection|OrderDetail[]
+     * @return Collection
      */
     public function getOrderDetail(): Collection
     {
         return $this->orderDetail;
     }
 
+    /**
+     * @param  OrderDetail  $orderDetail
+     *
+     * @return $this
+     */
     public function addOrderDetail(OrderDetail $orderDetail): self
     {
         if (!$this->orderDetail->contains($orderDetail)) {
@@ -87,6 +111,11 @@ class Order
         return $this;
     }
 
+    /**
+     * @param  OrderDetail  $orderDetail
+     *
+     * @return $this
+     */
     public function removeOrderDetail(OrderDetail $orderDetail): self
     {
         if ($this->orderDetail->removeElement($orderDetail)) {
@@ -98,4 +127,5 @@ class Order
 
         return $this;
     }
+
 }

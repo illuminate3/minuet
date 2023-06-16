@@ -16,4 +16,5 @@ final class SendEmailConfirmationAndResetPassword
     {
         return $this->user;
     }
+
 }

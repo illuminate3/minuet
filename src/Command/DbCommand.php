@@ -61,4 +61,5 @@ final class DbCommand extends Command
             ],
         ];
     }
+
 }
