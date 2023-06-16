@@ -20,4 +20,5 @@ final class SendEmailConfirmationLink
     {
         return $this->user;
     }
+
 }

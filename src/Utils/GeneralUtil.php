@@ -8,6 +8,10 @@ use DateTimeImmutable;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Contracts\Cache\ItemInterface;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 final class GeneralUtil implements GeneralUtilInterface
@@ -22,13 +26,13 @@ final class GeneralUtil implements GeneralUtilInterface
 
     /**
      * @param $cache
+     * @param $carApiClient
      *
-     * @return string
+     * @return mixed
      * @throws ClientExceptionInterface
      * @throws RedirectionExceptionInterface
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
-     * @throws \Exception
      */
     public static function getBearerToken($cache, $carApiClient)
     {

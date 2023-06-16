@@ -44,11 +44,19 @@ class Page
     #[ORM\Column(type: Types::BOOLEAN, nullable: true)]
     private ?bool $publish;
 
+    /**
+     * @return string|null
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * @param  string  $title
+     *
+     * @return $this
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -56,11 +64,19 @@ class Page
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
+    /**
+     * @param  string  $description
+     *
+     * @return $this
+     */
     public function setDescription(string $description): self
     {
         $this->description = $description;
@@ -68,11 +84,19 @@ class Page
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
+    /**
+     * @param  string  $slug
+     *
+     * @return $this
+     */
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
@@ -80,11 +104,19 @@ class Page
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getContent(): ?string
     {
         return $this->content;
     }
 
+    /**
+     * @param  string  $content
+     *
+     * @return $this
+     */
     public function setContent(string $content): self
     {
         $this->content = $content;
@@ -92,11 +124,19 @@ class Page
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getShowInMenu(): ?bool
     {
         return $this->show_in_menu;
     }
 
+    /**
+     * @param  bool  $show_in_menu
+     *
+     * @return $this
+     */
     public function setShowInMenu(bool $show_in_menu): self
     {
         $this->show_in_menu = $show_in_menu;
@@ -104,11 +144,19 @@ class Page
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getPublish(): ?bool
     {
         return $this->publish;
     }
 
+    /**
+     * @param  bool  $publish
+     *
+     * @return $this
+     */
     public function setPublish(bool $publish): self
     {
         $this->publish = $publish;
@@ -116,15 +164,24 @@ class Page
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getLocale(): string
     {
         return $this->locale;
     }
 
+    /**
+     * @param  string  $locale
+     *
+     * @return $this
+     */
     public function setLocale(string $locale): self
     {
         $this->locale = $locale;
 
         return $this;
     }
+
 }

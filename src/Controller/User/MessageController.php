@@ -116,7 +116,7 @@ class MessageController extends BaseController
             $thread = $threadRepository->findOneBy(['id' => $thread_id]);
             if (empty($thread)) {
                 $this->addFlash('danger', 'message.not_found');
-                return $this->redirectToRoute('app_message_show_thread', ['id' =>  (int) $thread_id], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_message_show_thread', ['id' => (int) $thread_id], Response::HTTP_SEE_OTHER);
             }
 
             $message->setUpdatedBy($user);

@@ -59,7 +59,6 @@ class Product
     #[ORM\JoinColumn(nullable: true)]
     private ?Category $category;
 
-
     public function __construct()
     {
         $this->threads = new ArrayCollection();
@@ -67,11 +66,19 @@ class Product
         // $this->productTrims = new ArrayCollection();
     }
 
+    /**
+     * @return string|null
+     */
     public function getTitle()
     {
         return $this->title;
     }
 
+    /**
+     * @param $title
+     *
+     * @return $this
+     */
     public function setTitle( $title): self
     {
         $this->title = $title;
@@ -79,11 +86,19 @@ class Product
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getDescription()
     {
         return $this->description;
     }
 
+    /**
+     * @param $description
+     *
+     * @return $this
+     */
     public function setDescription( $description): self
     {
         $this->description = $description;
@@ -91,11 +106,19 @@ class Product
         return $this;
     }
 
+    /**
+     * @return int
+     */
     public function getPrice()
     {
         return $this->price;
     }
 
+    /**
+     * @param  int  $price
+     *
+     * @return $this
+     */
     public function setPrice(int $price)
     {
         $this->price = $price;
@@ -103,11 +126,19 @@ class Product
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getVin()
     {
         return $this->vin;
     }
 
+    /**
+     * @param $vin
+     *
+     * @return $this
+     */
     public function setVin( $vin): self
     {
         $this->vin = $vin;
@@ -115,11 +146,19 @@ class Product
         return $this;
     }
 
+    /**
+     * @return Category|null
+     */
     public function getCategory(): ?Category
     {
         return $this->category;
     }
 
+    /**
+     * @param  Category|null  $category
+     *
+     * @return $this
+     */
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
@@ -128,13 +167,18 @@ class Product
     }
 
     /**
-     * @return Collection|OrderDetail[]
+     * @return Collection
      */
     public function getOrderDetail(): Collection
     {
         return $this->orderDetail;
     }
 
+    /**
+     * @param  OrderDetail  $orderDetail
+     *
+     * @return $this
+     */
     public function addOrdersDetail(OrderDetail $orderDetail): self
     {
         if (!$this->orderDetail->contains($orderDetail)) {
@@ -145,6 +189,11 @@ class Product
         return $this;
     }
 
+    /**
+     * @param  OrderDetail  $orderDetail
+     *
+     * @return $this
+     */
     public function removeOrdersDetail(OrderDetail $orderDetail): self
     {
         if ($this->orderDetail->removeElement($orderDetail)) {
@@ -157,11 +206,19 @@ class Product
         return $this;
     }
 
+    /**
+     * @return Account|null
+     */
     public function getAccount(): ?Account
     {
         return $this->account;
     }
 
+    /**
+     * @param  Account|null  $account
+     *
+     * @return $this
+     */
     public function setAccount(?Account $account)
     {
         $this->account = $account;
@@ -169,14 +226,19 @@ class Product
         return $this;
     }
 
-    // /**
-    //  * @return Collection<int, Thread>
-    //  */
+    /**
+     * @return Collection
+     */
     public function getThreads(): Collection
     {
         return $this->threads;
     }
 
+    /**
+     * @param  Thread  $thread
+     *
+     * @return $this
+     */
     public function addThread(Thread $thread): self
     {
         if (!$this->threads->contains($thread)) {
@@ -200,7 +262,7 @@ class Product
     // }
 
     /**
-     * @return Collection<int, Image>
+     * @return Collection
      */
     public function getImages(): Collection
     {
@@ -217,6 +279,11 @@ class Product
         return $this;
     }
 
+    /**
+     * @param  Image  $image
+     *
+     * @return $this
+     */
     public function removeImage(Image $image): self
     {
         if ($this->images->removeElement($image)) {
@@ -228,4 +295,5 @@ class Product
 
         return $this;
     }
+
 }

@@ -20,4 +20,5 @@ final class SendResetPasswordLink
     {
         return $this->user;
     }
+
 }

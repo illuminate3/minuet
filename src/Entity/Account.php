@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Entity;
+
 use App\Entity\Trait\CreatedAtTrait;
 use App\Entity\Trait\EntityIdTrait;
 use App\Entity\Trait\ModifiedAtTrait;
@@ -56,16 +57,27 @@ class Account
     }
 
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param  string  $name
+     *
+     * @return $this
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -73,11 +85,19 @@ class Account
         return $this;
     }
 
+    /**
+     * @return Subscription|null
+     */
     public function getSubscription(): ?Subscription
     {
         return $this->subscription;
     }
 
+    /**
+     * @param  Subscription|null  $subscription
+     *
+     * @return $this
+     */
     public function setSubscription(?Subscription $subscription): self
     {
         $this->subscription = $subscription;
@@ -93,6 +113,11 @@ class Account
         return $this->products;
     }
 
+    /**
+     * @param  Product  $product
+     *
+     * @return $this
+     */
     public function addProduct(Product $product): self
     {
         if (!$this->products->contains($product)) {
@@ -103,6 +128,11 @@ class Account
         return $this;
     }
 
+    /**
+     * @param  Product  $product
+     *
+     * @return $this
+     */
     public function removeProduct(Product $product): self
     {
         if ($this->products->removeElement($product)) {
@@ -115,11 +145,19 @@ class Account
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getPrimaryUser(): ?int
     {
         return $this->primaryUser;
     }
 
+    /**
+     * @param  int  $primaryUser
+     *
+     * @return $this
+     */
     public function setPrimaryUser(int $primaryUser): self
     {
         $this->primaryUser = $primaryUser;
@@ -128,13 +166,18 @@ class Account
     }
 
     /**
-     * @return Collection<int, Thread>
+     * @return Collection
      */
     public function getThreads(): Collection
     {
         return $this->threads;
     }
 
+    /**
+     * @param  Thread  $thread
+     *
+     * @return $this
+     */
     public function addThread(Thread $thread): self
     {
         if (!$this->threads->contains($thread)) {
@@ -145,6 +188,11 @@ class Account
         return $this;
     }
 
+    /**
+     * @param  Thread  $thread
+     *
+     * @return $this
+     */
     public function removeThread(Thread $thread): self
     {
         if ($this->threads->removeElement($thread)) {
@@ -157,6 +205,11 @@ class Account
         return $this;
     }
 
+    /**
+     * @param  bool  $isActive
+     *
+     * @return $this
+     */
     public function setIsSubscriptionActive(bool $isActive): self
     {
         $this->isSubscriptionActive = $isActive;
@@ -164,16 +217,27 @@ class Account
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getIsSubscriptionActive(): ?bool
     {
         return $this->isSubscriptionActive ? true : false;
     }
 
+    /**
+     * @return bool|null
+     */
     public function isIsExpiring(): ?bool
     {
         return $this->isExpiring;
     }
 
+    /**
+     * @param  bool  $isExpiring
+     *
+     * @return $this
+     */
     public function setIsExpiring(bool $isExpiring): static
     {
         $this->isExpiring = $isExpiring;
@@ -181,11 +245,19 @@ class Account
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function isIsPastDue(): ?bool
     {
         return $this->isPastDue;
     }
 
+    /**
+     * @param  bool  $isPastDue
+     *
+     * @return $this
+     */
     public function setIsPastDue(bool $isPastDue): static
     {
         $this->isPastDue = $isPastDue;
@@ -193,11 +265,19 @@ class Account
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getStripeCustomerId(): ?string
     {
         return $this->stripeCustomerId;
     }
 
+    /**
+     * @param  string  $stripeCustomerId
+     *
+     * @return $this
+     */
     public function setStripeCustomerId(string $stripeCustomerId): static
     {
         $this->stripeCustomerId = $stripeCustomerId;

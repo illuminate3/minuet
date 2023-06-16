@@ -88,4 +88,5 @@ final class CreateCategoryCommand extends Command
         }
         $this->em->flush();
     }
+
 }

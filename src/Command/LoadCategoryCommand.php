@@ -57,4 +57,5 @@ final class LoadCategoryCommand extends Command
 
         return Command::SUCCESS;
     }
+
 }

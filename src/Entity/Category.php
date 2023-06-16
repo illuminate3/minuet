@@ -39,16 +39,27 @@ class Category
         $this->product = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param  string  $name
+     *
+     * @return $this
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -56,11 +67,19 @@ class Category
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getCategoryOrder(): ?int
     {
         return $this->categoryOrder;
     }
 
+    /**
+     * @param  int  $categoryOrder
+     *
+     * @return $this
+     */
     public function setCategoryOrder(int $categoryOrder): self
     {
         $this->categoryOrder = $categoryOrder;
@@ -68,11 +87,19 @@ class Category
         return $this;
     }
 
+    /**
+     * @return $this|null
+     */
     public function getParent(): ?self
     {
         return $this->parent;
     }
 
+    /**
+     * @param  Category|null  $parent
+     *
+     * @return $this
+     */
     public function setParent(?self $parent): self
     {
         $this->parent = $parent;
@@ -81,13 +108,18 @@ class Category
     }
 
     /**
-     * @return Collection|self[]
+     * @return Collection
      */
     public function getCategory(): Collection
     {
         return $this->category;
     }
 
+    /**
+     * @param  Category  $category
+     *
+     * @return $this
+     */
     public function addCategory(self $category): self
     {
         if (!$this->category->contains($category)) {
@@ -98,6 +130,11 @@ class Category
         return $this;
     }
 
+    /**
+     * @param  Category  $category
+     *
+     * @return $this
+     */
     public function removeCategory(self $category): self
     {
         if ($this->category->removeElement($category)) {
@@ -111,13 +148,18 @@ class Category
     }
 
     /**
-     * @return Collection|Product[]
+     * @return Collection
      */
     public function getProduct(): Collection
     {
         return $this->product;
     }
 
+    /**
+     * @param  Product  $product
+     *
+     * @return $this
+     */
     public function addProduct(Product $product): self
     {
         if (!$this->product->contains($product)) {
@@ -128,6 +170,11 @@ class Category
         return $this;
     }
 
+    /**
+     * @param  Product  $product
+     *
+     * @return $this
+     */
     public function removeProduct(Product $product): self
     {
         if ($this->product->removeElement($product)) {
@@ -139,4 +186,5 @@ class Category
 
         return $this;
     }
+
 }

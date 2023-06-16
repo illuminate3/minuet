@@ -96,4 +96,5 @@ final class SendEmailConfirmationLinkHandler
             ->context($this->createContext($signatureComponents))
         ;
     }
+
 }
