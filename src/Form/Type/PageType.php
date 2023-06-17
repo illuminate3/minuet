@@ -25,8 +25,12 @@ final class PageType extends AbstractType
     ) {
     }
 
+
     /**
-     * {@inheritdoc}
+     * @param  FormBuilderInterface  $builder
+     * @param  array                 $options
+     *
+     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -100,8 +104,11 @@ final class PageType extends AbstractType
         ;
     }
 
+
     /**
-     * {@inheritdoc}
+     * @param  OptionsResolver  $resolver
+     *
+     * @return void
      */
     public function configureOptions(OptionsResolver $resolver): void
     {
@@ -110,4 +117,5 @@ final class PageType extends AbstractType
             'data_class' => Page::class,
         ]);
     }
+
 }

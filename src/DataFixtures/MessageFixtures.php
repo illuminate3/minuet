@@ -14,6 +14,12 @@ use Doctrine\Persistence\ObjectManager;
 
 class MessageFixtures extends Fixture implements DependentFixtureInterface
 {
+
+    /**
+     * @param  ObjectManager  $manager
+     *
+     * @return void
+     */
     public function load(ObjectManager $manager): void
     {
 //        user_id
@@ -45,6 +51,9 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
 //        content
 //        created_at
 
+    /**
+     * @return array[]
+     */
     private function getData(): array
     {
         return [
@@ -57,10 +66,14 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getDependencies(): array
     {
         return [
             ThreadFixtures::class,
         ];
     }
+
 }

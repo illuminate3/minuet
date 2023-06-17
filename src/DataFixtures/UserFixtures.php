@@ -13,6 +13,11 @@ use Doctrine\Persistence\ObjectManager;
 
 final class UserFixtures extends Fixture
 {
+    private UserTransformer $transformer;
+
+    /**
+     * @param  UserTransformer  $transformer
+     */
     public function __construct(UserTransformer $transformer)
     {
         $this->transformer = $transformer;
@@ -55,6 +60,9 @@ final class UserFixtures extends Fixture
         $manager->flush();
     }
 
+    /**
+     * @return array[]
+     */
     private function getUserData(): array
     {
 #       ROLE_SUPER, ROLE_ADMIN, ROLE_USER, ROLE_DEALER, ROLE_STAFF

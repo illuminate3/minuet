@@ -21,7 +21,11 @@ final class SendEmailConfirmationAndResetPasswordLinkHandler
     {
     }
 
+
     /**
+     * @param  SendEmailConfirmationAndResetPassword  $SendEmailConfirmationAndResetPassword
+     *
+     * @return void
      * @throws TransportExceptionInterface
      */
     public function __invoke(SendEmailConfirmationAndResetPassword $SendEmailConfirmationAndResetPassword): void
@@ -33,6 +37,9 @@ final class SendEmailConfirmationAndResetPasswordLinkHandler
         $this->mailer->send($email);
     }
 
+    /**
+     * @return Address
+     */
     private function getSender(): Address
     {
         $host = $this->router->getContext()->getHost();
@@ -40,6 +47,9 @@ final class SendEmailConfirmationAndResetPasswordLinkHandler
         return new Address('no-reply@' . $host, $host);
     }
 
+    /**
+     * @return string
+     */
     private function getSubject(): string
     {
         return $this->translator->trans('email.subject.staff.account_setup');
@@ -52,6 +62,11 @@ final class SendEmailConfirmationAndResetPasswordLinkHandler
         );
     }
 
+    /**
+     * @param  User  $user
+     *
+     * @return TemplatedEmail
+     */
     private function buildEmail(User $user): TemplatedEmail
     {
         return (new TemplatedEmail())

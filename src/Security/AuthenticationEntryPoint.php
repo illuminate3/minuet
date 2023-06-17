@@ -19,6 +19,12 @@ class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
         $this->urlGenerator = $urlGenerator;
     }
 
+    /**
+     * @param  Request                       $request
+     * @param  AuthenticationException|null  $authException
+     *
+     * @return RedirectResponse
+     */
     public function start(
         Request $request,
         AuthenticationException $authException = null

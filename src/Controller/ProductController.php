@@ -18,6 +18,14 @@ use function count;
 class ProductController extends BaseController
 {
 
+    /**
+     * @param  Request                    $request
+     * @param  FilterRepository           $repository
+     * @param  CategoryRepository         $categoryRepository
+     * @param  RequestToArrayTransformer  $transformer
+     *
+     * @return Response
+     */
     #[Route(path: '/{make<\w+>?}/{models?}', name: 'product_index', defaults: ['page' => 1], methods: ['GET'])]
     public function search(
         Request $request,
@@ -63,7 +71,12 @@ class ProductController extends BaseController
         );
     }
 
-
+    /**
+     * @param  Request  $request
+     * @param  Product  $product
+     *
+     * @return Response
+     */
     #[Route(path: '/{slug}/{id<\d+>}', name: 'product_show', methods: ['GET'])]
     public function productShow(
         Request $request,
@@ -80,4 +93,5 @@ class ProductController extends BaseController
             ]
         );
     }
+
 }

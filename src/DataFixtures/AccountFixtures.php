@@ -14,6 +14,11 @@ class AccountFixtures extends Fixture implements DependentFixtureInterface
 {
     private int $counter = 1;
 
+    /**
+     * @param  ObjectManager  $manager
+     *
+     * @return void
+     */
     public function load(ObjectManager $manager): void
     {
 //        $subscription_id
@@ -41,6 +46,10 @@ class AccountFixtures extends Fixture implements DependentFixtureInterface
 //        $name
 //        $primary_user
 
+
+    /**
+     * @return array[]
+     */
     private function getData(): array
     {
         return [
@@ -50,10 +59,14 @@ class AccountFixtures extends Fixture implements DependentFixtureInterface
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getDependencies(): array
     {
         return [
             SubscriptionFixtures::class,
         ];
     }
+
 }

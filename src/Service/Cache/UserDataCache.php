@@ -26,6 +26,9 @@ trait UserDataCache
     }
 
     /**
+     * @param  User  $user
+     *
+     * @return DateTimeInterface|null
      * @throws InvalidArgumentException
      */
     public function getConfirmationSentAt(User $user): ?DateTimeInterface
@@ -37,8 +40,14 @@ trait UserDataCache
         return $sentAt->get();
     }
 
+    /**
+     * @param  User  $user
+     *
+     * @return string
+     */
     private function getKey(User $user): string
     {
         return sprintf('user.%s.email_confirmation_link.sent_at', $user->getId());
     }
+
 }

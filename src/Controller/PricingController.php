@@ -13,6 +13,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class PricingController extends BaseController
 
 {
+
+    /**
+     * @param  Request                 $request
+     * @param  SubscriptionRepository  $subscriptionRepository
+     *
+     * @return Response
+     */
     #[Route('/pricing', name: 'app_pricing', methods: ['GET'])]
     public function index(
         Request $request,

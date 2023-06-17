@@ -21,6 +21,7 @@ class AddAgentFieldSubscriber implements EventSubscriberInterface
         $this->security = $security;
     }
 
+
     /**
      * @return string[]
      */
@@ -47,4 +48,5 @@ class AddAgentFieldSubscriber implements EventSubscriberInterface
             ]);
         }
     }
+
 }

@@ -21,11 +21,19 @@ final class MenuRepository extends ServiceEntityRepository
         parent::__construct($registry, Menu::class);
     }
 
+    /**
+     * @return Menu[]
+     */
     public function findItems(): array
     {
         return $this->findBy([], ['sort_order' => 'ASC']);
     }
 
+    /**
+     * @param  array  $items
+     *
+     * @return void
+     */
     public function reorderItems(array $items): void
     {
         $i = 1;
@@ -43,4 +51,5 @@ final class MenuRepository extends ServiceEntityRepository
             ++$i;
         }
     }
+
 }

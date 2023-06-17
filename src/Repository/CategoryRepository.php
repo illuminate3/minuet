@@ -22,6 +22,11 @@ class CategoryRepository extends ServiceEntityRepository
     }
 
 
+    /**
+     * @param $make
+     *
+     * @return float|int|mixed|string
+     */
     public function fetchSubCategories($make)
     {
         return $this->createQueryBuilder('c')

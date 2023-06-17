@@ -37,8 +37,9 @@ final class PageRepository extends ServiceEntityRepository
     }
 
     /**
-     * @throws NonUniqueResultException
+     * @return int
      * @throws NoResultException
+     * @throws NonUniqueResultException
      */
     public function countAll(): int
     {
@@ -51,6 +52,9 @@ final class PageRepository extends ServiceEntityRepository
         return (int) $count;
     }
 
+    /**
+     * @return int
+     */
     private function findLimit(): int
     {
         $repository = $this->getEntityManager()->getRepository(Settings::class);
@@ -59,6 +63,11 @@ final class PageRepository extends ServiceEntityRepository
         return (int) $limit->getSettingValue();
     }
 
+    /**
+     * @param  Request  $request
+     *
+     * @return PaginationInterface
+     */
     public function findLatest(
         Request $request,
     ): PaginationInterface {
@@ -73,6 +82,11 @@ final class PageRepository extends ServiceEntityRepository
         return $this->createPaginator($qb->getQuery(), $request);
     }
 
+    /**
+     * @param  Request  $request
+     *
+     * @return PaginationInterface
+     */
     public function findPublished(
         Request $request,
     ): PaginationInterface {
@@ -90,6 +104,12 @@ final class PageRepository extends ServiceEntityRepository
         return $this->createPaginator($qb->getQuery(), $request);
     }
 
+    /**
+     * @param  Query    $query
+     * @param  Request  $request
+     *
+     * @return PaginationInterface
+     */
     private function createPaginator(
         Query $query,
         Request $request
@@ -104,4 +124,5 @@ final class PageRepository extends ServiceEntityRepository
             10
         );
     }
+
 }

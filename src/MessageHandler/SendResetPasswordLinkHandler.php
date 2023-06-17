@@ -32,8 +32,10 @@ final class SendResetPasswordLinkHandler
         $this->router = $router;
     }
 
-
     /**
+     * @param  SendResetPasswordLink  $sendResetPasswordLink
+     *
+     * @return void
      * @throws TransportExceptionInterface
      */
     public function __invoke(SendResetPasswordLink $sendResetPasswordLink): void
@@ -45,6 +47,9 @@ final class SendResetPasswordLinkHandler
         $this->mailer->send($email);
     }
 
+    /**
+     * @return Address
+     */
     private function getSender(): Address
     {
         $host = $this->router->getContext()->getHost();
@@ -52,11 +57,19 @@ final class SendResetPasswordLinkHandler
         return new Address('no-reply@' . $host, $host);
     }
 
+    /**
+     * @return string
+     */
     private function getSubject(): string
     {
         return $this->translator->trans('email.subject.password_reset');
     }
 
+    /**
+     * @param  User  $user
+     *
+     * @return string
+     */
     private function getConfirmationUrl(User $user): string
     {
         return $this->router->generate(
@@ -64,6 +77,11 @@ final class SendResetPasswordLinkHandler
         );
     }
 
+    /**
+     * @param  User  $user
+     *
+     * @return TemplatedEmail
+     */
     private function buildEmail(User $user): TemplatedEmail
     {
         return (new TemplatedEmail())

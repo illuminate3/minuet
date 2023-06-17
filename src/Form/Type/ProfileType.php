@@ -15,8 +15,12 @@ use Symfony\Component\Validator\Constraints\NotNull;
 
 final class ProfileType extends AbstractType
 {
+
     /**
-     * {@inheritdoc}
+     * @param  FormBuilderInterface  $builder
+     * @param  array                 $options
+     *
+     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -263,8 +267,11 @@ final class ProfileType extends AbstractType
         ;
     }
 
+
     /**
-     * {@inheritdoc}
+     * @param  OptionsResolver  $resolver
+     *
+     * @return void
      */
     public function configureOptions(OptionsResolver $resolver): void
     {
@@ -272,4 +279,5 @@ final class ProfileType extends AbstractType
             'data_class' => Profile::class,
         ]);
     }
+
 }

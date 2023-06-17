@@ -29,7 +29,6 @@ class MainController extends AbstractController
         $this->params = $params;
     }
 
-
     /**
      * @param  HttpClientInterface  $carApiClient
      * @param  CacheInterface       $cache
@@ -74,7 +73,6 @@ class MainController extends AbstractController
         );
     }
 
-
     /**
      * @param $cache
      *
@@ -83,7 +81,6 @@ class MainController extends AbstractController
      * @throws RedirectionExceptionInterface
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
-     * @throws \Exception
      */
     public function getBearerToken($cache): string
     {

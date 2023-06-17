@@ -11,6 +11,12 @@ use Doctrine\Persistence\ObjectManager;
 
 final class ImageFixtures extends Fixture implements DependentFixtureInterface
 {
+
+    /**
+     * @param  ObjectManager  $manager
+     *
+     * @return void
+     */
     public function load(ObjectManager $manager): void
     {
         foreach ($this->getPhotoData() as [$product, $order, $file]) {
@@ -23,6 +29,9 @@ final class ImageFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
+    /**
+     * @return array[]
+     */
     private function getPhotoData(): array
     {
         return [
@@ -39,10 +48,14 @@ final class ImageFixtures extends Fixture implements DependentFixtureInterface
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getDependencies(): array
     {
         return [
             ProductFixtures::class,
         ];
     }
+
 }

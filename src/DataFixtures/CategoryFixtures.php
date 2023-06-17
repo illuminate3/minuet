@@ -18,10 +18,12 @@ class CategoryFixtures extends Fixture
 
     public function __construct(private ParameterBagInterface $params)
     {
-        $this->params = $params;
     }
 
     /**
+     * @param  ObjectManager  $manager
+     *
+     * @return void
      * @throws Exception
      */
     public function load(ObjectManager $manager): void
@@ -50,6 +52,11 @@ class CategoryFixtures extends Fixture
         $this->setCategoryReference($manager);
     }
 
+    /**
+     * @param $manager
+     *
+     * @return void
+     */
     private function setCategoryReference($manager): void
     {
         $categories = $manager->getRepository(Category::class)->findAll();

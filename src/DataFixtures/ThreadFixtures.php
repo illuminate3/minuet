@@ -15,6 +15,12 @@ use Doctrine\Persistence\ObjectManager;
 
 class ThreadFixtures extends Fixture implements DependentFixtureInterface
 {
+
+    /**
+     * @param  ObjectManager  $manager
+     *
+     * @return void
+     */
     public function load(ObjectManager $manager): void
     {
 //        product_id
@@ -49,6 +55,9 @@ class ThreadFixtures extends Fixture implements DependentFixtureInterface
 //        is_pin
 //        total_messages
 
+    /**
+     * @return \int[][]
+     */
     private function getData(): array
     {
         return [
@@ -61,6 +70,9 @@ class ThreadFixtures extends Fixture implements DependentFixtureInterface
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getDependencies(): array
     {
         return [
@@ -69,4 +81,5 @@ class ThreadFixtures extends Fixture implements DependentFixtureInterface
             ProductFixtures::class,
         ];
     }
+
 }

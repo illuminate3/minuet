@@ -14,6 +14,9 @@ trait CreatedAtTrait
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: false, options: ['default' => 'CURRENT_TIMESTAMP'])]
     private ?DateTimeImmutable $created_at;
 
+    /**
+     * @return DateTimeImmutable|null
+     */
     public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->created_at;
@@ -25,4 +28,5 @@ trait CreatedAtTrait
 
         return $this;
     }
+
 }

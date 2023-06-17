@@ -14,6 +14,11 @@ final class MessageController extends BaseController
 {
     private array $settings;
 
+    /**
+     * @param  ManagerRegistry     $doctrine
+     * @param  RequestStack        $requestStack
+     * @param  SettingsRepository  $settingsRepository
+     */
     public function __construct(
         ManagerRegistry $doctrine,
         RequestStack $requestStack,
@@ -24,7 +29,12 @@ final class MessageController extends BaseController
     }
 
     /**
-     * Generic Message Page.
+     * @param $title
+     * @param $message
+     * @param $link
+     * @param $linkTitle
+     *
+     * @return Response|null
      */
     public function authMessages(
         $title,

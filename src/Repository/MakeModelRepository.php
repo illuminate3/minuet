@@ -23,6 +23,12 @@ class MakeModelRepository extends ServiceEntityRepository
         parent::__construct($registry, MakeModel::class);
     }
 
+    /**
+     * @param  MakeModel  $entity
+     * @param  bool       $flush
+     *
+     * @return void
+     */
     public function save(MakeModel $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -32,6 +38,12 @@ class MakeModelRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @param  MakeModel  $entity
+     * @param  bool       $flush
+     *
+     * @return void
+     */
     public function remove(MakeModel $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
@@ -162,4 +174,5 @@ class MakeModelRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
 }

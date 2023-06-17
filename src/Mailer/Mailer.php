@@ -18,7 +18,11 @@ final class Mailer
         $this->mailer = $mailer;
     }
 
+
     /**
+     * @param  Email  $email
+     *
+     * @return void
      * @throws TransportExceptionInterface
      */
     public function send(Email $email): void
@@ -29,4 +33,5 @@ final class Mailer
             throw $e;
         }
     }
+
 }
