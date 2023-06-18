@@ -46,8 +46,7 @@ final class PasswordResetController extends BaseController implements AuthContro
                 [
                     'title' => 'title.password_reset_emailed',
                     'message' => 'message.emailed_reset_link',
-                    'link' => null,
-                    'link_title' => 'title.verify_account',
+                    'link' => null,                   
                 ]
             );
         }

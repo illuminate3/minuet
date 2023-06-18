@@ -44,20 +44,13 @@
                                 <div class="row mt-lg5">
 
                                     <div class="form-group row mb-0 mt-3 mb-auto">
-                                        <div class="col-md-12">
-
+                                        <div class="col-md-12 p-0">
                                             <div class="mt-4">
-                                                {{ message|trans|raw }}
-                                            </div>
-
-                                            {% if link_title %}
-                                            <div class="mt-4">
-                                                <a class="btn btn-info" href="{{ path('auth_password_reset') }}">
-                                                    {{ link_title|trans }}
-                                                </a>
-                                            </div>
-                                            {% endif %}
-
+                                                <div class="alert alert-success alert-dismissible fade show mt-lg-4" role="alert">
+                                                    {{ message|trans }}
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                </div>
+                                            </div>                                            
                                         </div>
                                     </div>
 
