@@ -7,6 +7,7 @@ namespace App\MessageHandler;
 use App\Entity\User;
 use App\Mailer\Mailer;
 use App\Message\SendResetPasswordLink;
+use App\Repository\SettingsRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
@@ -21,15 +22,18 @@ final class SendResetPasswordLinkHandler
     private Mailer $mailer;
     private TranslatorInterface $translator;
     private UrlGeneratorInterface $router;
+    private $settings;
 
     public function __construct(
         Mailer $mailer,
         TranslatorInterface $translator,
         UrlGeneratorInterface $router,
+        SettingsRepository $settingsRepository,
     ) {
         $this->mailer = $mailer;
         $this->translator = $translator;
         $this->router = $router;
+        $this->settings = $settingsRepository->findAllAsArray();
     }
 
     /**
@@ -92,6 +96,7 @@ final class SendResetPasswordLinkHandler
             ->context([
                 'confirmationUrl' => $this->getConfirmationUrl($user),
                 'username' => $user->getEmail(),
+                'siteName' => $this->settings["site_name"]
             ])
         ;
     }
