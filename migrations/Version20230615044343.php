@@ -26,6 +26,5 @@ final class Version20230615044343 extends AbstractMigration
     public function down(Schema $schema): void
     {
         // This down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE users CHANGE is_verified is_verified TINYINT(1) DEFAULT 0 NOT NULL, CHANGE status status VARCHAR(10) DEFAULT \'active\' NOT NULL');
     }
 }

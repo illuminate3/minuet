@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Utils;
 
 use DateTimeImmutable;
+use Exception;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Contracts\Cache\ItemInterface;
@@ -33,8 +34,9 @@ final class GeneralUtil implements GeneralUtilInterface
      * @throws RedirectionExceptionInterface
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
+     * @throws Exception
      */
-    public static function getBearerToken($cache, $carApiClient)
+    public static function getBearerToken($cache, $carApiClient): mixed
     {
         return $cache->get('carapi_bearer_token', function (ItemInterface $item) use($carApiClient) {
             $tokenValue = GeneralUtil::callBearerToken($carApiClient);
@@ -52,13 +54,11 @@ final class GeneralUtil implements GeneralUtilInterface
     }
 
     /**
-     * @return string
-     * @throws ClientExceptionInterface
-     * @throws RedirectionExceptionInterface
-     * @throws ServerExceptionInterface
-     * @throws TransportExceptionInterface
+     * @param $carApiClient
+     *
+     * @return mixed
      */
-    public static function callBearerToken($carApiClient)
+    public static function callBearerToken($carApiClient): mixed
     {
         $bearer = $carApiClient->request('POST', '/api/auth/login', [
             'body' => [
