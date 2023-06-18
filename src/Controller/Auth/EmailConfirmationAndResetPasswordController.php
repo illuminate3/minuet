@@ -22,6 +22,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class EmailConfirmationAndResetPasswordController extends BaseController implements AuthController
 {
+
+    /**
+     * @param  EmailVerifierAndResetPasswordService  $service
+     * @param  Request                               $request
+     *
+     * @return Response
+     */
     #[Route(path: '/password/reset', name: 'auth_password_reset', methods: ['GET|POST'])]
     public function passwordReset(
         EmailVerifierAndResetPasswordService $service,
@@ -52,6 +59,13 @@ final class EmailConfirmationAndResetPasswordController extends BaseController i
         ]);
     }
 
+    /**
+     * @param  ResettingRepository  $repository
+     * @param  Request              $request
+     * @param  string               $token
+     *
+     * @return Response
+     */
     #[Route(path: '/password/reset/{token}', name: 'password_reset_confirm', methods: ['GET|POST'])]
     public function passwordResetConfirm(
         ResettingRepository $repository,
@@ -95,6 +109,13 @@ final class EmailConfirmationAndResetPasswordController extends BaseController i
         ]);
     }
 
+    /**
+     * @param  Request                 $request
+     * @param  EntityManagerInterface  $entityManager
+     * @param  Security                $security
+     *
+     * @return Response
+     */
     #[Route('/password/change', name: 'user_password_change', methods: ['GET', 'POST'])]
     public function passwordChange(
         Request $request,

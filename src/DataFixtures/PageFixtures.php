@@ -15,6 +15,11 @@ final class PageFixtures extends Fixture
     private const LOREM_SLUG = 'lorem';
     private const IPSUM_SLUG = 'ipsum';
 
+    /**
+     * @param  ObjectManager  $manager
+     *
+     * @return void
+     */
     public function load(ObjectManager $manager): void
     {
         $page = new Page();
@@ -42,6 +47,9 @@ final class PageFixtures extends Fixture
         $manager->flush();
     }
 
+    /**
+     * @return string
+     */
     private function getAContent(): string
     {
         return '<h3>Lorem Lorem</h3>
@@ -64,6 +72,9 @@ final class PageFixtures extends Fixture
                 reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>';
     }
 
+    /**
+     * @return string
+     */
     private function getBContent(): string
     {
         return '<h3>Ipsum Ipsum</h3>
@@ -85,4 +96,5 @@ final class PageFixtures extends Fixture
                 nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
                 reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>';
     }
+
 }

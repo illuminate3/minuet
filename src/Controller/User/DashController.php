@@ -14,6 +14,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class DashController extends BaseController
 {
 
+    /**
+     * @param  Request   $request
+     * @param  Security  $security
+     *
+     * @return Response
+     */
     #[Route('/', name: 'app_dash')]
     public function index(
         Request $request,

@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace App\Form\Type;
 
-use App\Entity\Category;
-// use App\Entity\Product;
 use App\Entity\ProductDetails;
-use App\Repository\CategoryRepository;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProductCustomType extends AbstractType
 {
+
+    /**
+     * @param  FormBuilderInterface  $builder
+     * @param  array                 $options
+     *
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -29,7 +31,7 @@ class ProductCustomType extends AbstractType
                 'mapped' => true,
                 'required' => false,
             ])
-            
+
             ->add('suggested_vin', TextType::class, [
                 'label' => 'label.suggested_vin',
                 'attr' => [
@@ -222,7 +224,7 @@ class ProductCustomType extends AbstractType
             ->add('ev_drive_unit', TextType::class, [ 'label' => 'label.make', 'attr' => [ 'placeholder' => 'label.make', 'class' => 'form-control', ], 'mapped' => true ])
             ->add('battery_current_amps_to', TextType::class, [ 'label' => 'label.make', 'attr' => [ 'placeholder' => 'label.make', 'class' => 'form-control', ], 'mapped' => true ])
             ->add('battery_voltage_volts_to', TextType::class, [ 'label' => 'label.make', 'attr' => [ 'placeholder' => 'label.make', 'class' => 'form-control', ], 'mapped' => true ])
-            ->add('battery_energy_kwh_to', TextType::class, [ 'label' => 'label.make', 'attr' => [ 'placeholder' => 'label.make', 'class' => 'form-control', ], 'mapped' => true ])            
+            ->add('battery_energy_kwh_to', TextType::class, [ 'label' => 'label.make', 'attr' => [ 'placeholder' => 'label.make', 'class' => 'form-control', ], 'mapped' => true ])
             ->add('number_of_battery_modules_per_pack', TextType::class, [ 'label' => 'label.make', 'attr' => [ 'placeholder' => 'label.make', 'class' => 'form-control', ], 'mapped' => true ])
             ->add('number_of_battery_packs_per_vehicle', TextType::class, [ 'label' => 'label.make', 'attr' => [ 'placeholder' => 'label.make', 'class' => 'form-control', ], 'mapped' => true ])
             ->add('charger_level', TextType::class, [ 'label' => 'label.make', 'attr' => [ 'placeholder' => 'label.make', 'class' => 'form-control', ], 'mapped' => true ])
@@ -439,10 +441,16 @@ class ProductCustomType extends AbstractType
         $builder->get('lane_centering_assistance')->setRequired(false);
     }
 
+    /**
+     * @param  OptionsResolver  $resolver
+     *
+     * @return void
+     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => ProductDetails::class,
         ]);
     }
+
 }

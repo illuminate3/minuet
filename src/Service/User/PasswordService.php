@@ -32,6 +32,9 @@ final class PasswordService
     }
 
     /**
+     * @param  Request  $request
+     *
+     * @return void
      * @throws Exception
      */
     public function update(Request $request): void
@@ -48,6 +51,11 @@ final class PasswordService
         $this->service->update($user);
     }
 
+    /**
+     * @param  Request  $request
+     *
+     * @return ConstraintViolationListInterface
+     */
     private function findViolations(Request $request): ConstraintViolationListInterface
     {
         $password1 = $this->validator->validate($request->get('password1'), [
@@ -60,4 +68,5 @@ final class PasswordService
 
         return count($password1) > 0 ? $password1 : $password2;
     }
+
 }

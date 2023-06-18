@@ -19,6 +19,11 @@ final class VerifyCsrfToken
         $this->tokenManager = $tokenManager;
     }
 
+    /**
+     * @param  Request  $request
+     *
+     * @return void
+     */
     public function handle(Request $request): void
     {
         if (!$this->isCsrfTokenValid($this->getToken($request))) {
@@ -26,12 +31,22 @@ final class VerifyCsrfToken
         }
     }
 
+    /**
+     * @param  string|null  $token
+     *
+     * @return bool
+     */
     private function isCsrfTokenValid(?string $token): bool
     {
         return $this->tokenManager->isTokenValid(new CsrfToken('csrf_token', $token));
     }
 
-    private function getToken(Request $request)
+    /**
+     * @param  Request  $request
+     *
+     * @return mixed
+     */
+    private function getToken(Request $request): mixed
     {
         return $request->query->get('csrf_token')
             ?? $request->get('csrf_token');

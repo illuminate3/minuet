@@ -17,6 +17,14 @@ use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 final class VerificationController extends AbstractController implements AuthController
 {
 
+    /**
+     * @param  Request                     $request
+     * @param  VerifyEmailHelperInterface  $verifyEmailHelper
+     * @param  UserRepository              $userRepository
+     * @param  EntityManagerInterface      $entityManager
+     *
+     * @return Response
+     */
     #[Route(path: '/email/verify', name: 'verify_email')]
     public function verifyUserEmail(
         Request $request,
@@ -53,4 +61,5 @@ final class VerificationController extends AbstractController implements AuthCon
 
         return $this->redirectToRoute('security_login');
     }
+
 }

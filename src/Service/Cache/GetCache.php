@@ -20,7 +20,12 @@ trait GetCache
         $this->doctrine = $doctrine;
     }
 
+
     /**
+     * @param  string  $key
+     * @param  string  $class
+     *
+     * @return int
      * @throws InvalidArgumentException
      */
     public function getCount(string $key, string $class): int
@@ -32,10 +37,14 @@ trait GetCache
         return (int) $count;
     }
 
+    /**
+     * @return int
+     */
     private function countItems(): int
     {
         return (int) $this->doctrine
             ->getRepository($this->persistentObjectName)
             ->countAll();
     }
+
 }

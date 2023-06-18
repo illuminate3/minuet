@@ -13,6 +13,9 @@ trait ModifiedAtTrait
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true, options: ['default' => 'CURRENT_TIMESTAMP'])]
     private ?DateTimeImmutable $modified_at;
 
+    /**
+     * @return DateTimeImmutable|null
+     */
     public function getModifiedAt(): ?DateTimeImmutable
     {
         return $this->modified_at;
@@ -24,4 +27,5 @@ trait ModifiedAtTrait
 
         return $this;
     }
+
 }

@@ -10,6 +10,12 @@ use Doctrine\Persistence\ObjectManager;
 
 final class SettingsFixtures extends Fixture
 {
+
+    /**
+     * @param  ObjectManager  $manager
+     *
+     * @return void
+     */
     public function load(ObjectManager $manager): void
     {
         foreach ($this->getData() as [$setting_name, $setting_value]) {
@@ -21,6 +27,9 @@ final class SettingsFixtures extends Fixture
         $manager->flush();
     }
 
+    /**
+     * @return array[]
+     */
     private function getData(): array
     {
         return [
@@ -38,4 +47,5 @@ final class SettingsFixtures extends Fixture
             ['allow_register', '1'],
         ];
     }
+
 }

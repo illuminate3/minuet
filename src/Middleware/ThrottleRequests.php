@@ -18,6 +18,11 @@ final class ThrottleRequests
         $this->authLimiter = $authLimiter;
     }
 
+    /**
+     * @param  Request  $request
+     *
+     * @return void
+     */
     public function handle(Request $request): void
     {
         $limiter = $this->authLimiter->create(

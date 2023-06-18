@@ -36,6 +36,12 @@ class ThreadRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @param  Thread  $entity
+     * @param  bool    $flush
+     *
+     * @return void
+     */
     public function remove(Thread $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
@@ -45,6 +51,12 @@ class ThreadRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @param  int   $id
+     * @param  bool  $pin_value
+     *
+     * @return void
+     */
     public function updatePinStatus(int $id, bool $pin_value)
     {
         $thread = $this->getEntityManager()->getRepository(Thread::class)->find($id);
@@ -53,10 +65,16 @@ class ThreadRepository extends ServiceEntityRepository
             throw $this->createNotFoundException('Thread not found');
         }
 
-        $thread->setIsPin($pin_value); 
+        $thread->setIsPin($pin_value);
         $this->getEntityManager()->flush();
     }
 
+    /**
+     * @param  int   $id
+     * @param  bool  $close_value
+     *
+     * @return void
+     */
     public function updateCloseStatus(int $id, bool $close_value)
     {
         $thread = $this->getEntityManager()->getRepository(Thread::class)->find($id);
@@ -65,7 +83,7 @@ class ThreadRepository extends ServiceEntityRepository
             throw $this->createNotFoundException('Thread not found');
         }
 
-        $thread->setIsClosed($close_value); 
+        $thread->setIsClosed($close_value);
         $this->getEntityManager()->flush();
     }
 
@@ -93,4 +111,5 @@ class ThreadRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
 }

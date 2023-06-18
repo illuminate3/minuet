@@ -13,6 +13,13 @@ use Throwable;
 
 final class PasswordController extends AbstractController implements AjaxController
 {
+
+    /**
+     * @param  Request          $request
+     * @param  PasswordService  $service
+     *
+     * @return JsonResponse
+     */
     #[Route(path: '/api/user/password', name: 'api_user_password', methods: ['POST'])]
     public function update(Request $request, PasswordService $service): JsonResponse
     {
@@ -26,4 +33,5 @@ final class PasswordController extends AbstractController implements AjaxControl
             ], 422);
         }
     }
+
 }

@@ -10,6 +10,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class LandingController extends BaseController
 {
+
+    /**
+     * @param  Request  $request
+     *
+     * @return Response
+     */
     #[Route('/', name: 'app_index')]
     public function index(
         Request $request,

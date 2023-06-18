@@ -6,5 +6,10 @@ namespace App\Utils;
 
 interface TokenGeneratorInterface
 {
+
+    /**
+     * @return string
+     */
     public function generateToken(): string;
+
 }

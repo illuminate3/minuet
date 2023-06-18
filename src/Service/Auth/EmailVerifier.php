@@ -26,6 +26,10 @@ final class EmailVerifier
     }
 
     /**
+     * @param  Request        $request
+     * @param  UserInterface  $user
+     *
+     * @return void
      * @throws VerifyEmailExceptionInterface
      */
     public function handleEmailConfirmation(Request $request, UserInterface $user): void
@@ -37,4 +41,5 @@ final class EmailVerifier
         $this->entityManager->persist($user);
         $this->entityManager->flush();
     }
+
 }

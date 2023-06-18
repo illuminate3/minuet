@@ -12,6 +12,12 @@ use function function_exists;
 
 final class Slugger implements SluggerInterface
 {
+
+    /**
+     * @param  string  $string
+     *
+     * @return string
+     */
     public static function slugify(string $string): string
     {
         if (!function_exists('transliterate_transliterate')) {
@@ -24,9 +30,15 @@ final class Slugger implements SluggerInterface
         return (string) $slug;
     }
 
+    /**
+     * @param $value
+     *
+     * @return string
+     */
     private static function ascii($value): string
     {
         $language = 'en';
         return ASCII::to_ascii((string) $value, $language);
     }
+
 }

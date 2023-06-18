@@ -15,6 +15,11 @@ final class UserTransformer
     {
     }
 
+    /**
+     * @param  User  $user
+     *
+     * @return User
+     */
     public function transform(User $user): User
     {
         $user = $this->setRoles($user);
@@ -22,6 +27,11 @@ final class UserTransformer
         return $this->setEncodedPassword($user);
     }
 
+    /**
+     * @param  User  $user
+     *
+     * @return User
+     */
     private function setRolesNew(User $user): User
     {
         if (in_array('ROLE_ADMIN', $user->getRoles(), true)) {
@@ -38,6 +48,12 @@ final class UserTransformer
 
         return $user;
     }
+
+    /**
+     * @param  User  $user
+     *
+     * @return User
+     */
     private function setRoles(User $user): User
     {
 //        if (\in_array('ROLE_ADMIN', $user->getRoles(), true)) {
@@ -51,8 +67,11 @@ final class UserTransformer
         return $user;
     }
 
-
-
+    /**
+     * @param  User  $user
+     *
+     * @return User
+     */
     private function setEncodedPassword(User $user): User
     {
         $password = $user->getPassword();
@@ -60,4 +79,5 @@ final class UserTransformer
 
         return $user;
     }
+
 }

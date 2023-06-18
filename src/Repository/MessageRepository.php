@@ -22,6 +22,12 @@ class MessageRepository extends ServiceEntityRepository
         parent::__construct($registry, Message::class);
     }
 
+    /**
+     * @param  Message  $entity
+     * @param  bool     $flush
+     *
+     * @return void
+     */
     public function save(Message $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -31,6 +37,12 @@ class MessageRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @param  Message  $entity
+     * @param  bool     $flush
+     *
+     * @return void
+     */
     public function remove(Message $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
@@ -64,4 +76,5 @@ class MessageRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
 }

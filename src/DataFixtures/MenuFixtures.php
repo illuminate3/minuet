@@ -10,6 +10,12 @@ use Doctrine\Persistence\ObjectManager;
 
 final class MenuFixtures extends Fixture
 {
+
+    /**
+     * @param  ObjectManager  $manager
+     *
+     * @return void
+     */
     public function load(ObjectManager $manager): void
     {
         foreach ($this->getMenuData() as [$title, $url, $locale]) {
@@ -23,6 +29,9 @@ final class MenuFixtures extends Fixture
         $manager->flush();
     }
 
+    /**
+     * @return array[]
+     */
     private function getMenuData(): array
     {
         return [
@@ -33,4 +42,5 @@ final class MenuFixtures extends Fixture
             ['Source Code', 'https://github.com/illuminate3/minuet', 'en'],
         ];
     }
+
 }

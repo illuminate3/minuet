@@ -16,6 +16,12 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 #[Route('/user/dash')]
 final class ProfileController extends BaseController
 {
+
+    /**
+     * @param  Request  $request
+     *
+     * @return Response
+     */
     #[Route(path: '/', name: 'user_profile')]
     public function index(
         Request $request,
@@ -33,6 +39,13 @@ final class ProfileController extends BaseController
         ]);
     }
 
+    /**
+     * @param  Request                 $request
+     * @param  EntityManagerInterface  $entityManager
+     * @param  AuthenticationUtils     $helper
+     *
+     * @return Response
+     */
     #[Route(path: '/edit', name: 'user_profile_edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request,

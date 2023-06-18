@@ -69,4 +69,5 @@ final class GeneralUtil implements GeneralUtilInterface
 
         return $bearer->getContent();
     }
+
 }

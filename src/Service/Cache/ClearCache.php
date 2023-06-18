@@ -9,7 +9,11 @@ use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 trait ClearCache
 {
+
     /**
+     * @param  string  $key
+     *
+     * @return void
      * @throws InvalidArgumentException
      */
     public function clearCache(string $key): void
@@ -17,4 +21,5 @@ trait ClearCache
         $cache = new FilesystemAdapter();
         $cache->delete($key);
     }
+
 }

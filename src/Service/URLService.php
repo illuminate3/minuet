@@ -36,7 +36,14 @@ final class URLService
 //        ], UrlGeneratorInterface::ABSOLUTE_URL);
 //    }
 
-    // Check referer host.
+    /**
+     *
+     * Check referer host.
+     *
+     * @param  Request  $request
+     *
+     * @return bool
+     */
     public function isRefererFromCurrentHost(Request $request): bool
     {
         if (preg_match('/' . $request->getHost() . '/', $request->server->getHeaders()['REFERER'] ?? '')) {
@@ -45,4 +52,5 @@ final class URLService
 
         return false;
     }
+
 }

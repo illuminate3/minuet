@@ -18,8 +18,12 @@ final class SettingsType extends AbstractType
         'option.on' => '1',
     ];
 
+
     /**
-     * {@inheritdoc}
+     * @param  FormBuilderInterface  $builder
+     * @param  array                 $options
+     *
+     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -120,11 +124,15 @@ final class SettingsType extends AbstractType
         ;
     }
 
+
     /**
-     * {@inheritdoc}
+     * @param  OptionsResolver  $resolver
+     *
+     * @return void
      */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([]);
     }
+
 }

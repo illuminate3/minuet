@@ -12,6 +12,13 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/page')]
 final class PageController extends BaseController
 {
+
+    /**
+     * @param  Request         $request
+     * @param  PageRepository  $pageRepository
+     *
+     * @return Response
+     */
     #[Route(path: '/', name: 'page_index', defaults: ['page' => '1'], methods: ['GET'])]
     #[Route('/rss.xml', name: 'page_rss', defaults: ['page' => '1', '_format' => 'xml'], methods: ['GET'])]
     public function pageIndex(
@@ -29,6 +36,12 @@ final class PageController extends BaseController
         );
     }
 
+    /**
+     * @param  Request         $request
+     * @param  PageRepository  $pageRepository
+     *
+     * @return Response
+     */
     #[Route(path: '/{slug}', name: 'page', methods: ['GET'])]
     public function pageShow(
         Request $request,
@@ -59,4 +72,5 @@ final class PageController extends BaseController
             ]
         );
     }
+
 }

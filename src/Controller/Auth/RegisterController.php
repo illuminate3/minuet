@@ -57,7 +57,8 @@ final class RegisterController extends BaseController implements AuthController
     }
 
     /**
-     * @param  Request  $request
+     * @param  Request          $request
+     * @param  MailerInterface  $mailer
      *
      * @return Response|null
      * @throws InvalidArgumentException
@@ -106,6 +107,9 @@ final class RegisterController extends BaseController implements AuthController
         }          
     }
 
+    /**
+     * @return Response|null
+     */
     #[Route(path: '/closed', name: 'auth_no_register')]
     public function noRegister(): ?Response
     {
@@ -124,7 +128,10 @@ final class RegisterController extends BaseController implements AuthController
     }
 
     /**
-     * requestVerifyUserEmail.
+     * @param  Request         $request
+     * @param  UserRepository  $userRepository
+     *
+     * @return Response
      */
     #[Route(path: '/request/verify-email', name: 'auth_request_verify_email')]
     public function requestVerifyUserEmail(
@@ -175,6 +182,12 @@ final class RegisterController extends BaseController implements AuthController
         );
     }
 
+    /**
+     * @param  User     $user
+     * @param  Request  $request
+     *
+     * @return Response|null
+     */
     private function authenticate(User $user, Request $request): ?Response
     {
         return $this->userAuthenticator->authenticateUser(
@@ -185,10 +198,16 @@ final class RegisterController extends BaseController implements AuthController
     }
 
     /**
-     * After create account to redirect chooseplan page.
+     * After create account to redirect choose plan page.
+     *
+     * @param  Request                 $request
+     * @param  SubscriptionRepository  $subscriptionRepository
+     * @param                          $id
+     *
+     * @return Response
      */
     #[Route(path: '/dealer/choosePlan/{id}', name: 'dealer_choose_plan', methods: ['GET', 'POST'])]
-    public function choosePlan(Request $request, SubscriptionRepository $subscriptionRepository, $id)
+    public function choosePlan(Request $request, SubscriptionRepository $subscriptionRepository, $id): Response
     {
         // Get pages
         $subscriptions = $subscriptionRepository->findAll();
@@ -199,4 +218,5 @@ final class RegisterController extends BaseController implements AuthController
             'userId' => $id
         ]);
     }
+
 }

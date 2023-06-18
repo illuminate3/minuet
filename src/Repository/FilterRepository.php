@@ -8,6 +8,12 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
 
 final class FilterRepository extends ProductRepository
 {
+
+    /**
+     * @param  array  $params
+     *
+     * @return PaginationInterface
+     */
     public function findByFilter(array $params): PaginationInterface
     {
         $queryBuilder = $this->createQueryBuilder('p')->orderBy('p.id', 'DESC');
@@ -16,4 +22,5 @@ final class FilterRepository extends ProductRepository
         }
         return $this->createPaginator($queryBuilder->getQuery(), $params['page']);
     }
+
 }
