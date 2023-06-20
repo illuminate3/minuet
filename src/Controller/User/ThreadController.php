@@ -7,7 +7,6 @@ namespace App\Controller\User;
 use App\Controller\BaseController;
 use App\Entity\Thread;
 use App\Form\Type\ThreadType;
-use App\Repository\AccountRepository;
 use App\Repository\AccountUserRepository;
 use App\Repository\ProductRepository;
 use App\Repository\ThreadRepository;
@@ -20,12 +19,20 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/user/thread')]
 class ThreadController extends BaseController
 {
+
+    /**
+     * @param  Request                $request
+     * @param  Security               $security
+     * @param  ProductRepository      $productRepository
+     * @param  AccountUserRepository  $accountUserRepository
+     *
+     * @return Response
+     */
     #[Route('/', name: 'app_thread_index', methods: ['GET'])]
     public function index(
         Request $request,
         Security $security,
         ProductRepository $productRepository,
-        AccountRepository $accountRepository,
         AccountUserRepository $accountUserRepository,
     ): Response {
         // get the account information the user is registered to
@@ -36,13 +43,13 @@ class ThreadController extends BaseController
             $accountID = $account->getAccount()->getId();
             $products = $productRepository->findAllThreadsByAccount($accountID);
 
-            return $this->render('thread/index.html.twig', [
+            return $this->render('user/thread/index.html.twig', [
                 'title' => (!empty($account->getAccount()->getName())) ? $account->getAccount()->getName() : '',
                 'site' => $this->site($request),
                 'products' => $products,
             ]);
         } else {
-            return $this->render('thread/index.html.twig', [
+            return $this->render('user/thread/index.html.twig', [
                 'title' => 'title.dashboard',
                 'site' => $this->site($request),
                 'products' => $products,
@@ -50,6 +57,12 @@ class ThreadController extends BaseController
         }
     }
 
+    /**
+     * @param  Request           $request
+     * @param  ThreadRepository  $threadRepository
+     *
+     * @return Response
+     */
     #[Route('/new', name: 'app_thread_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ThreadRepository $threadRepository): Response
     {
@@ -63,20 +76,32 @@ class ThreadController extends BaseController
             return $this->redirectToRoute('app_thread_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('thread/new.html.twig', [
+        return $this->render('user/thread/new.html.twig', [
             'thread' => $thread,
             'form' => $form->createView(),
         ]);
     }
 
+    /**
+     * @param  Thread  $thread
+     *
+     * @return Response
+     */
     #[Route('/{id}', name: 'app_thread_show', methods: ['GET'])]
     public function show(Thread $thread): Response
     {
-        return $this->render('thread/show.html.twig', [
+        return $this->render('user/thread/show.html.twig', [
             'thread' => $thread,
         ]);
     }
 
+    /**
+     * @param  Request           $request
+     * @param  Thread            $thread
+     * @param  ThreadRepository  $threadRepository
+     *
+     * @return Response
+     */
     #[Route('/{id}/edit', name: 'app_thread_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Thread $thread, ThreadRepository $threadRepository): Response
     {
@@ -89,12 +114,19 @@ class ThreadController extends BaseController
             return $this->redirectToRoute('app_thread_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('thread/edit.html.twig', [
+        return $this->render('user/thread/edit.html.twig', [
             'thread' => $thread,
             'form' => $form->createView(),
         ]);
     }
 
+    /**
+     * @param  Request           $request
+     * @param  Thread            $thread
+     * @param  ThreadRepository  $threadRepository
+     *
+     * @return Response
+     */
     #[Route('/{id}', name: 'app_thread_delete', methods: ['POST'])]
     public function delete(Request $request, Thread $thread, ThreadRepository $threadRepository): Response
     {
@@ -106,6 +138,12 @@ class ThreadController extends BaseController
     }
 
 
+    /**
+     * @param  Request           $request
+     * @param  ThreadRepository  $threadRepository
+     *
+     * @return JsonResponse
+     */
     #[Route('/{id}/update_pin_status', name: 'is_pin', methods: ['POST'])]
     public function isPin(Request $request, ThreadRepository $threadRepository): JsonResponse
     {
@@ -117,6 +155,12 @@ class ThreadController extends BaseController
         return new JsonResponse(['status' => 'success', 'data' => (bool) $pinValue, 'id' => (int) $id]);
     }
 
+    /**
+     * @param  Request           $request
+     * @param  ThreadRepository  $threadRepository
+     *
+     * @return JsonResponse
+     */
     #[Route('/{id}/update_close_status', name: 'is_close', methods: ['POST'])]
     public function isClose(Request $request, ThreadRepository $threadRepository): JsonResponse
     {

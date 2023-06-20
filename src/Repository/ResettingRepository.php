@@ -28,6 +28,12 @@ final class ResettingRepository extends UserRepository
         $this->transformer = $transformer;
     }
 
+    /**
+     * @param  User    $user
+     * @param  string  $plainPassword
+     *
+     * @return void
+     */
     public function setPassword(User $user, string $plainPassword): void
     {
         $user->setPassword($plainPassword);
@@ -37,6 +43,12 @@ final class ResettingRepository extends UserRepository
         $this->save($user);
     }
 
+    /**
+     * @param  User    $user
+     * @param  string  $token
+     *
+     * @return void
+     */
     public function setToken(User $user, string $token): void
     {
         $user->setConfirmationToken($token);
@@ -44,10 +56,16 @@ final class ResettingRepository extends UserRepository
         $this->save($user);
     }
 
+    /**
+     * @param  User  $user
+     *
+     * @return void
+     */
     private function save(User $user): void
     {
         $em = $this->getEntityManager();
         $em->persist($user);
         $em->flush();
     }
+
 }

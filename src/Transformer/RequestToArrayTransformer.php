@@ -8,6 +8,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class RequestToArrayTransformer
 {
+
+    /**
+     * @param  Request  $request
+     *
+     * @return array
+     */
     public function transform(Request $request): array
     {
         $params = [];
@@ -15,4 +21,5 @@ final class RequestToArrayTransformer
 
         return $params;
     }
+
 }

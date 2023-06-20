@@ -9,6 +9,7 @@ use App\Message\SendEmailConfirmationAndResetPassword;
 use App\Repository\ResettingRepository;
 use App\Service\AbstractService;
 use App\Utils\TokenGenerator;
+use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -33,6 +34,12 @@ final class EmailVerifierAndResetPasswordService extends AbstractService
         $this->generator = $generator;
     }
 
+    /**
+     * @param  Request  $request
+     *
+     * @return void
+     * @throws Exception
+     */
     public function SendEmailConfirmationAndResetPassword(Request $request): void
     {
         /** @var User $user */
@@ -43,7 +50,11 @@ final class EmailVerifierAndResetPasswordService extends AbstractService
     }
 
     /**
+     *
      * Generating a Confirmation Token.
+     *
+     * @return string
+     * @throws Exception
      */
     private function generateToken(): string
     {
@@ -51,10 +62,17 @@ final class EmailVerifierAndResetPasswordService extends AbstractService
     }
 
     /**
+     *
      * Refreshing a Confirmation Token.
+     *
+     * @param  User  $user
+     *
+     * @return void
+     * @throws Exception
      */
     private function updateToken(User $user): void
     {
         $this->repository->setToken($user, $this->generateToken());
     }
+
 }

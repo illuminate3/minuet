@@ -18,6 +18,12 @@ final class RegisteredUserValidator extends ConstraintValidator
         $this->userRepository = $userRepository;
     }
 
+    /**
+     * @param              $value
+     * @param  Constraint  $constraint
+     *
+     * @return void
+     */
     public function validate($value, Constraint $constraint): void
     {
         /* @var $constraint RegisteredUser */
@@ -34,4 +40,5 @@ final class RegisteredUserValidator extends ConstraintValidator
             ;
         }
     }
+
 }

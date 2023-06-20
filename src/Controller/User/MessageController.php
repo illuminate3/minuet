@@ -18,18 +18,33 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/user/message')]
 class MessageController extends BaseController
 {
+
+    /**
+     * @param  Request            $request
+     * @param  MessageRepository  $messageRepository
+     *
+     * @return Response
+     */
     #[Route('/', name: 'app_message_index', methods: ['GET'])]
     public function index(
         Request $request,
         MessageRepository $messageRepository
     ): Response {
-        return $this->render('message/index.html.twig', [
+        return $this->render('user/message/index.html.twig', [
             'title' => 'title.message',
             'site' => $this->site($request),
             'messages' => $messageRepository->findAll(),
         ]);
     }
 
+    /**
+     * @param  Request            $request
+     * @param  MessageRepository  $messageRepository
+     * @param  ThreadRepository   $threadRepository
+     * @param                     $id
+     *
+     * @return Response
+     */
     #[Route('/new/{id}', name: 'app_message_new', methods: ['GET', 'POST'])]
     public function new(
         Request $request, MessageRepository $messageRepository, ThreadRepository $threadRepository, $id
@@ -59,7 +74,7 @@ class MessageController extends BaseController
             return $this->redirectToRoute('app_message_show_thread', ['id' =>  $id], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('message/new.html.twig', [
+        return $this->render('user/message/new.html.twig', [
             'title' => 'title.new.message',
             'messages' => $message,
             'thread' => $thread,
@@ -69,6 +84,14 @@ class MessageController extends BaseController
         ]);
     }
 
+    /**
+     * @param                     $id
+     * @param  Request            $request
+     * @param  MessageRepository  $messageRepository
+     * @param  ThreadRepository   $threadRepository
+     *
+     * @return Response
+     */
     #[Route('/thread/{id}', name: 'app_message_show_thread', methods: ['GET'])]
     public function showMessages(
         $id,
@@ -80,7 +103,7 @@ class MessageController extends BaseController
         $messages = $messageRepository->findBy(['thread' => $id]);
         $thread = $threadRepository->findOneBy(['id' => $id]);
 
-        return $this->render('message/index.html.twig', [
+        return $this->render('user/message/index.html.twig', [
             'title' => 'title.message',
             'new_url' => 'app_message_new',
             'site' => $this->site($request),
@@ -90,12 +113,18 @@ class MessageController extends BaseController
         ]);
     }
 
+    /**
+     * @param  Request  $request
+     * @param  Message  $message
+     *
+     * @return Response
+     */
     #[Route('/{id}', name: 'app_message_show', methods: ['GET'])]
     public function show(
         Request $request,
         Message $message,
     ): Response {
-        return $this->render('message/show.html.twig', [
+        return $this->render('user/message/show.html.twig', [
             'title' => 'title.dashboard',
             'site' => $this->site($request),
             'action_cancel_url' => 'app_message_show_thread',
@@ -103,6 +132,16 @@ class MessageController extends BaseController
         ]);
     }
 
+    /**
+     * @param  Request            $request
+     * @param  Message            $message
+     * @param  MessageRepository  $messageRepository
+     * @param  ThreadRepository   $threadRepository
+     * @param                     $thread_id
+     * @param                     $id
+     *
+     * @return Response
+     */
     #[Route('/thread/{thread_id}/message/{id}/edit', name: 'app_message_edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request, Message $message, MessageRepository $messageRepository, ThreadRepository $threadRepository, $thread_id, $id
@@ -130,7 +169,7 @@ class MessageController extends BaseController
             return $this->redirectToRoute('app_message_show_thread', ['id' => (int) $thread_id], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('message/edit.html.twig', [
+        return $this->render('user/message/edit.html.twig', [
             'title' => 'title.edit.message',
             'messages' => $messages,
             'thread' => $thread,
@@ -141,6 +180,13 @@ class MessageController extends BaseController
         ]);
     }
 
+    /**
+     * @param  Request            $request
+     * @param  Message            $message
+     * @param  MessageRepository  $messageRepository
+     *
+     * @return JsonResponse
+     */
     #[Route('/{id}', name: 'app_message_delete', methods: ['POST'])]
     public function delete(Request $request, Message $message, MessageRepository $messageRepository): JsonResponse
     {
@@ -152,4 +198,5 @@ class MessageController extends BaseController
 
         // return $this->redirectToRoute('app_message_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }

@@ -12,6 +12,10 @@ final class SendEmailConfirmationAndResetPassword
     {
     }
 
+
+    /**
+     * @return User
+     */
     public function getUser(): User
     {
         return $this->user;

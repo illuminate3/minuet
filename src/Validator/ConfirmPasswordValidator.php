@@ -9,6 +9,13 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 final class ConfirmPasswordValidator extends ConstraintValidator
 {
+
+    /**
+     * @param              $value
+     * @param  Constraint  $constraint
+     *
+     * @return void
+     */
     public function validate($value, Constraint $constraint): void
     {
         /* @var $constraint ConfirmPassword */
@@ -26,4 +33,5 @@ final class ConfirmPasswordValidator extends ConstraintValidator
             ;
         }
     }
+
 }

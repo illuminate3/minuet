@@ -36,8 +36,9 @@ class UserRepository extends ServiceEntityRepository
     }
 
     /**
-     * @throws NonUniqueResultException
+     * @return int
      * @throws NoResultException
+     * @throws NonUniqueResultException
      */
     public function countAll(): int
     {
@@ -50,6 +51,11 @@ class UserRepository extends ServiceEntityRepository
         return (int) $count;
     }
 
+    /**
+     * @param  Request  $request
+     *
+     * @return PaginationInterface
+     */
     public function findUsers(
         Request $request,
     ): PaginationInterface {
@@ -60,8 +66,10 @@ class UserRepository extends ServiceEntityRepository
         return $this->createPaginator($qb->getQuery(), $request);
     }
 
-     /**
-     * @return User[] Returns an array of User objects
+    /**
+     * @param  User  $dealer
+     *
+     * @return array
      */
     public function findByLoggedInDealer(User $dealer): array
     {
@@ -74,6 +82,12 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * @param  Query    $query
+     * @param  Request  $request
+     *
+     * @return PaginationInterface
+     */
     private function createPaginator(
         Query $query,
         Request $request
@@ -89,6 +103,12 @@ class UserRepository extends ServiceEntityRepository
         );
     }
 
+    /**
+     * @param  User  $entity
+     * @param  bool  $flush
+     *
+     * @return void
+     */
     public function remove(User $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
@@ -98,10 +118,16 @@ class UserRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @param  User  $user
+     *
+     * @return void
+     */
     private function save(User $user): void
     {
         $em = $this->getEntityManager();
         $em->persist($user);
         $em->flush();
     }
+
 }

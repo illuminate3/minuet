@@ -11,9 +11,9 @@ use App\Form\Type\PasswordType;
 use App\Form\Type\UserEmailType;
 use App\Repository\ResettingRepository;
 use App\Service\Auth\PasswordResetService;
-use App\Transformer\UserTransformer;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,6 +22,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class PasswordResetController extends BaseController implements AuthController
 {
+
+    /**
+     * @param  PasswordResetService  $service
+     * @param  Request               $request
+     *
+     * @return Response
+     * @throws Exception
+     */
     #[Route(path: '/password/reset', name: 'auth_password_reset', methods: ['GET|POST'])]
     public function passwordReset(
         PasswordResetService $service,
@@ -38,8 +46,7 @@ final class PasswordResetController extends BaseController implements AuthContro
                 [
                     'title' => 'title.password_reset_emailed',
                     'message' => 'message.emailed_reset_link',
-                    'link' => null,
-                    'link_title' => 'title.verify_account',
+                    'link' => null,                   
                 ]
             );
         }
@@ -52,11 +59,17 @@ final class PasswordResetController extends BaseController implements AuthContro
         ]);
     }
 
+    /**
+     * @param  ResettingRepository  $repository
+     * @param  Request              $request
+     * @param  string               $token
+     *
+     * @return Response
+     */
     #[Route(path: '/password/reset/{token}', name: 'password_reset_confirm', methods: ['GET|POST'])]
     public function passwordResetConfirm(
         ResettingRepository $repository,
         Request $request,
-        UserTransformer $transformer,
         string $token
     ): Response {
         /** @var User $user */
@@ -96,11 +109,16 @@ final class PasswordResetController extends BaseController implements AuthContro
         ]);
     }
 
+    /**
+     * @param  Request                 $request
+     * @param  EntityManagerInterface  $entityManager
+     *
+     * @return Response
+     */
     #[Route('/password/change', name: 'user_password_change', methods: ['GET', 'POST'])]
     public function passwordChange(
         Request $request,
         EntityManagerInterface $entityManager,
-        Security $security,
     ): Response {
 
         // check to see if user is logged in

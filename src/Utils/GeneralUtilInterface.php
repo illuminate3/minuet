@@ -6,7 +6,20 @@ namespace App\Utils;
 
 interface GeneralUtilInterface
 {
-    public static function getBearerToken($cache, $carClientApi);
 
-    public static function callBearerToken($carClientApi);
+    /**
+     * @param $cache
+     * @param $carClientApi
+     *
+     * @return mixed
+     */
+    public static function getBearerToken($cache, $carClientApi): mixed;
+
+    /**
+     * @param $carClientApi
+     *
+     * @return mixed
+     */
+    public static function callBearerToken($carClientApi): mixed;
+
 }

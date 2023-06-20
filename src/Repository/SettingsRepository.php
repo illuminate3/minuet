@@ -21,6 +21,9 @@ final class SettingsRepository extends ServiceEntityRepository
         parent::__construct($registry, Settings::class);
     }
 
+    /**
+     * @return array
+     */
     public function findAllAsArray(): array
     {
         $settings = $this->findAll();
@@ -33,6 +36,12 @@ final class SettingsRepository extends ServiceEntityRepository
         return $settingsArray;
     }
 
+    /**
+     * @param  string       $setting_name
+     * @param  string|null  $setting_value
+     *
+     * @return void
+     */
     public function updateSetting(string $setting_name, ?string $setting_value = ''): void
     {
         $this->createQueryBuilder('i')
@@ -46,10 +55,16 @@ final class SettingsRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * @param  array  $settings
+     *
+     * @return void
+     */
     public function updateSettings(array $settings): void
     {
         foreach ($settings as $setting_name => $setting_value) {
             $this->updateSetting($setting_name, (string) $setting_value);
         }
     }
+
 }

@@ -39,6 +39,9 @@ class ProductRepository extends ServiceEntityRepository
 
     public const NUM_ITEMS = 20;
 
+    /**
+     * @return array
+     */
     public function findAllPublished(): array
     {
         $qb = $this->createQueryBuilder('p');
@@ -50,9 +53,11 @@ class ProductRepository extends ServiceEntityRepository
         return $query->execute();
     }
 
+
     /**
-     * @throws NonUniqueResultException
+     * @return int
      * @throws NoResultException
+     * @throws NonUniqueResultException
      */
     public function countAll(): int
     {
@@ -66,11 +71,24 @@ class ProductRepository extends ServiceEntityRepository
     }
 
 
+    /**
+     * @param  Query  $query
+     * @param  int    $page
+     *
+     * @return PaginationInterface
+     */
     protected function createPaginator(Query $query, int $page): PaginationInterface
     {
         return $this->paginator->paginate($query, $page, 4);
     }
 
+    /**
+     * @param  int     $page
+     * @param  string  $slug
+     * @param  int     $limit
+     *
+     * @return array
+     */
     public function findProductsPaginated(int $page, string $slug, int $limit = 6): array
     {
         $limit = abs($limit);
@@ -103,6 +121,7 @@ class ProductRepository extends ServiceEntityRepository
         return $result;
     }
 
+
     /**
      * @param $account
      *
@@ -119,4 +138,5 @@ class ProductRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
 }

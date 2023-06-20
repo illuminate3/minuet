@@ -7,6 +7,7 @@ namespace App\MessageHandler;
 use App\Entity\User;
 use App\Mailer\Mailer;
 use App\Message\SendEmailConfirmationLink;
+use App\Repository\SettingsRepository;
 use App\Service\Cache\UserDataCache;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -28,22 +29,28 @@ final class SendEmailConfirmationLinkHandler
     private Mailer $mailer;
     private UrlGeneratorInterface $router;
     private TranslatorInterface $translator;
-
+    private $settings;
     public function __construct(
         VerifyEmailHelperInterface $helper,
         Mailer $mailer,
         UrlGeneratorInterface $router,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        SettingsRepository $settingsRepository,
     ) {
         $this->verifyEmailHelper = $helper;
         $this->mailer = $mailer;
         $this->router = $router;
         $this->translator = $translator;
+        $this->settings = $settingsRepository->findAllAsArray();
     }
 
+
     /**
-     * @throws TransportExceptionInterface
+     * @param  SendEmailConfirmationLink  $sendEmailConfirmationLink
+     *
+     * @return void
      * @throws InvalidArgumentException
+     * @throws TransportExceptionInterface
      */
     public function __invoke(SendEmailConfirmationLink $sendEmailConfirmationLink): void
     {
@@ -53,6 +60,9 @@ final class SendEmailConfirmationLinkHandler
         $this->setConfirmationSentAt($user);
     }
 
+    /**
+     * @return Address
+     */
     private function getSender(): Address
     {
         $host = $this->router->getContext()->getHost();
@@ -60,11 +70,19 @@ final class SendEmailConfirmationLinkHandler
         return new Address('no-reply@' . $host, $host);
     }
 
+    /**
+     * @return string
+     */
     private function getSubject(): string
     {
         return $this->translator->trans('message.email.subject.confirmation');
     }
 
+    /**
+     * @param  User  $user
+     *
+     * @return VerifyEmailSignatureComponents
+     */
     private function getSignatureComponents(User $user): VerifyEmailSignatureComponents
     {
         return $this->verifyEmailHelper->generateSignature(
@@ -75,15 +93,26 @@ final class SendEmailConfirmationLinkHandler
         );
     }
 
+    /**
+     * @param  VerifyEmailSignatureComponents  $signatureComponents
+     *
+     * @return array
+     */
     private function createContext(VerifyEmailSignatureComponents $signatureComponents): array
     {
         return [
             'signedUrl' => $signatureComponents->getSignedUrl(),
             'expiresAtMessageKey' => $signatureComponents->getExpirationMessageKey(),
             'expiresAtMessageData' => $signatureComponents->getExpirationMessageData(),
+            'siteName' => $this->settings["site_name"]
         ];
     }
 
+    /**
+     * @param  User  $user
+     *
+     * @return TemplatedEmail
+     */
     private function buildEmail(User $user): TemplatedEmail
     {
         $signatureComponents = $this->getSignatureComponents($user);

@@ -14,6 +14,11 @@ use Doctrine\Persistence\ObjectManager;
 class AccountUserFixtures extends Fixture implements DependentFixtureInterface
 {
 
+    /**
+     * @param  ObjectManager  $manager
+     *
+     * @return void
+     */
     public function load(ObjectManager $manager): void
     {
 //        $account_id
@@ -35,6 +40,10 @@ class AccountUserFixtures extends Fixture implements DependentFixtureInterface
 
 //        $account_id
 //        $user_id
+
+    /**
+     * @return array[]
+     */
     private function getData(): array
     {
         return [
@@ -45,6 +54,9 @@ class AccountUserFixtures extends Fixture implements DependentFixtureInterface
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getDependencies(): array
     {
         return [
@@ -52,4 +64,5 @@ class AccountUserFixtures extends Fixture implements DependentFixtureInterface
             UserFixtures::class,
         ];
     }
+
 }

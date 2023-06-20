@@ -19,6 +19,11 @@ abstract class BaseController extends AbstractController
     ) {
     }
 
+    /**
+     * @param  Request  $request
+     *
+     * @return array
+     */
     private function menu(Request $request): array
     {
         return [
@@ -29,6 +34,11 @@ abstract class BaseController extends AbstractController
         ];
     }
 
+    /**
+     * @param  Request  $request
+     *
+     * @return array
+     */
     private function menuPages(Request $request): array
     {
         return [
@@ -45,6 +55,11 @@ abstract class BaseController extends AbstractController
         ];
     }
 
+    /**
+     * @param  Request  $request
+     *
+     * @return array
+     */
     private function menuFooterPages(Request $request): array
     {
         return [
@@ -62,6 +77,11 @@ abstract class BaseController extends AbstractController
         ];
     }
 
+    /**
+     * @param  Request  $request
+     *
+     * @return array
+     */
     public function site(Request $request): array
     {
         $settings = $this->settingsRepository->findAllAsArray();
@@ -72,6 +92,5 @@ abstract class BaseController extends AbstractController
         return array_merge($settings, $menu, $menuPages, $footerPages);
     }
 
-
-  
 }
+

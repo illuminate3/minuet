@@ -11,5 +11,10 @@ use Symfony\Component\Validator\Constraint;
  */
 class ConfirmPassword extends Constraint
 {
+
+    /**
+     * @var string
+     */
     public string $message = 'validate.password.mismatch';
+
 }

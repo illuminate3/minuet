@@ -14,12 +14,21 @@ final class SitemapController extends AbstractController
 {
     private const DEFAULTS = ['_format' => 'xml'];
 
+    /**
+     * @return Response
+     */
     #[Route(path: '/sitemap.xml', name: 'sitemap', defaults: self::DEFAULTS)]
     public function siteMap(): Response
     {
         return $this->render('sitemap/sitemap.xml.twig');
     }
 
+    /**
+     * @param  Request         $request
+     * @param  PageRepository  $pageRepository
+     *
+     * @return Response
+     */
     #[Route(path: '/sitemap/pages.xml', name: 'pages_sitemap', defaults: self::DEFAULTS)]
     public function pages(
         Request $request,
@@ -32,4 +41,5 @@ final class SitemapController extends AbstractController
             'pages' => $pages,
         ]);
     }
+
 }

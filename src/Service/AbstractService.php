@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Service\Cache\ClearCache;
-use LogicException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
@@ -25,7 +24,13 @@ abstract class AbstractService
     }
 
     /**
+     *
      * Checks the validity of a CSRF token.
+     *
+     * @param  string       $id
+     * @param  string|null  $token
+     *
+     * @return bool
      */
     protected function isCsrfTokenValid(string $id, ?string $token): bool
     {
@@ -33,12 +38,17 @@ abstract class AbstractService
     }
 
     /**
+     *
      * Adds a flash message to the current session for type.
      *
-     * @throws LogicException
+     * @param  string  $type
+     * @param  string  $message
+     *
+     * @return void
      */
     protected function addFlash(string $type, string $message): void
     {
         $this->session->getFlashBag()->add($type, $message);
     }
+
 }

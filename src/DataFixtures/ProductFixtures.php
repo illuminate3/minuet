@@ -18,7 +18,11 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
 {
     private int $counter = 1;
 
+
     /**
+     * @param  ObjectManager  $manager
+     *
+     * @return void
      * @throws Exception
      */
     public function load(ObjectManager $manager): void
@@ -66,6 +70,9 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
+    /**
+     * @return string[]
+     */
     public function getDependencies(): array
     {
         return [
@@ -74,4 +81,5 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             CategoryFixtures::class,
         ];
     }
+
 }

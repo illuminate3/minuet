@@ -15,11 +15,20 @@ trait EntityNameTrait
     #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $slug;
 
+
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param  string  $name
+     *
+     * @return EntityNameTrait
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -27,15 +36,24 @@ trait EntityNameTrait
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
+    /**
+     * @param  string  $slug
+     *
+     * @return EntityNameTrait
+     */
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
 
         return $this;
     }
+
 }

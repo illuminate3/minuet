@@ -20,6 +20,12 @@ final class LoginFormType extends AbstractType
         $this->helper = $helper;
     }
 
+    /**
+     * @param  FormBuilderInterface  $builder
+     * @param  array                 $options
+     *
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -39,6 +45,12 @@ final class LoginFormType extends AbstractType
         ;
     }
 
+
+    /**
+     * @param  OptionsResolver  $resolver
+     *
+     * @return void
+     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -46,4 +58,5 @@ final class LoginFormType extends AbstractType
             'csrf_token_id' => 'authenticate',
         ]);
     }
+
 }

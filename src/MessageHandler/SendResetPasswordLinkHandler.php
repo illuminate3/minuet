@@ -7,6 +7,7 @@ namespace App\MessageHandler;
 use App\Entity\User;
 use App\Mailer\Mailer;
 use App\Message\SendResetPasswordLink;
+use App\Repository\SettingsRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
@@ -21,19 +22,24 @@ final class SendResetPasswordLinkHandler
     private Mailer $mailer;
     private TranslatorInterface $translator;
     private UrlGeneratorInterface $router;
+    private $settings;
 
     public function __construct(
         Mailer $mailer,
         TranslatorInterface $translator,
         UrlGeneratorInterface $router,
+        SettingsRepository $settingsRepository,
     ) {
         $this->mailer = $mailer;
         $this->translator = $translator;
         $this->router = $router;
+        $this->settings = $settingsRepository->findAllAsArray();
     }
 
-
     /**
+     * @param  SendResetPasswordLink  $sendResetPasswordLink
+     *
+     * @return void
      * @throws TransportExceptionInterface
      */
     public function __invoke(SendResetPasswordLink $sendResetPasswordLink): void
@@ -45,6 +51,9 @@ final class SendResetPasswordLinkHandler
         $this->mailer->send($email);
     }
 
+    /**
+     * @return Address
+     */
     private function getSender(): Address
     {
         $host = $this->router->getContext()->getHost();
@@ -52,11 +61,19 @@ final class SendResetPasswordLinkHandler
         return new Address('no-reply@' . $host, $host);
     }
 
+    /**
+     * @return string
+     */
     private function getSubject(): string
     {
         return $this->translator->trans('email.subject.password_reset');
     }
 
+    /**
+     * @param  User  $user
+     *
+     * @return string
+     */
     private function getConfirmationUrl(User $user): string
     {
         return $this->router->generate(
@@ -64,6 +81,11 @@ final class SendResetPasswordLinkHandler
         );
     }
 
+    /**
+     * @param  User  $user
+     *
+     * @return TemplatedEmail
+     */
     private function buildEmail(User $user): TemplatedEmail
     {
         return (new TemplatedEmail())
@@ -74,6 +96,7 @@ final class SendResetPasswordLinkHandler
             ->context([
                 'confirmationUrl' => $this->getConfirmationUrl($user),
                 'username' => $user->getEmail(),
+                'siteName' => $this->settings["site_name"]
             ])
         ;
     }

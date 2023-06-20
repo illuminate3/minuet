@@ -34,7 +34,11 @@ final class PasswordResetService extends AbstractService
         $this->generator = $generator;
     }
 
+
     /**
+     * @param  Request  $request
+     *
+     * @return void
      * @throws Exception
      */
     public function sendResetPasswordLink(Request $request): void
@@ -47,8 +51,10 @@ final class PasswordResetService extends AbstractService
     }
 
     /**
+     *
      * Generating a Confirmation Token.
      *
+     * @return string
      * @throws Exception
      */
     private function generateToken(): string
@@ -57,12 +63,17 @@ final class PasswordResetService extends AbstractService
     }
 
     /**
+     *
      * Refreshing a Confirmation Token.
      *
+     * @param  User  $user
+     *
+     * @return void
      * @throws Exception
      */
     private function updateToken(User $user): void
     {
         $this->repository->setToken($user, $this->generateToken());
     }
+
 }

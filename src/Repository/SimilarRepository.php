@@ -57,4 +57,5 @@ final class SimilarRepository extends ProductRepository
 //
 //        return '1' === $state->getSettingValue();
 //    }
+
 }

@@ -18,6 +18,9 @@ final class AppExtension extends AbstractExtension
         $this->translator = $translator;
     }
 
+    /**
+     * @return TwigFilter[]
+     */
     public function getFilters(): array
     {
         return [
@@ -25,8 +28,14 @@ final class AppExtension extends AbstractExtension
         ];
     }
 
-    public function showPageNumber($number = 1): string
+    /**
+     * @param  int  $number
+     *
+     * @return string
+     */
+    public function showPageNumber(int $number = 1): string
     {
         return ($number > 1) ? ' - ' . $this->translator->trans('text.page') . ' ' . $number : '';
     }
+
 }

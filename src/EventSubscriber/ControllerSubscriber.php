@@ -22,6 +22,12 @@ final class ControllerSubscriber implements EventSubscriberInterface
     ) {
     }
 
+
+    /**
+     * @param  ControllerEvent  $event
+     *
+     * @return void
+     */
     public function onKernelController(ControllerEvent $event): void
     {
         $controller = $event->getController();
@@ -36,10 +42,15 @@ final class ControllerSubscriber implements EventSubscriberInterface
         }
     }
 
+
+    /**
+     * @return string[]
+     */
     public static function getSubscribedEvents(): array
     {
         return [
             KernelEvents::CONTROLLER => 'onKernelController',
         ];
     }
+
 }

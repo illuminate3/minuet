@@ -15,6 +15,14 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 final class LoginController extends BaseController
 {
+
+    /**
+     * @param  Request              $request
+     * @param  Security             $security
+     * @param  AuthenticationUtils  $helper
+     *
+     * @return Response
+     */
     #[Route(path: '/login', name: 'security_login')]
     public function login(
         Request $request,
@@ -28,7 +36,7 @@ final class LoginController extends BaseController
             return $this->redirectToRoute('app_dash');
         }
 
-//        $error = $helper->getLastAuthenticationError();
+        $error = $helper->getLastAuthenticationError();
 
 //        if ($error && $error->getMessage() !== null) {
 //            return $this->forward(
@@ -53,6 +61,7 @@ final class LoginController extends BaseController
     }
 
     /**
+     * @return void
      * @throws Exception
      */
     #[Route(path: '/logout', name: 'security_logout')]
@@ -60,4 +69,5 @@ final class LoginController extends BaseController
     {
         throw new Exception('This should never be reached!');
     }
+
 }

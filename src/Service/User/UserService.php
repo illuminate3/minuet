@@ -30,6 +30,9 @@ final class UserService extends AbstractService
     }
 
     /**
+     * @param  User  $user
+     *
+     * @return void
      * @throws InvalidArgumentException
      */
     public function create(User $user): void
@@ -44,6 +47,11 @@ final class UserService extends AbstractService
         $this->addFlash('success', 'message.created');
     }
 
+    /**
+     * @param  User  $user
+     *
+     * @return void
+     */
     public function update(User $user): void
     {
         $user = $this->transformer->transform($user);
@@ -52,6 +60,9 @@ final class UserService extends AbstractService
     }
 
     /**
+     * @param  User  $user
+     *
+     * @return void
      * @throws InvalidArgumentException
      */
     public function remove(User $user): void
@@ -62,9 +73,15 @@ final class UserService extends AbstractService
         $this->addFlash('success', 'message.deleted');
     }
 
+    /**
+     * @param  User  $user
+     *
+     * @return void
+     */
     private function save(User $user): void
     {
         $this->em->persist($user);
         $this->em->flush();
     }
+
 }

@@ -10,6 +10,12 @@ use Doctrine\Persistence\ObjectManager;
 
 class SubscriptionFixtures extends Fixture
 {
+
+    /**
+     * @param  ObjectManager  $manager
+     *
+     * @return void
+     */
     public function load(ObjectManager $manager): void
     {
         foreach ($this->getData() as [$plan, $price, $stripe_price_Id, $valid_until, $availability, $support]) {
@@ -30,6 +36,9 @@ class SubscriptionFixtures extends Fixture
         $manager->flush();
     }
 
+    /**
+     * @return array[]
+     */
     private function getData(): array
     {
         return [
@@ -39,4 +48,5 @@ class SubscriptionFixtures extends Fixture
             ['cinematic', 39.99, 'price_1N1LtuHxcL7TQhSHhp6oIzuQ', '2 months', 'lifetime', '24/7 Support'],
         ];
     }
+
 }

@@ -27,6 +27,11 @@ final class RegistrationFormAuthenticator extends AbstractAuthenticator
         $this->urlGenerator = $urlGenerator;
     }
 
+    /**
+     * @param  Request  $request
+     *
+     * @return Passport
+     */
     public function authenticate(Request $request): Passport
     {
         $formData = $request->request->all('registration_form');
@@ -41,18 +46,37 @@ final class RegistrationFormAuthenticator extends AbstractAuthenticator
         );
     }
 
+    /**
+     * @param  Request         $request
+     * @param  TokenInterface  $token
+     * @param  string          $firewallName
+     *
+     * @return Response|null
+     */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
         return new RedirectResponse($this->urlGenerator->generate('app_dash'));
     }
 
+    /**
+     * @param  Request  $request
+     *
+     * @return bool|null
+     */
     public function supports(Request $request): ?bool
     {
         return false;
     }
 
+    /**
+     * @param  Request                  $request
+     * @param  AuthenticationException  $exception
+     *
+     * @return Response|null
+     */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
         return new RedirectResponse($this->urlGenerator->generate('security_login'));
     }
+
 }

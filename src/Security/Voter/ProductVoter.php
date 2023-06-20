@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Security\Voter;
 
 use App\Entity\Product;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class ProductVoter extends Voter
@@ -22,6 +22,12 @@ class ProductVoter extends Voter
         $this->security = $security;
     }
 
+    /**
+     * @param  string  $attribute
+     * @param          $product
+     *
+     * @return bool
+     */
     protected function supports(string $attribute, $product): bool
     {
         if (!\in_array($attribute, [self::EDIT, self::DELETE], true)) {
@@ -36,6 +42,13 @@ class ProductVoter extends Voter
         // return in_array($attribute, [self::EDIT, self::DELETE]) && $product instanceof Product;
     }
 
+    /**
+     * @param                  $attribute
+     * @param                  $product
+     * @param  TokenInterface  $token
+     *
+     * @return bool
+     */
     protected function voteOnAttribute($attribute, $product, TokenInterface $token): bool
     {
         $user = $token->getUser();
@@ -51,13 +64,14 @@ class ProductVoter extends Voter
         switch ($attribute) {
             case self::EDIT:
                 return $this->canEdit();
-                break;
             case self::DELETE:
                 return $this->canDelete();
-                break;
         }
     }
 
+    /**
+     * @return bool
+     */
     private function canEdit(): bool
     {
         return $this->security->isGranted('ROLE_PRODUCT_ADMIN');
@@ -67,4 +81,5 @@ class ProductVoter extends Voter
     {
         return $this->security->isGranted('ROLE_ADMIN');
     }
+
 }
