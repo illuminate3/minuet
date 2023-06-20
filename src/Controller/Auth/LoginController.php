@@ -36,7 +36,7 @@ final class LoginController extends BaseController
             return $this->redirectToRoute('app_dash');
         }
 
-//        $error = $helper->getLastAuthenticationError();
+        $error = $helper->getLastAuthenticationError();
 
 //        if ($error && $error->getMessage() !== null) {
 //            return $this->forward(

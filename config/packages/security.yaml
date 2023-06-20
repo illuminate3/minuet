@@ -1,6 +1,6 @@
 security:
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
-    hide_user_not_found: true
+    hide_user_not_found: false
     password_hashers:
         # By default, password hashers are resource intensive and take time. This is
         # important to generate secure password hashes. In tests however, secure hashes
@@ -36,6 +36,7 @@ security:
             login_throttling:
                 max_attempts: 5
 
+            #            custom_authenticator: App\Security\UsersAuthenticator
             # This allows the user to login by submitting a username and password
             # Reference: https://symfony.com/doc/current/security/form_login_setup.html
             form_login:
