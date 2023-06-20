@@ -26,6 +26,5 @@ final class Version20230613031627 extends AbstractMigration
     public function down(Schema $schema): void
     {
         // This down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE users DROP status');
     }
 }

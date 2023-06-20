@@ -43,23 +43,5 @@ final class Version20230611164710 extends AbstractMigration
     public function down(Schema $schema): void
     {
         // This down() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP TABLE users');
-        $this->addSql('DROP TABLE order_detail');
-        $this->addSql('DROP TABLE profile');
-        $this->addSql('DROP TABLE product_details');
-        $this->addSql('DROP TABLE product_trims');
-        $this->addSql('DROP TABLE account');
-        $this->addSql('DROP TABLE menu');
-        $this->addSql('DROP TABLE thread');
-        $this->addSql('DROP TABLE product');
-        $this->addSql('DROP TABLE account_user');
-        $this->addSql('DROP TABLE `order`');
-        $this->addSql('DROP TABLE subscription');
-        $this->addSql('DROP TABLE category');
-        $this->addSql('DROP TABLE message');
-        $this->addSql('DROP TABLE make_model');
-        $this->addSql('DROP TABLE page');
-        $this->addSql('DROP TABLE settings');
-        $this->addSql('DROP TABLE image');
     }
 }

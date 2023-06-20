@@ -28,8 +28,5 @@ final class Version20230613062344 extends AbstractMigration
     public function down(Schema $schema): void
     {
         // This down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE users ADD stripe_customer_id VARCHAR(255) DEFAULT NULL, ADD stripe_subscription_id VARCHAR(255) DEFAULT NULL, ADD is_subscription_active TINYINT(1) DEFAULT 0 NOT NULL');
-        $this->addSql('ALTER TABLE account DROP stripe_customer_id, DROP is_expiring, DROP is_past_due, DROP created_at, DROP modified_at, CHANGE is_subscription_active is_subscription_active TINYINT(1) DEFAULT NULL');
-        $this->addSql('ALTER TABLE subscription DROP frequency, DROP slug, CHANGE support support VARCHAR(20) DEFAULT NULL');
     }
 }
