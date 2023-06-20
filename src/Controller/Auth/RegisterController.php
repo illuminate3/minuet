@@ -66,8 +66,6 @@ final class RegisterController extends BaseController implements AuthController
     #[Route(path: '/register', name: 'auth_register', methods: ['GET','POST'])]
     public function register(Request $request, MailerInterface $mailer,SessionInterface $session): ?Response
     {
-
-        try {
             if ($this->security->isGranted('ROLE_USER')) {
                 return $this->redirectToRoute('app_dash');
             }
@@ -100,11 +98,7 @@ final class RegisterController extends BaseController implements AuthController
                 'site' => $this->settings,
                 'error' => null,
                 'form' => $form->createView(),
-            ]);
-        } catch (\Throwable $th) {
-            $this->addFlash('danger',$th->getMessage());
-            return $this->redirectToRoute('auth_register');
-        }          
+            ]);                
     }
 
     /**
