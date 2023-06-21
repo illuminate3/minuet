@@ -1,18 +1,5 @@
 'use strict';
 
-import Cookies from 'js-cookie/src/js.cookie';
-
-/*=============================================
-    =    		 Preloader			      =
-=============================================*/
-function preloader() {
-    $('.preloader').delay(0).fadeOut();
-};
-
-$(window).on('load', function () {
-    // preloader();
-});
-
 $(document).ready(() => {
     let currentUrl = window.location.href;
     $('.collapse').each(function () {
