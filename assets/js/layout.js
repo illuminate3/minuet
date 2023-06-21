@@ -1,7 +1,5 @@
 'use strict';
 
-import Cookies from 'js-cookie/src/js.cookie';
-
 $(document).ready(() => {
     let currentUrl = window.location.href;
     $('.collapse').each(function () {
