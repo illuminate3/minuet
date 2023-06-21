@@ -146,7 +146,7 @@ final class EmailConfirmationAndResetPasswordController extends BaseController i
 
         return $this->render('user/password/password_change.html.twig', [
             'title' => 'title.change_password',
-            'action_cancel_url' => 'app_dash',
+            'cancel_url' => 'app_dash',
             'site' => $this->site($request),
             'form' => $form->createView(),
         ]);

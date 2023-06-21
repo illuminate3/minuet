@@ -2,17 +2,13 @@
 
 {% block subheader %}
 <!-- Title -->
-{{ include('layout/partials/_title.html.twig') }}
+{{ include('common/_action_title.html.twig') }}
 {% endblock %}
 
 {% block body %}
 
 <div class="row mt-4 mb-4 px-lg-5">
     <div class="col-md-9 col-lg-10">
-
-    <h4 class="mb-3">
-        {{ 'text.account_information'|trans }}
-    </h4>
 
     <div class="row g-3">
 
@@ -29,10 +25,6 @@
 
     <hr class="my-4">
 
-    <h4 class="mb-3">
-        {{ 'text.billing_address'|trans }}
-    </h4>
-
     {{ form_start(form) }}
 
         <div class="row g-3">
@@ -43,84 +35,6 @@
 
             <div class="col-sm-6">
                 {{ form_row(form.last_name) }}
-            </div>
-
-            <div class="col-12">
-                {{ form_row(form.phone) }}
-            </div>
-
-            <div class="col-12">
-                {{ form_row(form.display_email) }}
-            </div>
-
-            <div class="col-12">
-                {{ form_row(form.address_street) }}
-            </div>
-
-            <div class="col-12">
-                {{ form_row(form.address_unit) }}
-            </div>
-
-            <div class="col-md-5">
-                {{ form_row(form.city) }}
-            </div>
-
-            <div class="col-md-4">
-                {{ form_row(form.state) }}
-            </div>
-
-            <div class="col-md-3">
-                {{ form_row(form.post_code) }}
-            </div>
-
-        </div>
-
-        <hr class="my-4">
-
-        <h4 class="mb-3">
-        </h4>
-
-        <div class="row g-3">
-
-            <div class="col-md-6">
-                {{ form_row(form.website) }}
-            </div>
-
-            <div class="col-md-6">
-                {{ form_row(form.facebook) }}
-            </div>
-
-            <div class="col-md-6">
-                {{ form_row(form.twitter) }}
-            </div>
-
-            <div class="col-md-6">
-                {{ form_row(form.linkedin) }}
-            </div>
-
-            <div class="col-md-6">
-                {{ form_row(form.instagram) }}
-            </div>
-
-            <div class="col-md-6">
-                {{ form_row(form.pinterest) }}
-            </div>
-
-            <div class="col-md-6">
-                {{ form_row(form.youtube) }}
-            </div>
-
-        </div>
-
-        <hr class="my-4">
-
-        <h4 class="mb-3">
-        </h4>
-
-        <div class="row g-3">
-
-            <div class="col-12">
-                {{ form_row(form.banner) }}
             </div>
 
         </div>

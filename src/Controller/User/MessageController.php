@@ -32,6 +32,7 @@ class MessageController extends BaseController
     ): Response {
         return $this->render('user/message/index.html.twig', [
             'title' => 'title.message',
+            'back_url' => 'app_dash',
             'site' => $this->site($request),
             'messages' => $messageRepository->findAll(),
         ]);
@@ -78,7 +79,7 @@ class MessageController extends BaseController
             'title' => 'title.new.message',
             'messages' => $message,
             'thread' => $thread,
-            'action_cancel_url' => 'app_message_show_thread',
+            'cancel_url' => 'app_message_show_thread',
             'site' => $this->site($request),
             'form' => $form->createView(),
         ]);
@@ -107,7 +108,7 @@ class MessageController extends BaseController
             'title' => 'title.message',
             'new_url' => 'app_message_new',
             'site' => $this->site($request),
-            'action_cancel_url' => 'app_thread_index',
+            'cancel_url' => 'app_thread_index',
             'messages' => $messages,
             'thread' => $thread,
         ]);
@@ -127,7 +128,7 @@ class MessageController extends BaseController
         return $this->render('user/message/show.html.twig', [
             'title' => 'title.dashboard',
             'site' => $this->site($request),
-            'action_cancel_url' => 'app_message_show_thread',
+            'cancel_url' => 'app_message_show_thread',
             'messages' => $message,
         ]);
     }
@@ -173,8 +174,8 @@ class MessageController extends BaseController
             'title' => 'title.edit.message',
             'messages' => $messages,
             'thread' => $thread,
-            'action_cancel_url' => 'app_message_show_thread',
-            'action_delete_url' => true,
+            'cancel_url' => 'app_message_show_thread',
+            'delete_url' => true,
             'site' => $this->site($request),
             'form' => $form->createView(),
         ]);

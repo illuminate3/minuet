@@ -94,4 +94,27 @@ class ProductController extends BaseController
         );
     }
 
+    /**
+     * @param  Request  $request
+     * @param  Product  $product
+     *
+     * @return Response
+     */
+    #[Route(path: '/{slug}', name: 'product_slug', methods: ['GET'])]
+    public function productSlug(
+        Request $request,
+        Product $product,
+    ): Response {
+
+        return $this->render(
+            'product/show.html.twig',
+            [
+                'title' => $product->getTitle(),
+                'site' => $this->site($request),
+                'product' => $product,
+                'number_of_photos' => count($product->getImages()),
+            ]
+        );
+    }
+
 }

@@ -25,6 +25,7 @@ class ThreadController extends BaseController
      * @param  Security               $security
      * @param  ProductRepository      $productRepository
      * @param  AccountUserRepository  $accountUserRepository
+     * @param  ThreadRepository       $threadRepository
      *
      * @return Response
      */
@@ -34,27 +35,29 @@ class ThreadController extends BaseController
         Security $security,
         ProductRepository $productRepository,
         AccountUserRepository $accountUserRepository,
+        ThreadRepository $threadRepository,
     ): Response {
         // get the account information the user is registered to
         $user = $security->getUser();
-        $account = $accountUserRepository->findOneBy(['user' => $user->getId()]);
-        $products = [];
-        if (!empty($account)) {
-            $accountID = $account->getAccount()->getId();
-            $products = $productRepository->findAllThreadsByAccount($accountID);
+        $threads = $threadRepository->findBy(['user' => $user->getId()]);
 
-            return $this->render('user/thread/index.html.twig', [
-                'title' => (!empty($account->getAccount()->getName())) ? $account->getAccount()->getName() : '',
-                'site' => $this->site($request),
-                'products' => $products,
-            ]);
-        } else {
-            return $this->render('user/thread/index.html.twig', [
-                'title' => 'title.dashboard',
-                'site' => $this->site($request),
-                'products' => $products,
-            ]);
-        }
+//        $account = $accountUserRepository->findOneBy(['user' => $user->getId()]);
+
+        $products = [];
+
+//        if (!empty($account)) {
+//            $accountID = $account->getAccount()->getId();
+//            $products = $productRepository->findAllThreadsByAccount($accountID);
+//
+//        }
+
+        return $this->render('user/thread/index.html.twig', [
+            'title' => 'title.message',
+            'back_url' => 'app_dash',
+            'site' => $this->site($request),
+            'products' => $products,
+            'threads' => $threads,
+        ]);
     }
 
     /**

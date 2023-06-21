@@ -1,25 +1,30 @@
 <!-- Title -->
-<div class="row" style="padding:10px;">
+<div class="row">
 
     <div class="col-9 text-start page-title">
         {{ title|trans }}
     </div>
 
-{% if action_cancel_main_url is defined %}
+    {% if action_cancel_main_url is defined %}
+
         <div class="col-2 text-end">
-            <a class="btn btn-success" href="{{ path(action_cancel_main_url) }}">
+            <a class="btn btn-danger" href="{{ path(action_cancel_main_url) }}">
                 <i class="fa fa-arrow-left"></i>
                 {{ 'action.list.cancel'|trans }}
             </a>
         </div>
+
     {% endif %}
-    {% if action_edit_url is defined %}
+
+    {% if edit_url is defined %}
+
         <div class="col-9 text-end">
-            <a class="btn btn-success" href="{{ path(action_edit_url) }}">
+            <a class="btn btn-success" href="{{ path(edit_url) }}">
                 <i class="fa-solid fa-plus"></i>
                 {{ 'action.edit'|trans }}
             </a>
         </div>
+
     {% endif %}
 
     {#{% if new_url is defined %}
@@ -34,7 +39,7 @@
 
     {% if thread is defined %}
             {% if thread.id is empty %}
-             
+
             {% else %}
                  <div class="col text-end">
             <a class="btn btn-success" href="{{ path('app_message_new',{'id': thread.id}) }}">
@@ -57,19 +62,19 @@
     {% if thread is defined %}
             {% if thread.id is empty %}
             {% else %}
-                <div class="col-{% if action_delete_url is defined %}2{%else%}2{%endif%} text-end">
-                    <a class="btn btn-success" href="{{ path(action_cancel_url,{id: thread.id}) }}">
+                <div class="col-{% if delete_url is defined %}2{%else%}2{%endif%} text-end">
+                    <a class="btn btn-danger" href="{{ path(cancel_url,{id: thread.id}) }}">
                         <i class="fa fa-arrow-left"></i>
                         {{ 'action.list.cancel'|trans }}
                     </a>
                 </div>
             {% endif %}
         {% else %}
-            
+
         {% endif %}
 
 
-    {% if action_delete_url is defined %}
+    {% if delete_url is defined %}
         <div class="col-1 text-end">
             {{ include('message/_delete_form.html.twig') }}
         </div>

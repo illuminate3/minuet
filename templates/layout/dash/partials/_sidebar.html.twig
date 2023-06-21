@@ -18,6 +18,13 @@
         </li>
 
         <li class="mb-3">
+            <a href="{{ path('user_profile') }}" class="link-light d-inline-flex text-decoration-none rounded">
+                <i class="fa-regular fa-user"></i>
+                {{ 'menu.profile'|trans }}
+            </a>
+        </li>
+
+        <li class="mb-3">
             <a href="{{ path('security_logout') }}" class="link-light d-inline-flex text-decoration-none rounded">
                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
                 {{ 'menu.logout'|trans }}

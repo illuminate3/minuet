@@ -1,6 +1,8 @@
-{% extends '../../layout/base.html.twig' %}
+{% extends 'layout/dash/dash.html.twig' %}
 
 {% block subheader %}
+    <!-- Title -->
+    {{ include('common/_action_title.html.twig') }}
     <!-- Title -->
     <div class="row">
         {{ include('common/_flash_messages.html.twig') }}

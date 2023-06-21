@@ -4,32 +4,37 @@
         {{ title|trans }}
     </div>
 
+    <div class="col text-end">
+
     {% if new_url is defined %}
-        <div class="col text-end">
-            <a class="btn btn-success" href="{{ path(new_url) }}">
-                <i class="fa-solid fa-plus"></i>
-                {{ 'action.new'|trans }}
-            </a>
-        </div>
+        <a class="btn btn-success" href="{{ path(new_url) }}">
+            <i class="fa-solid fa-plus"></i>
+            {{ 'action.new'|trans }}
+        </a>
     {% endif %}
 
     {% if edit_url is defined %}
-        <div class="col text-end">
-            <a class="btn btn-success" href="{{ path(edit_url) }}">
-                <i class="fa-solid fa-plus"></i>
-                {{ 'action.edit'|trans }}
-            </a>
-        </div>
+        <a class="btn btn-success" href="{{ path(edit_url) }}">
+            <i class="fa-solid fa-plus"></i>
+            {{ 'action.edit'|trans }}
+        </a>
+    {% endif %}
+
+    {% if back_url is defined %}
+        <a class="btn btn-info" href="{{ path(back_url) }}">
+            <i class="fa-solid fa-backward"></i>
+            {{ 'action.back'|trans }}
+        </a>
     {% endif %}
 
     {% if cancel_url is defined %}
-        <div class="col text-end">
-            <a class="btn btn-danger" href="{{ path(cancel_url) }}">
-                <i class="fa-solid fa-backward"></i>
-                {{ 'action.cancel'|trans }}
-            </a>
-        </div>
+        <a class="btn btn-danger" href="{{ path(cancel_url) }}">
+            <i class="fa-solid fa-backward"></i>
+            {{ 'action.cancel'|trans }}
+        </a>
     {% endif %}
+
+    </div>
 
 </div>
 <hr>

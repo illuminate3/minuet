@@ -46,7 +46,7 @@ final class PasswordResetController extends BaseController implements AuthContro
                 [
                     'title' => 'title.password_reset_emailed',
                     'message' => 'message.emailed_reset_link',
-                    'link' => null,                   
+                    'link' => null,
                 ]
             );
         }
@@ -140,7 +140,7 @@ final class PasswordResetController extends BaseController implements AuthContro
 
         return $this->render('user/password/password_change.html.twig', [
             'title' => 'title.change_password',
-            'action_cancel_url' => 'app_dash',
+            'cancel_url' => 'app_dash',
             'site' => $this->site($request),
             'form' => $form->createView(),
         ]);

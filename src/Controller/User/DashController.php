@@ -26,7 +26,7 @@ class DashController extends BaseController
         Security $security,
 ): Response
     {
-        if (!$security->isGranted('ROLE_SELLER')) {
+        if (!$security->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('app_index');
         }
 

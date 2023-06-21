@@ -94,6 +94,10 @@
                 <source>action.add_menu</source>
                 <target>Add Menu</target>
             </trans-unit>
+            <trans-unit id="action.back">
+                <source>action.back</source>
+                <target>Back</target>
+            </trans-unit>
             <trans-unit id="action.cancel">
                 <source>action.cancel</source>
                 <target>Cancel</target>
@@ -1010,15 +1014,15 @@
             </trans-unit>
             <trans-unit id="title.message">
                 <source>title.message</source>
-                <target>Thread Messages</target>
+                <target>Messages</target>
             </trans-unit>
             <trans-unit id="title.new.message">
                 <source>title.new.message</source>
-                <target>Create New Thread Message</target>
+                <target>Create New Message</target>
             </trans-unit>
             <trans-unit id="title.edit.message">
                 <source>title.edit.message</source>
-                <target>Edit Thread Message</target>
+                <target>Edit Message</target>
             </trans-unit>
             <trans-unit id="menu.products">
                 <source>menu.products</source>

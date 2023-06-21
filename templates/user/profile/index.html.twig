@@ -2,17 +2,13 @@
 
 {% block subheader %}
 <!-- Title -->
-{{ include('layout/partials/_title.html.twig') }}
+{{ include('common/_action_title.html.twig') }}
 {% endblock %}
 
 {% block body %}
 
 <div class="row mt-4 mb-4 px-lg-5">
-    <div class="col-md-9 col-lg-10">
-
-    <h4 class="mb-3">
-        {{ 'text.account_information'|trans }}
-    </h4>
+<div class="col-md-9 col-lg-10">
 
     <div class="row g-3">
 
@@ -29,187 +25,29 @@
 
     <hr class="my-4">
 
-    <h4 class="mb-3">
-        {{ 'text.billing_address'|trans }}
-    </h4>
+    <div class="row g-3">
 
-        <div class="row g-3">
-
-            <div class="col-sm-6">
-                <div class="text-muted">
-                    {{ 'label.first_name'|trans }}
-                </div>
-                <div>
-                    {{ profile.firstName }}
-                </div>
+        <div class="col-sm-6">
+            <div class="text-muted">
+                {{ 'label.first_name'|trans }}
             </div>
-
-            <div class="col-sm-6">
-                <div class="text-muted">
-                    {{ 'label.last_name'|trans }}
-                </div>
-                <div>
-                    {{ profile.lastName }}
-                </div>
+            <div>
+                {{ profile.firstName }}
             </div>
-
-            <div class="col-12">
-                <div class="text-muted">
-                    {{ 'label.phone'|trans }}
-                </div>
-                <div>
-                    {{ profile.phone }}
-                </div>
-            </div>
-
-            <div class="col-12">
-                <div class="text-muted">
-                    {{ 'label.display_email'|trans }}
-                </div>
-                <div>
-                    {{ profile.displayEmail }}
-                </div>
-            </div>
-
-            <div class="col-12">
-                <div class="text-muted">
-                    {{ 'label.address_street'|trans }}
-                </div>
-                <div>
-                    {{ profile.addressStreet }}
-                </div>
-            </div>
-
-            <div class="col-12">
-                <div class="text-muted">
-                    {{ 'label.address_unit'|trans }}
-                </div>
-                <div>
-                    {{ profile.addressUnit }}
-                </div>
-            </div>
-
-            <div class="col-md-5">
-                <div class="text-muted">
-                    {{ 'label.city'|trans }}
-                </div>
-                <div>
-                    {{ profile.city }}
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="text-muted">
-                    {{ 'label.state'|trans }}
-                </div>
-                <div>
-                    {{ profile.state }}
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="text-muted">
-                    {{ 'label.post_code'|trans }}
-                </div>
-                <div>
-                    {{ profile.postCode }}
-                </div>
-            </div>
-
         </div>
 
-        <hr class="my-4">
-
-        <h4 class="mb-3">
-        </h4>
-
-        <div class="row g-3">
-
-            <div class="col-md-6">
-                <div class="text-muted">
-                    {{ 'label.website'|trans }}
-                </div>
-                <div>
-                    {{ profile.website }}
-                </div>
+        <div class="col-sm-6">
+            <div class="text-muted">
+                {{ 'label.last_name'|trans }}
             </div>
-
-            <div class="col-md-6">
-                <div class="text-muted">
-                    {{ 'label.facebook'|trans }}
-                </div>
-                <div>
-                    {{ profile.facebook }}
-                </div>
+            <div>
+                {{ profile.lastName }}
             </div>
-
-            <div class="col-md-6">
-                <div class="text-muted">
-                    {{ 'label.twitter'|trans }}
-                </div>
-                <div>
-                    {{ profile.twitter }}
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="text-muted">
-                    {{ 'label.linkedin'|trans }}
-                </div>
-                <div>
-                    {{ profile.linkedin }}
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="text-muted">
-                    {{ 'label.instagram'|trans }}
-                </div>
-                <div>
-                    {{ profile.instagram }}
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="text-muted">
-                    {{ 'label.pinterest'|trans }}
-                </div>
-                <div>
-                    {{ profile.pinterest }}
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="text-muted">
-                    {{ 'label.youtube'|trans }}
-                </div>
-                <div>
-                    {{ profile.youtube }}
-                </div>
-            </div>
-
         </div>
-
-        <hr class="my-4">
-
-        <h4 class="mb-3">
-        </h4>
-
-        <div class="row g-3">
-
-            <div class="col-12">
-                <div class="text-muted">
-                    {{ 'label.banner'|trans }}
-                </div>
-                <div>
-                    {{ profile.banner }}
-                </div>
-            </div>
-
-        </div>
-
 
     </div>
+
+</div>
 </div>
 
 {% endblock %}

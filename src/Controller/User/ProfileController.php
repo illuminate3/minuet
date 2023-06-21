@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-#[Route('/user/dash')]
+#[Route('/user/profile')]
 final class ProfileController extends BaseController
 {
 
@@ -33,7 +33,8 @@ final class ProfileController extends BaseController
 
         return $this->render('user/profile/index.html.twig', [
             'title' => 'title.profile',
-            'action_edit_url' => 'user_profile_edit',
+            'back_url' => 'app_dash',
+            'edit_url' => 'user_profile_edit',
             'site' => $this->site($request),
             'profile' => $profile,
         ]);
@@ -71,7 +72,7 @@ final class ProfileController extends BaseController
 
         return $this->render('user/profile/edit.html.twig', [
             'title' => 'title.profile',
-            'action_cancel_url' => 'user_profile',
+            'cancel_url' => 'user_profile',
             'site' => $this->site($request),
             'error' => $error,
             'form' => $form->createView(),
