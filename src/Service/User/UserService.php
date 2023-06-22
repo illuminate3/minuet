@@ -41,7 +41,7 @@ final class UserService extends AbstractService
         $user->setCreatedAt(new DateTimeImmutable('now'));
         $user->setModifiedAt(new DateTimeImmutable('now'));
         $user->setIsAccount(false);
-        $user->setStatus('active');
+        $user->setStatus(true);
         $this->save($user);
         $this->clearCache('users_count');
         $this->addFlash('success', 'message.created');

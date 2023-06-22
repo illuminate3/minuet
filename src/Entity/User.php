@@ -65,8 +65,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?bool $isAccount = null;
 
-    #[ORM\Column(type: Types::STRING, length:10, nullable:true, options:['default'=>'active'])]
-    private ?string $status;
+    #[ORM\Column(type: Types::BOOLEAN, length: 1, nullable: true, options: ['default' => 0])]
+    private bool $status = false;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Thread::class)]
     private Collection $threads;
@@ -351,21 +351,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return string|null
+     * @return bool|null
      */
-    public function getStatus(): ?string
+    public function getStatus(): ?bool
     {
         return $this->status;
     }
 
     /**
-     * @param  string  $status
+     * @param  bool  $status
      *
-     * @return string
+     * @return bool
      */
-    public function setStatus(string $status): string
+    public function setStatus(bool $status): bool
     {
-      return  $this->status = $status;
+      return (bool) $this->status = $status;
     }
 
     /**

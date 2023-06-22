@@ -30,6 +30,17 @@ final class LoginController extends BaseController
         AuthenticationUtils $helper,
     ): Response {
 
+        $user = $security->getUser();        
+        if ($user && $user->getStatus()===false) {
+            $this->addFlash("danger","Your account is temporarily disabled. Please contact administrator.");
+            $security->logout(false);
+        }
+        if ($user && $user->getIsVerified()===false) {
+            $this->addFlash("danger","Your account is not verified. Please contact administrator.");
+            $security->logout(false);
+        }
+            
+
         // if user is already logged in, don't display the login page again
 
         if ($security->isGranted('ROLE_USER')) {
