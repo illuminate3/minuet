@@ -69,7 +69,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private bool $status = false;
 
     #[ORM\Column(type: Types::INTEGER, length:10, nullable:false, options:['default'=>0])]
-    private ?int $loginAttempts;
+    private ?int $loginAttempts = 0;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Thread::class)]
     private Collection $threads;
