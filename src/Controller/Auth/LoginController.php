@@ -10,11 +10,12 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-
 final class LoginController extends BaseController
 {
 
@@ -31,22 +32,30 @@ final class LoginController extends BaseController
         Security $security,
         UserRepository $userRepository,
         AuthenticationUtils $helper,
+        TranslatorInterface $translator,
         EntityManagerInterface $entityManager
     ): Response {
 
-        $user = $security->getUser();        
+        $user = $security->getUser();  
+        $form = $this->createForm(LoginFormType::class); 
+        $emailField = $form->get('email');       
         if ($user && $user->getStatus()===false) {
-            $this->addFlash("danger","Your account is temporarily disabled. Please contact administrator.");
-            $security->logout(false);
+            $security->logout(false);   
+            $errorTranslationKey = 'message.user_inactive';
+            $translatedErrorMessage = $translator->trans($errorTranslationKey);        
+            $error = new FormError($translatedErrorMessage);
+            $emailField->addError($error);          
         }
         if ($user && $user->getIsVerified()===false) {
-            $this->addFlash("danger","Your account is not verified. Please contact administrator.");
-            $security->logout(false);
+            $security->logout(false); 
+            $errorTranslationKey = 'message.user_unverified';
+            $translatedErrorMessage = $translator->trans($errorTranslationKey);                            
+            $error = new FormError($translatedErrorMessage);            
+            $emailField->addError($error);            
         }
             
 
         // if user is already logged in, don't display the login page again
-        $form = $this->createForm(LoginFormType::class);
         $user = $userRepository->findOneBy(["email"=>$form->get('email')->getData()]);
         if ($security->isGranted('ROLE_USER')) {
             $user->setLoginAttempts(0);
@@ -55,25 +64,33 @@ final class LoginController extends BaseController
         }
         $error = $helper->getLastAuthenticationError();
        if ($error && $error->getMessage() !== null) { 
-                    
-        $user->setLoginAttempts($user->getLoginAttempts()+1);
-        $entityManager->flush();
-        $attemptsRemaining = 3-$user->getLoginAttempts();
-        if ($attemptsRemaining===0) { 
-            $user->setLoginAttempts(0);
-            $entityManager->flush();
-            $this->addFlash("danger","Please create a forgot password request and reset your password.");   
-            return $this->redirectToRoute("auth_password_reset");
-        }else{    
-            $attempts = $attemptsRemaining==1 ? "attempt is" : "attempts are";   
-            $this->addFlash("danger",$error->getMessage());
-            $this->addFlash("danger","Only $attemptsRemaining $attempts remaining.");
-        }        
+            if (!is_null($user)) {
+                $user->setLoginAttempts($user->getLoginAttempts()+1);
+                $entityManager->flush();
+                $attemptsRemaining = 3-$user->getLoginAttempts();
+                if ($attemptsRemaining===0) { 
+                    $user->setLoginAttempts(0);
+                    $entityManager->flush();
+                    $this->addFlash("danger","message.create_forgot_request");   
+                    return $this->redirectToRoute("auth_password_reset");
+                }else{    
+                    $attempts = $attemptsRemaining==1 ? "attempt is" : "attempts are";                       
+                    $emailField = $form->get('password');                    
+                    $error = new FormError($error->getMessage()." Only $attemptsRemaining $attempts remaining.");                    
+                    $emailField->addError($error);                    
+                } 
+            }else{                
+                $emailField = $form->get('email');                
+                $error = new FormError($error->getMessage());                
+                $emailField->addError($error);
+            }              
        }       
         return $this->render('auth/login/login.html.twig', [
             'title' => 'title.login',
             'site' => $this->site($request),
             'form' => $form->createView(),
+            'error'=>$helper->getLastAuthenticationError()
+            
         ]);
     }
 
