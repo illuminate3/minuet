@@ -41,14 +41,16 @@ final class UserFixtures extends Fixture
             $user->setPassword($password);
 // set verified, account, subscription_active(stripe), createdAt
             $user->setIsVerified($verified);
-            $user->setIsAccount($is_account);          
+            $user->setIsAccount($is_account);
             $user->setCreatedAt(new DateTimeImmutable('now'));
 // set email
             $user->setEmail($email);
             $user->setEmailVerifiedAt(new DateTimeImmutable('now'));
 
 // set status
-            $user->setStatus(true);
+            $user->setStatus(true);            
+// set login_attempts
+            $user->setLoginAttempts(0);
 // set roles
             $user = $this->transformer->transform($user);
             $user->setRoles($roles);
