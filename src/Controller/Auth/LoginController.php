@@ -74,9 +74,10 @@ final class LoginController extends BaseController
                     $this->addFlash("danger","message.create_forgot_request");   
                     return $this->redirectToRoute("auth_password_reset");
                 }else{    
-                    $attempts = $attemptsRemaining==1 ? "attempt is" : "attempts are";                       
-                    $emailField = $form->get('password');                    
-                    $error = new FormError($error->getMessage()." Only $attemptsRemaining $attempts remaining.");                    
+                    $attempts = $attemptsRemaining==1 ? " $attemptsRemaining attempt is" : "$attemptsRemaining attempts are";                       
+                    $emailField = $form->get('password');    
+                    $message = $translator->trans('message.attempt_remaining', ['%attemptcount%' => $attempts]);                
+                    $error = new FormError($error->getMessage()." $message");                    
                     $emailField->addError($error);                    
                 } 
             }else{                

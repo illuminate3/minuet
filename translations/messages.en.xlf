@@ -1315,6 +1315,12 @@
                     Regards, the Team.
                 </target>
             </trans-unit>
+            <trans-unit id="message.attempt_remaining">
+                <source>message.attempt_remaining</source>
+                <target>
+                    Only %attemptcount% remaining.
+                </target>
+            </trans-unit>
             <trans-unit id="message.email_verified">
                 <source>message.email_verified</source>
                 <target>Your email address has been verified.</target>
