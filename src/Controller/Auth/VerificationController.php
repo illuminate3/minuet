@@ -36,20 +36,18 @@ final class VerificationController extends AbstractController implements AuthCon
         if (!$user) {
             throw $this->createNotFoundException();
         }
+        if ($user->getIsVerified() === true) {
+            $this->addFlash('warning', 'message.already_verified');
+            return $this->redirectToRoute('security_login');
+        }
         try {
             $verifyEmailHelper->validateEmailConfirmation(
                 $request->getUri(),
                 (string) $user->getId(),
                 $user->getEmail(),
             );
-        } catch (VerifyEmailExceptionInterface $e) {
-            if ($user->getIsVerified() === true) {
-                $this->addFlash('warning', 'message.already_verified');
-
-                return $this->redirectToRoute('security_login');
-            }
+        } catch (VerifyEmailExceptionInterface $e) {            
             $this->addFlash('danger', $e->getReason());
-
             return $this->redirectToRoute('auth_request_verify_email');
         }
 
