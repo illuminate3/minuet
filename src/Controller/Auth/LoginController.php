@@ -33,6 +33,10 @@ final class LoginController extends BaseController
         // if user is already logged in, don't display the login page again
 
         if ($security->isGranted('ROLE_USER')) {
+            $user = $security->getUser();  
+            if (is_null($user->getProfile()->getFirstName())) {
+                return $this->redirectToRoute('user_profile_edit');
+            }
             return $this->redirectToRoute('app_dash');
         }
 
