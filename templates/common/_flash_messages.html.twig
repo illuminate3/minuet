@@ -25,7 +25,7 @@
 {% if app.user %}
     {% if not app.user.isVerified %}
         <div class="alert alert-dismissible alert-warning mt-2" role="alert">
-            {{ 'message.confirm_email'|trans }} 22222
+            {{ 'message.confirm_email'|trans }}
             <a href="#" id="resend"
                data-token="{{ csrf_token('csrf_token') }}"
                data-path="{{ path('resend_confirmation') }}"
