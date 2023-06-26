@@ -68,11 +68,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::STRING, length:10, nullable:true, options:['default'=>'active'])]
     private ?string $status;
 
+    #[ORM\Column(type: Types::INTEGER, length:10, nullable:false, options:['default'=>0])]
+    private ?int $loginAttempts;
+
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Thread::class)]
     private Collection $threads;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Message::class)]
     private Collection $messages;
+
 
     private ?string $role = '';
 
@@ -108,6 +112,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getEmail(): ?string
     {
         return $this->email;
+    }
+
+    /**
+     * @return int
+     */
+    public function setLoginAttempts($count): int
+    {
+        return $this->loginAttempts = $count;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getLoginAttempts(): ?int
+    {
+        return $this->loginAttempts;
     }
 
     /**
