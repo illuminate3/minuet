@@ -49,8 +49,7 @@ final class LoginController extends BaseController
             $user = $security->getUser();  
             if (is_null($user->getProfile()->getFirstName())) {
                 return $this->redirectToRoute('user_profile_edit');
-            }
-            return $this->redirectToRoute('app_dash');
+            }      
         }
         $error = $helper->getLastAuthenticationError();
        if ($error && $error->getMessage() !== null) {  
