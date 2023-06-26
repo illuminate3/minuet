@@ -7,6 +7,7 @@ namespace App\Controller\Auth;
 use App\Controller\BaseController;
 use App\Form\Type\LoginFormType;
 use App\Repository\UserRepository;
+use App\Service\User\UserService;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -33,6 +34,7 @@ final class LoginController extends BaseController
         Security $security,
         UserRepository $userRepository,
         AuthenticationUtils $helper,
+        UserService $userService,
         TranslatorInterface $translator,
         EntityManagerInterface $entityManager
     ): Response {
@@ -53,7 +55,7 @@ final class LoginController extends BaseController
         $errorMessage = $translator->trans($error->getMessage());
         if ($error instanceof BadCredentialsException) {
             if (!is_null($user)) {                
-                $attemptsRemaining = $userRepository->getMaxLoginAttempt();
+                $attemptsRemaining = $userService->getMaxLoginAttempt($user);
                 if ($attemptsRemaining===0) {                     
                     $this->addFlash("danger","message.create_forgot_request");   
                     return $this->redirectToRoute("auth_password_reset");

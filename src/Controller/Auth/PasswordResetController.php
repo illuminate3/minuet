@@ -37,6 +37,7 @@ final class PasswordResetController extends BaseController implements AuthContro
     public function passwordReset(
         PasswordResetService $service,
         UserRepository $userRepository,
+        UserService $userService,
         Request $request
     ): Response {
         $form = $this->createForm(UserEmailType::class, []);
@@ -68,7 +69,7 @@ final class PasswordResetController extends BaseController implements AuthContro
             
 
             $service->sendResetPasswordLink($request);
-            $userRepository->resetMaxLoginAttempt($user);
+            $userService->resetMaxLoginAttempt($user);
 
             return $this->forward(
                 'App\Controller\Auth\MessageController::authMessages',
