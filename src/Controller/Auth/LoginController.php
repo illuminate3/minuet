@@ -46,8 +46,7 @@ final class LoginController extends BaseController
         // if user is already logged in, don't display the login page again
         $user = $userRepository->findOneBy(["email"=>$form->get('email')->getData()]);
         if ($security->isGranted('ROLE_USER')) {
-            $user->setLoginAttempts(0);
-            $entityManager->flush();
+            $userService->resetMaxLoginAttempt($user);            
             return $this->redirectToRoute('app_dash');
         }
         $error = $helper->getLastAuthenticationError();

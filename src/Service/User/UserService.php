@@ -98,7 +98,9 @@ final class UserService extends AbstractService
             $this->em->flush();
             $attemptsRemaining = 3-$user->getLoginAttempts();            
             return $attemptsRemaining;
-        }       
+        }else{
+            return 0;
+        }   
     }
 
 
