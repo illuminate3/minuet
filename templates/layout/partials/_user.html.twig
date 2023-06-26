@@ -7,7 +7,7 @@
        data-bs-toggle="dropdown"
        aria-haspopup="true"
        aria-expanded="false">
-        {% if app.user %}
+        {% if app.user and app.user.profile.fullName %}
             {{ app.user.profile.fullName }}
         {% else %}
             {{ 'menu.user'|trans }}
