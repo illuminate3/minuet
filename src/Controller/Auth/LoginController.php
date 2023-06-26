@@ -15,6 +15,7 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 final class LoginController extends BaseController
 {
@@ -39,22 +40,7 @@ final class LoginController extends BaseController
         $user = $security->getUser();  
         $form = $this->createForm(LoginFormType::class); 
         $emailField = $form->get('email');       
-        if ($user && $user->getStatus()===false) {
-            $security->logout(false);   
-            $errorTranslationKey = 'message.user_inactive';
-            $translatedErrorMessage = $translator->trans($errorTranslationKey);        
-            $error = new FormError($translatedErrorMessage);
-            $emailField->addError($error);          
-        }
-        if ($user && $user->getIsVerified()===false) {
-            $security->logout(false); 
-            $errorTranslationKey = 'message.user_unverified';
-            $translatedErrorMessage = $translator->trans($errorTranslationKey);                            
-            $error = new FormError($translatedErrorMessage);            
-            $emailField->addError($error);            
-        }
-            
-
+        
         // if user is already logged in, don't display the login page again
         $user = $userRepository->findOneBy(["email"=>$form->get('email')->getData()]);
         if ($security->isGranted('ROLE_USER')) {
@@ -63,26 +49,25 @@ final class LoginController extends BaseController
             return $this->redirectToRoute('app_dash');
         }
         $error = $helper->getLastAuthenticationError();
-       if ($error && $error->getMessage() !== null) { 
-            if (!is_null($user)) {
-                $user->setLoginAttempts($user->getLoginAttempts()+1);
-                $entityManager->flush();
-                $attemptsRemaining = 3-$user->getLoginAttempts();
-                if ($attemptsRemaining===0) { 
-                    $user->setLoginAttempts(0);
-                    $entityManager->flush();
+       if ($error && $error->getMessage() !== null) {  
+        $errorMessage = $translator->trans($error->getMessage());
+        if ($error instanceof BadCredentialsException) {
+            if (!is_null($user)) {                
+                $attemptsRemaining = $userRepository->getMaxLoginAttempt();
+                if ($attemptsRemaining===0) {                     
                     $this->addFlash("danger","message.create_forgot_request");   
                     return $this->redirectToRoute("auth_password_reset");
                 }else{    
                     $attempts = $attemptsRemaining==1 ? " $attemptsRemaining attempt is" : "$attemptsRemaining attempts are";                       
                     $emailField = $form->get('password');    
                     $message = $translator->trans('message.attempt_remaining', ['%attemptcount%' => $attempts]);                
-                    $error = new FormError($error->getMessage()." $message");                    
+                    $error = new FormError( $translator->trans($errorMessage)." $message");                    
                     $emailField->addError($error);                    
                 } 
-            }else{                
-                $emailField = $form->get('email');                
-                $error = new FormError($error->getMessage());                
+            }
+        }else{                
+                $emailField = $form->get('email');
+                $error = new FormError($errorMessage);                
                 $emailField->addError($error);
             }              
        }       
