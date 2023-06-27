@@ -1303,6 +1303,10 @@
                 <source>message.email_verified</source>
                 <target>Your email address has been verified.</target>
             </trans-unit>
+            <trans-unit id="message.already_verified">
+                <source>message.already_verified</source>
+                <target>Your email address has been verified.</target>
+            </trans-unit>
             <trans-unit id="message.not_found">
                 <source>message.not_found</source>
                 <target>Not Found</target>
