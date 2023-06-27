@@ -10,7 +10,10 @@ use App\Form\Type\PasswordChangeType;
 use App\Form\Type\PasswordType;
 use App\Form\Type\UserEmailType;
 use App\Repository\ResettingRepository;
+use App\Repository\UserRepository;
 use App\Service\Auth\PasswordResetService;
+use App\Service\User\UserService;
+use DateTime;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -33,13 +36,40 @@ final class PasswordResetController extends BaseController implements AuthContro
     #[Route(path: '/password/reset', name: 'auth_password_reset', methods: ['GET|POST'])]
     public function passwordReset(
         PasswordResetService $service,
+        UserRepository $userRepository,
+        UserService $userService,
         Request $request
     ): Response {
         $form = $this->createForm(UserEmailType::class, []);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $userRepository->findOneBy(["email"=>$form->getData()["email"]]);
+            $passwordRequestedAt = $user->getPasswordRequestedAt();
+            if ($passwordRequestedAt) {
+                // Create a DateTime object with the current time
+                $currentTime = new DateTime();
+
+                // Create a DateTime object with the password_requested_at value
+                $requestedAtTime = new DateTime($passwordRequestedAt->format('Y-m-d H:i:s'));
+
+                // Calculate the time difference between the current time and the password requested time
+                $timeDifference = $currentTime->diff($requestedAtTime);
+                    if ($timeDifference->i <= 15) {
+                    return $this->forward(
+                        'App\Controller\Auth\MessageController::authMessages',
+                        [
+                            'title' => 'title.password_reset_emailed',
+                            'message' => 'message.password_request_ban',
+                            'link' => null,                   
+                        ]
+                    );
+                }
+            }
+            
+
             $service->sendResetPasswordLink($request);
+            $userService->resetMaxLoginAttempt($user);
 
             return $this->forward(
                 'App\Controller\Auth\MessageController::authMessages',

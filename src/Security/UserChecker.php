@@ -24,10 +24,13 @@ class UserChecker implements UserCheckerInterface
         }
         if (!$user->getEmailVerifiedAt()) {
             // the message passed to this exception is meant to be displayed to the user
-            throw new CustomUserMessageAccountStatusException('message.verify_account');
+            throw new CustomUserMessageAccountStatusException('message.user_unverified');
         }
         if (!$user->isVerified()) {
-            throw new CustomUserMessageAccountStatusException('message.verify_account');
+            throw new CustomUserMessageAccountStatusException('message.user_unverified');
+        }
+        if (!$user->getStatus()) {
+            throw new CustomUserMessageAccountStatusException('message.user_inactive');
         }
     }
 

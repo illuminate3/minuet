@@ -48,7 +48,7 @@ final class UserFixtures extends Fixture
             $user->setEmailVerifiedAt(new DateTimeImmutable('now'));
 
 // set status
-            $user->setStatus("active");
+            $user->setStatus(true);            
 // set login_attempts
             $user->setLoginAttempts(0);
 // set roles

@@ -41,7 +41,7 @@ final class UserService extends AbstractService
         $user->setCreatedAt(new DateTimeImmutable('now'));
         $user->setModifiedAt(new DateTimeImmutable('now'));
         $user->setIsAccount(false);
-        $user->setStatus('active');
+        $user->setStatus(true);
         $this->save($user);
         $this->clearCache('users_count');
         $this->addFlash('success', 'message.created');
@@ -83,5 +83,39 @@ final class UserService extends AbstractService
         $this->em->persist($user);
         $this->em->flush();
     }
+
+
+
+     /**
+     * @param  User  $user
+     *
+     * @return int
+     */
+    public function getMaxLoginAttempt(User $user): int
+    {
+        if ($user->getLoginAttempts()<3) {
+            $user->setLoginAttempts($user->getLoginAttempts()+1);
+            $this->em->flush();
+            $attemptsRemaining = 3-$user->getLoginAttempts();            
+            return $attemptsRemaining;
+        }else{
+            return 0;
+        }   
+    }
+
+
+    
+     /**
+     * @param  User  $user
+     *
+     * @return void
+     */
+
+    public function resetMaxLoginAttempt(User $user): void
+    {
+        $user->setLoginAttempts(0);
+        $this->em->flush(); 
+    }
+
 
 }

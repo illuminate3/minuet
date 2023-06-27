@@ -1244,6 +1244,22 @@
                 <source>message.stripe_in_active</source>
                 <target>Your subscription is not active or has been expired, please subscribe again.</target>
             </trans-unit>
+            <trans-unit id="message.user_inactive">
+                <source>message.user_inactive</source>
+                <target>Your account is temporarily disabled. Please contact administrator.</target>
+            </trans-unit>
+            <trans-unit id="message.create_forgot_request">
+                <source>message.create_forgot_request</source>
+                <target>Please create a forgot password request and reset your password.</target>
+            </trans-unit>
+            <trans-unit id="message.user_unverified">
+                <source>message.user_unverified</source>
+                <target>Your account is not verified. Please contact administrator.</target>
+            </trans-unit>
+            <trans-unit id="message.password_request_ban">
+                <source>message.password_request_ban</source>
+                <target>please check your email for verification link.</target>
+            </trans-unit>
             <trans-unit id="message.created">
                 <source>message.created</source>
                 <target>Created successfully</target>
@@ -1297,6 +1313,12 @@
                     Hello %username%!
                     To reset your password - please visit %confirmationUrl%
                     Regards, the Team.
+                </target>
+            </trans-unit>
+            <trans-unit id="message.attempt_remaining">
+                <source>message.attempt_remaining</source>
+                <target>
+                    Only %attemptcount% remaining.
                 </target>
             </trans-unit>
             <trans-unit id="message.email_verified">
