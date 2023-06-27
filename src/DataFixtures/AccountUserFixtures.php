@@ -48,6 +48,7 @@ class AccountUserFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             // data = [$account_id, $user_id]
+            [1, 2],
             [2, 3],
             [2, 4],
             [2, 5],

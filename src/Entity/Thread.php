@@ -30,7 +30,7 @@ class Thread
     #[ORM\Column(type: Types::SMALLINT, nullable: true, options: ['default' => 0])]
     private ?int $totalMessages = null;
 
-    #[ORM\ManyToOne(inversedBy: 'threads')]
+    #[ORM\ManyToOne(inversedBy: 'threads', cascade: ['persist', 'remove'])]
     private ?Product $product = null;
 
     #[ORM\ManyToOne(inversedBy: 'threads')]

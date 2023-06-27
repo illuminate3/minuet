@@ -30,6 +30,9 @@ class Account
     #[ORM\Column(length: 32, unique: true)]
     private ?string $stripeCustomerId = null;
 
+    #[ORM\Column(length: 32)]
+    private ?string $stripeSubscriptionId = null;
+
     #[ORM\ManyToOne(inversedBy: 'account_id')]
     #[ORM\JoinColumn(nullable: true)]
     #[ORM\JoinColumn(nullable: true)]
@@ -281,6 +284,18 @@ class Account
     public function setStripeCustomerId(string $stripeCustomerId): static
     {
         $this->stripeCustomerId = $stripeCustomerId;
+
+        return $this;
+    }
+
+    public function getStripeSubscriptionId()
+    {
+        return $this->stripeSubscriptionId;
+    }
+
+    public function setStripeSubscriptionId(string $stripeSubscriptionId)
+    {
+        $this->stripeSubscriptionId = $stripeSubscriptionId;
 
         return $this;
     }

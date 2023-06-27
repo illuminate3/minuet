@@ -48,10 +48,10 @@ class Product
     #[ORM\ManyToOne(inversedBy: 'products')]
     private ?Account $account;
 
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Thread::class)]
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Thread::class, cascade: ['persist', 'remove'])]
     private Collection $threads;
 
-    #[ORM\OneToMany(mappedBy: 'product',  targetEntity: Image::class)]
+    #[ORM\OneToMany(mappedBy: 'product',  targetEntity: Image::class, cascade: ['persist', 'remove'])]
     #[ORM\OrderBy(['sortOrder' => 'DESC'])]
     private Collection $images;
 
