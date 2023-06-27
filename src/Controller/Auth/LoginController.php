@@ -38,8 +38,10 @@ final class LoginController extends BaseController
         $form = $this->createForm(LoginFormType::class);
         $user = $userRepository->findOneBy(["email"=>$form->get('email')->getData()]);
         if ($security->isGranted('ROLE_USER')) {
-            $user->setLoginAttempts(0);
-            $entityManager->flush();
+            $user = $security->getUser();  
+            if (is_null($user->getProfile()->getFirstName())) {
+                return $this->redirectToRoute('user_profile_edit');
+            }
             return $this->redirectToRoute('app_dash');
         }
         $error = $helper->getLastAuthenticationError();
