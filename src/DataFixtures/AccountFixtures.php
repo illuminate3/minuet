@@ -32,6 +32,7 @@ class AccountFixtures extends Fixture implements DependentFixtureInterface
             $account = new Account();
             $account->setSubscription($subscription);
             $account->setStripeCustomerId($stripe_customer_id);
+            $account->setStripeSubscriptionId('');
             $account->setCreatedAt(new DateTimeImmutable('now'));
             $account->setName($name);
             $account->setPrimaryUser($primary_user);
