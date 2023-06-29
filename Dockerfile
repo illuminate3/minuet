@@ -10,10 +10,8 @@ RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* /var/www/html
     php bin/composer.phar install; \
     yarn install --ignore-engines --force; \
     yarn build; \
-    chown www-data.www-data /var/www/html/* -R; \
-    php bin/console d:m:m -n --allow-no-migration;
-
-#ONBUILD RUN php bin/console app:dev;
+    chown www-data.www-data /var/www/html/* -R;
+#    php bin/console d:m:m -n --allow-no-migration;
 
 EXPOSE 80
 ENTRYPOINT ["apache2-foreground"]
