@@ -1,119 +1,149 @@
 <!-- Footer -->
-<footer class="footer bg-dark">
-<div class="container">
+ 
+<footer class="footer-area">
+        <div class="footer-widget px-md-0">
+            <div class="container px-4 px-md-0">
+                <div class="row justify-content-between">
+                    <div class="col-lg-3 col-md-5 col-sm-6">
+                        <div class="text-widget mt-50 ">
+                            <a href="#"  class="h3 footer-title ">
+                                {# <img src="assets/images/logo.png" alt=""> #}
+                                 {{ site.site_name }}
+                            </a>
+                            <div class="text-content">
+                                <div class="single-text">
+                                    <p>{{ site.site_branding }}</p>
+                                </div>
+                                <div class="single-text">
+                                    <p>
+                                        <span><a href="mailto:support@minuet.com">support@minuet.com</a></span>
+                                        <span><a href="tel:00853462188">+0085 346 2188</a></span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-6">
+                        <div class="footer-menu mt-50">
+                            <h3 class="footer-title">  {{ 'menu.pages'|trans }}</h3>
 
-    <div class="row gy-4 gx-5">
+                            <ul class="menu-items">
+                                {% for item in site.footer_pages %}
+                                <li>
+                                    <a class="nav-link" href="page/{{ item.slug }}"
+                                    >
+                                        {{ item.title }}
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-6">
+                        <div class="footer-menu mt-50">
+                            <h3 class="footer-title"> {{ 'text.quick_links'|trans }}</h3>
 
-        <div class="col-lg-6 col-md-6">
+                            <ul class="menu-items">
+                                {% for item in site.menu %}
+                                    <li>
+                                        <a class="nav-link" href="{{ item.url }}"
+                                            {% if item.nofollow == true %} rel="nofollow" {% endif %}
+                                            {% if item.newTab == true %} target="_blank" {% endif %}
+                                        >
+                                            {{ item.title }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-6">
+                        <div class="footer-menu mt-50">
+                            <h3 class="footer-title">{{ 'text.navigation'|trans }}</h3>
 
-            <h5 class="h1 text-white">
-                {{ site.site_name }}
-            </h5>
+                            <ul class="menu-items">
+                                {% if app.user %}
+                                    <li>
+                                        <a class="nav-link" href="{{ path('app_dash') }}">
+                                            {{ 'menu.dash'|trans }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="{{ path('app_thread_index') }}">
+                                            {{ 'menu.messages'|trans }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="{{ path('app_pricing') }}">
+                                            {{ 'menu.pricing'|trans }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="{{ path('user_profile') }}">
+                                            {{ 'menu.profile'|trans }}
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <a class="nav-link" href="{{ path('app_pricing') }}">
+                                            {{ 'menu.pricing'|trans }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="{{ path('auth_register') }}">
+                                            {{ 'menu.register'|trans }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="{{ path('security_login') }}">
+                                            {{ 'menu.login'|trans }}
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12">
+                        <div class="footer-newsletter mt-50">
+                            <h3 class="footer-title">Newsletter</h3>
 
-            <p class="small text-muted">
-                {{ site.site_branding }}
-            </p>
+                            <div class="newsletter-wrapper">
+                                <p>Subscribe to our newsletter to get the latest cars discount promotions and other latest news stay updated.</p>
 
-            <p class="small text-muted mb-0">
-                © {{ 'text.copyrights'|trans }} {{ "now" | date("Y") }}.
-                {{ 'text.all_rights_reserved'|trans }}
-                <a class="text-muted" href="{{ path('app_index') }}">
-                    {{ site.site_name }}
-                </a>
-            </p>
-
+                                <div class="newsletter-form">
+                                    <form action="#">
+                                        <input type="text" placeholder="Email address">
+                                        <button><i class="ion-ios-arrow-right pe-0"></i></button>
+                                    </form>
+                                </div>
+                                <span>Don't worry! We don't spam</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="col-lg-2 col-md-6">
+        <div class="footer-text">
+            <div class="container">
+                <div class="footer-text-wrapper d-flex flex-wrap align-items-center justify-content-between">
+                    <div class="footer-copyright">
+                        <p>© 2023 <span> {{site.site_name}} </span>                        
+                        </p>
+                    </div>
+                    <div class="footer-social">
+                        <span class="label">Follow us</span>
+                        <ul class="socia">
+                            <li><a href="#"><i class="ion-social-twitter"></i></a></li>
+                            <li><a href="#"><i class="ion-social-facebook"></i></a></li>
+                            <li><a href="#"><i class="ion-social-rss"></i></a></li>
+                            <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
+                            <li><a href="#"><i class="ion-social-youtube-outline"></i></a></li>
+                        </ul>
+                    </div>                    
+                </div>
+            </div>
 
-            <h5 class="text-white mb-3">
-                {{ 'menu.pages'|trans }}
-            </h5>
-
-            <ul class="list-unstyled text-muted">
-                {% for item in site.footer_pages %}
-                    <li>
-                        <a class="nav-link" href="page/{{ item.slug }}"
-                        >
-                            {{ item.title }}
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-
+            
         </div>
-
-        <div class="col-lg-2 col-md-6">
-
-            <h5 class="text-white mb-3">
-                {{ 'text.quick_links'|trans }}
-            </h5>
-
-            <ul class="list-unstyled text-muted">
-                {% for item in site.menu %}
-                    <li>
-                        <a class="nav-link" href="{{ item.url }}"
-                            {% if item.nofollow == true %} rel="nofollow" {% endif %}
-                            {% if item.newTab == true %} target="_blank" {% endif %}
-                        >
-                            {{ item.title }}
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-
-        </div>
-
-        <div class="col-lg-2 col-md-6">
-
-            <h5 class="text-white mb-3">
-                {{ 'text.navigation'|trans }}
-            </h5>
-
-            <ul class="list-unstyled text-muted">
-                {% if app.user %}
-                    <li>
-                        <a class="nav-link" href="{{ path('app_dash') }}">
-                            {{ 'menu.dash'|trans }}
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="{{ path('app_thread_index') }}">
-                            {{ 'menu.messages'|trans }}
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="{{ path('app_pricing') }}">
-                            {{ 'menu.pricing'|trans }}
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="{{ path('user_profile') }}">
-                            {{ 'menu.profile'|trans }}
-                        </a>
-                    </li>
-                {% else %}
-                    <li>
-                        <a class="nav-link" href="{{ path('app_pricing') }}">
-                            {{ 'menu.pricing'|trans }}
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="{{ path('auth_register') }}">
-                            {{ 'menu.register'|trans }}
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="{{ path('security_login') }}">
-                            {{ 'menu.login'|trans }}
-                        </a>
-                    </li>
-                {% endif %}
-            </ul>
-
-        </div>
-
-    </div>
-
-</div>
-</footer>
+     </footer>

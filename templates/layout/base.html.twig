@@ -49,6 +49,23 @@
 
     <!-- CSS -->
     {{ encore_entry_link_tags('css/app') }}
+    
+    <!--====== Main Style CSS ======-->
+    {{ encore_entry_link_tags('css/theme') }}
+    
+    <!--===== Vendor CSS (Bootstrap & Icon Font) =====-->
+    {{ encore_entry_link_tags('css/ionicons') }}
+    {{ encore_entry_link_tags('css/fontawesome') }}
+    {{ encore_entry_link_tags('css/default') }}
+    
+    <!--===== Plugins CSS (All Plugins Files) =====-->
+    {{ encore_entry_link_tags('css/animate') }}
+    {{ encore_entry_link_tags('css/slick') }}
+    {{ encore_entry_link_tags('css/magnific-popup') }}
+    {{ encore_entry_link_tags('css/sumoselect') }}
+
+
+
     {% block stylesheets %}{% endblock %}
 
 </head>
@@ -58,7 +75,7 @@
 <!-- Preloader -->
 {{ include('layout/partials/_preloader.html.twig') }}
 
-<div class="container-fluid overflow-hidden">
+<div class="container-fluid overflow-hidden px-0">
 
     <!-- Header -->
     <div class="row border">
@@ -81,6 +98,9 @@
                     {% endblock %}
                     <!-- Content -->
                     {% block body %}{% endblock %}
+
+                  {% include 'buttons/back-to-top.html.twig' %}
+
                 </div>
             </main>
 
@@ -99,6 +119,13 @@
 
 <!-- Scripts -->
 {{ encore_entry_script_tags('js/app') }}
+<!--====== All Plugins js ======-->
+{{ encore_entry_script_tags('js/popper-min') }}
+{{ encore_entry_script_tags('js/slick-min') }}
+{{ encore_entry_script_tags('js/sumoselect-min') }}
+{{ encore_entry_script_tags('js/magnific-popup') }}
+{{ encore_entry_script_tags('js/modernizr') }}
+{{ encore_entry_script_tags('js/custom') }}
 {% block javascripts %}{% endblock %}
 <!-- Analytics -->
 {{ site.analytics_code | raw }}

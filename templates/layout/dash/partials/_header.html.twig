@@ -2,39 +2,57 @@
 <header>
 
 <!-- Fixed navbar -->
-<nav class="navbar navbar-expand-md navbar-light static-top bg-light">
 
-    <div class="container-fluid">
-
-        <a class="navbar-brand" href="{{ path('app_index') }}">
-            {{ site.site_name }}
-        </a>
-
-        <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarCollapse"
-            aria-controls="navbarCollapse"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-
-            <ul class="navbar-nav ms-auto mb-2 mb-md-0">
-
-                {{ include('layout/partials/_menu.html.twig') }}
-
-                {{ include('layout/partials/_user.html.twig') }}
-
-            </ul>
-
+    <div class="header-menu d-none d-lg-block static-top pt-1">
+        <div class="container-fluid px-md-5">
+            <div class="header-menu-inner d-flex align-items-center justify-content-between">
+                <div>
+                    <a class="navbar-brand fw-bolder text-dark" href="{{ path('app_index') }}">
+                        {{ site.site_name }}
+                    </a>
+                </div>
+                <div class="header-social-compare-login d-flex align-items-center">
+                    <div class="header-compare-login">
+                        <nav class="site-navigation mobile">
+                            <ul class="main-menu compare-login">
+                                {{ include('layout/partials/_menu.html.twig') }}
+                                {{ include('layout/partials/_user.html.twig') }}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
         </div>
-
     </div>
 
-</nav>
+    <!--====== Header Desktop Menu Ends ======-->
 
+    <!--====== Header Mobile menu Start ======-->
+
+    <div class="header-mobile-menu d-lg-none">
+        <div class="container-fluid px-sm-4 px-0">
+            <div class="header-mobile-wrapper d-flex justify-content-between align-items-center">
+                <div class="header-mobile-logo">
+                    <a href="/" class="ps-3">
+                        {# <img class="custom-logo" src="assets/images/logo.png" alt=""> #}
+                         <a class="navbar-brand fw-bolder text-dark" href="{{ path('app_index') }}">
+                        {{ site.site_name }}
+                    </a>
+                </div>
+                <div class="header-mobile-meta ">
+                    <div class="header-menu-inner">
+                        <nav class="site-navigation mobile">
+                            <ul class="main-menu  meta d-flex">
+                                {{ include('layout/partials/_menu.html.twig') }}
+                                {{ include('layout/partials/_user.html.twig') }}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--====== Header Mobile menu Ends ======-->
 </header>
+
+

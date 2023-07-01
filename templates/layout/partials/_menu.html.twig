@@ -1,24 +1,22 @@
 <!-- Menu -->
 <li class="nav-item dropdown no-arrow">
-    <a class="nav-link dropdown-toggle"
-       href="#" id="userDropdown"
-       role="button"
-       data-toggle="dropdown"
-       data-bs-toggle="dropdown"
-       aria-haspopup="true"
-       aria-expanded="false">
+    <a class=""
+       href="#">
         {{ 'menu.site_info'|trans }}
     </a>
-    <div class="dropdown-menu" aria-labelledby="userDropdown">
+    <ul class="sub-menu" aria-labelledby="userDropdown">
 
         {% for item in site.menu %}
+         <li class="ms-0">
             <a class="dropdown-item" href="{{ item.url }}"
                 {% if item.nofollow == true %} rel="nofollow" {% endif %}
                 {% if item.newTab == true %} target="_blank" {% endif %}
             >
                 {{ item.title }}
             </a>
+        </li>
         {% endfor %}
 
-    </div>
+    </ul>
 </li>
+                       

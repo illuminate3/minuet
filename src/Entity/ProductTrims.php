@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Entity\Trait\CreatedAtTrait;
 use App\Entity\Trait\EntityIdTrait;
+use App\Entity\Trait\ModifiedAtTrait;
 use App\Repository\ProductTrimsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,6 +17,8 @@ use Doctrine\ORM\Mapping as ORM;
 class ProductTrims
 {
     use EntityIdTrait;
+    use CreatedAtTrait;
+    use ModifiedAtTrait;
 
     #[ORM\Column(type: Types::INTEGER, nullable: true)]
     private ?int $trim_id;
