@@ -1,15 +1,21 @@
 <!-- Signup -->
 {% if site.allow_register %}
 
-    <li class="nav-item">
-        <a class="nav-link" href="{{ path('auth_register') }}">
-            {{ 'menu.register'|trans }}
+    <li class="nav-item ms-0">
+        <a class="nav-link d-flex py-1" href="{{ path('auth_register') }}">
+        <i class="ion-ios-contact-outline"></i>
+           <span class="d-lg-block d-none">
+                {{ 'menu.register'|trans }}
+            </span>
         </a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ path('security_login') }}">
+    <li class="nav-item ms-0">
+        <a class="nav-link d-flex py-1" href="{{ path('security_login') }}">
+        <i class="ion-ios-contact-outline"></i>
+        <span class="d-lg-block d-none">
             {{ 'menu.login'|trans }}
+        </span>
         </a>
     </li>
-
+ 
 {% endif %}

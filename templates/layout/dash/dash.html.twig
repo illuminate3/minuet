@@ -49,6 +49,14 @@
 
     <!-- CSS -->
     {{ encore_entry_link_tags('css/app') }}
+       <!--====== Main Style CSS ======-->
+    {{ encore_entry_link_tags('css/theme') }}
+    
+    <!--===== Vendor CSS (Bootstrap & Icon Font) =====-->
+   
+       {{ encore_entry_link_tags('css/ionicons') }}
+   
+    
     {% block stylesheets %}{% endblock %}
 
 </head>
@@ -110,6 +118,8 @@
 {{ encore_entry_script_tags('js/layout') }}
 {{ encore_entry_script_tags('js/user-thread') }}
 {{ encore_entry_script_tags('js/product') }}
+{{ encore_entry_script_tags('js/sumoselect-min') }}
+{{ encore_entry_script_tags('js/custom') }}
 {% block javascripts %}{% endblock %}
 
 </body>
