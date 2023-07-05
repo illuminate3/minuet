@@ -29,11 +29,11 @@ class ProductDetails
     #[ORM\Column(type: Types::INTEGER, nullable: true)]
     private ?int $year = null;
 
-    #[ORM\Column(type: Types::INTEGER, nullable: true)]
-    private ?int $make = null;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $make = null;
 
-    #[ORM\Column(type: Types::INTEGER, nullable: true)]
-    private ?int $model = null;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $model = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $suggested_vin = '';
