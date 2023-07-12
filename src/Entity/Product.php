@@ -36,7 +36,7 @@ class Product
    /**
     * @ORM\Column(type="decimal", precision=7, scale=2)
     */
-    #[ORM\Column(type: Types::INTEGER, nullable: false)]
+    #[ORM\Column(type: Types::FLOAT, nullable: false, precision: 7, scale : 2)]
     private $price = 0;
 
 //     #[ORM\Column(type: 'integer')]
@@ -106,22 +106,14 @@ class Product
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getPrice()
     {
-        return $this->price;
+        return floatval($this->price);
     }
 
-    /**
-     * @param  int  $price
-     *
-     * @return $this
-     */
-    public function setPrice(int $price)
+    public function setPrice(?float $price)
     {
-        $this->price = $price;
+        $this->price = floatval($price);
 
         return $this;
     }

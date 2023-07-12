@@ -80,8 +80,8 @@ class ProductDetails
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $note = '';
 
-    #[ORM\Column(type: 'decimal', nullable: true)]
-    private ?DecimalType $base_price;
+    #[ORM\Column(type: Types::FLOAT, nullable: true, precision: 7, scale : 2)]
+    private $base_price = 0;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $non_land_use = '';
@@ -3078,24 +3078,14 @@ class ProductDetails
         return $this;
     }
 
-
-    /**
-     * @return int|null
-     */
-    public function getBasePrice(): ?int
+    public function getBasePrice()
     {
         return $this->base_price;
     }
 
-
-    /**
-     * @param  DecimalType  $base_price
-     *
-     * @return $this
-     */
-    public function setBasePrice(DecimalType $base_price): self
+    public function setBasePrice(?float $base_price)
     {
-        $this->base_price = $base_price;
+        $this->base_price = floatval($base_price);
 
         return $this;
     }
